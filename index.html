@@ -96,6 +96,13 @@
     font-size:10.5px; font-weight:700; padding:1px 7px; border-radius:999px; margin-right:6px; letter-spacing:.4px; }
   .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   @media (max-width:700px){ .grid2{ grid-template-columns:1fr; } }
+  /* phone screenshots row */
+  .phones{ display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin:18px 0 6px;
+    background:linear-gradient(180deg,#f1f5f9,#e2e8f0); border:1px solid var(--line);
+    border-radius:16px; padding:22px 16px; }
+  .phones figure{ margin:0; width:240px; max-width:44%; }
+  .phones figure img{ border-radius:18px; border:6px solid #0b1020; box-shadow:0 10px 26px rgba(15,23,42,.22); }
+  .phones figcaption{ text-align:center; }
 
   /* hero */
   .hero{ background:linear-gradient(135deg,#4f46e5 0%,#6d28d9 48%,#0f766e 100%); color:#fff;
@@ -239,6 +246,7 @@
         <a href="#wb-share">5.9 Phát hành &amp; Cổng</a>
         <a href="#wb-webhook">5.10 Webhook</a>
         <a href="#wb-io">5.11 Import / Export</a>
+        <a href="#wb-mobile">5.12 Giao diện Mobile &amp; PWA ⭐</a>
       </div>
     </div>
   </nav>
@@ -828,6 +836,43 @@
         <figure><img src="images/5f-export.png"><figcaption><span class="exlabel">VÍ DỤ</span>Export — bundle gồm màn hình, dataset, người dùng.</figcaption></figure>
         <figure><img src="images/5g-import.png"><figcaption><span class="exlabel">VÍ DỤ</span>Import — nạp bundle &amp; tự tạo dataset.</figcaption></figure>
       </div>
+    </section>
+
+    <section class="doc" id="wb-mobile">
+      <h3 class="feat"><span class="feat-id">5.12</span>Giao diện Mobile &amp; PWA <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <p><b>Là gì:</b> mọi mini-app Workboard <b>tự thích ứng với điện thoại</b> và có thể <b>cài lên màn hình chính như một app</b> (PWA) — kèm khả năng <b>dùng offline</b>. Cùng một bản dựng phục vụ cả desktop lẫn mobile, không cần làm app riêng, không phụ thuộc kho ứng dụng.</p>
+
+      <div class="phones">
+        <figure><img src="images/5l-mobile-nav.png"><figcaption>Thanh điều hướng dưới (bottom-nav) + màn danh sách.</figcaption></figure>
+        <figure><img src="images/5m-mobile-form.png"><figcaption>Form trên mobile — wizard + nút chụp ảnh (OCR).</figcaption></figure>
+        <figure><img src="images/5n-mobile-more.png"><figcaption>Menu “Mục” gom màn hình theo workspace.</figcaption></figure>
+        <figure><img src="images/5k-mobile-login.png"><figcaption>Đăng nhập PIN trên mobile.</figcaption></figure>
+      </div>
+
+      <p><b>1) Điều hướng tự thích ứng theo kích thước màn.</b> Hệ thống tự nhận diện bề ngang màn hình (không cần chọn thiết bị):</p>
+      <ul>
+        <li><b>Điện thoại (&lt; 768px):</b> chọn 1 trong 2 kiểu — <b>Thanh dưới (bottom-nav)</b> hiển thị tối đa 4 mục chính + nút <b>“Mục”</b> mở bảng menu gom theo workspace; hoặc <b>Ngăn kéo (drawer)</b> trượt ra từ nút hamburger.</li>
+        <li><b>Máy tính bảng / desktop (≥ 768px):</b> theo cấu hình của app — <b>Sidebar</b> hoặc <b>Top tabs 2 tầng</b> (workspace → màn hình).</li>
+      </ul>
+
+      <p><b>2) Cài như một ứng dụng (PWA).</b> Mini-app có web manifest (chạy toàn màn hình, có icon &amp; màu thương hiệu) nên cài được lên màn hình chính:</p>
+      <div class="howto"><h4>⚙ Cách cài lên màn hình chính</h4><ol>
+        <li><b>Android/Chrome:</b> mở app trong trình duyệt → bấm nút <b>“Cài đặt / Install”</b> hiện ra (hoặc menu trình duyệt → <i>Thêm vào màn hình chính</i>).</li>
+        <li><b>iPhone/Safari:</b> mở app trong Safari → bấm <b>Chia sẻ</b> → <b>“Thêm vào MH chính”</b> (app có sẵn hướng dẫn này).</li>
+        <li>Mở app từ icon trên màn hình chính → chạy <b>toàn màn hình</b>, không thanh địa chỉ, như app gốc.</li>
+      </ol></div>
+
+      <p><b>3) Hoạt động offline (offline-first).</b> Phù hợp nhân viên hiện trường, kho, công trường — chỗ sóng yếu:</p>
+      <ul>
+        <li><b>Xem được khi mất mạng:</b> các màn (form/table/doc) đã từng mở khi online được lưu cache để mở lại offline.</li>
+        <li><b>Nhập liệu khi mất mạng:</b> phiếu (form thêm mới) được <b>lưu tạm trên máy</b> và <b>tự gửi khi có mạng trở lại</b>; thanh đồng bộ hiện số bản ghi đang chờ + nút gửi thủ công.</li>
+        <li>Chống trùng nhờ mã thao tác (gửi lại không tạo bản ghi đôi).</li>
+      </ul>
+      <div class="note"><b>Lưu ý:</b> offline phục vụ <b>xem màn đã tải</b> và <b>nhập phiếu mới</b>; thao tác cần dữ liệu sống (sửa dòng bảng, mở màn chưa từng tải, đăng nhập lần đầu) vẫn cần mạng.</div>
+
+      <p><b>4) Tối ưu cho cảm ứng &amp; camera.</b> Trường ảnh/file trên điện thoại mở thẳng <b>Camera / Thư viện / Tệp</b>; form xếp dọc dễ thao tác; bảng cuộn ngang gọn; bố cục chừa <b>vùng an toàn</b> (tai thỏ/thanh home iPhone). Ô PIN dùng bàn phím số.</p>
+
+      <div class="tip"><b>Mẹo cấu hình:</b> kiểu điều hướng mobile (bottom-nav / drawer) và hiển thị từng màn đặt trong <a href="#wb-settings">App settings (5.2)</a>; muốn ẩn màn nào khỏi thanh điều hướng chỉ cần tắt “hiển thị trong nav”.</div>
     </section>
 
     <hr>
