@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppBI — Tài liệu hướng dẫn &amp; giới thiệu sản phẩm</title>
+<style>
+  :root{
+    --ink:#0f172a; --body:#334155; --muted:#64748b; --line:#e6e9ef;
+    --brand:#4f46e5; --brand-d:#4338ca; --brand2:#0f766e; --accent:#ff6b4a;
+    --bg:#ffffff; --soft:#f8fafc; --chip:#eef2ff; --code:#1e293b;
+    --sidebar:300px; --maxw:1300px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; font-family:"Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--body); font-size:16.5px; line-height:1.72; background:var(--bg); }
+  a{ color:var(--brand); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  h1,h2,h3,h4{ color:var(--ink); line-height:1.25; }
+  img{ max-width:100%; }
+  code{ background:#eef2ff; color:#4338ca; padding:1px 6px; border-radius:5px; font-size:.86em;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace; }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{ position:fixed; top:0; left:0; bottom:0; width:var(--sidebar); background:#0b1020;
+    color:#cbd5e1; overflow-y:auto; padding:0 0 40px; z-index:40; }
+  .sidebar .brand{ display:flex; align-items:center; gap:11px; padding:20px 20px 14px; position:sticky; top:0;
+    background:#0b1020; z-index:2; }
+  .sidebar .brand .logo{ width:38px;height:38px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,#6366f1,#0f766e); display:flex;align-items:center;justify-content:center;font-size:20px; }
+  .sidebar .brand b{ color:#fff; font-size:18px; letter-spacing:.3px; display:block; }
+  .sidebar .brand span{ font-size:11px; color:#94a3b8; }
+  .search{ padding:0 16px 12px; position:sticky; top:72px; background:#0b1020; z-index:2; }
+  .search input{ width:100%; padding:9px 12px; border-radius:9px; border:1px solid #283047;
+    background:#11172b; color:#e2e8f0; font-size:13.5px; outline:none; }
+  .search input::placeholder{ color:#64748b; }
+  .search .hint{ font-size:10.5px; color:#475569; margin-top:5px; }
+  nav.tree{ padding:4px 10px; }
+  nav.tree .grp{ margin:2px 0; }
+  nav.tree .grp>button{ width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    color:#e2e8f0; font-size:12px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    padding:10px 10px 6px; display:flex; align-items:center; gap:8px; }
+  nav.tree .grp>button .tw{ font-size:9px; color:#64748b; transition:transform .15s; }
+  nav.tree .grp.collapsed>button .tw{ transform:rotate(-90deg); }
+  nav.tree .grp .links{ display:flex; flex-direction:column; }
+  nav.tree .grp.collapsed .links{ display:none; }
+  nav.tree a{ color:#94a3b8; font-size:13.5px; padding:6px 12px 6px 26px; border-radius:8px;
+    border-left:2px solid transparent; }
+  nav.tree a:hover{ color:#fff; background:#161d33; text-decoration:none; }
+  nav.tree a.active{ color:#fff; background:#1c2540; border-left-color:var(--accent); font-weight:600; }
+  nav.tree a.hidden{ display:none; }
+  nav.tree .nores{ color:#64748b; font-size:12.5px; padding:8px 14px; display:none; }
+
+  /* ---------- MAIN ---------- */
+  main{ margin-left:var(--sidebar); padding:0; }
+  .topbar{ position:sticky; top:0; z-index:20; background:rgba(255,255,255,.86); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:11px 32px; display:flex; align-items:center; gap:14px; }
+  .topbar .crumb{ font-size:12.5px; color:var(--muted); }
+  .topbar .crumb b{ color:var(--ink); }
+  .hamburger{ display:none; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:18px 56px 90px; }
+
+  section.doc{ padding-top:26px; margin-top:6px; scroll-margin-top:66px; }
+  .eyebrow{ color:var(--brand); font-weight:800; letter-spacing:1.5px; text-transform:uppercase; font-size:11px; }
+  h2.mod{ font-size:30px; margin:4px 0 6px; letter-spacing:-.6px; }
+  h3.feat{ font-size:21px; margin:6px 0 4px; letter-spacing:-.3px; padding-top:8px; }
+  .feat-id{ font-size:11px; font-weight:800; color:#fff; background:var(--brand2); padding:2px 8px;
+    border-radius:6px; margin-right:8px; vertical-align:middle; letter-spacing:.5px; }
+  p{ margin:8px 0; }
+  .lead{ font-size:17px; color:#475569; }
+  ul,ol{ margin:8px 0; padding-left:22px; }
+  li{ margin:3px 0; }
+  hr{ border:none; border-top:1px solid var(--line); margin:30px 0; }
+
+  /* how-to */
+  .howto{ background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:14px 18px 16px; margin:14px 0; }
+  .howto h4{ margin:0 0 8px; font-size:13px; letter-spacing:.5px; text-transform:uppercase; color:var(--brand-d);
+    display:flex; align-items:center; gap:7px; }
+  .howto ol{ margin:0; padding-left:20px; counter-reset:s; }
+  .howto ol li{ margin:5px 0; }
+  .howto ol li b{ color:var(--ink); }
+  .path{ background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 7px; font-size:13px;
+    color:#334155; white-space:nowrap; }
+
+  .tip,.note{ border-radius:10px; padding:10px 14px; margin:12px 0; font-size:13.5px; }
+  .tip{ background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+  .note{ background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; }
+  .tip b,.note b{ font-weight:700; }
+
+  figure{ margin:16px 0 6px; }
+  figure img{ width:100%; border:1px solid var(--line); border-radius:10px; display:block;
+    box-shadow:0 8px 22px rgba(15,23,42,.09); }
+  figcaption{ color:var(--muted); font-size:12px; margin-top:7px; }
+  .exlabel{ display:inline-block; background:#eef2ff; color:#4338ca; border:1px solid #c7d2fe;
+    font-size:10.5px; font-weight:700; padding:1px 7px; border-radius:999px; margin-right:6px; letter-spacing:.4px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:700px){ .grid2{ grid-template-columns:1fr; } }
+
+  /* hero */
+  .hero{ background:linear-gradient(135deg,#4f46e5 0%,#6d28d9 48%,#0f766e 100%); color:#fff;
+    border-radius:18px; padding:40px 38px; margin:18px 0 6px; }
+  .hero .tag{ font-size:11px; letter-spacing:3px; text-transform:uppercase; opacity:.85; }
+  .hero h1{ color:#fff; font-size:40px; margin:8px 0 10px; letter-spacing:-1px; }
+  .hero p{ font-size:17px; opacity:.96; max-width:600px; }
+  .hero .chips{ margin-top:20px; display:flex; flex-wrap:wrap; gap:8px; }
+  .hero .chips span{ background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28);
+    padding:6px 13px; border-radius:999px; font-size:13px; font-weight:600; }
+  .hero .chips .a{ background:none;border:none;opacity:.7;padding:6px 0; }
+
+  /* strengths */
+  .str{ display:grid; grid-template-columns:44px 1fr; gap:14px; border:1px solid var(--line);
+    border-left:5px solid var(--accent); border-radius:12px; padding:15px 18px; margin:13px 0;
+    background:linear-gradient(180deg,#fff,#fff7f4); }
+  .str .num{ width:38px;height:38px;border-radius:11px;background:var(--accent);color:#fff;font-size:18px;
+    font-weight:800;display:flex;align-items:center;justify-content:center; }
+  .str h4{ margin:0 0 4px; font-size:16px; }
+  .str p{ margin:0 0 5px; font-size:13.6px; }
+  .str .where{ font-size:12px; color:var(--brand); font-weight:600; }
+
+  /* quickstart steps */
+  .qs{ counter-reset:q; display:flex; flex-direction:column; gap:10px; margin:14px 0; }
+  .qs .step{ display:grid; grid-template-columns:40px 1fr; gap:14px; align-items:start;
+    border:1px solid var(--line); border-radius:12px; padding:13px 16px; background:#fff; }
+  .qs .step .n{ counter-increment:q; }
+  .qs .step .n::before{ content:counter(q); width:34px;height:34px;border-radius:50%;
+    background:var(--brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px; }
+  .qs .step b{ color:var(--ink); }
+  .qs .step .sub{ font-size:13px; color:var(--muted); }
+
+  /* glossary */
+  .gloss{ border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:14px 0; }
+  .gloss .row{ display:grid; grid-template-columns:170px 1fr; gap:0; border-top:1px solid var(--line); }
+  .gloss .row:first-child{ border-top:none; }
+  .gloss .row .k{ background:var(--soft); padding:11px 15px; font-weight:700; color:var(--ink); font-size:13.5px; }
+  .gloss .row .v{ padding:11px 15px; font-size:13.5px; }
+  @media (max-width:600px){ .gloss .row{ grid-template-columns:1fr; } .gloss .row .k{ border-bottom:1px solid var(--line); } }
+
+  .totop{ position:fixed; right:22px; bottom:22px; width:42px;height:42px;border-radius:50%;
+    background:var(--brand); color:#fff; display:none; align-items:center; justify-content:center;
+    box-shadow:0 6px 18px rgba(79,70,229,.4); cursor:pointer; z-index:30; font-size:20px; border:none; }
+
+  /* responsive */
+  @media (max-width:900px){
+    .sidebar{ transform:translateX(-100%); transition:transform .25s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    .sidebar.open{ transform:translateX(0); }
+    main{ margin-left:0; }
+    .hamburger{ display:inline-flex; background:none;border:1px solid var(--line);border-radius:8px;
+      width:38px;height:34px;align-items:center;justify-content:center;cursor:pointer;font-size:18px; }
+    .wrap{ padding:14px 18px 80px; }
+    .hero{ padding:28px 22px; } .hero h1{ font-size:30px; }
+  }
+  .scrim{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:35; }
+  .scrim.show{ display:block; }
+</style>
+</head>
+<body>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="logo">📊</div>
+    <div><b>AppBI</b><span>Tài liệu &amp; Hướng dẫn</span></div>
+  </div>
+  <div class="search">
+    <input id="q" type="search" placeholder="🔎 Tìm tính năng… (vd: measure, RLS, PDF)" autocomplete="off">
+    <div class="hint">Gõ để lọc &amp; nhảy nhanh tới mục bất kỳ</div>
+  </div>
+  <nav class="tree" id="tree">
+    <div class="nores" id="nores">Không thấy mục phù hợp.</div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> Bắt đầu</button>
+      <div class="links">
+        <a href="#gioi-thieu">Giới thiệu AppBI</a>
+        <a href="#diem-manh">5 điểm mạnh nổi bật</a>
+        <a href="#quickstart">Bắt đầu nhanh 5 phút</a>
+        <a href="#khai-niem">Khái niệm cốt lõi</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 1 · Kết nối dữ liệu</button>
+      <div class="links">
+        <a href="#ds-list">1.1 Danh sách nguồn</a>
+        <a href="#ds-new">1.2 Tạo nguồn &amp; các loại</a>
+        <a href="#ds-edit">1.3 Sửa &amp; test kết nối</a>
+        <a href="#ds-share">1.4 Chia sẻ &amp; phân quyền</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 2 · Dataset &amp; Mô hình</button>
+      <div class="links">
+        <a href="#dt-list">2.1 Danh sách Dataset</a>
+        <a href="#dt-tables">2.2 Không gian Tables</a>
+        <a href="#dt-add">2.3 Thêm bảng</a>
+        <a href="#dt-cols">2.4 Cột &amp; cột tính toán</a>
+        <a href="#dt-model">2.5 Mô hình (ERD) &amp; quan hệ</a>
+        <a href="#dt-measure">2.6 Measures (chỉ số)</a>
+        <a href="#dt-date">2.7 Date table &amp; Từ điển</a>
+        <a href="#dt-quality">2.8 Chất lượng dữ liệu</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 3 · Explore (Biểu đồ)</button>
+      <div class="links">
+        <a href="#ex-types">3.1 Thư viện 33 biểu đồ</a>
+        <a href="#ex-bind">3.2 Gắn dữ liệu</a>
+        <a href="#ex-format">3.3 Định dạng &amp; Query</a>
+        <a href="#ex-adv">3.4 Biểu đồ nâng cao</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 4 · Dashboard (Báo cáo)</button>
+      <div class="links">
+        <a href="#db-list">4.1 Danh sách &amp; đa trang</a>
+        <a href="#db-layout">4.2 Thêm chart &amp; bố cục</a>
+        <a href="#db-filter">4.3 Slicer · Filter · Filter Map</a>
+        <a href="#db-theme">4.4 Tuỳ biến giao diện</a>
+        <a href="#db-share">4.5 Chia sẻ · Nhúng · PDF</a>
+        <a href="#db-ai">4.6 Trợ lý AI ⭐</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 5 · Workboard (Mini-app)</button>
+      <div class="links">
+        <a href="#wb-builder">5.1 Builder &amp; cấu trúc</a>
+        <a href="#wb-settings">5.2 Cài đặt ứng dụng</a>
+        <a href="#wb-form">5.3 Màn hình Form</a>
+        <a href="#wb-table">5.4 Màn hình Table</a>
+        <a href="#wb-doc">5.5 Màn hình Document</a>
+        <a href="#wb-dash">5.6 Màn hình Dashboard</a>
+        <a href="#wb-rls">5.7 Phân quyền RLS</a>
+        <a href="#wb-users">5.8 Người dùng &amp; PIN</a>
+        <a href="#wb-share">5.9 Phát hành &amp; Cổng</a>
+        <a href="#wb-webhook">5.10 Webhook</a>
+        <a href="#wb-io">5.11 Import / Export</a>
+      </div>
+    </div>
+  </nav>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- ===================== MAIN ===================== -->
+<main>
+  <div class="topbar">
+    <button class="hamburger" id="ham">☰</button>
+    <div class="crumb">📊 <b>AppBI</b> · Tài liệu giới thiệu &amp; hướng dẫn sử dụng</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- HERO / INTRO -->
+    <section class="doc" id="gioi-thieu" style="padding-top:6px">
+      <div class="hero">
+        <div class="tag">Nền tảng phân tích &amp; ứng dụng dữ liệu</div>
+        <h1>Giới thiệu AppBI</h1>
+        <p>AppBI giúp doanh nghiệp biến dữ liệu thành quyết định: <b>kết nối mọi nguồn</b>, <b>xây mô hình &amp; chỉ số</b>, <b>trực quan hoá thành báo cáo tương tác</b>, và <b>đóng gói thành ứng dụng vận hành</b> cho người dùng cuối — tất cả trong một nền tảng, do đội ngũ làm chủ hoàn toàn.</p>
+        <div class="chips">
+          <span>Nguồn dữ liệu</span><span class="a">→</span>
+          <span>Dataset &amp; Mô hình</span><span class="a">→</span>
+          <span>Biểu đồ</span><span class="a">→</span>
+          <span>Báo cáo</span><span class="a">→</span>
+          <span>Mini-app</span>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:22px">Tài liệu này hướng dẫn bạn sử dụng AppBI theo đúng hành trình thực tế — mỗi tính năng đều có phần <b>“Cách làm”</b> từng bước để bạn đọc là làm được ngay.</p>
+      <p><b>Dành cho ai?</b> Nhà phân tích dữ liệu (DA), quản lý &amp; lãnh đạo cần báo cáo, và đội vận hành cần ứng dụng nhập liệu — không yêu cầu biết lập trình.</p>
+      <div class="note"><b>Về các ảnh minh hoạ:</b> mọi ảnh chụp trong tài liệu dùng một bộ dữ liệu mẫu (thương mại điện tử) để minh hoạ thao tác. Đó chỉ là ví dụ — AppBI áp dụng cho mọi ngành và mọi nguồn dữ liệu của bạn.</div>
+    </section>
+
+    <!-- STRENGTHS -->
+    <section class="doc" id="diem-manh">
+      <div class="eyebrow">Điểm khác biệt</div>
+      <h2 class="mod">5 điểm mạnh nổi bật</h2>
+      <p class="lead">Vì sao AppBI khác biệt so với các công cụ BI thông thường.</p>
+
+      <div class="str"><div class="num">1</div><div>
+        <h4>Dựng hệ thống báo cáo cực nhanh nhờ Claude + MCP riêng</h4>
+        <p>AppBI tích hợp một <b>MCP server</b> kết nối thẳng với trợ lý AI Claude. Thay vì thao tác tay từng bước, bạn có thể yêu cầu bằng ngôn ngữ tự nhiên để AI tự động dựng chuỗi <b>Nguồn → Dataset → Mô hình → Biểu đồ → Báo cáo → Mini-app</b> — rút thời gian từ nhiều ngày xuống còn vài phút.</p>
+        <div class="where">▸ Thời gian triển khai cho khách hàng mới giảm mạnh, vẫn giữ chất lượng và chuẩn hoá.</div>
+      </div></div>
+
+      <div class="str"><div class="num">2</div><div>
+        <h4>Tuỳ biến không giới hạn — không phụ thuộc bên thứ ba</h4>
+        <p>Toàn bộ nền tảng do đội tự phát triển, nên có thể <b>thêm loại biểu đồ mới</b> hay <b>thêm tính năng riêng</b> theo đúng nghiệp vụ từng khách hàng — không bị khoá bởi giấy phép hay lộ trình của nhà cung cấp ngoài.</p>
+        <div class="where">▸ Khách cần gì làm nấy: từ một dạng biểu đồ chuyên biệt đến một luồng nhập liệu riêng.</div>
+      </div></div>
+
+      <div class="str"><div class="num">3</div><div>
+        <h4>Phân quyền đa hình thức, linh hoạt tới từng người</h4>
+        <p>Không chỉ “công khai / nội bộ”. AppBI cho phép <b>mỗi người một link báo cáo riêng</b>, <b>đặt mật khẩu</b> cho link, số lượng <b>không giới hạn</b>; khoá/ẩn bộ lọc trên từng link; và <b>RLS theo hàng</b> để mỗi người chỉ thấy đúng phần dữ liệu của mình.</p>
+        <div class="where">▸ Xem: <a href="#db-share">Public Links (4.5)</a>, <a href="#wb-dash">link theo vai trò (5.6)</a>, <a href="#wb-rls">RLS (5.7)</a>.</div>
+      </div></div>
+
+      <div class="str"><div class="num">4</div><div>
+        <h4>AI hướng dẫn &amp; phân tích ngay trên báo cáo đang xem</h4>
+        <p>Trợ lý AI sống <b>ngay trong báo cáo</b>: tổng hợp số liệu trực tiếp từ chính báo cáo người dùng đang xem, trả lời kèm <b>trích dẫn biểu đồ nguồn</b>, gợi ý câu hỏi tiếp, và hướng dẫn người mới cách đọc báo cáo. Người xem không cần biết SQL hay BI vẫn tự phân tích được.</p>
+        <div class="where">▸ Xem: <a href="#db-ai">Trợ lý AI (4.6)</a>.</div>
+      </div></div>
+
+      <div class="str"><div class="num">5</div><div>
+        <h4>Dữ liệu real-time từ Data Warehouse — không độ trễ chờ refresh</h4>
+        <p>AppBI truy vấn <b>trực tiếp (live)</b> tới nguồn/Data Warehouse mỗi lần xem. Không sao chép dữ liệu, không lịch refresh — số liệu hiển thị luôn là <b>mới nhất tại thời điểm mở báo cáo</b>, kèm cache thông minh để vẫn nhanh trên dữ liệu lớn.</p>
+        <div class="where">▸ Cơ chế minh bạch: xem SQL sinh ra ở <a href="#ex-format">tab Query (3.3)</a>.</div>
+      </div></div>
+    </section>
+
+    <!-- QUICKSTART -->
+    <section class="doc" id="quickstart">
+      <div class="eyebrow">Hướng dẫn nhanh</div>
+      <h2 class="mod">Bắt đầu nhanh trong 5 phút</h2>
+      <p class="lead">Năm bước để đi từ con số 0 đến một báo cáo chia sẻ được.</p>
+      <div class="qs">
+        <div class="step"><div class="n"></div><div><b>Kết nối nguồn dữ liệu.</b> Vào <span class="path">Data Sources → New Data Source</span>, chọn loại (PostgreSQL, BigQuery, Google Sheets, Excel/CSV…), nhập thông tin kết nối rồi <span class="path">Create</span>. <span class="sub">Hệ thống tự kiểm tra kết nối.</span></div></div>
+        <div class="step"><div class="n"></div><div><b>Tạo Dataset.</b> Vào <span class="path">Datasets → New Dataset</span>, thêm các bảng cần dùng và (tuỳ chọn) tạo quan hệ &amp; chỉ số (Measure). <span class="sub">Đây là “lớp ngữ nghĩa” dùng chung cho mọi biểu đồ.</span></div></div>
+        <div class="step"><div class="n"></div><div><b>Tạo biểu đồ.</b> Vào <span class="path">Explore</span>, chọn loại biểu đồ → kéo trường vào trục/giá trị → <span class="path">Run</span> → <span class="path">Save</span>.</div></div>
+        <div class="step"><div class="n"></div><div><b>Lắp báo cáo.</b> Vào <span class="path">Dashboards → New Dashboard</span>, bấm <span class="path">Add Chart</span> để đưa biểu đồ vào, sắp xếp bố cục, thêm slicer/bộ lọc.</div></div>
+        <div class="step"><div class="n"></div><div><b>Chia sẻ.</b> Bấm <span class="path">⋯ → Public links → Create</span> để có link công khai (đặt mật khẩu nếu cần), hoặc <span class="path">Share with team</span> cho người trong tổ chức.</div></div>
+      </div>
+      <div class="tip"><b>Mẹo:</b> Chưa có dữ liệu thật? Dùng loại nguồn <b>Manual Table</b> để kéo-thả một file Excel/CSV và trải nghiệm toàn bộ quy trình ngay.</div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section class="doc" id="khai-niem">
+      <div class="eyebrow">Nền tảng kiến thức</div>
+      <h2 class="mod">Khái niệm cốt lõi</h2>
+      <p class="lead">Sáu khái niệm giúp bạn hiểu cách AppBI vận hành.</p>
+      <div class="gloss">
+        <div class="row"><div class="k">Data Source</div><div class="v">Kết nối tới nơi chứa dữ liệu (database, kho đám mây, bảng tính, file). Dữ liệu được truy vấn trực tiếp, không sao chép.</div></div>
+        <div class="row"><div class="k">Dataset</div><div class="v">Lớp mô hình hoá: gom nhiều bảng, định nghĩa quan hệ và chỉ số. Là “nguồn sự thật” dùng chung cho biểu đồ &amp; mini-app.</div></div>
+        <div class="row"><div class="k">Measure</div><div class="v">Chỉ số nghiệp vụ tái sử dụng (vd Doanh thu, Số đơn, % giao đúng hẹn) — định nghĩa một lần, dùng ở mọi nơi.</div></div>
+        <div class="row"><div class="k">Explore / Chart</div><div class="v">Trình tạo biểu đồ. Mỗi biểu đồ (chart) được lưu lại để tái sử dụng trên nhiều báo cáo.</div></div>
+        <div class="row"><div class="k">Dashboard</div><div class="v">Báo cáo nhiều trang ghép từ các biểu đồ + bộ lọc, để xem và chia sẻ.</div></div>
+        <div class="row"><div class="k">Workboard</div><div class="v">Mini-app vận hành dựng trên Dataset: gồm các màn Form/Table/Document/Dashboard, có đăng nhập và phân quyền theo người dùng.</div></div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 1 ===================== -->
+    <section class="doc" id="m1">
+      <div class="eyebrow">Module 1</div>
+      <h2 class="mod">Kết nối dữ liệu — Data Sources</h2>
+      <p class="lead">Điểm khởi đầu của mọi báo cáo. AppBI kết nối trực tiếp tới cơ sở dữ liệu, kho phân tích đám mây, bảng tính và file tải lên; dữ liệu được truy vấn <b>live</b>, không cần sao chép thủ công.</p>
+    </section>
+
+    <section class="doc" id="ds-list">
+      <h3 class="feat"><span class="feat-id">1.1</span>Danh sách nguồn dữ liệu</h3>
+      <p><b>Là gì:</b> nơi quản lý mọi kết nối — thống kê, tìm kiếm, lọc theo loại/quyền/chủ sở hữu, xem dạng lưới hoặc bảng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Data Sources</span> ở thanh điều hướng trái.</li>
+        <li>Dùng ô <b>Search</b> hoặc bộ lọc <b>All source types</b> để tìm nhanh nguồn.</li>
+        <li>Trên mỗi dòng, dùng các nút <b>Test connection</b>, <b>Share</b>, <b>Delete</b> ở cột Actions.</li>
+      </ol></div>
+      <div class="note"><b>Lưu ý:</b> không xoá được nguồn đang được một Dataset sử dụng — hệ thống sẽ báo các Dataset phụ thuộc để bạn xử lý trước.</div>
+      <figure><img src="images/11-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trang Data Sources — thống kê và danh sách kết nối.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ds-new">
+      <h3 class="feat"><span class="feat-id">1.2</span>Tạo nguồn mới &amp; các loại nguồn</h3>
+      <p><b>Là gì:</b> AppBI hỗ trợ <b>PostgreSQL, MySQL, BigQuery, Google Sheets</b> và <b>Manual Table</b> (Excel/CSV). Kết nối được kiểm tra tự động khi lưu.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">New Data Source</span>.</li>
+        <li>Đặt <b>Name</b> và chọn <b>Type</b> (loại nguồn).</li>
+        <li>Nhập cấu hình tương ứng:
+          <ul>
+            <li><b>PostgreSQL/MySQL:</b> host, port, database, schema, user, password.</li>
+            <li><b>BigQuery:</b> đăng nhập Google (OAuth) hoặc dán Service Account JSON.</li>
+            <li><b>Google Sheets:</b> kết nối Google rồi chọn spreadsheet/sheet.</li>
+            <li><b>Manual Table:</b> kéo-thả file <code>.csv</code>/<code>.xlsx</code> vào vùng tải lên.</li>
+          </ul>
+        </li>
+        <li>Bấm <span class="path">Create</span> — hệ thống tự test kết nối; nếu lỗi sẽ báo ngay.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> với Manual Table, file Excel nhiều sheet sẽ được nạp tất cả các sheet thành nhiều bảng.</div>
+      <div class="grid2">
+        <figure><img src="images/12-new-postgres.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tạo nguồn PostgreSQL.</figcaption></figure>
+        <figure><img src="images/14-new-bigquery.png"><figcaption><span class="exlabel">VÍ DỤ</span>BigQuery — OAuth hoặc Service Account.</figcaption></figure>
+      </div>
+      <figure><img src="images/13-new-manual.png"><figcaption><span class="exlabel">VÍ DỤ</span>Manual Table — kéo-thả CSV/Excel.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ds-edit">
+      <h3 class="feat"><span class="feat-id">1.3</span>Sửa cấu hình &amp; kiểm tra kết nối</h3>
+      <p><b>Là gì:</b> cập nhật thông tin kết nối an toàn. Thông tin nhạy cảm (mật khẩu, khoá) được mã hoá; để trống nghĩa là giữ nguyên giá trị cũ.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm vào tên nguồn để mở chi tiết, rồi bấm <span class="path">Edit</span>.</li>
+        <li>Sửa các trường cần thiết (mật khẩu để trống nếu không đổi).</li>
+        <li>Bấm <b>Update/Save</b> — kết nối được kiểm tra lại tự động.</li>
+        <li>Hoặc bấm <b>Test connection</b> ở danh sách để kiểm tra mà không cần sửa.</li>
+      </ol></div>
+      <figure><img src="images/15-detail-edit.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chi tiết nguồn — kiểm tra kết nối tự động khi lưu.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ds-share">
+      <h3 class="feat"><span class="feat-id">1.4</span>Chia sẻ &amp; phân quyền</h3>
+      <p><b>Là gì:</b> cấp quyền cho người dùng/nhóm với 3 mức <b>Xem / Sửa / Toàn quyền</b>. Cơ chế này dùng nhất quán cho cả Dataset, Chart, Dashboard, Workboard.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm biểu tượng <b>Share</b> trên nguồn cần chia sẻ.</li>
+        <li>Nhập email người dùng (hoặc chọn nhóm), chọn vai trò <b>Viewer/Editor/Full</b>.</li>
+        <li>Bấm <b>Share</b>. Có thể thu hồi quyền bất cứ lúc nào trong cùng hộp thoại.</li>
+      </ol></div>
+      <figure><img src="images/16-share.png"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại chia sẻ theo người &amp; nhóm.</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> cần viết SQL tuỳ ý? Bạn không cần công cụ ngoài — dùng bảng <b>SQL Query</b> trong Dataset hoặc chế độ <b>Custom SQL</b> trong Explore.</div>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 2 ===================== -->
+    <section class="doc" id="m2">
+      <div class="eyebrow">Module 2</div>
+      <h2 class="mod">Dataset &amp; Mô hình dữ liệu</h2>
+      <p class="lead">Dataset là “lớp ngữ nghĩa” biến dữ liệu thô thành mô hình sẵn sàng phân tích: gom nhiều bảng, định nghĩa quan hệ, tạo chỉ số (Measure), kiểm soát chất lượng và tài liệu hoá ý nghĩa từng cột.</p>
+    </section>
+
+    <section class="doc" id="dt-list">
+      <h3 class="feat"><span class="feat-id">2.1</span>Danh sách Dataset</h3>
+      <p><b>Là gì:</b> quản lý toàn bộ Dataset, lọc chéo theo dashboard/chart/nguồn, chia sẻ và xoá (có chặn phụ thuộc).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Datasets</span>. Bấm <span class="path">New Dataset</span> để tạo mới (đặt tên + mô tả).</li>
+        <li>Bấm vào một Dataset để mở không gian làm việc của nó.</li>
+      </ol></div>
+      <figure><img src="images/21-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dataset.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-tables">
+      <h3 class="feat"><span class="feat-id">2.2</span>Không gian làm việc Tables</h3>
+      <p><b>Là gì:</b> trung tâm của Dataset — sidebar gom bảng theo nhóm (<b>Source / Calculated / Calendar / Measures</b>), lưới xem trước dữ liệu, công cụ quản lý cột &amp; xuất Excel. Có 3 tab: <b>Tables · Quality · Model</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở tab <b>Tables</b>, chọn một bảng trong sidebar trái để xem dữ liệu.</li>
+        <li>Dùng <b>Columns</b> để ẩn/hiện cột, <b>Export Excel</b> để tải dữ liệu.</li>
+        <li>Chuyển tab <b>Model</b> để dựng quan hệ, tab <b>Quality</b> để kiểm soát chất lượng.</li>
+      </ol></div>
+      <figure><img src="images/22-tables.png"><figcaption><span class="exlabel">VÍ DỤ</span>Không gian Tables — sidebar nhóm bảng + lưới xem trước.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-add">
+      <h3 class="feat"><span class="feat-id">2.3</span>Thêm bảng vào Dataset</h3>
+      <p><b>Là gì:</b> ba cách đưa bảng vào mô hình — bảng vật lý, truy vấn SQL, hoặc bảng dẫn xuất.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong nhóm <b>Source</b> (hoặc Calculated), bấm <span class="path">+ Add</span>.</li>
+        <li>Chọn cách thêm:
+          <ul>
+            <li><b>From Table:</b> chọn nguồn → chọn bảng có sẵn.</li>
+            <li><b>From SQL Query:</b> chọn nguồn → viết câu SQL tuỳ ý.</li>
+            <li><b>Calculated:</b> viết SQL tham chiếu các bảng khác trong Dataset.</li>
+          </ul>
+        </li>
+        <li>Bấm <b>Add Table</b> — cột được tự suy luận kiểu dữ liệu.</li>
+      </ol></div>
+      <figure><img src="images/23-addtable.png"><figcaption><span class="exlabel">VÍ DỤ</span>Thêm bảng — From Table / From SQL Query.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-cols">
+      <h3 class="feat"><span class="feat-id">2.4</span>Quản lý cột &amp; cột tính toán</h3>
+      <p><b>Là gì:</b> ẩn/hiện cột; thêm cột tính toán bằng <b>công thức kiểu Excel</b> (IF, LOOKUP, SUM…) hoặc <b>JavaScript</b>; đổi kiểu &amp; định dạng (số/tiền/%/ngày).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">Columns</span> trên thanh công cụ để mở bảng quản lý cột.</li>
+        <li>Tích/bỏ tích để hiện/ẩn từng cột, rồi <b>Apply</b>.</li>
+        <li>Để thêm cột tính toán: bấm <b>+ Add column</b>, chọn <b>Excel formula</b> hoặc <b>JavaScript</b>, nhập công thức, xem preview rồi lưu.</li>
+        <li>Đổi định dạng/kiểu: mở popup định dạng trên tiêu đề cột (số lẻ, ký hiệu tiền tệ, định dạng ngày…).</li>
+      </ol></div>
+      <figure><img src="images/24-managecols.png"><figcaption><span class="exlabel">VÍ DỤ</span>Manage Columns — bật/tắt hiển thị cột.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-model">
+      <h3 class="feat"><span class="feat-id">2.5</span>Mô hình dữ liệu (ERD) &amp; quan hệ</h3>
+      <p><b>Là gì:</b> sơ đồ trực quan các bảng và quan hệ. Tạo/sửa quan hệ với loại join, cardinality (1:1, 1:N…), khoá chính, hướng lọc chéo. Nút <b>Generate Model</b> tự dò quan hệ theo khoá ngoại.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở tab <b>Model</b> của Dataset.</li>
+        <li>Bấm <b>Generate relationships</b> để hệ thống tự đề xuất quan hệ, hoặc <b>Add Relationship</b> để tạo tay.</li>
+        <li>Trong hộp thoại quan hệ: chọn <b>From/To table</b>, cặp cột khoá, <b>Join type</b>, <b>Cardinality</b>, hướng cross-filter → <b>Save</b>.</li>
+        <li>Bấm vào một đường nối để sửa, hoặc bấm ✕ để xoá quan hệ.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/26-model.png"><figcaption><span class="exlabel">VÍ DỤ</span>Canvas ERD — bảng &amp; đường quan hệ.</figcaption></figure>
+        <figure><img src="images/27-relationship.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tạo quan hệ — join type, cardinality.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="dt-measure">
+      <h3 class="feat"><span class="feat-id">2.6</span>Measures — chỉ số nghiệp vụ</h3>
+      <p><b>Là gì:</b> chỉ số tái sử dụng (vd Doanh thu, AOV, % giao đúng hẹn). Định nghĩa một lần với biểu thức, bộ lọc riêng, định dạng, nhóm folder; hỗ trợ nhiều loại (sum, count_distinct, % of total, formula, window…).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong sidebar, mở nhóm <b>Measures</b> và bấm <span class="path">+ Add</span> (chọn bảng đích).</li>
+        <li>Nhập <b>Label</b> (tên hiển thị) và <b>biểu thức</b> (vd <code>SUM(total_revenue)</code> hoặc tham chiếu measure khác).</li>
+        <li>Tuỳ chọn: thêm <b>bộ lọc (WHERE)</b>, chọn <b>định dạng</b> (số/tiền/%), gán <b>folder</b>.</li>
+        <li>Lưu — measure sẵn sàng dùng trong Explore và mini-app.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> đặt tên rõ nghĩa và gom theo folder (vd “Doanh thu”, “Vận hành”) để người tạo biểu đồ tìm nhanh.</div>
+      <figure><img src="images/25-measure.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trình soạn Measure — biểu thức, phụ thuộc, định dạng, điều kiện.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-date">
+      <h3 class="feat"><span class="feat-id">2.7</span>Date table (chiều thời gian) &amp; Từ điển</h3>
+      <p><b>Là gì:</b> tạo bảng lịch chuẩn (năm/quý/tháng/tuần, fiscal year, auto-join cột ngày) để phân tích theo thời gian. <b>Dictionary</b> tài liệu hoá ý nghĩa từng bảng/cột kèm % độ phủ.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Date table:</b> mở hộp thoại <b>Calendar</b>, đặt khoảng ngày, ngày đầu tuần, tháng đầu năm tài chính, bật auto-join cột ngày → Save.</li>
+        <li><b>Dictionary:</b> ở tab Model bấm <b>Dictionary</b>, điền mô tả cho bảng/cột; theo dõi % đã tài liệu hoá.</li>
+      </ol></div>
+      <figure><img src="images/28-dictionary.png"><figcaption><span class="exlabel">VÍ DỤ</span>Dictionary — chú thích ý nghĩa cột.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="dt-quality">
+      <h3 class="feat"><span class="feat-id">2.8</span>Chất lượng dữ liệu (Data Quality)</h3>
+      <p><b>Là gì:</b> giám sát dữ liệu theo 6 chiều — Completeness, Validity, Uniqueness, Consistency, Timeliness, Accuracy — với 13 loại rule, gợi ý bằng AI, xem trước PASS/FAIL, chạy theo lịch và lưu lịch sử.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở tab <b>Quality</b>, bấm <span class="path">+ Add Rule</span>.</li>
+        <li>Chọn <b>bảng</b>, <b>loại rule</b> (not null, accepted values, range, unique, freshness, custom SQL…) và <b>cột</b>.</li>
+        <li>Đặt mức độ (Info/Warning/Error), xem <b>Live preview</b>, bấm <b>Run test</b> để thử trên dữ liệu thật → <b>Create Rule</b>.</li>
+        <li>Bấm <b>Run Now</b> để chấm điểm, hoặc <b>Automate</b> để chạy theo lịch.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> bấm <b>Suggest with AI</b> để hệ thống tự đề xuất bộ rule phù hợp với bảng của bạn.</div>
+      <div class="grid2">
+        <figure><img src="images/29-quality.png"><figcaption><span class="exlabel">VÍ DỤ</span>Quality — 6 chiều chất lượng.</figcaption></figure>
+        <figure><img src="images/2a-qualityrule.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trình tạo rule — AI suggest + live preview.</figcaption></figure>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 3 ===================== -->
+    <section class="doc" id="m3">
+      <div class="eyebrow">Module 3</div>
+      <h2 class="mod">Explore — Trình tạo biểu đồ</h2>
+      <p class="lead">Nơi biến dữ liệu thành hình ảnh. Giao diện 3 bước (Loại biểu đồ → Gắn dữ liệu → Định dạng) với khung xem trước trực tiếp; hỗ trợ <b>33 loại biểu đồ</b> trên 6 nhóm.</p>
+    </section>
+
+    <section class="doc" id="ex-types">
+      <h3 class="feat"><span class="feat-id">3.1</span>Thư viện 33 loại biểu đồ</h3>
+      <p><b>Là gì:</b> chọn loại phù hợp ngay ở Bước 1; mỗi nhóm gom các loại cùng mục đích.</p>
+      <ul>
+        <li><b>Essentials:</b> Table, Matrix, KPI, Gauge, Bullet, Podium.</li>
+        <li><b>Comparison:</b> Bar, Horizontal/Grouped/Stacked Bar, Waterfall, Heatmap, Treemap, Funnel.</li>
+        <li><b>Trend:</b> Line, Area, Time Series, Bar + Line.</li>
+        <li><b>Composition:</b> Pie, Donut, Polar, Sunburst, Sankey.</li>
+        <li><b>Relationship:</b> Scatter, Bubble, Radar, 9-Box Grid.</li>
+        <li><b>Geo:</b> Point Map, Region Map.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào <span class="path">Explore</span> → chọn <b>Dataset</b> ở thanh trên.</li>
+        <li>Ở <b>Bước 1</b>, chọn nhóm rồi chọn loại biểu đồ.</li>
+      </ol></div>
+      <figure><img src="images/31-typegrid.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 1 — thư viện loại biểu đồ (6 nhóm).</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ex-bind">
+      <h3 class="feat"><span class="feat-id">3.2</span>Gắn dữ liệu (Data Binding)</h3>
+      <p><b>Là gì:</b> gán trường vào các vai trò — Dimension (chiều), Values/metric (giá trị, kèm hàm tổng hợp), Breakdown (tách nhóm), trục X/Y, trường thời gian + cấp độ (ngày/tuần/tháng), nhãn.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở <b>Bước 2 (Data Binding)</b>, kéo/chọn trường cho <b>X Axis</b> (chiều) và <b>Values</b> (giá trị).</li>
+        <li>Chọn <b>hàm tổng hợp</b> cho giá trị (sum, avg, count…) hoặc dùng Measure đã định nghĩa.</li>
+        <li>Tuỳ chọn thêm <b>Breakdown</b> để tách theo nhóm, hoặc bật <b>Date hierarchy</b> để khoan sâu theo thời gian.</li>
+        <li>Bấm <span class="path">Run</span> để xem kết quả ở khung preview.</li>
+      </ol></div>
+      <figure><img src="images/32-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — gắn dữ liệu + xem trước biểu đồ đường.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ex-format">
+      <h3 class="feat"><span class="feat-id">3.3</span>Định dạng &amp; kiểm tra truy vấn</h3>
+      <p><b>Là gì:</b> tinh chỉnh hiển thị (tiêu đề, bảng màu, định dạng số, đơn vị trục, nhãn dữ liệu, legend, sort, Top/Bottom N). Tab <b>Query</b> cho thấy SQL sinh ra, dialect và thời gian chạy — minh chứng dữ liệu là <b>live</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở <b>Bước 3 (Format)</b>, dùng ô tìm kiếm thiết lập hoặc mở các nhóm <b>Visual / Axes / Data labels</b>.</li>
+        <li>Bật <b>nhãn dữ liệu</b>, chọn bảng màu, đặt giới hạn <b>Top/Bottom N</b>… rồi <span class="path">Run</span> lại.</li>
+        <li>Mở tab <b>Query</b> (góc phải preview) để xem SQL hệ thống chạy trực tiếp trên nguồn.</li>
+        <li>Bấm <span class="path">Save</span> để lưu biểu đồ.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo nâng cao:</b> chuyển công tắc <b>Builder ↔ SQL</b> để tạo biểu đồ từ câu SQL tuỳ ý khi cần.</div>
+      <figure><img src="images/33-format-query.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 3 Format + tab Query hiển thị SQL backend.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ex-adv">
+      <h3 class="feat"><span class="feat-id">3.4</span>Biểu đồ nâng cao — ví dụ 9-Box Grid</h3>
+      <p><b>Là gì:</b> các loại quan hệ/nâng cao có cấu hình riêng. <b>9-Box</b> chia lưới 3×3 theo hai trục có hàm tổng hợp (SUM/AVG) + nhãn phân nhóm — hữu ích để đánh giá danh mục/nhân sự.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Chọn loại <b>9-Box Grid</b> ở nhóm Relationship.</li>
+        <li>Gán <b>X Axis</b> và <b>Y Axis</b> (chọn hàm tổng hợp cho mỗi trục), gán <b>Label</b> để phân nhóm điểm.</li>
+        <li><span class="path">Run</span> để xem lưới 3×3.</li>
+      </ol></div>
+      <figure><img src="images/34-ninebox.png"><figcaption><span class="exlabel">VÍ DỤ</span>9-Box Grid — X/Y Aggregation + nhãn.</figcaption></figure>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 4 ===================== -->
+    <section class="doc" id="m4">
+      <div class="eyebrow">Module 4</div>
+      <h2 class="mod">Dashboard — Báo cáo</h2>
+      <p class="lead">Lắp ghép biểu đồ thành báo cáo nhiều trang tương tác, áp dụng bộ lọc, tuỳ biến giao diện, rồi chia sẻ công khai/nhúng/xuất PDF — kèm trợ lý AI hỏi đáp dữ liệu.</p>
+    </section>
+
+    <section class="doc" id="db-list">
+      <h3 class="feat"><span class="feat-id">4.1</span>Danh sách Dashboard &amp; báo cáo đa trang</h3>
+      <p><b>Là gì:</b> tạo mới, Import HTML, tìm/lọc, chia sẻ. Báo cáo hỗ trợ <b>nhiều trang</b> — chuyển trang, thêm/đổi tên/xoá trang.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Dashboards → New Dashboard</span> (đặt tên, mô tả).</li>
+        <li>Dùng bộ chọn trang trên tiêu đề để <b>chuyển trang</b>; bấm <b>Add page</b> để thêm trang mới.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/41-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dashboard.</figcaption></figure>
+        <figure><img src="images/43-pages.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bộ chuyển trang + thêm/đổi tên/xoá trang.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="db-layout">
+      <h3 class="feat"><span class="feat-id">4.2</span>Thêm biểu đồ, bố cục &amp; nhãn dữ liệu</h3>
+      <p><b>Là gì:</b> thêm biểu đồ có sẵn hoặc tạo mới, kéo-thả &amp; resize tile, “Tidy layout” tự căn hàng, chế độ Canvas tự do, và các widget (text, đếm ngược, ảnh, hình khối). Biểu đồ hiển thị nhãn số liệu rõ ràng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">Add Chart</span>, tìm biểu đồ có sẵn hoặc tạo mới, rồi đưa vào báo cáo.</li>
+        <li>Kéo để di chuyển, kéo góc để chỉnh kích thước tile; dùng <b>⋯ → Tidy layout</b> để tự căn hàng.</li>
+        <li>Dùng <b>⋯ → Add widget</b> để chèn text/đếm ngược/ảnh/hình khối.</li>
+      </ol></div>
+      <figure><img src="images/42-hero.png"><figcaption><span class="exlabel">VÍ DỤ</span>Một trang báo cáo — KPI + biểu đồ đường + donut.</figcaption></figure>
+      <div class="grid2" style="margin-top:14px">
+        <figure><img src="images/48-addchart.png"><figcaption><span class="exlabel">VÍ DỤ</span>Add Chart — tìm/tạo &amp; xem trước.</figcaption></figure>
+        <figure><img src="images/4g-bar.png"><figcaption><span class="exlabel">VÍ DỤ</span>Biểu đồ cột có nhãn giá trị.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="db-filter">
+      <h3 class="feat"><span class="feat-id">4.3</span>Slicer, Filter &amp; Filter Map</h3>
+      <p><b>Là gì:</b> Slicer trên canvas, Filter pane theo phạm vi (toàn báo cáo / từng trang), lọc theo từng chart (HAVING), cross-highlight (bấm một điểm để lọc các chart khác). <b>Filter Map</b> tổng hợp mọi filter đang tác động và nguồn gốc của chúng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>Add slicer</b> để thêm bộ chọn lên canvas (vd Năm, Khu vực).</li>
+        <li>Bấm <b>Filters</b> để mở Filter pane và thêm bộ lọc cấp trang hoặc toàn báo cáo.</li>
+        <li>Bấm vào một điểm dữ liệu trên biểu đồ để <b>lọc chéo</b> các biểu đồ khác; bấm lại để bỏ.</li>
+        <li>Mở <b>⋯ → Filter map</b> để xem toàn bộ bộ lọc đang áp dụng.</li>
+      </ol></div>
+      <figure><img src="images/49-filtermap.png"><figcaption><span class="exlabel">VÍ DỤ</span>Filter Map — mọi filter + nguồn gốc + trạng thái public.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="db-theme">
+      <h3 class="feat"><span class="feat-id">4.4</span>Tuỳ biến giao diện (Theme)</h3>
+      <p><b>Là gì:</b> 5 mục <b>Mẫu / Màu / Chữ / Thẻ / Biểu đồ</b> với 8 preset dựng sẵn và bảng màu dữ liệu, có xem trước trực tiếp.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>⋯ → Theme</b>.</li>
+        <li>Chọn một <b>Mẫu</b> dựng sẵn, hoặc tinh chỉnh từng mục Màu/Chữ/Thẻ/Biểu đồ.</li>
+        <li>Xem preview tức thì rồi <b>Save appearance</b>.</li>
+      </ol></div>
+      <figure><img src="images/4a-theme.png"><figcaption><span class="exlabel">VÍ DỤ</span>Theme — 8 mẫu + tuỳ chỉnh màu/chữ/thẻ.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="db-share">
+      <h3 class="feat"><span class="feat-id">4.5</span>Chia sẻ công khai, Nhúng &amp; Xuất PDF</h3>
+      <p><b>Là gì:</b> tạo link công khai (kèm khoá/ẩn filter, <b>mật khẩu</b>, giao diện riêng), nhúng iframe vào website khác, xuất PDF nhiều trang. <b>Số link không giới hạn</b> — mỗi đối tượng một link riêng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Link công khai:</b> <span class="path">⋯ → Public links → Create new public link</span>; tuỳ chọn đặt mật khẩu, khoá/ẩn bộ lọc, chỉnh giao diện; rồi <b>Copy link</b>.</li>
+        <li><b>Nhúng:</b> dùng URL dạng <code>/embed/&lt;token&gt;</code> trong cùng hộp thoại để chèn iframe.</li>
+        <li><b>Xuất PDF:</b> <span class="path">⋯ → Export PDF</span>, chọn hướng giấy/khổ/trang → <b>Export</b>.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo phân quyền:</b> tạo nhiều link cho nhiều đối tượng — mỗi link có thể khoá sẵn một bộ lọc và đặt mật khẩu riêng, không giới hạn số lượng.</div>
+      <div class="grid2">
+        <figure><img src="images/4b-publiclinks.png"><figcaption><span class="exlabel">VÍ DỤ</span>Public Links — quản lý link, URL nhúng.</figcaption></figure>
+        <figure><img src="images/4c-exportpdf.png"><figcaption><span class="exlabel">VÍ DỤ</span>Export PDF — hướng giấy, khổ, chọn trang.</figcaption></figure>
+      </div>
+      <figure><img src="images/4d-public.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trang công khai — người xem không cần đăng nhập.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="db-ai">
+      <h3 class="feat"><span class="feat-id">4.6</span>Trợ lý AI trên báo cáo <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <p><b>Là gì:</b> một trợ lý phân tích sống ngay trong báo cáo. Khi mở, nó <b>chủ động giới thiệu</b> điểm đáng chú ý và gợi ý câu hỏi; khi được hỏi, nó <b>tổng hợp số liệu trực tiếp từ chính báo cáo đang xem</b>, trả lời kèm <b>trích dẫn biểu đồ nguồn</b> + độ tin cậy, và đề xuất câu hỏi đào sâu. Người xem không cần biết SQL/BI.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trên báo cáo (bản công khai hoặc nội bộ), bấm nút trợ lý AI (góc dưới phải).</li>
+        <li>Bấm một <b>câu hỏi gợi ý</b>, hoặc tự gõ câu hỏi bằng tiếng Việt.</li>
+        <li>Chọn độ phân tích: <b>Tự động → Nhanh → Sâu</b> tuỳ nhu cầu; có thể bật tra cứu web.</li>
+        <li>Đánh giá câu trả lời 👍/👎 để cải thiện.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> hỏi “Hướng dẫn tôi cách đọc báo cáo này” để AI dẫn bạn đi từng trang/biểu đồ — rất hợp cho người mới.</div>
+      <div class="grid2">
+        <figure><img src="images/4e2-aibot-welcome.png"><figcaption><span class="exlabel">VÍ DỤ</span>Mở bot — lời chào chủ động &amp; câu hỏi gợi ý.</figcaption></figure>
+        <figure><img src="images/4e-aibot.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trả lời kèm số liệu chính xác, trích dẫn chart nguồn &amp; gợi ý đào sâu.</figcaption></figure>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 5 ===================== -->
+    <section class="doc" id="m5">
+      <div class="eyebrow">Module 5</div>
+      <h2 class="mod">Workboard — Mini-app vận hành</h2>
+      <p class="lead">Biến Dataset thành ứng dụng vận hành thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn hình (Form nhập liệu, Table, Document in ấn, Dashboard nhúng), phân quyền theo từng người dùng và phát hành qua cổng đăng nhập PIN.</p>
+    </section>
+
+    <section class="doc" id="wb-builder">
+      <h3 class="feat"><span class="feat-id">5.1</span>Builder &amp; cấu trúc ứng dụng</h3>
+      <p><b>Là gì:</b> trình dựng dạng canvas — các tab <b>Workspace</b>, danh sách màn hình, dataset gắn kết. Một mini-app có thể gồm nhiều màn thuộc 4 loại: Form/Table/Document/Dashboard.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào <span class="path">Workboards → New workboard</span> (chọn Dataset nguồn).</li>
+        <li>Trong Builder, tạo <b>Workspace</b> rồi thêm màn hình bằng palette <b>+ Form / + Table / + Document / + Dashboard</b>.</li>
+        <li>Kéo để sắp xếp thứ tự; bấm vào một màn để mở trình sửa chi tiết.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/51-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Workboard.</figcaption></figure>
+        <figure><img src="images/52-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — nhiều màn hình qua các Workspace.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-settings">
+      <h3 class="feat"><span class="feat-id">5.2</span>Cài đặt ứng dụng (branding, nav, auto-number)</h3>
+      <p><b>Là gì:</b> đổi dataset, đặt tên app, màu chủ đạo, logo, lời chào; cấu hình điều hướng (sidebar/bottom-nav); định nghĩa <b>số tự tăng</b> theo mẫu.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong Builder, bấm <b>App settings</b>.</li>
+        <li>Thiết lập <b>App name, Primary color, Logo URL, Welcome text</b>.</li>
+        <li>Thêm <b>auto-number</b>: chọn cột + mẫu (vd <code>SH-{YYYY}{MM}{DD}-{N:3}</code>) + chu kỳ reset.</li>
+        <li>Chọn kiểu điều hướng cho mobile/desktop.</li>
+      </ol></div>
+      <figure><img src="images/53-appsettings.png"><figcaption><span class="exlabel">VÍ DỤ</span>App Settings — branding, auto-number, navigation.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-form">
+      <h3 class="feat"><span class="feat-id">5.3</span>Màn hình Form (nhập liệu)</h3>
+      <p><b>Là gì:</b> biểu mẫu nhiều trang (wizard có thanh tiến độ), chia section, <b>10 loại widget</b> (text, số, chọn, lookup, ngày, checkbox, file, ảnh/chụp ảnh…), logic điều kiện (show_if / required_if / valid_if), giá trị mặc định và <b>OCR chụp ảnh tự điền</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Form, ở tab <b>Content</b> chọn <b>bảng đích</b> để ghi dữ liệu.</li>
+        <li>Bấm <b>+ Add field</b>, đặt <b>Label</b>, chọn <b>widget</b>, gắn <b>cột</b>.</li>
+        <li>Tuỳ chọn điều kiện: <b>show_if / required_if / valid_if</b> (vd bắt buộc SĐT khi kênh = “Điện thoại”).</li>
+        <li>Chia thành nhiều <b>page</b> để tạo wizard; đặt giá trị mặc định nếu cần.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/55-form-wizard.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form wizard — nhiều trang + nhiều widget.</figcaption></figure>
+        <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-table">
+      <h3 class="feat"><span class="feat-id">5.4</span>Màn hình Table (danh sách &amp; chỉnh sửa)</h3>
+      <p><b>Là gì:</b> cấu hình cột, nhóm cột, định dạng; bộ lọc (text/select/ngày/số); chỉnh sửa inline, thêm/xoá dòng, <b>dán hàng loạt</b>; <b>cột tính toán JS</b>, cột lookup (VLOOKUP đa hop), và dòng tổng (sum/avg/min/max/count).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Table, chọn <b>Data source</b> (bảng).</li>
+        <li>Trong <b>Visible columns</b>, chọn cột hiển thị; trong <b>Editable columns</b>, chọn cột cho phép sửa.</li>
+        <li>Bật <b>Add/Delete row</b>, cấu hình <b>Filters</b>, <b>Footer totals</b>, <b>Computed column (JS)</b> nếu cần.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/54-tableeditor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Table editor — cột, editable, footer totals.</figcaption></figure>
+        <figure><img src="images/58-table-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — bảng có nhóm cột, filter, cột tính toán.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-doc">
+      <h3 class="feat"><span class="feat-id">5.5</span>Màn hình Document (in ấn A4)</h3>
+      <p><b>Là gì:</b> tài liệu khổ A4 in được, ghép từ các block: header, key-value, text, data table (có dòng tổng), footer, chữ ký; hỗ trợ biến động (<code>{{today}}</code>, <code>{{app_user.username}}</code>…).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Document, đặt <b>Page setup</b> (khổ giấy, hướng, lề).</li>
+        <li>Bấm <b>+ Add block</b> để thêm header/text/data table/kv/footer/chữ ký.</li>
+        <li>Với data table, chọn bảng &amp; cột hiển thị, bật dòng tổng nếu cần.</li>
+      </ol></div>
+      <figure><img src="images/59-doc.png"><figcaption><span class="exlabel">VÍ DỤ</span>Document editor — page setup A4 + các block.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-dash">
+      <h3 class="feat"><span class="feat-id">5.6</span>Màn hình Dashboard (nhúng báo cáo)</h3>
+      <p><b>Là gì:</b> nhúng thẳng một báo cáo AppBI vào mini-app, ánh xạ bộ lọc theo vai trò người dùng, và tự sinh <b>link công khai riêng cho từng vai trò</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Dashboard, chọn <b>báo cáo nguồn</b>.</li>
+        <li>Thêm <b>Role mapping</b> để mỗi vai trò chỉ thấy phần dữ liệu của mình; hoặc <b>Static filters</b> để cố định một giá trị.</li>
+        <li>Hệ thống tự tạo link công khai theo vai trò (user/admin/owner).</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5a-dashscreen.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình màn Dashboard — role mapping, link theo vai trò.</figcaption></figure>
+        <figure><img src="images/5b-embed.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — báo cáo hiển thị ngay trong mini-app.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-rls">
+      <h3 class="feat"><span class="feat-id">5.7</span>Phân quyền hàng (RLS) theo người dùng</h3>
+      <p><b>Là gì:</b> mỗi rule = một vai trò + phạm vi xem/thêm/sửa/xoá. Theo quy ước cột <code>miniapp_user</code>, mỗi người chỉ thấy dữ liệu của mình; Owner/Admin có thể xem tất cả.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở một màn, vào tab <b>Permissions</b>.</li>
+        <li>Thêm rule cho vai trò <b>User</b>: đặt <b>filter column</b> = <code>miniapp_user</code>, <b>filter value</b> = <code>{{app_user.username}}</code>.</li>
+        <li>Tích các quyền <b>Create / Update / Delete</b> phù hợp; vai trò Owner/Admin có thể bật <b>Unrestricted</b>.</li>
+      </ol></div>
+      <div class="note"><b>Lưu ý quan trọng:</b> nếu vai trò User không có rule nào, người dùng sẽ <b>không thấy dữ liệu</b> (mặc định an toàn). Hãy luôn cấu hình rule cho từng vai trò cần truy cập.</div>
+      <figure><img src="images/5c-rls.png"><figcaption><span class="exlabel">VÍ DỤ</span>RLS editor — lọc per-user qua miniapp_user.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-users">
+      <h3 class="feat"><span class="feat-id">5.8</span>Người dùng &amp; đăng nhập PIN</h3>
+      <p><b>Là gì:</b> quản lý app-user (username, PIN, vai trò user/admin/owner, ngữ cảnh); có bảng kiểm tra <b>access-mode</b> tự phân loại từng bảng (per-user / shared / joined). Người dùng đăng nhập cổng bằng PIN.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào tab <b>Users</b>, bấm <b>Add user</b>.</li>
+        <li>Nhập username, đặt/PIN sinh tự động, chọn vai trò; lưu.</li>
+        <li>Chia sẻ link cổng + PIN cho người dùng để họ đăng nhập.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5d-users.png"><figcaption><span class="exlabel">VÍ DỤ</span>App Users + audit phân quyền dữ liệu.</figcaption></figure>
+        <figure><img src="images/5i-login.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cổng công khai — đăng nhập PIN.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-share">
+      <h3 class="feat"><span class="feat-id">5.9</span>Phát hành &amp; chia sẻ Cổng (Portal)</h3>
+      <p><b>Là gì:</b> phát hành app (yêu cầu PIN owner), bật cổng công khai và <b>bật/tắt hiển thị từng màn/Workspace</b>. Người dùng chỉ thấy đúng dữ liệu của mình nhờ RLS.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Đặt <b>slug</b> cho app, đổi PIN owner khỏi mặc định, rồi bấm <b>Publish</b>.</li>
+        <li>Bấm <b>Chia sẻ</b> → <b>Bật chia sẻ công khai</b> để tạo cổng (link <code>/ws/&lt;token&gt;</code>).</li>
+        <li>Bật/tắt hiển thị từng màn/Workspace trên cổng theo nhu cầu.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5h-share.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chia sẻ Cổng — hiển thị từng màn.</figcaption></figure>
+        <figure><img src="images/5j-rls-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — người dùng chỉ thấy dữ liệu của mình.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-webhook">
+      <h3 class="feat"><span class="feat-id">5.10</span>Webhook (đẩy dữ liệu ra hệ thống ngoài)</h3>
+      <p><b>Là gì:</b> khi người dùng bấm Sync trên màn Document, dữ liệu được POST tới endpoint cấu hình sẵn (batch size, headers, timeout) — kèm lịch sử chạy.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào tab <b>Webhook → Thêm webhook</b>.</li>
+        <li>Nhập <b>tên, URL, màn doc phục vụ, headers</b>, batch size, timeout.</li>
+        <li>Bấm <b>Gửi test</b> để thử, rồi <b>Lưu</b>. Xem kết quả ở sub-tab <b>History</b>.</li>
+      </ol></div>
+      <figure><img src="images/5e-webhook.png"><figcaption><span class="exlabel">VÍ DỤ</span>Webhook — cấu hình endpoint đẩy dữ liệu.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-io">
+      <h3 class="feat"><span class="feat-id">5.11</span>Import / Export Workboard</h3>
+      <p><b>Là gì:</b> đóng gói toàn bộ app thành bundle (dataset + layout + người dùng) để mang đi nơi khác; khi import chỉ cần chọn đúng Source, hệ thống tự dựng lại dataset và app.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Export:</b> trong Builder bấm <b>Export</b>, chọn có kèm PIN hay không, rồi <b>Download .json</b>.</li>
+        <li><b>Import:</b> ở danh sách Workboard bấm <b>Import</b>, tải file bundle, chọn Source/Dataset đích → <b>Tạo dataset + import</b>.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5f-export.png"><figcaption><span class="exlabel">VÍ DỤ</span>Export — bundle gồm màn hình, dataset, người dùng.</figcaption></figure>
+        <figure><img src="images/5g-import.png"><figcaption><span class="exlabel">VÍ DỤ</span>Import — nạp bundle &amp; tự tạo dataset.</figcaption></figure>
+      </div>
+    </section>
+
+    <hr>
+    <p style="text-align:center; color:var(--muted); font-size:13px; padding:10px 0 30px">
+      📊 <b>AppBI</b> — Một nền tảng, từ dữ liệu thô đến báo cáo và ứng dụng vận hành.<br>
+      Tài liệu này là bản web tra cứu — dùng ô tìm kiếm bên trái để tới bất kỳ tính năng nào.
+    </p>
+  </div>
+</main>
+
+<button class="totop" id="totop" title="Lên đầu trang">↑</button>
+
+<script>
+(function(){
+  var tree=document.getElementById('tree');
+  var links=Array.prototype.slice.call(tree.querySelectorAll('a'));
+  var sections=links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  /* ---- collapsible groups ---- */
+  tree.querySelectorAll('.grp>button').forEach(function(btn){
+    btn.addEventListener('click', function(){ btn.parentElement.classList.toggle('collapsed'); });
+  });
+
+  /* ---- search filter ---- */
+  var q=document.getElementById('q'), nores=document.getElementById('nores');
+  function norm(s){ return (s||'').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d'); }
+  q.addEventListener('input', function(){
+    var term=norm(q.value.trim()); var any=false;
+    links.forEach(function(a){
+      var hit = !term || norm(a.textContent).indexOf(term)>-1;
+      a.classList.toggle('hidden', !hit); if(hit) any=true;
+    });
+    tree.querySelectorAll('.grp').forEach(function(g){
+      var vis=g.querySelectorAll('a:not(.hidden)').length;
+      g.style.display = (term && vis===0) ? 'none' : '';
+      if(term) g.classList.remove('collapsed');
+    });
+    nores.style.display = (term && !any) ? 'block':'none';
+  });
+  q.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ var first=links.find(function(a){return !a.classList.contains('hidden');});
+      if(first){ first.click(); first.scrollIntoView({block:'nearest'}); } }
+  });
+
+  /* ---- scrollspy ---- */
+  var byId={}; links.forEach(function(a){ byId[a.getAttribute('href').slice(1)]=a; });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('active'); });
+        var a=byId[en.target.id]; if(a){ a.classList.add('active');
+          /* keep active visible in sidebar */
+          var r=a.getBoundingClientRect(); if(r.top<90||r.bottom>window.innerHeight) a.scrollIntoView({block:'center'});
+        }
+      }
+    });
+  },{ rootMargin:'-64px 0px -70% 0px', threshold:0 });
+  sections.forEach(function(s){ if(s) io.observe(s); });
+
+  /* ---- mobile sidebar ---- */
+  var sb=document.getElementById('sidebar'), ham=document.getElementById('ham'), scrim=document.getElementById('scrim');
+  function close(){ sb.classList.remove('open'); scrim.classList.remove('show'); }
+  ham.addEventListener('click', function(){ sb.classList.toggle('open'); scrim.classList.toggle('show'); });
+  scrim.addEventListener('click', close);
+  tree.addEventListener('click', function(e){ if(e.target.tagName==='A' && window.innerWidth<=900) close(); });
+
+  /* ---- back to top ---- */
+  var tt=document.getElementById('totop');
+  window.addEventListener('scroll', function(){ tt.style.display = window.scrollY>500 ? 'flex':'none'; });
+  tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
