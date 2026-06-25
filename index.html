@@ -238,6 +238,7 @@
         <a href="#wb-builder">5.1 Builder &amp; cấu trúc</a>
         <a href="#wb-settings">5.2 Cài đặt ứng dụng</a>
         <a href="#wb-form">5.3 Màn hình Form</a>
+        <a href="#wb-ocr">↳ Chụp ảnh → AI tự điền (OCR) ⭐</a>
         <a href="#wb-table">5.4 Màn hình Table</a>
         <a href="#wb-doc">5.5 Màn hình Document</a>
         <a href="#wb-dash">5.6 Màn hình Dashboard</a>
@@ -733,6 +734,41 @@
         <figure><img src="images/55-form-wizard.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form wizard — nhiều trang + nhiều widget.</figcaption></figure>
         <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác.</figcaption></figure>
       </div>
+    </section>
+
+    <section class="doc" id="wb-ocr">
+      <h3 class="feat"><span class="feat-id" style="background:var(--accent)">AI</span>Chụp ảnh → AI tự đọc &amp; điền form (OCR) <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <p><b>Là gì:</b> người nhập <b>chụp (hoặc tải lên) ảnh một tờ phiếu</b> — đơn hàng, hoá đơn, biên bản, phiếu giao… — AI <b>đọc nội dung và tự điền vào đúng các trường của biểu mẫu</b>. Người dùng chỉ việc rà soát rồi lưu. Cắt phần lớn thời gian gõ tay và giảm sai sót, đặc biệt cho nhân viên hiện trường.</p>
+
+      <p><b>Cách hoạt động (chính xác theo hệ thống):</b></p>
+      <ul>
+        <li><b>Mang token của bạn (BYOK):</b> hỗ trợ 3 nhà cung cấp AI thị giác — <b>Anthropic (Claude), OpenAI (GPT), Google Gemini</b> — tự chọn model (mặc định lần lượt <code>claude-3-5-sonnet</code> / <code>gpt-4o-mini</code> / <code>gemini-2.5-flash</code>).</li>
+        <li><b>Hiểu đúng biểu mẫu:</b> hệ thống tự gửi cho AI <b>danh sách trường của chính form</b> (mã cột, nhãn, kiểu, và các lựa chọn nếu là select) → AI trả về giá trị theo từng cột.</li>
+        <li><b>Tự chuẩn hoá theo kiểu trường:</b> số (hiểu cả định dạng <code>1.234,56</code>), ngày (đưa về chuẩn), trường chọn (khớp về đúng đáp án), checkbox.</li>
+        <li><b>Không bịa:</b> trường nào không thấy rõ trong ảnh thì bỏ qua, không điền bừa.</li>
+        <li><b>Dễ rà soát:</b> các ô được AI điền được <b>tô vàng + gắn nhãn “AI”</b> để người dùng kiểm tra trước khi lưu.</li>
+      </ul>
+      <div class="note"><b>Bảo mật token:</b> token được <b>mã hoá khi lưu</b>, <b>không bao giờ gửi xuống trình duyệt người xem/runtime</b>; ở builder chỉ hiển thị “đã lưu” (có nút con mắt để chính người cấu hình xem lại).</div>
+
+      <p><b>Cách bật (builder):</b></p>
+      <div class="howto"><h4>⚙ Cấu hình</h4><ol>
+        <li>Mở màn Form → mục <b>“Chụp ảnh tự điền (OCR)”</b>, tích <b>“Cho phép chụp ảnh để tự điền biểu mẫu”</b>.</li>
+        <li>Chọn <b>Nhà cung cấp AI</b> + <b>Model</b>, dán <b>Token (API key)</b>.</li>
+        <li>Bấm <b>“Kiểm tra kết nối”</b> để chắc token/model hoạt động trước khi dùng.</li>
+        <li>(Tuỳ chọn) thêm <b>“Hướng dẫn cho AI”</b> mô tả bố cục phiếu để đọc chính xác hơn.</li>
+      </ol></div>
+      <figure><img src="images/5o-ocr-config.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình OCR trong builder — nhà cung cấp, model, token (mã hoá), kiểm tra kết nối, gợi ý cho AI.</figcaption></figure>
+
+      <p><b>Cách dùng (người nhập):</b></p>
+      <div class="howto"><h4>⚙ Thao tác</h4><ol>
+        <li>Ở màn Form, bấm <b>📷 “Chụp ảnh để điền nhanh”</b> hoặc kéo-thả ảnh (trên điện thoại mở thẳng camera/thư viện).</li>
+        <li>Đợi AI đọc — các trường khớp được <b>tự điền &amp; tô vàng</b>.</li>
+        <li><b>Kiểm tra/sửa</b> rồi bấm <b>Lưu</b>.</li>
+      </ol></div>
+      <div class="phones">
+        <figure><img src="images/5m-mobile-form.png"><figcaption>Nút “Chụp ảnh để điền nhanh” trên form (mobile).</figcaption></figure>
+      </div>
+      <div class="tip"><b>Mẹo:</b> tính năng này độc lập với trường <b>“Ảnh chứng từ” / “File đính kèm”</b> trong form — OCR dùng ảnh để <i>đọc &amp; điền</i>, còn các trường upload dùng để <i>lưu kèm</i> minh chứng.</div>
     </section>
 
     <section class="doc" id="wb-table">
