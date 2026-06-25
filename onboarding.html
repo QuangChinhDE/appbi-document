@@ -938,12 +938,24 @@
         <li><b>Máy tính bảng / desktop (≥ 768px):</b> theo cấu hình của app — <b>Sidebar</b> hoặc <b>Top tabs 2 tầng</b> (workspace → màn hình).</li>
       </ul>
 
-      <p><b>2) Cài như một ứng dụng (PWA).</b> Mini-app có web manifest (chạy toàn màn hình, có icon &amp; màu thương hiệu) nên cài được lên màn hình chính:</p>
-      <div class="howto"><h4>⚙ Cách cài lên màn hình chính</h4><ol>
-        <li><b>Android/Chrome:</b> mở app trong trình duyệt → bấm nút <b>“Cài đặt / Install”</b> hiện ra (hoặc menu trình duyệt → <i>Thêm vào màn hình chính</i>).</li>
-        <li><b>iPhone/Safari:</b> mở app trong Safari → bấm <b>Chia sẻ</b> → <b>“Thêm vào MH chính”</b> (app có sẵn hướng dẫn này).</li>
-        <li>Mở app từ icon trên màn hình chính → chạy <b>toàn màn hình</b>, không thanh địa chỉ, như app gốc.</li>
+      <p><b>2) Cài như một ứng dụng (PWA) — qua tên miền riêng của bạn.</b> Mini-app có web manifest (chạy toàn màn hình, có icon &amp; màu thương hiệu) nên cài thẳng lên màn hình chính, không cần qua kho ứng dụng.</p>
+      <div class="callout"><b>Mỗi khách hàng có một tên miền riêng.</b> Trang “Ứng dụng của tôi” (launcher) của bạn nằm tại <span class="path">https://&lt;tên-miền-của-bạn&gt;/m</span> — ví dụ <span class="path">https://report.base-datateam.com/m</span>. Cứ mở đường dẫn <b>/m</b> này trên điện thoại để bắt đầu.</div>
+
+      <div class="howto"><h4>⚙ Cài lên màn hình chính</h4><ol>
+        <li>Trên điện thoại, mở <span class="path">https://&lt;tên-miền-của-bạn&gt;/m</span> (iPhone hãy mở bằng <b>Safari</b>) → hiện màn <b>“Ứng dụng của tôi”</b>.</li>
+        <li>Bấm <b>“+ Thêm workspace”</b>, <b>dán link Cổng được cấp</b> → ứng dụng xuất hiện trong danh sách trên máy.</li>
+        <li><b>Cài lên màn hình chính:</b>
+          <ul>
+            <li><b>iPhone / Safari:</b> bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên ↑ ở thanh dưới) → cuộn xuống chọn <b>“Thêm vào Màn hình chính”</b>.</li>
+            <li><b>Android / Chrome:</b> bấm nút <b>“Cài ứng dụng về màn hình chính”</b> ngay trên trang (hoặc menu ⋮ → <i>Thêm vào màn hình chính</i>).</li>
+          </ul>
+        </li>
+        <li>Mở app từ icon vừa tạo → chạy <b>toàn màn hình</b> như app gốc (và dùng được cả khi offline — xem mục 3).</li>
       </ol></div>
+      <div class="phones">
+        <figure><img src="images/5p-launcher.png"><figcaption>Trang launcher tại <b>/m</b> — “Thêm workspace” + nút cài về màn hình chính.</figcaption></figure>
+      </div>
+      <div class="tip"><b>Mẹo:</b> iPhone không có nút cài tự động — luôn dùng <b>Safari → Chia sẻ → “Thêm vào Màn hình chính”</b> (chính trang launcher cũng hiển thị nhắc này khi mở trên iPhone).</div>
 
       <p><b>3) Hoạt động offline (offline-first).</b> Phù hợp nhân viên hiện trường, kho, công trường — chỗ sóng yếu:</p>
       <ul>
