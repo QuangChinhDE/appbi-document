@@ -213,10 +213,12 @@
     <div class="grp">
       <button><span class="tw">▼</span> 3 · Explore (Biểu đồ)</button>
       <div class="links">
-        <a href="#ex-types">3.1 Thư viện 33 biểu đồ</a>
-        <a href="#ex-bind">3.2 Gắn dữ liệu</a>
-        <a href="#ex-format">3.3 Định dạng &amp; Query</a>
-        <a href="#ex-adv">3.4 Biểu đồ nâng cao</a>
+        <a href="#m3">3.0 Bố cục màn Explore</a>
+        <a href="#ex-types">3.1 Bước 1 — Loại biểu đồ</a>
+        <a href="#ex-bind">3.2 Bước 2 — Gắn dữ liệu</a>
+        <a href="#ex-format">3.3 Bước 3 — Định dạng</a>
+        <a href="#ex-preview">3.4 Xem trước · Run · Save</a>
+        <a href="#ex-adv">3.5 Biểu đồ nâng cao</a>
       </div>
     </div>
 
@@ -537,54 +539,110 @@
     <section class="doc" id="m3">
       <div class="eyebrow">Module 3</div>
       <h2 class="mod">Explore — Trình tạo biểu đồ</h2>
-      <p class="lead">Nơi biến dữ liệu thành hình ảnh. Giao diện 3 bước (Loại biểu đồ → Gắn dữ liệu → Định dạng) với khung xem trước trực tiếp; hỗ trợ <b>33 loại biểu đồ</b> trên 6 nhóm.</p>
+      <p class="lead">Nơi biến dữ liệu thành hình ảnh. Bạn đi theo <b>3 bước từ trên xuống</b> (Loại biểu đồ → Gắn dữ liệu → Định dạng) và xem kết quả ngay ở khung bên phải. Hỗ trợ <b>33 loại biểu đồ</b> trên 6 nhóm.</p>
+
+      <h3 class="feat"><span class="feat-id">3.0</span>Bố cục màn Explore — vùng nào làm gì</h3>
+      <p>Màn hình chia làm <b>3 khu vực</b>. Hiểu 3 khu này là dùng được mọi biểu đồ:</p>
+      <ul>
+        <li><b>① Thanh trên cùng:</b> chọn <b>Dataset</b> (kho dữ liệu) &amp; <b>Base table</b> (bảng gốc), công tắc <b>Builder ↔ SQL</b>, nút <b>Run</b> (chạy thử), <b>Save/Update</b> (lưu), và <b>Add note</b> (ghi chú ý đồ biểu đồ).</li>
+        <li><b>② Cột cấu hình (bên trái) — 3 bước:</b> <b>Bước 1</b> chọn loại biểu đồ · <b>Bước 2</b> gắn dữ liệu vào các “vai trò” (trục, giá trị…) · <b>Bước 3</b> định dạng (màu, nhãn, trục…).</li>
+        <li><b>③ Khung xem trước (bên phải):</b> 3 thẻ <b>Chart</b> (hình), <b>Table</b> (bảng số), <b>Query</b> (câu SQL hệ thống chạy). Bấm <b>Run</b> để cập nhật.</li>
+      </ul>
+      <figure><img src="images/30-builder-layout.png"><figcaption><span class="exlabel">VÍ DỤ</span>Toàn cảnh màn Explore: ① thanh trên · ② cột cấu hình 3 bước · ③ khung xem trước.</figcaption></figure>
+      <div class="tip"><b>Quy trình chung:</b> chọn Dataset → Bước 1 chọn loại → Bước 2 kéo trường vào trục &amp; giá trị → <b>Run</b> xem thử → Bước 3 chỉnh đẹp → <b>Save</b>.</div>
     </section>
 
     <section class="doc" id="ex-types">
-      <h3 class="feat"><span class="feat-id">3.1</span>Thư viện 33 loại biểu đồ</h3>
-      <p><b>Là gì:</b> chọn loại phù hợp ngay ở Bước 1; mỗi nhóm gom các loại cùng mục đích.</p>
+      <h3 class="feat"><span class="feat-id">3.1</span>Bước 1 — Chọn loại biểu đồ</h3>
+      <p><b>Vùng này để làm gì:</b> chọn <b>hình thức trực quan</b> trước, vì nó quyết định Bước 2 cần gắn những trường nào. 33 loại được gom vào 6 nhóm theo mục đích — chọn nhóm rồi chọn loại.</p>
+      <p><b>Chọn nhóm nào khi…</b></p>
       <ul>
-        <li><b>Essentials:</b> Table, Matrix, KPI, Gauge, Bullet, Podium.</li>
-        <li><b>Comparison:</b> Bar, Horizontal/Grouped/Stacked Bar, Waterfall, Heatmap, Treemap, Funnel.</li>
-        <li><b>Trend:</b> Line, Area, Time Series, Bar + Line.</li>
-        <li><b>Composition:</b> Pie, Donut, Polar, Sunburst, Sankey.</li>
-        <li><b>Relationship:</b> Scatter, Bubble, Radar, 9-Box Grid.</li>
-        <li><b>Geo:</b> Point Map, Region Map.</li>
+        <li><b>Essentials</b> — số/bảng cốt lõi: <b>Table, Matrix</b> (bảng &amp; bảng chéo), <b>KPI</b> (một con số nổi bật), <b>Gauge, Bullet</b> (so với mục tiêu), <b>Podium</b> (xếp hạng top). → khi cần “con số” hơn “hình”.</li>
+        <li><b>Comparison</b> — so sánh giữa các hạng mục: <b>Bar / Horizontal / Grouped / Stacked Bar, Waterfall</b> (tăng/giảm lũy kế), <b>Heatmap, Treemap, Funnel</b> (phễu chuyển đổi).</li>
+        <li><b>Trend</b> — diễn biến theo thời gian: <b>Line, Area, Time Series, Bar + Line</b> (cột + đường 2 trục).</li>
+        <li><b>Composition</b> — cơ cấu/tỷ trọng: <b>Pie, Donut, Polar, Sunburst</b> (phân cấp), <b>Sankey</b> (luồng).</li>
+        <li><b>Relationship</b> — quan hệ giữa 2+ chỉ số: <b>Scatter, Bubble, Radar, 9-Box Grid</b>.</li>
+        <li><b>Geo</b> — bản đồ: <b>Point Map</b> (điểm), <b>Region Map</b> (vùng).</li>
       </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Vào <span class="path">Explore</span> → chọn <b>Dataset</b> ở thanh trên.</li>
-        <li>Ở <b>Bước 1</b>, chọn nhóm rồi chọn loại biểu đồ.</li>
+        <li>Vào <span class="path">Explore → New Chart</span>, chọn <b>Dataset</b> ở thanh trên.</li>
+        <li>Ở <b>Bước 1</b>, bấm tab nhóm (Essentials/Comparison/…) rồi bấm loại biểu đồ.</li>
+        <li>Đổi ý lúc nào cũng được: bấm <b>Change</b> ở thẻ loại để chọn lại (cấu hình tương thích sẽ được giữ).</li>
       </ol></div>
-      <figure><img src="images/31-typegrid.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 1 — thư viện loại biểu đồ (6 nhóm).</figcaption></figure>
+      <figure><img src="images/31-typegrid.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 1 — thư viện loại biểu đồ, 6 nhóm theo mục đích.</figcaption></figure>
+      <div class="tip"><b>Chưa chắc chọn gì?</b> Xu hướng theo thời gian → <i>Line</i>; so sánh hạng mục → <i>Bar</i>; tỷ trọng → <i>Donut</i>; một con số KPI → <i>KPI</i>; bảng chi tiết → <i>Table</i>.</div>
     </section>
 
     <section class="doc" id="ex-bind">
-      <h3 class="feat"><span class="feat-id">3.2</span>Gắn dữ liệu (Data Binding)</h3>
-      <p><b>Là gì:</b> gán trường vào các vai trò — Dimension (chiều), Values/metric (giá trị, kèm hàm tổng hợp), Breakdown (tách nhóm), trục X/Y, trường thời gian + cấp độ (ngày/tuần/tháng), nhãn.</p>
+      <h3 class="feat"><span class="feat-id">3.2</span>Bước 2 — Gắn dữ liệu (Field Roles)</h3>
+      <p><b>Vùng này để làm gì:</b> bạn “đổ” các cột dữ liệu vào những <b>vai trò</b> mà biểu đồ cần. Mục có dấu <b>*</b> là bắt buộc. Tuỳ loại biểu đồ, các vai trò hiện ra sẽ khác nhau — dưới đây là các vai trò phổ biến:</p>
+      <ul>
+        <li><b>X Axis (trục/chiều phân tích)</b> — cột dùng để chia nhóm/đặt lên trục ngang (vd <i>Tháng</i>, <i>Sản phẩm</i>, <i>Khu vực</i>). Với cột ngày có thêm công tắc <b>Date hierarchy</b> để <b>khoan sâu Năm → Quý → Tháng → Ngày</b>.</li>
+        <li><b>Values / Y (giá trị cần đo)</b> — con số muốn hiển thị, kèm <b>hàm tổng hợp</b>:
+          <ul>
+            <li><b>AS-IS</b> — lấy nguyên giá trị (không gộp).</li>
+            <li><b>SUM</b> — cộng tổng · <b>AVG</b> — trung bình · <b>MIN/MAX</b> — nhỏ nhất/lớn nhất.</li>
+            <li><b>COUNT</b> — đếm số dòng · <b>COUNT DISTINCT</b> — đếm giá trị khác nhau (vd số khách duy nhất).</li>
+          </ul>
+          Bấm <b>“+ add value”</b> để thêm nhiều chỉ số (vd vừa Doanh thu vừa Số đơn). Có thể chọn thẳng <b>Measure</b> đã định nghĩa ở Dataset (đã kèm sẵn cách tính).
+        </li>
+        <li><b>Breakdown (tách nhóm/màu)</b> — tách mỗi giá trị theo một cột nữa (vd doanh thu <i>theo kênh</i>) → tạo nhiều cột/đường/lát màu.</li>
+        <li><b>Vai trò riêng theo loại:</b> Scatter/Bubble/9-Box có <b>X/Y</b> (kèm hàm tổng hợp) + <b>Size</b> (kích thước) + <b>Label</b>; Time Series có <b>trường thời gian</b>; Bảng có chọn cột hiển thị / pivot (hàng × cột).</li>
+      </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Ở <b>Bước 2 (Data Binding)</b>, kéo/chọn trường cho <b>X Axis</b> (chiều) và <b>Values</b> (giá trị).</li>
-        <li>Chọn <b>hàm tổng hợp</b> cho giá trị (sum, avg, count…) hoặc dùng Measure đã định nghĩa.</li>
-        <li>Tuỳ chọn thêm <b>Breakdown</b> để tách theo nhóm, hoặc bật <b>Date hierarchy</b> để khoan sâu theo thời gian.</li>
-        <li>Bấm <span class="path">Run</span> để xem kết quả ở khung preview.</li>
+        <li>Chọn cột cho <b>X Axis</b> (chiều) và <b>Values (Y)</b> (giá trị).</li>
+        <li>Mở ô <b>hàm tổng hợp</b> bên cạnh giá trị → chọn SUM/AVG/COUNT… cho đúng ý nghĩa.</li>
+        <li>(Tuỳ chọn) thêm <b>Breakdown</b> để tách nhóm; với cột ngày bật <b>Date hierarchy</b>.</li>
+        <li>Bấm <span class="path">Run</span> để xem kết quả ở khung bên phải.</li>
       </ol></div>
-      <figure><img src="images/32-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — gắn dữ liệu + xem trước biểu đồ đường.</figcaption></figure>
+      <div class="note"><b>Lưu ý:</b> chọn sai hàm tổng hợp là sai số liệu — ví dụ “số khách” phải dùng <b>COUNT DISTINCT</b> (không phải SUM); “doanh thu” dùng <b>SUM</b>; “điểm đánh giá trung bình” dùng <b>AVG</b>.</div>
+      <figure><img src="images/32-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 2 — X Axis = Tháng, Values = SUM(GMV), kèm Date hierarchy &amp; Breakdown.</figcaption></figure>
     </section>
 
     <section class="doc" id="ex-format">
-      <h3 class="feat"><span class="feat-id">3.3</span>Định dạng &amp; kiểm tra truy vấn</h3>
-      <p><b>Là gì:</b> tinh chỉnh hiển thị (tiêu đề, bảng màu, định dạng số, đơn vị trục, nhãn dữ liệu, legend, sort, Top/Bottom N). Tab <b>Query</b> cho thấy SQL sinh ra, dialect và thời gian chạy — minh chứng dữ liệu là <b>live</b>.</p>
+      <h3 class="feat"><span class="feat-id">3.3</span>Bước 3 — Định dạng (Format)</h3>
+      <p><b>Vùng này để làm gì:</b> làm biểu đồ <b>dễ đọc &amp; đẹp</b>. Có ô <b>tìm thiết lập</b> ở đầu (gõ “màu”, “nhãn”, “trục”…) và các nhóm gập/mở:</p>
+      <ul>
+        <li><b>VISUAL (hiển thị cơ bản):</b>
+          <ul>
+            <li><b>Chart Title</b> — tiêu đề biểu đồ (để trống thì dùng tên chart).</li>
+            <li><b>Color Palette</b> — bảng màu: <i>Default / Vibrant / Classic / Monochrome / Pastel</i>; có thể đổi <b>màu từng series</b> riêng.</li>
+            <li><b>Number Format</b> — cách hiển thị số: <i>Auto (raw)</i>, <i>Compact</i> (1.2K, 3.4M), <i>Full Number</i> (1,234), <i>Percent (%)</i>, <i>Currency ($)</i>.</li>
+            <li><b>Legend</b> — vị trí chú giải: <i>Top / Bottom / Left / Right / Hidden</i>.</li>
+          </ul>
+        </li>
+        <li><b>ADVANCED (nâng cao):</b> bật/tắt <b>nhãn dữ liệu</b> (hiện số ngay trên cột/điểm) &amp; vị trí nhãn, <b>sắp xếp</b> (sort), <b>giới hạn Top/Bottom N</b>, kiểu đường/độ dày/điểm cho Line, độ trong cho Area, đường mốc (benchmark)…</li>
+        <li><b>AXES &amp; SCALE (trục &amp; thang đo):</b> đặt <b>tiêu đề trục X/Y</b>, <b>giá trị nhỏ nhất/lớn nhất của trục Y</b>, <b>đơn vị hiển thị</b> (nghìn/triệu/tỷ), bật/tắt <b>lưới</b>.</li>
+        <li><b>Chart Filters (bộ lọc của riêng biểu đồ):</b> lọc dữ liệu <b>lưu kèm chart</b> và <b>chạy trước</b> bộ lọc cấp dashboard — dùng để cố định phạm vi (vd chỉ đơn “delivered”).</li>
+      </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Ở <b>Bước 3 (Format)</b>, dùng ô tìm kiếm thiết lập hoặc mở các nhóm <b>Visual / Axes / Data labels</b>.</li>
-        <li>Bật <b>nhãn dữ liệu</b>, chọn bảng màu, đặt giới hạn <b>Top/Bottom N</b>… rồi <span class="path">Run</span> lại.</li>
-        <li>Mở tab <b>Query</b> (góc phải preview) để xem SQL hệ thống chạy trực tiếp trên nguồn.</li>
-        <li>Bấm <span class="path">Save</span> để lưu biểu đồ.</li>
+        <li>Mở nhóm cần chỉnh (hoặc gõ vào ô tìm thiết lập), đổi giá trị → biểu đồ cập nhật ngay.</li>
+        <li>Bật <b>nhãn dữ liệu</b> ở ADVANCED nếu muốn người xem thấy số ngay trên hình.</li>
+        <li>Đặt <b>Top/Bottom N</b> khi cột/lát quá nhiều (vd chỉ Top 10).</li>
       </ol></div>
-      <div class="tip"><b>Mẹo nâng cao:</b> chuyển công tắc <b>Builder ↔ SQL</b> để tạo biểu đồ từ câu SQL tuỳ ý khi cần.</div>
-      <figure><img src="images/33-format-query.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 3 Format + tab Query hiển thị SQL backend.</figcaption></figure>
+      <figure><img src="images/33b-format.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bước 3 — nhóm VISUAL (Palette, Number Format, Legend) + các nhóm ADVANCED / AXES &amp; SCALE / Chart Filters.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="ex-preview">
+      <h3 class="feat"><span class="feat-id">3.4</span>Xem trước · Run · Save · chế độ SQL</h3>
+      <p><b>Vùng này để làm gì:</b> chạy thử, đối chiếu số, và lưu biểu đồ. Khung xem trước (bên phải) có 3 thẻ:</p>
+      <ul>
+        <li><b>Chart</b> — xem hình trực quan.</li>
+        <li><b>Table</b> — xem <b>bảng số</b> đúng như dữ liệu vẽ ra (để đối chiếu).</li>
+        <li><b>Query</b> — xem <b>câu SQL hệ thống chạy thẳng trên nguồn</b> + dialect + thời gian chạy + số dòng. Đây là bằng chứng dữ liệu là <b>real-time</b> (không phải bản sao cũ); có nút <b>Copy SQL</b>.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>Run</b> mỗi khi đổi cấu hình để cập nhật xem trước.</li>
+        <li>(Tuỳ chọn) đổi <b>Base table</b> ở thanh trên để dùng bảng gốc khác (các bảng đã nối hiện ở “joinable”).</li>
+        <li>Bấm <b>Add note</b> ghi lại ý đồ/giả định của biểu đồ cho người sau.</li>
+        <li>Bấm <b>Save</b> (chart mới) hoặc <b>Update</b> (chart có sẵn) để lưu — sau đó có thể đưa vào Dashboard.</li>
+      </ol></div>
+      <div class="tip"><b>Nâng cao — chế độ SQL:</b> chuyển công tắc <b>Builder ↔ SQL</b> ở thanh trên để tự viết câu truy vấn, khi nhu cầu vượt khả năng kéo-thả.</div>
+      <figure><img src="images/33-format-query.png"><figcaption><span class="exlabel">VÍ DỤ</span>Thẻ <b>Query</b> — SQL hệ thống sinh ra chạy trực tiếp trên nguồn (real-time).</figcaption></figure>
     </section>
 
     <section class="doc" id="ex-adv">
-      <h3 class="feat"><span class="feat-id">3.4</span>Biểu đồ nâng cao — ví dụ 9-Box Grid</h3>
+      <h3 class="feat"><span class="feat-id">3.5</span>Biểu đồ nâng cao — ví dụ 9-Box Grid</h3>
       <p><b>Là gì:</b> các loại quan hệ/nâng cao có cấu hình riêng. <b>9-Box</b> chia lưới 3×3 theo hai trục có hàm tổng hợp (SUM/AVG) + nhãn phân nhóm — hữu ích để đánh giá danh mục/nhân sự.</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
         <li>Chọn loại <b>9-Box Grid</b> ở nhóm Relationship.</li>
