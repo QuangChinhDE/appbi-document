@@ -672,18 +672,65 @@
 
     <section class="doc" id="db-ai">
       <h3 class="feat"><span class="feat-id">4.6</span>Trợ lý AI trên báo cáo <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
-      <p><b>Là gì:</b> một trợ lý phân tích sống ngay trong báo cáo. Khi mở, nó <b>chủ động giới thiệu</b> điểm đáng chú ý và gợi ý câu hỏi; khi được hỏi, nó <b>tổng hợp số liệu trực tiếp từ chính báo cáo đang xem</b>, trả lời kèm <b>trích dẫn biểu đồ nguồn</b> + độ tin cậy, và đề xuất câu hỏi đào sâu. Người xem không cần biết SQL/BI.</p>
-      <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Trên báo cáo (bản công khai hoặc nội bộ), bấm nút trợ lý AI (góc dưới phải).</li>
-        <li>Bấm một <b>câu hỏi gợi ý</b>, hoặc tự gõ câu hỏi bằng tiếng Việt.</li>
-        <li>Chọn độ phân tích: <b>Tự động → Nhanh → Sâu</b> tuỳ nhu cầu; có thể bật tra cứu web.</li>
-        <li>Đánh giá câu trả lời 👍/👎 để cải thiện.</li>
-      </ol></div>
-      <div class="tip"><b>Mẹo:</b> hỏi “Hướng dẫn tôi cách đọc báo cáo này” để AI dẫn bạn đi từng trang/biểu đồ — rất hợp cho người mới.</div>
+      <p class="lead">Một <b>nhà phân tích AI sống ngay trong báo cáo</b>: nó đọc đúng dữ liệu người dùng đang xem, trả lời bằng ngôn ngữ tự nhiên kèm <b>trích dẫn biểu đồ nguồn</b> và độ tin cậy, biết <b>phân tích sâu</b> (vì sao, xu hướng, dự báo, so sánh) và <b>hướng dẫn người mới cách đọc</b>. Người xem không cần biết SQL hay BI.</p>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">① Hai “bộ não”, tự chọn theo câu hỏi</p>
+      <p>Bot có 2 chế độ và <b>tự định tuyến</b> (không bắt người dùng chọn, không tốn thêm lượt gọi AI — phân loại bằng quy tắc, hiểu tiếng Việt cả khi không dấu):</p>
+      <ul>
+        <li><b>Nhanh (Normal)</b> — cho câu tra cứu: “doanh thu tháng này bao nhiêu”, “cho xem top 10…”. Trả lời nhanh.</li>
+        <li><b>Sâu (Thinking)</b> — cho câu phân tích: “tại sao…”, “so sánh…”, “xu hướng/dự báo…”. Bot lập <b>kế hoạch đọc</b> rồi gọi nhiều công cụ.</li>
+        <li>Mặc định <b>Tự động</b>; người xem có thể bấm chip để ép Nhanh/Sâu.</li>
+      </ul>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">② Chủ động ngay khi mở</p>
+      <ul>
+        <li><b>Tóm tắt “điều đáng chú ý”</b> + <b>câu hỏi gợi ý</b> dựa trên chính các biểu đồ của báo cáo (tính sẵn, không gọi AI nên mở rất nhanh).</li>
+        <li><b>Trợ lý dẫn dắt (briefing):</b> đoán lĩnh vực/vai trò/trọng tâm để “đọc” báo cáo theo đúng góc nhìn của bạn.</li>
+      </ul>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">③ Biết làm gì — bộ công cụ phân tích</p>
+      <p>Bot không “đoán” mà thực sự <b>truy vấn dữ liệu báo cáo qua các công cụ</b>:</p>
+      <ul>
+        <li><b>Đọc &amp; tra cứu:</b> liệt kê biểu đồ, lấy tóm tắt/thống kê (tổng, min/max, trung bình, top-5, outlier), lấy dữ liệu một biểu đồ, xem bộ lọc đang áp dụng, tra <b>từ điển nghiệp vụ</b> (ý nghĩa cột).</li>
+        <li><b>Phân tích sâu (chế độ Sâu):</b> so sánh kỳ (MoM/QoQ/YoY), <b>bóc tách nguyên nhân thay đổi</b> (ai/yếu tố nào đóng góp), <b>dự báo</b> kỳ tới, đọc <b>xu hướng</b> chắc chắn (loại kỳ dở dang), <b>so sánh một nhóm với phần còn lại</b>, tương quan giữa 2 biểu đồ, phát hiện bất thường, phân bố (P90/Pareto), khoan sâu &amp; gộp nhóm.</li>
+        <li><b>Tính toán:</b> bộ tính an toàn cho các phép cộng/trừ/tỷ lệ, luôn ghi nguồn số.</li>
+      </ul>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">④ Tra cứu web (tuỳ admin bật)</p>
+      <p>Khi được phép, ở chế độ Sâu bot có thể <b>tìm kiếm web</b>, <b>đọc một URL</b>, và <b>đối chiếu chỉ số với chuẩn ngành/thị trường</b> — dữ liệu web được tách bạch (gắn nhãn) khỏi số liệu báo cáo.</p>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑤ Đáng tin: trích dẫn — không bịa — đúng phạm vi</p>
+      <ul>
+        <li><b>Trích dẫn nguồn:</b> mọi con số gắn <code>[chart:N]</code> trỏ về biểu đồ gốc; có nhãn độ tin cậy <b>HIGH / MED / LOW</b>.</li>
+        <li><b>Không bịa:</b> dữ liệu không đủ thì nói thẳng, không suy diễn; “0 dòng” khác “không có dữ liệu”.</li>
+        <li><b>Đúng phạm vi link:</b> bot <b>luôn tuân thủ bộ lọc đã khoá/ẩn</b> của link công khai và slicer người xem — không “lách” để lộ dữ liệu ngoài phạm vi.</li>
+        <li>Tuỳ chọn <b>tự rà soát (self-critique)</b> thêm một lượt để loại mâu thuẫn &amp; ép trích dẫn.</li>
+      </ul>
+
       <div class="grid2">
         <figure><img src="images/4e2-aibot-welcome.png"><figcaption><span class="exlabel">VÍ DỤ</span>Mở bot — lời chào chủ động &amp; câu hỏi gợi ý.</figcaption></figure>
         <figure><img src="images/4e-aibot.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trả lời kèm số liệu chính xác, trích dẫn chart nguồn &amp; gợi ý đào sâu.</figcaption></figure>
       </div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑥ Cách dùng (người xem)</p>
+      <div class="howto"><h4>⚙ Thao tác</h4><ol>
+        <li>Trên báo cáo (bản công khai/embed/nội bộ), bấm nút trợ lý AI (góc dưới phải).</li>
+        <li>Bấm một <b>câu hỏi gợi ý</b>, hoặc tự gõ câu hỏi bằng tiếng Việt.</li>
+        <li>(Tuỳ chọn) bấm chip chế độ để ép <b>Nhanh/Sâu</b>; theo dõi “AI đang đọc” khi phân tích sâu.</li>
+        <li>Xem câu trả lời kèm trích dẫn → bấm gợi ý để <b>đào sâu</b>; đánh giá 👍/👎.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> hỏi <i>“Hướng dẫn tôi cách đọc báo cáo này”</i> để AI dẫn bạn đi từng trang/biểu đồ — rất hợp cho người mới.</div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑦ Cấu hình cho quản trị (theo từng link)</p>
+      <p>Bot bật/tắt &amp; tinh chỉnh <b>riêng cho mỗi link công khai</b> (trong trình sửa Public Link → tab <b>AI Bot</b>):</p>
+      <div class="howto"><h4>⚙ Cấu hình</h4><ol>
+        <li>Bật <b>“AI analyst”</b> cho link.</li>
+        <li>Chọn <b>nhà cung cấp</b> (Anthropic / OpenAI / Gemini) + <b>model</b>; <b>API key lưu phía server, không bao giờ lộ cho người xem</b> (người xem cũng có thể dùng key riêng — chỉ lưu tạm trong phiên, không lưu trữ).</li>
+        <li>Chọn <b>chế độ phân tích</b> (Tự động/Nhanh/Sâu) và bật/tắt <b>Tra cứu web</b>.</li>
+        <li>Viết <b>system prompt</b> (“ngữ cảnh báo cáo”) để hướng bot đọc đúng nghiệp vụ của bạn; bật <b>tự rà soát</b> nếu cần độ chính xác cao.</li>
+      </ol></div>
+      <figure><img src="images/4e3-aibot-config.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tab “AI Bot” của Public Link — bật trợ lý, chọn nhà cung cấp/model, chế độ tự động, tra cứu web, system prompt; key giữ phía server.</figcaption></figure>
+      <div class="note"><b>Riêng tư &amp; an toàn:</b> key người xem chỉ tồn tại trong phiên (đóng tab là mất); mỗi câu hỏi giới hạn số bước gọi công cụ; bot chỉ đọc trong phạm vi dữ liệu của link.</div>
     </section>
 
     <hr>
