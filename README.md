@@ -2,7 +2,7 @@
 
 Trang tài liệu onboarding cho **AppBI** — nền tảng phân tích & ứng dụng dữ liệu.
 
-🌐 **Xem trực tuyến:** https://quangchinhde.github.io/AppBI-Document/
+🌐 **Xem trực tuyến:** [https://quangchinhde.github.io/AppBI-Document/](https://quangchinhde.github.io/appbi-document/)
 
 - `index.html` — trang tài liệu (docs-site: sidebar + tìm kiếm + hướng dẫn từng bước).
 - `images/` — ảnh minh hoạ chụp từ phần mềm.
