@@ -104,6 +104,35 @@
   .phones figure img{ border-radius:18px; border:6px solid #0b1020; box-shadow:0 10px 26px rgba(15,23,42,.22); }
   .phones figcaption{ text-align:center; }
 
+  /* what's new timeline */
+  .wn-note{ font-size:13.5px; color:var(--muted); margin:6px 0 18px; }
+  .timeline{ position:relative; margin:12px 0 6px; padding-left:24px; border-left:2px solid var(--line); }
+  .tl{ position:relative; padding:0 0 22px 8px; }
+  .tl:last-child{ padding-bottom:2px; }
+  .tl::before{ content:""; position:absolute; left:-32px; top:3px; width:13px; height:13px; border-radius:50%;
+    background:#fff; border:3px solid var(--brand); }
+  .tl.big::before{ border-color:var(--accent); width:15px; height:15px; left:-33px; }
+  .tl .meta{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .tl .date{ font-size:12px; font-weight:700; color:var(--muted); }
+  .tl .tag{ font-size:10.5px; font-weight:800; letter-spacing:.4px; padding:2px 8px; border-radius:999px; }
+  .tl .tag.big{ background:#fff1ec; color:#c2410c; border:1px solid #fed7aa; }
+  .tl .tag.small{ background:#eef2ff; color:#4338ca; border:1px solid #c7d2fe; }
+  .tl h4{ margin:6px 0 2px; font-size:15.5px; }
+  .tl p{ margin:0 0 4px; font-size:13.6px; color:#475569; }
+  .tl .go{ font-size:12.5px; font-weight:600; }
+
+  /* new badge */
+  .new-badge{ font-size:10.5px; font-weight:800; background:#16a34a; color:#fff; padding:2px 7px;
+    border-radius:999px; margin-left:8px; vertical-align:middle; letter-spacing:.4px; }
+
+  /* module quick-contents */
+  .modtoc{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px; }
+  .modtoc .lbl{ width:100%; font-size:11px; font-weight:700; letter-spacing:.6px; color:var(--muted);
+    text-transform:uppercase; margin-bottom:2px; }
+  .modtoc a{ font-size:12.5px; background:var(--soft); border:1px solid var(--line); border-radius:999px;
+    padding:5px 12px; color:var(--body); }
+  .modtoc a:hover{ background:var(--chip); color:var(--brand-d); text-decoration:none; border-color:#c7d2fe; }
+
   /* hero */
   .hero{ background:linear-gradient(135deg,#4f46e5 0%,#6d28d9 48%,#0f766e 100%); color:#fff;
     border-radius:18px; padding:40px 38px; margin:18px 0 6px; }
@@ -183,6 +212,13 @@
         <a href="#diem-manh">5 điểm mạnh nổi bật</a>
         <a href="#quickstart">Bắt đầu nhanh 5 phút</a>
         <a href="#khai-niem">Khái niệm cốt lõi</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> ✦ Cập nhật sản phẩm</button>
+      <div class="links">
+        <a href="#whatsnew">Dòng thời gian cập nhật</a>
       </div>
     </div>
 
@@ -353,11 +389,80 @@
 
     <hr>
 
+    <!-- ===================== WHAT'S NEW ===================== -->
+    <section class="doc" id="whatsnew">
+      <div class="eyebrow" style="color:var(--accent)">✦ Sản phẩm đang hoàn thiện liên tục</div>
+      <h2 class="mod">Cập nhật sản phẩm</h2>
+      <p class="lead">AppBI phát hành liên tục — cả những nâng cấp lớn lẫn cải tiến nhỏ. Dưới đây là các mốc gần đây; bấm “Xem hướng dẫn →” để tới ngay phần hướng dẫn tương ứng.</p>
+      <p class="wn-note">Ghi chú: mốc thời gian mang tính minh hoạ — đội sản phẩm cập nhật danh sách này ở mỗi kỳ phát hành. <b>(Bạn hãy chỉnh lại ngày &amp; nội dung cho khớp thực tế.)</b></p>
+
+      <div class="timeline">
+        <div class="tl big">
+          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
+          <h4>Trợ lý AI thế hệ mới trên báo cáo</h4>
+          <p>Tự chọn chế độ Nhanh/Sâu theo câu hỏi; phân tích sâu (nguyên nhân, xu hướng, dự báo, so sánh), tra cứu web, trả lời kèm trích dẫn biểu đồ nguồn.</p>
+          <a class="go" href="#db-ai">Xem hướng dẫn →</a>
+        </div>
+        <div class="tl big">
+          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
+          <h4>Mini-app Mobile &amp; PWA</h4>
+          <p>Cài lên màn hình chính như app gốc, chạy toàn màn hình, dùng được offline; điều hướng tự thích ứng điện thoại/máy tính bảng.</p>
+          <a class="go" href="#wb-mobile">Xem hướng dẫn →</a>
+        </div>
+        <div class="tl big">
+          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
+          <h4>OCR — chụp ảnh phiếu, AI tự điền form</h4>
+          <p>Chụp/tải ảnh phiếu → AI đọc và điền sẵn các trường, có trích dẫn &amp; rà soát; token giữ phía server.</p>
+          <a class="go" href="#wb-ocr">Xem hướng dẫn →</a>
+        </div>
+        <div class="tl">
+          <div class="meta"><span class="date">T6/2026</span><span class="tag small">NHỎ</span></div>
+          <h4>Thêm biểu đồ 9-Box Grid</h4>
+          <p>Loại biểu đồ quan hệ dạng lưới 3×3 để đánh giá danh mục/nhân sự theo hai trục.</p>
+          <a class="go" href="#ex-adv">Xem hướng dẫn →</a>
+        </div>
+
+        <div class="tl big">
+          <div class="meta"><span class="date">T5/2026</span><span class="tag big">LỚN</span></div>
+          <h4>Báo cáo real-time từ Data Warehouse &amp; tăng tốc tải</h4>
+          <p>Truy vấn trực tiếp lên nguồn (không chờ refresh), kèm cache thông minh để vẫn nhanh trên dữ liệu lớn.</p>
+          <a class="go" href="#diem-manh">Xem hướng dẫn →</a>
+        </div>
+        <div class="tl">
+          <div class="meta"><span class="date">T5/2026</span><span class="tag small">NHỎ</span></div>
+          <h4>Tương tác chéo &amp; tuỳ biến giao diện</h4>
+          <p>Bấm một điểm dữ liệu để lọc các biểu đồ khác (cross-highlight); Theme 5 mục (Mẫu/Màu/Chữ/Thẻ/Biểu đồ) + xuất PDF đa trang.</p>
+          <a class="go" href="#db-filter">Xem hướng dẫn →</a>
+        </div>
+
+        <div class="tl big">
+          <div class="meta"><span class="date">T4/2026</span><span class="tag big">LỚN</span></div>
+          <h4>Workboard — mini-app vận hành</h4>
+          <p>Dựng ứng dụng nhập liệu/vận hành từ Dataset: màn Form/Table/Document/Dashboard, phân quyền theo người dùng (RLS), cổng đăng nhập PIN.</p>
+          <a class="go" href="#m5">Xem hướng dẫn →</a>
+        </div>
+        <div class="tl">
+          <div class="meta"><span class="date">T4/2026</span><span class="tag small">NHỎ</span></div>
+          <h4>Chất lượng dữ liệu + gợi ý bằng AI · Import/Export</h4>
+          <p>Giám sát dữ liệu theo 6 chiều, gợi ý rule bằng AI; đóng gói &amp; nhập lại Workboard theo bundle.</p>
+          <a class="go" href="#dt-quality">Xem hướng dẫn →</a>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
     <!-- ===================== MODULE 1 ===================== -->
     <section class="doc" id="m1">
       <div class="eyebrow">Module 1</div>
       <h2 class="mod">Kết nối dữ liệu — Data Sources</h2>
       <p class="lead">Điểm khởi đầu của mọi báo cáo. AppBI kết nối trực tiếp tới cơ sở dữ liệu, kho phân tích đám mây, bảng tính và file tải lên; dữ liệu được truy vấn <b>live</b>, không cần sao chép thủ công.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#ds-list">1.1 Danh sách nguồn</a>
+        <a href="#ds-new">1.2 Tạo nguồn &amp; loại</a>
+        <a href="#ds-edit">1.3 Sửa &amp; test kết nối</a>
+        <a href="#ds-share">1.4 Chia sẻ &amp; phân quyền</a>
+      </div>
     </section>
 
     <section class="doc" id="ds-list">
@@ -427,6 +532,16 @@
       <div class="eyebrow">Module 2</div>
       <h2 class="mod">Dataset &amp; Mô hình dữ liệu</h2>
       <p class="lead">Dataset là “lớp ngữ nghĩa” biến dữ liệu thô thành mô hình sẵn sàng phân tích: gom nhiều bảng, định nghĩa quan hệ, tạo chỉ số (Measure), kiểm soát chất lượng và tài liệu hoá ý nghĩa từng cột.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#dt-list">2.1 Danh sách</a>
+        <a href="#dt-tables">2.2 Không gian Tables</a>
+        <a href="#dt-add">2.3 Thêm bảng</a>
+        <a href="#dt-cols">2.4 Cột &amp; cột tính toán</a>
+        <a href="#dt-model">2.5 Mô hình (ERD)</a>
+        <a href="#dt-measure">2.6 Measures</a>
+        <a href="#dt-date">2.7 Date table &amp; Từ điển</a>
+        <a href="#dt-quality">2.8 Chất lượng dữ liệu</a>
+      </div>
     </section>
 
     <section class="doc" id="dt-list">
@@ -540,6 +655,14 @@
       <div class="eyebrow">Module 3</div>
       <h2 class="mod">Explore — Trình tạo biểu đồ</h2>
       <p class="lead">Nơi biến dữ liệu thành hình ảnh. Bạn đi theo <b>3 bước từ trên xuống</b> (Loại biểu đồ → Gắn dữ liệu → Định dạng) và xem kết quả ngay ở khung bên phải. Hỗ trợ <b>33 loại biểu đồ</b> trên 6 nhóm.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#m3">3.0 Bố cục màn Explore</a>
+        <a href="#ex-types">3.1 Loại biểu đồ</a>
+        <a href="#ex-bind">3.2 Gắn dữ liệu</a>
+        <a href="#ex-format">3.3 Định dạng</a>
+        <a href="#ex-preview">3.4 Xem trước · Run · Save</a>
+        <a href="#ex-adv">3.5 Biểu đồ nâng cao</a>
+      </div>
 
       <h3 class="feat"><span class="feat-id">3.0</span>Bố cục màn Explore — vùng nào làm gì</h3>
       <p>Màn hình chia làm <b>3 khu vực</b>. Hiểu 3 khu này là dùng được mọi biểu đồ:</p>
@@ -642,7 +765,7 @@
     </section>
 
     <section class="doc" id="ex-adv">
-      <h3 class="feat"><span class="feat-id">3.5</span>Biểu đồ nâng cao — ví dụ 9-Box Grid</h3>
+      <h3 class="feat"><span class="feat-id">3.5</span>Biểu đồ nâng cao — ví dụ 9-Box Grid <span class="new-badge">MỚI</span></h3>
       <p><b>Là gì:</b> các loại quan hệ/nâng cao có cấu hình riêng. <b>9-Box</b> chia lưới 3×3 theo hai trục có hàm tổng hợp (SUM/AVG) + nhãn phân nhóm — hữu ích để đánh giá danh mục/nhân sự.</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
         <li>Chọn loại <b>9-Box Grid</b> ở nhóm Relationship.</li>
@@ -659,6 +782,14 @@
       <div class="eyebrow">Module 4</div>
       <h2 class="mod">Dashboard — Báo cáo</h2>
       <p class="lead">Lắp ghép biểu đồ thành báo cáo nhiều trang tương tác, áp dụng bộ lọc, tuỳ biến giao diện, rồi chia sẻ công khai/nhúng/xuất PDF — kèm trợ lý AI hỏi đáp dữ liệu.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#db-list">4.1 Danh sách &amp; đa trang</a>
+        <a href="#db-layout">4.2 Thêm chart &amp; bố cục</a>
+        <a href="#db-filter">4.3 Slicer · Filter · Filter Map</a>
+        <a href="#db-theme">4.4 Tuỳ biến giao diện</a>
+        <a href="#db-share">4.5 Chia sẻ · Nhúng · PDF</a>
+        <a href="#db-ai">4.6 Trợ lý AI</a>
+      </div>
     </section>
 
     <section class="doc" id="db-list">
@@ -729,7 +860,7 @@
     </section>
 
     <section class="doc" id="db-ai">
-      <h3 class="feat"><span class="feat-id">4.6</span>Trợ lý AI trên báo cáo <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <h3 class="feat"><span class="feat-id">4.6</span>Trợ lý AI trên báo cáo <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
       <p class="lead">Một <b>nhà phân tích AI sống ngay trong báo cáo</b>: nó đọc đúng dữ liệu người dùng đang xem, trả lời bằng ngôn ngữ tự nhiên kèm <b>trích dẫn biểu đồ nguồn</b> và độ tin cậy, biết <b>phân tích sâu</b> (vì sao, xu hướng, dự báo, so sánh) và <b>hướng dẫn người mới cách đọc</b>. Người xem không cần biết SQL hay BI.</p>
 
       <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">① Hai “bộ não”, tự chọn theo câu hỏi</p>
@@ -798,6 +929,21 @@
       <div class="eyebrow">Module 5</div>
       <h2 class="mod">Workboard — Mini-app vận hành</h2>
       <p class="lead">Biến Dataset thành ứng dụng vận hành thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn hình (Form nhập liệu, Table, Document in ấn, Dashboard nhúng), phân quyền theo từng người dùng và phát hành qua cổng đăng nhập PIN.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#wb-builder">5.1 Builder &amp; cấu trúc</a>
+        <a href="#wb-settings">5.2 Cài đặt ứng dụng</a>
+        <a href="#wb-form">5.3 Form</a>
+        <a href="#wb-ocr">OCR tự điền</a>
+        <a href="#wb-table">5.4 Table</a>
+        <a href="#wb-doc">5.5 Document</a>
+        <a href="#wb-dash">5.6 Dashboard nhúng</a>
+        <a href="#wb-rls">5.7 RLS</a>
+        <a href="#wb-users">5.8 Người dùng &amp; PIN</a>
+        <a href="#wb-share">5.9 Phát hành &amp; Cổng</a>
+        <a href="#wb-webhook">5.10 Webhook</a>
+        <a href="#wb-io">5.11 Import/Export</a>
+        <a href="#wb-mobile">5.12 Mobile &amp; PWA</a>
+      </div>
     </section>
 
     <section class="doc" id="wb-builder">
@@ -842,7 +988,7 @@
     </section>
 
     <section class="doc" id="wb-ocr">
-      <h3 class="feat"><span class="feat-id" style="background:var(--accent)">AI</span>Chụp ảnh → AI tự đọc &amp; điền form (OCR) <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <h3 class="feat"><span class="feat-id" style="background:var(--accent)">AI</span>Chụp ảnh → AI tự đọc &amp; điền form (OCR) <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
       <p><b>Là gì:</b> người nhập <b>chụp (hoặc tải lên) ảnh một tờ phiếu</b> — đơn hàng, hoá đơn, biên bản, phiếu giao… — AI <b>đọc nội dung và tự điền vào đúng các trường của biểu mẫu</b>. Người dùng chỉ việc rà soát rồi lưu. Cắt phần lớn thời gian gõ tay và giảm sai sót, đặc biệt cho nhân viên hiện trường.</p>
 
       <p><b>Cách hoạt động (chính xác theo hệ thống):</b></p>
@@ -980,7 +1126,7 @@
     </section>
 
     <section class="doc" id="wb-mobile">
-      <h3 class="feat"><span class="feat-id">5.12</span>Giao diện Mobile &amp; PWA <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span></h3>
+      <h3 class="feat"><span class="feat-id">5.12</span>Giao diện Mobile &amp; PWA <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
       <p><b>Là gì:</b> mọi mini-app Workboard <b>tự thích ứng với điện thoại</b> và có thể <b>cài lên màn hình chính như một app</b> (PWA) — kèm khả năng <b>dùng offline</b>. Cùng một bản dựng phục vụ cả desktop lẫn mobile, không cần làm app riêng, không phụ thuộc kho ứng dụng.</p>
 
       <div class="phones">
