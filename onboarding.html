@@ -218,7 +218,8 @@
     <div class="grp">
       <button><span class="tw">▼</span> ✦ Cập nhật sản phẩm</button>
       <div class="links">
-        <a href="#whatsnew">Dòng thời gian cập nhật</a>
+        <a href="#whatsnew">Cập nhật mới nhất</a>
+        <a href="changelog.html">Nhật ký &amp; Lộ trình ↗</a>
       </div>
     </div>
 
@@ -286,6 +287,14 @@
         <a href="#wb-webhook">5.10 Webhook</a>
         <a href="#wb-io">5.11 Import / Export</a>
         <a href="#wb-mobile">5.12 Giao diện Mobile &amp; PWA ⭐</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 6 · Govern &amp; Observability</button>
+      <div class="links">
+        <a href="#gov">6.1 Govern — chỉ số dùng chung</a>
+        <a href="#obs">6.2 Observability — sức khoẻ dữ liệu</a>
       </div>
     </div>
   </nav>
@@ -393,61 +402,22 @@
     <section class="doc" id="whatsnew">
       <div class="eyebrow" style="color:var(--accent)">✦ Sản phẩm đang hoàn thiện liên tục</div>
       <h2 class="mod">Cập nhật sản phẩm</h2>
-      <p class="lead">AppBI phát hành liên tục — cả những nâng cấp lớn lẫn cải tiến nhỏ. Dưới đây là các mốc gần đây; bấm “Xem hướng dẫn →” để tới ngay phần hướng dẫn tương ứng.</p>
-      <p class="wn-note">Ghi chú: mốc thời gian mang tính minh hoạ — đội sản phẩm cập nhật danh sách này ở mỗi kỳ phát hành. <b>(Bạn hãy chỉnh lại ngày &amp; nội dung cho khớp thực tế.)</b></p>
-
-      <div class="timeline">
-        <div class="tl big">
-          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
-          <h4>Trợ lý AI thế hệ mới trên báo cáo</h4>
-          <p>Tự chọn chế độ Nhanh/Sâu theo câu hỏi; phân tích sâu (nguyên nhân, xu hướng, dự báo, so sánh), tra cứu web, trả lời kèm trích dẫn biểu đồ nguồn.</p>
-          <a class="go" href="#db-ai">Xem hướng dẫn →</a>
-        </div>
-        <div class="tl big">
-          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
-          <h4>Mini-app Mobile &amp; PWA</h4>
-          <p>Cài lên màn hình chính như app gốc, chạy toàn màn hình, dùng được offline; điều hướng tự thích ứng điện thoại/máy tính bảng.</p>
-          <a class="go" href="#wb-mobile">Xem hướng dẫn →</a>
-        </div>
-        <div class="tl big">
-          <div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
-          <h4>OCR — chụp ảnh phiếu, AI tự điền form</h4>
-          <p>Chụp/tải ảnh phiếu → AI đọc và điền sẵn các trường, có trích dẫn &amp; rà soát; token giữ phía server.</p>
-          <a class="go" href="#wb-ocr">Xem hướng dẫn →</a>
-        </div>
-        <div class="tl">
-          <div class="meta"><span class="date">T6/2026</span><span class="tag small">NHỎ</span></div>
-          <h4>Thêm biểu đồ 9-Box Grid</h4>
-          <p>Loại biểu đồ quan hệ dạng lưới 3×3 để đánh giá danh mục/nhân sự theo hai trục.</p>
-          <a class="go" href="#ex-adv">Xem hướng dẫn →</a>
-        </div>
-
-        <div class="tl big">
-          <div class="meta"><span class="date">T5/2026</span><span class="tag big">LỚN</span></div>
-          <h4>Báo cáo real-time từ Data Warehouse &amp; tăng tốc tải</h4>
-          <p>Truy vấn trực tiếp lên nguồn (không chờ refresh), kèm cache thông minh để vẫn nhanh trên dữ liệu lớn.</p>
-          <a class="go" href="#diem-manh">Xem hướng dẫn →</a>
-        </div>
-        <div class="tl">
-          <div class="meta"><span class="date">T5/2026</span><span class="tag small">NHỎ</span></div>
-          <h4>Tương tác chéo &amp; tuỳ biến giao diện</h4>
-          <p>Bấm một điểm dữ liệu để lọc các biểu đồ khác (cross-highlight); Theme 5 mục (Mẫu/Màu/Chữ/Thẻ/Biểu đồ) + xuất PDF đa trang.</p>
-          <a class="go" href="#db-filter">Xem hướng dẫn →</a>
-        </div>
-
-        <div class="tl big">
-          <div class="meta"><span class="date">T4/2026</span><span class="tag big">LỚN</span></div>
-          <h4>Workboard — mini-app vận hành</h4>
-          <p>Dựng ứng dụng nhập liệu/vận hành từ Dataset: màn Form/Table/Document/Dashboard, phân quyền theo người dùng (RLS), cổng đăng nhập PIN.</p>
-          <a class="go" href="#m5">Xem hướng dẫn →</a>
-        </div>
-        <div class="tl">
-          <div class="meta"><span class="date">T4/2026</span><span class="tag small">NHỎ</span></div>
-          <h4>Chất lượng dữ liệu + gợi ý bằng AI · Import/Export</h4>
-          <p>Giám sát dữ liệu theo 6 chiều, gợi ý rule bằng AI; đóng gói &amp; nhập lại Workboard theo bundle.</p>
-          <a class="go" href="#dt-quality">Xem hướng dẫn →</a>
-        </div>
+      <p class="lead">AppBI phát hành liên tục — cả nâng cấp lớn lẫn cải tiến nhỏ. Vài mốc mới nhất:</p>
+      <div class="timeline" style="margin-bottom:8px">
+        <div class="tl big"><div class="meta"><span class="date">02/07</span><span class="tag big">LỚN</span></div>
+          <h4>Báo cáo real-time (snapshot) + Govern &amp; Observability</h4>
+          <p>Báo cáo BigQuery tải gần thời gian thực; ra mắt module giám sát dữ liệu (Govern &amp; Observability).</p>
+          <a class="go" href="#m6">Xem hướng dẫn →</a></div>
+        <div class="tl big"><div class="meta"><span class="date">T6/2026</span><span class="tag big">LỚN</span></div>
+          <h4>Trợ lý AI thế hệ mới · Mobile &amp; PWA · OCR tự điền form</h4>
+          <p>AI router Nhanh/Sâu + tra cứu web; mini-app cài lên màn hình chính &amp; offline; chụp ảnh phiếu AI tự điền.</p>
+          <a class="go" href="#db-ai">Xem hướng dẫn →</a></div>
       </div>
+      <p style="margin-top:14px">
+        <a href="changelog.html" style="display:inline-block;background:var(--brand);color:#fff;font-weight:700;
+          padding:11px 20px;border-radius:10px;font-size:14px">📜 Xem đầy đủ Nhật ký cập nhật &amp; Lộ trình →</a>
+      </p>
+      <p class="wn-note">Nhật ký đầy đủ (từ tháng 5 tới nay), phân loại Lớn/Nhỏ theo từng mảng và người thực hiện — nằm ở trang riêng để dễ theo dõi khi số lượng tăng dần.</p>
     </section>
 
     <hr>
@@ -1172,6 +1142,53 @@
       <p><b>4) Tối ưu cho cảm ứng &amp; camera.</b> Trường ảnh/file trên điện thoại mở thẳng <b>Camera / Thư viện / Tệp</b>; form xếp dọc dễ thao tác; bảng cuộn ngang gọn; bố cục chừa <b>vùng an toàn</b> (tai thỏ/thanh home iPhone). Ô PIN dùng bàn phím số.</p>
 
       <div class="tip"><b>Mẹo cấu hình:</b> kiểu điều hướng mobile (bottom-nav / drawer) và hiển thị từng màn đặt trong <a href="#wb-settings">App settings (5.2)</a>; muốn ẩn màn nào khỏi thanh điều hướng chỉ cần tắt “hiển thị trong nav”.</div>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 6 ===================== -->
+    <section class="doc" id="m6">
+      <div class="eyebrow">Module 6 <span class="new-badge">MỚI</span></div>
+      <h2 class="mod">Govern &amp; Observability — Quản trị &amp; Giám sát dữ liệu</h2>
+      <p class="lead">Lớp <b>quản trị ngữ nghĩa</b> và <b>giám sát sức khoẻ dữ liệu</b> cho toàn hệ thống: chuẩn hoá chỉ số dùng chung, gắn nhãn/thuật ngữ, và theo dõi độ tươi/chất lượng/sự cố của mọi dataset — để số liệu vừa <b>nhất quán</b> vừa <b>đáng tin</b>.</p>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#gov">6.1 Govern — chỉ số dùng chung</a>
+        <a href="#obs">6.2 Observability — sức khoẻ dữ liệu</a>
+      </div>
+    </section>
+
+    <section class="doc" id="gov">
+      <h3 class="feat"><span class="feat-id">6.1</span>Govern — chỉ số dùng chung &amp; từ điển ngữ nghĩa</h3>
+      <p><b>Là gì:</b> nơi <b>chuẩn hoá chỉ số (KPI) dùng chung</b> — định nghĩa một lần, dùng nhất quán mọi nơi; gắn <b>nhãn</b> (vd Tối mật, Bronze) &amp; <b>thuật ngữ</b> để cả tổ chức hiểu số liệu giống nhau, và <b>phát hiện xung đột</b> khi hai nơi định nghĩa khác nhau.</p>
+      <ul>
+        <li><b>Danh mục chỉ số</b> — mọi measure/KPI kèm mô tả, nguồn, loại (sum/count/avg…), chủ sở hữu.</li>
+        <li><b>Nhãn &amp; Thuật ngữ (Từ điển)</b> — gắn nhãn phân loại và định nghĩa nghiệp vụ chuẩn cho từng chỉ số.</li>
+        <li><b>Cảnh báo xung đột</b> — hệ thống chỉ ra các chỉ số bị định nghĩa/không thống nhất để rà soát.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Govern</span> ở thanh điều hướng.</li>
+        <li>Tìm/lọc chỉ số theo nguồn/loại; mở <b>“Từ điển &amp; Nhãn”</b> để gắn thuật ngữ/nhãn.</li>
+        <li>Xem badge <b>“xung đột”</b> để phát hiện chỉ số chưa thống nhất và xử lý.</li>
+        <li>Bấm <b>“+ Thêm chỉ số”</b> khi cần khai báo chỉ số dùng chung mới.</li>
+      </ol></div>
+      <figure><img src="images/60-govern.png"><figcaption><span class="exlabel">VÍ DỤ</span>Govern — danh mục chỉ số dùng chung, nhãn/thuật ngữ, cảnh báo xung đột.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="obs">
+      <h3 class="feat"><span class="feat-id">6.2</span>Observability — sức khoẻ &amp; vòng đời dữ liệu</h3>
+      <p><b>Là gì:</b> theo dõi <b>sức khoẻ dữ liệu</b> trên mọi dataset theo 5 trụ cột — <span class="pill">Độ tươi</span><span class="pill">Khối lượng</span><span class="pill">Lược đồ</span><span class="pill">Phân phối</span><span class="pill">Chất lượng</span> — kèm giám sát (monitor), xử lý <b>sự cố</b>, xem <b>lineage</b> (nguồn gốc dữ liệu) và <b>cảnh báo</b>.</p>
+      <ul>
+        <li><b>Chỉ số vận hành:</b> số dataset đang giám sát, sự cố đang mở, MTTR (thời gian khắc phục TB), số đã xử lý.</li>
+        <li><b>Bảng theo dõi dataset:</b> sự cố mở, số monitor, mức tiêu thụ (biểu đồ/dòng), lần làm mới gần nhất.</li>
+        <li><b>Drill-in:</b> bấm một dataset để giám sát, xử lý sự cố &amp; xem lineage ngay tại chỗ.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Observability</span> ở thanh điều hướng.</li>
+        <li>Lọc <b>“Chỉ dataset có sự cố”</b> hoặc theo trụ cột sức khoẻ để khoanh vùng.</li>
+        <li>Bấm <b>“Quét ngay”</b> để chấm sức khoẻ, hoặc <b>“Kênh cảnh báo”</b> để cấu hình nơi nhận cảnh báo.</li>
+        <li>Bấm vào một dataset để xem chi tiết monitor/sự cố/lineage.</li>
+      </ol></div>
+      <figure><img src="images/61-observability.png"><figcaption><span class="exlabel">VÍ DỤ</span>Observability — sức khoẻ dữ liệu theo dataset (độ tươi, sự cố, monitor, lineage).</figcaption></figure>
     </section>
 
     <hr>
