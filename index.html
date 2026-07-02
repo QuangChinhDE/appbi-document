@@ -133,6 +133,47 @@
     padding:5px 12px; color:var(--body); }
   .modtoc a:hover{ background:var(--chip); color:var(--brand-d); text-decoration:none; border-color:#c7d2fe; }
 
+  /* changelog modal (in-page, same style as docs) */
+  .clog-overlay{ display:none; position:fixed; inset:0; z-index:60; background:rgba(15,23,42,.55);
+    backdrop-filter:blur(2px); padding:24px; }
+  .clog-overlay.open{ display:flex; align-items:flex-start; justify-content:center; }
+  .clog-modal{ background:#fff; width:100%; max-width:1040px; max-height:90vh; margin:auto;
+    border-radius:16px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 30px 80px rgba(0,0,0,.45); }
+  .clog-head{ background:linear-gradient(135deg,#4f46e5,#6d28d9 55%,#0f766e); color:#fff; padding:18px 22px;
+    display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex:none; }
+  .clog-head h3{ color:#fff; margin:0 0 4px; font-size:20px; letter-spacing:-.3px; }
+  .clog-head p{ margin:0; opacity:.95; font-size:13px; max-width:680px; }
+  .clog-x{ background:rgba(255,255,255,.18); border:none; color:#fff; width:34px; height:34px; border-radius:9px;
+    font-size:18px; cursor:pointer; flex:none; line-height:1; }
+  .clog-body{ padding:18px 22px 26px; overflow-y:auto; }
+  .clog-note{ background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; border-radius:10px; padding:9px 13px; font-size:12.5px; margin:0 0 14px; }
+  .clog-legend{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; margin:0 0 16px; font-size:12.5px; color:var(--muted); }
+  .clog-mhead{ margin:20px 0 8px; font-size:14px; font-weight:800; color:var(--brand); letter-spacing:.5px; }
+  .clog-mhead:first-of-type{ margin-top:4px; }
+  .clog table{ width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .clog thead th{ background:#0b1020; color:#cbd5e1; font-size:11px; letter-spacing:.4px; text-transform:uppercase; text-align:left; padding:9px 11px; font-weight:700; }
+  .clog tbody td{ border-top:1px solid var(--line); padding:10px 11px; font-size:13px; vertical-align:top; }
+  .clog tbody tr:hover{ background:#fafbff; }
+  .clog td.date{ white-space:nowrap; color:var(--muted); font-weight:600; font-size:12px; width:82px; }
+  .clog td.type{ width:60px; } .clog td.area{ width:150px; color:var(--ink); font-weight:600; }
+  .clog td.who-c{ width:118px; } .clog td.doc{ width:110px; white-space:nowrap; }
+  .clog .who{ display:inline-block; font-size:11.5px; font-weight:700; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+  .clog .who.chinhbui02{ background:#eef2ff; color:#4338ca; border:1px solid #c7d2fe; }
+  .clog .who.anhphan{ background:#ecfdf5; color:#047857; border:1px solid #a7f3d0; }
+  .clog .who.minhngo03{ background:#fff7ed; color:#c2410c; border:1px solid #fed7aa; }
+  .clog .tg{ display:inline-block; font-size:10px; font-weight:800; letter-spacing:.4px; padding:2px 8px; border-radius:999px; }
+  .clog .tg.big{ background:#fff1ec; color:#c2410c; border:1px solid #fed7aa; }
+  .clog .tg.small{ background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
+  @media (max-width:760px){
+    .clog table,.clog thead,.clog tbody,.clog tr,.clog td,.clog th{ display:block; }
+    .clog thead{ display:none; }
+    .clog tbody tr{ border:1px solid var(--line); border-radius:10px; margin-bottom:9px; padding:8px 10px; }
+    .clog tbody td{ border:none; padding:3px 0; width:auto; }
+    .clog td.date::before{ content:"Ngày: "; color:var(--muted); font-weight:700; }
+    .clog td.area::before{ content:"Mảng: "; color:var(--muted); font-weight:700; }
+    .clog td.who-c::before{ content:"Người: "; color:var(--muted); font-weight:700; }
+  }
+
   /* hero */
   .hero{ background:linear-gradient(135deg,#4f46e5 0%,#6d28d9 48%,#0f766e 100%); color:#fff;
     border-radius:18px; padding:40px 38px; margin:18px 0 6px; }
@@ -219,7 +260,7 @@
       <button><span class="tw">▼</span> ✦ Cập nhật sản phẩm</button>
       <div class="links">
         <a href="#whatsnew">Cập nhật mới nhất</a>
-        <a href="changelog.html">Nhật ký &amp; Lộ trình ↗</a>
+        <a href="#" data-clog>Nhật ký &amp; Lộ trình</a>
       </div>
     </div>
 
@@ -422,7 +463,7 @@
           <a class="go" href="#db-ai">Xem hướng dẫn →</a></div>
       </div>
       <p style="margin-top:14px">
-        <a href="changelog.html" style="display:inline-block;background:var(--brand);color:#fff;font-weight:700;
+        <a href="#" data-clog style="display:inline-block;background:var(--brand);color:#fff;font-weight:700;
           padding:11px 20px;border-radius:10px;font-size:14px">📜 Xem đầy đủ Nhật ký cập nhật &amp; Lộ trình →</a>
       </p>
       <p class="wn-note">Nhật ký đầy đủ (từ tháng 5 tới nay), phân loại Lớn/Nhỏ theo từng mảng và người thực hiện — nằm ở trang riêng để dễ theo dõi khi số lượng tăng dần.</p>
@@ -1262,6 +1303,73 @@
   </div>
 </main>
 
+<!-- ===================== CHANGELOG MODAL ===================== -->
+<div class="clog-overlay" id="clog">
+  <div class="clog-modal" role="dialog" aria-modal="true" aria-label="Nhật ký cập nhật">
+    <div class="clog-head">
+      <div>
+        <h3>📜 Nhật ký cập nhật &amp; Lộ trình</h3>
+        <p>AppBI phát hành liên tục — cả nâng cấp lớn lẫn cải tiến nhỏ. Bấm “Hướng dẫn” để tới phần tương ứng.</p>
+      </div>
+      <button class="clog-x" data-clog-close aria-label="Đóng">✕</button>
+    </div>
+    <div class="clog clog-body">
+      <div class="clog-note"><b>Ghi chú:</b> ngày &amp; người thực hiện mang tính minh hoạ cho demo — hãy chỉnh lại cho khớp thực tế.</div>
+      <div class="clog-legend"><span><b>Người thực hiện:</b></span>
+        <span><span class="who chinhbui02">chinhbui02</span> lõi nền tảng · AI bot · Workboard (trước nay)</span>
+        <span><span class="who anhphan">anhphan</span> Dashboard/Báo cáo</span>
+        <span><span class="who minhngo03">minhngo03</span> Workboard (mới nhất)</span>
+      </div>
+
+      <div class="clog-mhead">Tháng 7 / 2026</div>
+      <table>
+        <thead><tr><th>Ngày</th><th>Loại</th><th>Mảng</th><th>Nội dung</th><th>Người thực hiện</th><th>Hướng dẫn</th></tr></thead>
+        <tbody>
+          <tr><td class="date">02/07</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Workboard · Form</td><td class="content"><b>Widget Bản đồ (Leaflet)</b> — chọn vùng/lô ngay trên bản đồ vệ tinh (polygon), cho mini-app hiện trường (vd chọn lô vườn cao su).</td><td class="who-c"><span class="who minhngo03">minhngo03</span></td><td class="doc"><a href="#wb-form">Form →</a></td></tr>
+          <tr><td class="date">02/07</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Workboard · Table</td><td class="content"><b>Chế độ Gallery cho màn Table</b> — hiển thị bản ghi dạng thẻ ảnh, gom nhóm theo ngày/lô, kèm bộ lọc.</td><td class="who-c"><span class="who minhngo03">minhngo03</span></td><td class="doc"><a href="#wb-table">Table →</a></td></tr>
+          <tr><td class="date">02/07</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Workboard · Tooling</td><td class="content"><b>Dựng Workboard bằng AI (MCP)</b> — bộ authoring/dataset/model/source giúp trợ lý AI dựng mini-app nhanh hơn.</td><td class="who-c"><span class="who minhngo03">minhngo03</span></td><td class="doc"><a href="#m5">Workboard →</a></td></tr>
+          <tr><td class="date">02/07</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Dashboard</td><td class="content"><b>Báo cáo real-time (snapshot materialization)</b> — tải BigQuery cực nhanh, gần thời gian thực.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#diem-manh">Điểm mạnh #5 →</a></td></tr>
+          <tr><td class="date">02/07</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content"><b>Đơn vị hiển thị toàn báo cáo</b> (tỷ/triệu/nghìn) + tooltip tiêu đề tile, KPI không xuống dòng, gọn nhãn.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#db-theme">Theme →</a></td></tr>
+          <tr><td class="date">01/07</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Observability</td><td class="content"><b>Ra mắt module giám sát dữ liệu</b> — độ tươi/khối lượng/lược đồ/chất lượng, sự cố, lineage, cảnh báo.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#m7">Module 7 →</a></td></tr>
+          <tr><td class="date">01/07</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Explore/Dataset</td><td class="content"><b>“Explain mode”</b> — hiện câu SQL sinh ra ở danh sách giá trị lọc; health-probe hệ thống.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#ex-preview">Explore →</a></td></tr>
+        </tbody>
+      </table>
+
+      <div class="clog-mhead">Tháng 6 / 2026</div>
+      <table>
+        <thead><tr><th>Ngày</th><th>Loại</th><th>Mảng</th><th>Nội dung</th><th>Người thực hiện</th><th>Hướng dẫn</th></tr></thead>
+        <tbody>
+          <tr><td class="date">30/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Govern &amp; Catalog</td><td class="content"><b>Lớp quản trị ngữ nghĩa DB-backed</b> — chỉ số dùng chung, nhãn/thuật ngữ, phát hiện xung đột.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#m6">Module 6 →</a></td></tr>
+          <tr><td class="date">24/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">AI bot</td><td class="content"><b>Trợ lý AI thế hệ mới</b> — router Nhanh/Sâu, phân tích sâu, tra cứu web, trích dẫn nguồn.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#db-ai">Trợ lý AI →</a></td></tr>
+          <tr><td class="date">25/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">AI bot</td><td class="content">Sửa lỗi lời chào (recon) + đủ token cho model suy luận.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#db-ai">Trợ lý AI →</a></td></tr>
+          <tr><td class="date">22/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Workboard</td><td class="content"><b>Mini-app Mobile &amp; PWA</b> — cài lên màn hình chính, offline-first, hỗ trợ iOS.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#wb-mobile">Mobile &amp; PWA →</a></td></tr>
+          <tr><td class="date">21/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Workboard</td><td class="content"><b>OCR chụp ảnh tự điền form</b> — AI đọc ảnh phiếu, điền sẵn các trường.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#wb-ocr">OCR →</a></td></tr>
+          <tr><td class="date">23/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Explore</td><td class="content">Thêm biểu đồ <b>9-Box Grid</b>; bản đồ điểm vector thật + geocoding (MAP_POINT).</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#ex-adv">9-Box →</a></td></tr>
+          <tr><td class="date">21/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content"><b>Tương tác chéo (cross-highlight)</b> kiểu PBI — kèm embed &amp; chart nâng cao.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#db-filter">Filter →</a></td></tr>
+          <tr><td class="date">21/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Nền tảng</td><td class="content">Trang <b>Overview</b> (lineage) + song ngữ EN/VI + redesign phân quyền.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#gioi-thieu">Tổng quan →</a></td></tr>
+          <tr><td class="date">17/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content"><b>Xuất PDF v2 (hybrid)</b> — bảng chữ/link + biểu đồ ảnh, đa trang.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#db-share">Chia sẻ/PDF →</a></td></tr>
+          <tr><td class="date">15/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content"><b>Đồng biên tập real-time</b> — hiển thị người đang sửa + chống xung đột theo tile.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#m4">Dashboard →</a></td></tr>
+          <tr><td class="date">13/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content"><b>Hệ thống Theme kiểu PBI</b> — Mẫu/Màu/Chữ/Thẻ/Biểu đồ + bảng màu dữ liệu.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#db-theme">Theme →</a></td></tr>
+          <tr><td class="date">10–13/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dataset</td><td class="content"><b>Trình soạn Measure kiểu PBI</b> — chip editor, tự lưu nháp, biểu thức cross-view.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#dt-measure">Measures →</a></td></tr>
+          <tr><td class="date">09–10/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Workboard</td><td class="content"><b>Workspaces + Export/Import v2 + publish/draft + Cổng</b> + hiển thị màn theo link.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#m5">Workboard →</a></td></tr>
+          <tr><td class="date">02–09/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Semantic engine</td><td class="content"><b>Chuẩn PowerBI cho số liệu</b> — measure isolation, lọc cross-fact (EXISTS), SUM-over-STRING, running-total/YTD.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#dt-measure">Dataset →</a></td></tr>
+          <tr><td class="date">10/06</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Dashboard</td><td class="content">Tối ưu tốc độ tải BigQuery/Sheets + cache theo tile.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#m4">Dashboard →</a></td></tr>
+        </tbody>
+      </table>
+
+      <div class="clog-mhead">Tháng 5 / 2026</div>
+      <table>
+        <thead><tr><th>Ngày</th><th>Loại</th><th>Mảng</th><th>Nội dung</th><th>Người thực hiện</th><th>Hướng dẫn</th></tr></thead>
+        <tbody>
+          <tr><td class="date">28/05–18/06</td><td class="type"><span class="tg big">LỚN</span></td><td class="area">Dashboard/Filter</td><td class="content"><b>Bộ lọc chuẩn PowerBI</b> — page-scope, dedup, slicer kiểu Looker, distinct-cascade, đồng bộ editor↔public.</td><td class="who-c"><span class="who anhphan">anhphan</span></td><td class="doc"><a href="#db-filter">Filter →</a></td></tr>
+          <tr><td class="date">30/05</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Explore</td><td class="content">Chuẩn hoá định dạng KPI/Gauge/Bullet/Podium; tự định tuyến measure cho Table.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#ex-format">Định dạng →</a></td></tr>
+          <tr><td class="date">28/05</td><td class="type"><span class="tg small">NHỎ</span></td><td class="area">Semantic engine</td><td class="content">Lọc cross-table snowflake bằng EXISTS + đồng bộ distinct của slicer.</td><td class="who-c"><span class="who chinhbui02">chinhbui02</span></td><td class="doc"><a href="#db-filter">Filter →</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <button class="totop" id="totop" title="Lên đầu trang">↑</button>
 
 <script>
@@ -1323,6 +1431,22 @@
   var tt=document.getElementById('totop');
   window.addEventListener('scroll', function(){ tt.style.display = window.scrollY>500 ? 'flex':'none'; });
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ---- changelog modal ---- */
+  var clog=document.getElementById('clog');
+  function openClog(){ clog.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeClog(){ clog.classList.remove('open'); document.body.style.overflow=''; }
+  document.addEventListener('click', function(e){
+    var opener=e.target.closest('[data-clog]');
+    if(opener){ e.preventDefault(); openClog(); if(window.innerWidth<=900) close(); return; }
+    if(e.target.closest('[data-clog-close]') || e.target===clog){ closeClog(); return; }
+    /* a "Hướng dẫn" link inside the modal: close then let the hash jump */
+    if(clog.classList.contains('open')){
+      var a=e.target.closest('.clog-body a[href^="#"]');
+      if(a){ closeClog(); }
+    }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && clog.classList.contains('open')) closeClog(); });
 })();
 </script>
 </body>
