@@ -291,10 +291,18 @@
     </div>
 
     <div class="grp">
-      <button><span class="tw">▼</span> 6 · Govern &amp; Observability</button>
+      <button><span class="tw">▼</span> 6 · Govern (Quản trị) <span style="color:#16a34a">•</span></button>
       <div class="links">
-        <a href="#gov">6.1 Govern — chỉ số dùng chung</a>
-        <a href="#obs">6.2 Observability — sức khoẻ dữ liệu</a>
+        <a href="#gov">6.1 Danh mục chỉ số dùng chung</a>
+        <a href="#gov-dict">6.2 Từ điển &amp; Nhãn</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <button><span class="tw">▼</span> 7 · Observability (Giám sát) <span style="color:#16a34a">•</span></button>
+      <div class="links">
+        <a href="#obs">7.1 Tổng quan sức khoẻ dữ liệu</a>
+        <a href="#obs-detail">7.2 Sự cố · Giám sát · Lineage</a>
       </div>
     </div>
   </nav>
@@ -955,6 +963,10 @@
         <figure><img src="images/55-form-wizard.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form wizard — nhiều trang + nhiều widget.</figcaption></figure>
         <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác.</figcaption></figure>
       </div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Widget Bản đồ (chọn vùng/lô trên bản đồ) <span class="new-badge">MỚI</span></p>
+      <p>Ngoài các widget cơ bản, Form có <b>widget Bản đồ</b>: hiển thị các vùng/lô (polygon) trên <b>bản đồ vệ tinh</b>, người nhập <b>chạm vào một vùng để chọn</b> (vd chọn lô vườn, khu vực công trình). Hình học lấy từ một bảng dataset; giá trị chọn được lưu như một lựa chọn bình thường. Rất hợp cho mini-app hiện trường.</p>
+      <figure><img src="images/5q-map-widget.png"><figcaption><span class="exlabel">VÍ DỤ</span>Widget Bản đồ trong Form — bản đồ vệ tinh + các lô (polygon), chạm để chọn.</figcaption></figure>
     </section>
 
     <section class="doc" id="wb-ocr">
@@ -1004,6 +1016,10 @@
         <figure><img src="images/54-tableeditor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Table editor — cột, editable, footer totals.</figcaption></figure>
         <figure><img src="images/58-table-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — bảng có nhóm cột, filter, cột tính toán.</figcaption></figure>
       </div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Chế độ Gallery — hiển thị dạng thẻ ảnh <span class="new-badge">MỚI</span></p>
+      <p>Màn Table có thêm <b>chế độ hiển thị Gallery</b>: thay vì bảng, mỗi bản ghi hiện thành <b>thẻ ảnh</b> (ảnh + tiêu đề + phụ đề), <b>gom nhóm</b> theo một cột (vd theo ngày/theo lô) và có bộ lọc. Rất hợp để xem nhanh ảnh chứng từ/hiện trường sau khi nhập bằng Form.</p>
+      <figure><img src="images/5r-gallery.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ Gallery — thẻ ảnh gom theo ngày, kèm bộ lọc ngày/lô.</figcaption></figure>
     </section>
 
     <section class="doc" id="wb-doc">
@@ -1149,46 +1165,93 @@
     <!-- ===================== MODULE 6 ===================== -->
     <section class="doc" id="m6">
       <div class="eyebrow">Module 6 <span class="new-badge">MỚI</span></div>
-      <h2 class="mod">Govern &amp; Observability — Quản trị &amp; Giám sát dữ liệu</h2>
-      <p class="lead">Lớp <b>quản trị ngữ nghĩa</b> và <b>giám sát sức khoẻ dữ liệu</b> cho toàn hệ thống: chuẩn hoá chỉ số dùng chung, gắn nhãn/thuật ngữ, và theo dõi độ tươi/chất lượng/sự cố của mọi dataset — để số liệu vừa <b>nhất quán</b> vừa <b>đáng tin</b>.</p>
+      <h2 class="mod">Govern — Quản trị dữ liệu</h2>
+      <p class="lead">Nơi <b>chuẩn hoá ngữ nghĩa dữ liệu</b> cho cả tổ chức: định nghĩa <b>chỉ số (KPI) dùng chung</b> một lần rồi dùng nhất quán mọi nơi, gắn <b>nhãn</b> &amp; <b>thuật ngữ nghiệp vụ</b>, và <b>phát hiện xung đột</b> khi cùng một chỉ số bị hiểu khác nhau.</p>
+      <div class="note">⚙️ <b>Đang phát triển:</b> Govern là module mới, vẫn đang hoàn thiện — giao diện &amp; tính năng có thể thay đổi ở các bản kế tiếp.</div>
       <div class="modtoc"><span class="lbl">Trong module này</span>
-        <a href="#gov">6.1 Govern — chỉ số dùng chung</a>
-        <a href="#obs">6.2 Observability — sức khoẻ dữ liệu</a>
+        <a href="#gov">6.1 Danh mục chỉ số dùng chung</a>
+        <a href="#gov-dict">6.2 Từ điển &amp; Nhãn</a>
       </div>
     </section>
 
     <section class="doc" id="gov">
-      <h3 class="feat"><span class="feat-id">6.1</span>Govern — chỉ số dùng chung &amp; từ điển ngữ nghĩa</h3>
-      <p><b>Là gì:</b> nơi <b>chuẩn hoá chỉ số (KPI) dùng chung</b> — định nghĩa một lần, dùng nhất quán mọi nơi; gắn <b>nhãn</b> (vd Tối mật, Bronze) &amp; <b>thuật ngữ</b> để cả tổ chức hiểu số liệu giống nhau, và <b>phát hiện xung đột</b> khi hai nơi định nghĩa khác nhau.</p>
+      <h3 class="feat"><span class="feat-id">6.1</span>Danh mục chỉ số dùng chung</h3>
+      <p><b>Vùng này để làm gì:</b> tập trung mọi <b>chỉ số/KPI</b> của hệ thống về một danh mục để đối chiếu &amp; chuẩn hoá — thay vì mỗi báo cáo tự định nghĩa một kiểu.</p>
       <ul>
-        <li><b>Danh mục chỉ số</b> — mọi measure/KPI kèm mô tả, nguồn, loại (sum/count/avg…), chủ sở hữu.</li>
-        <li><b>Nhãn &amp; Thuật ngữ (Từ điển)</b> — gắn nhãn phân loại và định nghĩa nghiệp vụ chuẩn cho từng chỉ số.</li>
-        <li><b>Cảnh báo xung đột</b> — hệ thống chỉ ra các chỉ số bị định nghĩa/không thống nhất để rà soát.</li>
+        <li><b>Bảng chỉ số:</b> mỗi dòng là một chỉ số kèm <b>mô tả</b>, <b>nguồn/dataset</b>, <b>loại</b> (sum/count/avg…), <b>nhãn</b>, <b>thuật ngữ</b>, <b>chủ sở hữu</b>.</li>
+        <li><b>Thống kê đầu trang:</b> tổng số chỉ số, số <b>xung đột</b>, số thuật ngữ, số nhãn.</li>
+        <li><b>Cảnh báo xung đột:</b> badge <b>“⚠ xung đột”</b> đánh dấu chỉ số bị định nghĩa không thống nhất giữa các nơi để bạn rà lại.</li>
+        <li><b>Tìm &amp; lọc</b> theo tên/dataset, theo nguồn, theo loại.</li>
       </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Mở <span class="path">Govern</span> ở thanh điều hướng.</li>
-        <li>Tìm/lọc chỉ số theo nguồn/loại; mở <b>“Từ điển &amp; Nhãn”</b> để gắn thuật ngữ/nhãn.</li>
-        <li>Xem badge <b>“xung đột”</b> để phát hiện chỉ số chưa thống nhất và xử lý.</li>
-        <li>Bấm <b>“+ Thêm chỉ số”</b> khi cần khai báo chỉ số dùng chung mới.</li>
+        <li>Mở <span class="path">Govern</span> ở thanh điều hướng trái.</li>
+        <li>Dùng ô tìm + bộ lọc <b>Mọi nguồn / Mọi loại</b> để khoanh vùng chỉ số.</li>
+        <li>Bấm lọc <b>“⚠ xung đột”</b> để xem riêng các chỉ số đang mâu thuẫn và xử lý.</li>
+        <li>Bấm <b>“+ Thêm chỉ số”</b> để khai báo một chỉ số dùng chung mới.</li>
       </ol></div>
-      <figure><img src="images/60-govern.png"><figcaption><span class="exlabel">VÍ DỤ</span>Govern — danh mục chỉ số dùng chung, nhãn/thuật ngữ, cảnh báo xung đột.</figcaption></figure>
+      <figure><img src="images/60-govern.png"><figcaption><span class="exlabel">VÍ DỤ</span>Govern — danh mục chỉ số (mô tả, nhãn, thuật ngữ, chủ sở hữu) + cảnh báo xung đột.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="gov-dict">
+      <h3 class="feat"><span class="feat-id">6.2</span>Từ điển &amp; Nhãn (chuẩn hoá ngữ nghĩa)</h3>
+      <p><b>Vùng này để làm gì:</b> quản lý <b>thuật ngữ nghiệp vụ</b> (định nghĩa chuẩn) và <b>nhãn phân loại</b> dùng chung, rồi <b>gắn vào chỉ số</b> để cả công ty hiểu số liệu giống nhau.</p>
+      <ul>
+        <li><b>Thuật ngữ:</b> mỗi thuật ngữ có tên, nhóm nghiệp vụ, định nghĩa (vd “Doanh thu thuần = tổng doanh thu sau giảm giá, chiết khấu, hàng trả lại”) và số chỉ số đang dùng nó.</li>
+        <li><b>Phân loại (Nhãn):</b> gắn nhãn (vd <i>Tối mật</i>, <i>Bronze</i>) để phân loại/độ nhạy của chỉ số.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở trang Govern, bấm <b>“Từ điển &amp; Nhãn”</b> (góc trên phải).</li>
+        <li>Chuyển giữa tab <b>Thuật ngữ</b> / <b>Phân loại</b>; bấm <b>“+ Thêm thuật ngữ”</b> để tạo định nghĩa chuẩn mới.</li>
+        <li>Gắn thuật ngữ/nhãn vào chỉ số ở trang chi tiết mỗi chỉ số; bấm “n chỉ số” để lọc xem chỉ số nào đang dùng.</li>
+      </ol></div>
+      <figure><img src="images/62-govern-dict.png"><figcaption><span class="exlabel">VÍ DỤ</span>Từ điển &amp; Nhãn — thuật ngữ nghiệp vụ chuẩn + nhãn phân loại dùng chung.</figcaption></figure>
+    </section>
+
+    <hr>
+
+    <!-- ===================== MODULE 7 ===================== -->
+    <section class="doc" id="m7">
+      <div class="eyebrow">Module 7 <span class="new-badge">MỚI</span></div>
+      <h2 class="mod">Observability — Giám sát sức khoẻ dữ liệu</h2>
+      <p class="lead">Theo dõi <b>sức khoẻ &amp; vòng đời dữ liệu</b> trên mọi dataset — để phát hiện sớm dữ liệu <b>trễ, thiếu, sai lệch</b> trước khi nó làm hỏng báo cáo. Năm trụ cột: <span class="pill">Độ tươi</span><span class="pill">Khối lượng</span><span class="pill">Lược đồ</span><span class="pill">Phân phối</span><span class="pill">Chất lượng</span></p>
+      <div class="note">⚙️ <b>Đang phát triển:</b> Observability là module mới, vẫn đang hoàn thiện — một số chỉ số/monitor còn ở mức khởi tạo; giao diện có thể thay đổi ở các bản kế tiếp.</div>
+      <div class="modtoc"><span class="lbl">Trong module này</span>
+        <a href="#obs">7.1 Tổng quan sức khoẻ dữ liệu</a>
+        <a href="#obs-detail">7.2 Sự cố · Giám sát · Chất lượng · Lineage</a>
+      </div>
     </section>
 
     <section class="doc" id="obs">
-      <h3 class="feat"><span class="feat-id">6.2</span>Observability — sức khoẻ &amp; vòng đời dữ liệu</h3>
-      <p><b>Là gì:</b> theo dõi <b>sức khoẻ dữ liệu</b> trên mọi dataset theo 5 trụ cột — <span class="pill">Độ tươi</span><span class="pill">Khối lượng</span><span class="pill">Lược đồ</span><span class="pill">Phân phối</span><span class="pill">Chất lượng</span> — kèm giám sát (monitor), xử lý <b>sự cố</b>, xem <b>lineage</b> (nguồn gốc dữ liệu) và <b>cảnh báo</b>.</p>
+      <h3 class="feat"><span class="feat-id">7.1</span>Tổng quan sức khoẻ dữ liệu</h3>
+      <p><b>Vùng này để làm gì:</b> một bảng điều khiển cho biết <b>toàn bộ dataset đang “khoẻ” hay có vấn đề</b>, để đội dữ liệu xử lý trước khi người xem báo cáo bị ảnh hưởng.</p>
       <ul>
-        <li><b>Chỉ số vận hành:</b> số dataset đang giám sát, sự cố đang mở, MTTR (thời gian khắc phục TB), số đã xử lý.</li>
-        <li><b>Bảng theo dõi dataset:</b> sự cố mở, số monitor, mức tiêu thụ (biểu đồ/dòng), lần làm mới gần nhất.</li>
-        <li><b>Drill-in:</b> bấm một dataset để giám sát, xử lý sự cố &amp; xem lineage ngay tại chỗ.</li>
+        <li><b>Chỉ số vận hành đầu trang:</b> số dataset đang giám sát · <b>sự cố đang mở</b> · <b>MTTR</b> (thời gian khắc phục trung bình) · số đã xử lý.</li>
+        <li><b>Bảng dataset:</b> mỗi dòng hiện sự cố mở, số <b>monitor</b>, mức tiêu thụ (số biểu đồ/dòng dùng), lần <b>làm mới</b> gần nhất.</li>
+        <li><b>Lọc nhanh:</b> “Chỉ dataset có sự cố”, hoặc theo trụ cột (Độ tươi/Khối lượng/Lược đồ/Phân phối/Chất lượng).</li>
       </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
         <li>Mở <span class="path">Observability</span> ở thanh điều hướng.</li>
-        <li>Lọc <b>“Chỉ dataset có sự cố”</b> hoặc theo trụ cột sức khoẻ để khoanh vùng.</li>
-        <li>Bấm <b>“Quét ngay”</b> để chấm sức khoẻ, hoặc <b>“Kênh cảnh báo”</b> để cấu hình nơi nhận cảnh báo.</li>
-        <li>Bấm vào một dataset để xem chi tiết monitor/sự cố/lineage.</li>
+        <li>Bấm <b>“Quét ngay”</b> để chấm lại sức khoẻ; hoặc <b>“Kênh cảnh báo”</b> để cấu hình nơi nhận cảnh báo (khi có sự cố).</li>
+        <li>Dùng bộ lọc để tìm dataset cần chú ý, rồi bấm vào dataset đó để xem chi tiết.</li>
       </ol></div>
-      <figure><img src="images/61-observability.png"><figcaption><span class="exlabel">VÍ DỤ</span>Observability — sức khoẻ dữ liệu theo dataset (độ tươi, sự cố, monitor, lineage).</figcaption></figure>
+      <figure><img src="images/61-observability.png"><figcaption><span class="exlabel">VÍ DỤ</span>Observability — danh sách dataset kèm sự cố, monitor, tiêu thụ, lần làm mới.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="obs-detail">
+      <h3 class="feat"><span class="feat-id">7.2</span>Chi tiết một dataset — Sự cố · Giám sát · Chất lượng · Lineage</h3>
+      <p><b>Vùng này để làm gì:</b> bấm vào một dataset để mở trang chi tiết với 4 tab, xử lý mọi thứ ngay tại chỗ:</p>
+      <ul>
+        <li><b>Sự cố:</b> danh sách sự cố (lọc Đang mở/Tất cả, mức Nghiêm trọng/Cảnh báo/Thông tin). “Mọi monitor đều khoẻ” = không có sự cố.</li>
+        <li><b>Giám sát:</b> các monitor đang chạy trên dataset.</li>
+        <li><b>Chất lượng:</b> điểm chất lượng theo các chiều (liên thông với rule chất lượng ở Dataset — mục 2.8).</li>
+        <li><b>Lineage:</b> sơ đồ <b>nguồn gốc dữ liệu</b>: Nguồn → Bảng → Biểu đồ → Dashboard — biết một dataset đang “nuôi” những báo cáo nào (đánh giá tác động khi có sự cố).</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở danh sách, bấm một dataset để vào trang chi tiết.</li>
+        <li>Chuyển tab <b>Sự cố / Giám sát / Chất lượng / Lineage</b> tuỳ nhu cầu.</li>
+        <li>Mở tab <b>Lineage</b> để xem dataset này đang cấp dữ liệu cho biểu đồ/dashboard nào.</li>
+      </ol></div>
+      <figure><img src="images/63-obs-lineage.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chi tiết dataset · tab Lineage — Nguồn → 13 Bảng → 70 Biểu đồ → 1 Dashboard.</figcaption></figure>
     </section>
 
     <hr>
