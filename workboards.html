@@ -1,72 +1,252 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Workboard — Mini-app vận hành — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workboard — Mini-app vận hành — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">🧩</span></div>
   <h1>Workboard — Mini-app vận hành</h1>
   <p>Biến Dataset thành ứng dụng thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn (Form / Table / Document / Dashboard), phân quyền theo người dùng và phát hành qua cổng đăng nhập PIN.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
 
-<section class="sec"><div class="container">
+    <section class="doc" id="wb-builder">
+      <h3 class="feat"><span class="feat-id">5.1</span>Builder &amp; cấu trúc ứng dụng</h3>
+      <p><b>Là gì:</b> trình dựng dạng canvas — các tab <b>Workspace</b>, danh sách màn hình, dataset gắn kết. Một mini-app có thể gồm nhiều màn thuộc 4 loại: Form/Table/Document/Dashboard.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào <span class="path">Workboards → New workboard</span> (chọn Dataset nguồn).</li>
+        <li>Trong Builder, tạo <b>Workspace</b> rồi thêm màn hình bằng palette <b>+ Form / + Table / + Document / + Dashboard</b>.</li>
+        <li>Kéo để sắp xếp thứ tự; bấm vào một màn để mở trình sửa chi tiết.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/51-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Workboard.</figcaption></figure>
+        <figure><img src="images/52-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — nhiều màn hình qua các Workspace.</figcaption></figure>
+      </div>
+    </section>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Builder trực quan, nhiều loại màn</h3>
-      <p>Canvas quản lý Workspace + màn hình; 4 loại màn: <b>Form</b> (nhập liệu), <b>Table</b> (danh sách/sửa), <b>Document</b> (in A4), <b>Dashboard</b> (nhúng báo cáo).</p>
-    </div>
-    <div class="shot"><figure><img src="images/52-builder.png"><figcaption>Builder — nhiều màn qua các Workspace.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="wb-settings">
+      <h3 class="feat"><span class="feat-id">5.2</span>Cài đặt ứng dụng (branding, nav, auto-number)</h3>
+      <p><b>Là gì:</b> đổi dataset, đặt tên app, màu chủ đạo, logo, lời chào; cấu hình điều hướng (sidebar/bottom-nav); định nghĩa <b>số tự tăng</b> theo mẫu.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong Builder, bấm <b>App settings</b>.</li>
+        <li>Thiết lập <b>App name, Primary color, Logo URL, Welcome text</b>.</li>
+        <li>Thêm <b>auto-number</b>: chọn cột + mẫu (vd <code>SH-{YYYY}{MM}{DD}-{N:3}</code>) + chu kỳ reset.</li>
+        <li>Chọn kiểu điều hướng cho mobile/desktop.</li>
+      </ol></div>
+      <figure><img src="images/53-appsettings.png"><figcaption><span class="exlabel">VÍ DỤ</span>App Settings — branding, auto-number, navigation.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Form mạnh: 10 widget · logic điều kiện · OCR</h3>
-      <p>Wizard đa trang, 10 loại widget, điều kiện show/required/valid, auto-number. <b>OCR</b>: chụp/tải ảnh phiếu → AI đọc &amp; điền sẵn các trường (Anthropic/OpenAI/Gemini, token giữ phía server).</p>
-    </div>
-    <div class="shot"><figure><img src="images/5o-ocr-config.png"><figcaption>Cấu hình OCR — nhà cung cấp/model/token.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="wb-form">
+      <h3 class="feat"><span class="feat-id">5.3</span>Màn hình Form (nhập liệu)</h3>
+      <p><b>Là gì:</b> biểu mẫu nhiều trang (wizard có thanh tiến độ), chia section, <b>10 loại widget</b> (text, số, chọn, lookup, ngày, checkbox, file, ảnh/chụp ảnh…), logic điều kiện (show_if / required_if / valid_if), giá trị mặc định và <b>OCR chụp ảnh tự điền</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Form, ở tab <b>Content</b> chọn <b>bảng đích</b> để ghi dữ liệu.</li>
+        <li>Bấm <b>+ Add field</b>, đặt <b>Label</b>, chọn <b>widget</b>, gắn <b>cột</b>.</li>
+        <li>Tuỳ chọn điều kiện: <b>show_if / required_if / valid_if</b> (vd bắt buộc SĐT khi kênh = “Điện thoại”).</li>
+        <li>Chia thành nhiều <b>page</b> để tạo wizard; đặt giá trị mặc định nếu cần.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/55-form-wizard.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form wizard — nhiều trang + nhiều widget.</figcaption></figure>
+        <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác.</figcaption></figure>
+      </div>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Bản đồ &amp; Gallery cho hiện trường <span class="kbadge">MỚI</span></h3>
-      <p><b>Widget Bản đồ (Leaflet):</b> chọn vùng/lô trên bản đồ vệ tinh (polygon). <b>Chế độ Gallery:</b> bản ghi thành thẻ ảnh, gom nhóm theo ngày/lô + bộ lọc — hợp cho nhật ký/khảo sát hiện trường.</p>
-    </div>
-    <div class="shot"><figure><img src="images/5q-map-widget.png"><figcaption>Widget Bản đồ — chạm để chọn lô.</figcaption></figure></div>
-  </div>
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Widget Bản đồ (chọn vùng/lô trên bản đồ) <span class="new-badge">MỚI</span></p>
+      <p>Ngoài các widget cơ bản, Form có <b>widget Bản đồ</b>: hiển thị các vùng/lô (polygon) trên <b>bản đồ vệ tinh</b>, người nhập <b>chạm vào một vùng để chọn</b> (vd chọn lô vườn, khu vực công trình). Hình học lấy từ một bảng dataset; giá trị chọn được lưu như một lựa chọn bình thường. Rất hợp cho mini-app hiện trường.</p>
+      <figure><img src="images/5q-map-widget.png"><figcaption><span class="exlabel">VÍ DỤ</span>Widget Bản đồ trong Form — bản đồ vệ tinh + các lô (polygon), chạm để chọn.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Phân quyền hàng (RLS) &amp; Cổng PIN</h3>
-      <p>Mỗi người chỉ thấy dữ liệu của mình (theo <code>miniapp_user</code>); Owner/Admin xem tất cả. Phát hành qua <b>cổng công khai</b>, đăng nhập bằng PIN, bật/tắt hiển thị từng màn.</p>
-    </div>
-    <div class="shot"><figure><img src="images/5c-rls.png"><figcaption>RLS editor — lọc theo người dùng.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="wb-ocr">
+      <h3 class="feat"><span class="feat-id" style="background:var(--accent)">AI</span>Chụp ảnh → AI tự đọc &amp; điền form (OCR) <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
+      <p><b>Là gì:</b> người nhập <b>chụp (hoặc tải lên) ảnh một tờ phiếu</b> — đơn hàng, hoá đơn, biên bản, phiếu giao… — AI <b>đọc nội dung và tự điền vào đúng các trường của biểu mẫu</b>. Người dùng chỉ việc rà soát rồi lưu. Cắt phần lớn thời gian gõ tay và giảm sai sót, đặc biệt cho nhân viên hiện trường.</p>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Mobile &amp; PWA — cài lên điện thoại <span class="kbadge">ĐIỂM MẠNH</span></h3>
-      <p>Điều hướng tự thích ứng (bottom-nav/drawer), <b>cài lên màn hình chính</b> như app gốc, <b>chạy offline</b> (nhập phiếu offline → tự gửi khi có mạng). Truy cập qua <span class="path">https://&lt;tên-miền&gt;/m</span>.</p>
-    </div>
-    <div class="shot"><figure><img src="images/5l-mobile-nav.png"><figcaption>Mini-app trên điện thoại — bottom-nav.</figcaption></figure></div>
-  </div>
+      <p><b>Cách hoạt động (chính xác theo hệ thống):</b></p>
+      <ul>
+        <li><b>Mang token của bạn (BYOK):</b> hỗ trợ 3 nhà cung cấp AI thị giác — <b>Anthropic (Claude), OpenAI (GPT), Google Gemini</b> — tự chọn model (mặc định lần lượt <code>claude-3-5-sonnet</code> / <code>gpt-4o-mini</code> / <code>gemini-2.5-flash</code>).</li>
+        <li><b>Hiểu đúng biểu mẫu:</b> hệ thống tự gửi cho AI <b>danh sách trường của chính form</b> (mã cột, nhãn, kiểu, và các lựa chọn nếu là select) → AI trả về giá trị theo từng cột.</li>
+        <li><b>Tự chuẩn hoá theo kiểu trường:</b> số (hiểu cả định dạng <code>1.234,56</code>), ngày (đưa về chuẩn), trường chọn (khớp về đúng đáp án), checkbox.</li>
+        <li><b>Không bịa:</b> trường nào không thấy rõ trong ảnh thì bỏ qua, không điền bừa.</li>
+        <li><b>Dễ rà soát:</b> các ô được AI điền được <b>tô vàng + gắn nhãn “AI”</b> để người dùng kiểm tra trước khi lưu.</li>
+      </ul>
+      <div class="note"><b>Bảo mật token:</b> token được <b>mã hoá khi lưu</b>, <b>không bao giờ gửi xuống trình duyệt người xem/runtime</b>; ở builder chỉ hiển thị “đã lưu” (có nút con mắt để chính người cấu hình xem lại).</div>
 
-</div></section>
+      <p><b>Cách bật (builder):</b></p>
+      <div class="howto"><h4>⚙ Cấu hình</h4><ol>
+        <li>Mở màn Form → mục <b>“Chụp ảnh tự điền (OCR)”</b>, tích <b>“Cho phép chụp ảnh để tự điền biểu mẫu”</b>.</li>
+        <li>Chọn <b>Nhà cung cấp AI</b> + <b>Model</b>, dán <b>Token (API key)</b>.</li>
+        <li>Bấm <b>“Kiểm tra kết nối”</b> để chắc token/model hoạt động trước khi dùng.</li>
+        <li>(Tuỳ chọn) thêm <b>“Hướng dẫn cho AI”</b> mô tả bố cục phiếu để đọc chính xác hơn.</li>
+      </ol></div>
+      <figure><img src="images/5o-ocr-config.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình OCR trong builder — nhà cung cấp, model, token (mã hoá), kiểm tra kết nối, gợi ý cho AI.</figcaption></figure>
 
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Liên quan</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="datasets.html">🗄️ Dataset làm nền →</a>
-    <a href="dashboards.html">📊 Nhúng báo cáo vào app →</a>
-    <a href="showcase.html">🎁 Xem mini-app demo →</a>
-  </div>
-</div></section>
+      <p><b>Cách dùng (người nhập):</b></p>
+      <div class="howto"><h4>⚙ Thao tác</h4><ol>
+        <li>Ở màn Form, bấm <b>📷 “Chụp ảnh để điền nhanh”</b> hoặc kéo-thả ảnh (trên điện thoại mở thẳng camera/thư viện).</li>
+        <li>Đợi AI đọc — các trường khớp được <b>tự điền &amp; tô vàng</b>.</li>
+        <li><b>Kiểm tra/sửa</b> rồi bấm <b>Lưu</b>.</li>
+      </ol></div>
+      <div class="phones">
+        <figure><img src="images/5m-mobile-form.png"><figcaption>Nút “Chụp ảnh để điền nhanh” trên form (mobile).</figcaption></figure>
+      </div>
+      <div class="tip"><b>Mẹo:</b> tính năng này độc lập với trường <b>“Ảnh chứng từ” / “File đính kèm”</b> trong form — OCR dùng ảnh để <i>đọc &amp; điền</i>, còn các trường upload dùng để <i>lưu kèm</i> minh chứng.</div>
+    </section>
 
+    <section class="doc" id="wb-table">
+      <h3 class="feat"><span class="feat-id">5.4</span>Màn hình Table (danh sách &amp; chỉnh sửa)</h3>
+      <p><b>Là gì:</b> cấu hình cột, nhóm cột, định dạng; bộ lọc (text/select/ngày/số); chỉnh sửa inline, thêm/xoá dòng, <b>dán hàng loạt</b>; <b>cột tính toán JS</b>, cột lookup (VLOOKUP đa hop), và dòng tổng (sum/avg/min/max/count).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Table, chọn <b>Data source</b> (bảng).</li>
+        <li>Trong <b>Visible columns</b>, chọn cột hiển thị; trong <b>Editable columns</b>, chọn cột cho phép sửa.</li>
+        <li>Bật <b>Add/Delete row</b>, cấu hình <b>Filters</b>, <b>Footer totals</b>, <b>Computed column (JS)</b> nếu cần.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/54-tableeditor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Table editor — cột, editable, footer totals.</figcaption></figure>
+        <figure><img src="images/58-table-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — bảng có nhóm cột, filter, cột tính toán.</figcaption></figure>
+      </div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Chế độ Gallery — hiển thị dạng thẻ ảnh <span class="new-badge">MỚI</span></p>
+      <p>Màn Table có thêm <b>chế độ hiển thị Gallery</b>: thay vì bảng, mỗi bản ghi hiện thành <b>thẻ ảnh</b> (ảnh + tiêu đề + phụ đề), <b>gom nhóm</b> theo một cột (vd theo ngày/theo lô) và có bộ lọc. Rất hợp để xem nhanh ảnh chứng từ/hiện trường sau khi nhập bằng Form.</p>
+      <figure><img src="images/5r-gallery.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ Gallery — thẻ ảnh gom theo ngày, kèm bộ lọc ngày/lô.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-doc">
+      <h3 class="feat"><span class="feat-id">5.5</span>Màn hình Document (in ấn A4)</h3>
+      <p><b>Là gì:</b> tài liệu khổ A4 in được, ghép từ các block: header, key-value, text, data table (có dòng tổng), footer, chữ ký; hỗ trợ biến động (<code>{{today}}</code>, <code>{{app_user.username}}</code>…).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Document, đặt <b>Page setup</b> (khổ giấy, hướng, lề).</li>
+        <li>Bấm <b>+ Add block</b> để thêm header/text/data table/kv/footer/chữ ký.</li>
+        <li>Với data table, chọn bảng &amp; cột hiển thị, bật dòng tổng nếu cần.</li>
+      </ol></div>
+      <figure><img src="images/59-doc.png"><figcaption><span class="exlabel">VÍ DỤ</span>Document editor — page setup A4 + các block.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-dash">
+      <h3 class="feat"><span class="feat-id">5.6</span>Màn hình Dashboard (nhúng báo cáo)</h3>
+      <p><b>Là gì:</b> nhúng thẳng một báo cáo AppBI vào mini-app, ánh xạ bộ lọc theo vai trò người dùng, và tự sinh <b>link công khai riêng cho từng vai trò</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở màn Dashboard, chọn <b>báo cáo nguồn</b>.</li>
+        <li>Thêm <b>Role mapping</b> để mỗi vai trò chỉ thấy phần dữ liệu của mình; hoặc <b>Static filters</b> để cố định một giá trị.</li>
+        <li>Hệ thống tự tạo link công khai theo vai trò (user/admin/owner).</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5a-dashscreen.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình màn Dashboard — role mapping, link theo vai trò.</figcaption></figure>
+        <figure><img src="images/5b-embed.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — báo cáo hiển thị ngay trong mini-app.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-rls">
+      <h3 class="feat"><span class="feat-id">5.7</span>Phân quyền hàng (RLS) theo người dùng</h3>
+      <p><b>Là gì:</b> mỗi rule = một vai trò + phạm vi xem/thêm/sửa/xoá. Theo quy ước cột <code>miniapp_user</code>, mỗi người chỉ thấy dữ liệu của mình; Owner/Admin có thể xem tất cả.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở một màn, vào tab <b>Permissions</b>.</li>
+        <li>Thêm rule cho vai trò <b>User</b>: đặt <b>filter column</b> = <code>miniapp_user</code>, <b>filter value</b> = <code>{{app_user.username}}</code>.</li>
+        <li>Tích các quyền <b>Create / Update / Delete</b> phù hợp; vai trò Owner/Admin có thể bật <b>Unrestricted</b>.</li>
+      </ol></div>
+      <div class="note"><b>Lưu ý quan trọng:</b> nếu vai trò User không có rule nào, người dùng sẽ <b>không thấy dữ liệu</b> (mặc định an toàn). Hãy luôn cấu hình rule cho từng vai trò cần truy cập.</div>
+      <figure><img src="images/5c-rls.png"><figcaption><span class="exlabel">VÍ DỤ</span>RLS editor — lọc per-user qua miniapp_user.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-users">
+      <h3 class="feat"><span class="feat-id">5.8</span>Người dùng &amp; đăng nhập PIN</h3>
+      <p><b>Là gì:</b> quản lý app-user (username, PIN, vai trò user/admin/owner, ngữ cảnh); có bảng kiểm tra <b>access-mode</b> tự phân loại từng bảng (per-user / shared / joined). Người dùng đăng nhập cổng bằng PIN.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào tab <b>Users</b>, bấm <b>Add user</b>.</li>
+        <li>Nhập username, đặt/PIN sinh tự động, chọn vai trò; lưu.</li>
+        <li>Chia sẻ link cổng + PIN cho người dùng để họ đăng nhập.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5d-users.png"><figcaption><span class="exlabel">VÍ DỤ</span>App Users + audit phân quyền dữ liệu.</figcaption></figure>
+        <figure><img src="images/5i-login.png"><figcaption><span class="exlabel">VÍ DỤ</span>Cổng công khai — đăng nhập PIN.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-share">
+      <h3 class="feat"><span class="feat-id">5.9</span>Phát hành &amp; chia sẻ Cổng (Portal)</h3>
+      <p><b>Là gì:</b> phát hành app (yêu cầu PIN owner), bật cổng công khai và <b>bật/tắt hiển thị từng màn/Workspace</b>. Người dùng chỉ thấy đúng dữ liệu của mình nhờ RLS.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Đặt <b>slug</b> cho app, đổi PIN owner khỏi mặc định, rồi bấm <b>Publish</b>.</li>
+        <li>Bấm <b>Chia sẻ</b> → <b>Bật chia sẻ công khai</b> để tạo cổng (link <code>/ws/&lt;token&gt;</code>).</li>
+        <li>Bật/tắt hiển thị từng màn/Workspace trên cổng theo nhu cầu.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5h-share.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chia sẻ Cổng — hiển thị từng màn.</figcaption></figure>
+        <figure><img src="images/5j-rls-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — người dùng chỉ thấy dữ liệu của mình.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-webhook">
+      <h3 class="feat"><span class="feat-id">5.10</span>Webhook (đẩy dữ liệu ra hệ thống ngoài)</h3>
+      <p><b>Là gì:</b> khi người dùng bấm Sync trên màn Document, dữ liệu được POST tới endpoint cấu hình sẵn (batch size, headers, timeout) — kèm lịch sử chạy.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Vào tab <b>Webhook → Thêm webhook</b>.</li>
+        <li>Nhập <b>tên, URL, màn doc phục vụ, headers</b>, batch size, timeout.</li>
+        <li>Bấm <b>Gửi test</b> để thử, rồi <b>Lưu</b>. Xem kết quả ở sub-tab <b>History</b>.</li>
+      </ol></div>
+      <figure><img src="images/5e-webhook.png"><figcaption><span class="exlabel">VÍ DỤ</span>Webhook — cấu hình endpoint đẩy dữ liệu.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="wb-io">
+      <h3 class="feat"><span class="feat-id">5.11</span>Import / Export Workboard</h3>
+      <p><b>Là gì:</b> đóng gói toàn bộ app thành bundle (dataset + layout + người dùng) để mang đi nơi khác; khi import chỉ cần chọn đúng Source, hệ thống tự dựng lại dataset và app.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Export:</b> trong Builder bấm <b>Export</b>, chọn có kèm PIN hay không, rồi <b>Download .json</b>.</li>
+        <li><b>Import:</b> ở danh sách Workboard bấm <b>Import</b>, tải file bundle, chọn Source/Dataset đích → <b>Tạo dataset + import</b>.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/5f-export.png"><figcaption><span class="exlabel">VÍ DỤ</span>Export — bundle gồm màn hình, dataset, người dùng.</figcaption></figure>
+        <figure><img src="images/5g-import.png"><figcaption><span class="exlabel">VÍ DỤ</span>Import — nạp bundle &amp; tự tạo dataset.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc" id="wb-mobile">
+      <h3 class="feat"><span class="feat-id">5.12</span>Giao diện Mobile &amp; PWA <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
+      <p><b>Là gì:</b> mọi mini-app Workboard <b>tự thích ứng với điện thoại</b> và có thể <b>cài lên màn hình chính như một app</b> (PWA) — kèm khả năng <b>dùng offline</b>. Cùng một bản dựng phục vụ cả desktop lẫn mobile, không cần làm app riêng, không phụ thuộc kho ứng dụng.</p>
+
+      <div class="phones">
+        <figure><img src="images/5l-mobile-nav.png"><figcaption>Thanh điều hướng dưới (bottom-nav) + màn danh sách.</figcaption></figure>
+        <figure><img src="images/5m-mobile-form.png"><figcaption>Form trên mobile — wizard + nút chụp ảnh (OCR).</figcaption></figure>
+        <figure><img src="images/5n-mobile-more.png"><figcaption>Menu “Mục” gom màn hình theo workspace.</figcaption></figure>
+        <figure><img src="images/5k-mobile-login.png"><figcaption>Đăng nhập PIN trên mobile.</figcaption></figure>
+      </div>
+
+      <p><b>1) Điều hướng tự thích ứng theo kích thước màn.</b> Hệ thống tự nhận diện bề ngang màn hình (không cần chọn thiết bị):</p>
+      <ul>
+        <li><b>Điện thoại (&lt; 768px):</b> chọn 1 trong 2 kiểu — <b>Thanh dưới (bottom-nav)</b> hiển thị tối đa 4 mục chính + nút <b>“Mục”</b> mở bảng menu gom theo workspace; hoặc <b>Ngăn kéo (drawer)</b> trượt ra từ nút hamburger.</li>
+        <li><b>Máy tính bảng / desktop (≥ 768px):</b> theo cấu hình của app — <b>Sidebar</b> hoặc <b>Top tabs 2 tầng</b> (workspace → màn hình).</li>
+      </ul>
+
+      <p><b>2) Cài như một ứng dụng (PWA) — qua tên miền riêng của bạn.</b> Mini-app có web manifest (chạy toàn màn hình, có icon &amp; màu thương hiệu) nên cài thẳng lên màn hình chính, không cần qua kho ứng dụng.</p>
+      <div class="callout"><b>Mỗi khách hàng có một tên miền riêng.</b> Trang “Ứng dụng của tôi” (launcher) của bạn nằm tại <span class="path">https://&lt;tên-miền-của-bạn&gt;/m</span> — ví dụ <span class="path">https://report.base-datateam.com/m</span>. Cứ mở đường dẫn <b>/m</b> này trên điện thoại để bắt đầu.</div>
+
+      <div class="howto"><h4>⚙ Cài lên màn hình chính</h4><ol>
+        <li>Trên điện thoại, mở <span class="path">https://&lt;tên-miền-của-bạn&gt;/m</span> (iPhone hãy mở bằng <b>Safari</b>) → hiện màn <b>“Ứng dụng của tôi”</b>.</li>
+        <li>Bấm <b>“+ Thêm workspace”</b>, <b>dán link Cổng được cấp</b> → ứng dụng xuất hiện trong danh sách trên máy.</li>
+        <li><b>Cài lên màn hình chính:</b>
+          <ul>
+            <li><b>iPhone / Safari:</b> bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên ↑ ở thanh dưới) → cuộn xuống chọn <b>“Thêm vào Màn hình chính”</b>.</li>
+            <li><b>Android / Chrome:</b> bấm nút <b>“Cài ứng dụng về màn hình chính”</b> ngay trên trang (hoặc menu ⋮ → <i>Thêm vào màn hình chính</i>).</li>
+          </ul>
+        </li>
+        <li>Mở app từ icon vừa tạo → chạy <b>toàn màn hình</b> như app gốc (và dùng được cả khi offline — xem mục 3).</li>
+      </ol></div>
+      <div class="phones">
+        <figure><img src="images/5p-launcher.png"><figcaption>Trang launcher tại <b>/m</b> — “Thêm workspace” + nút cài về màn hình chính.</figcaption></figure>
+      </div>
+      <div class="tip"><b>Mẹo:</b> iPhone không có nút cài tự động — luôn dùng <b>Safari → Chia sẻ → “Thêm vào Màn hình chính”</b> (chính trang launcher cũng hiển thị nhắc này khi mở trên iPhone).</div>
+
+      <p><b>3) Hoạt động offline (offline-first).</b> Phù hợp nhân viên hiện trường, kho, công trường — chỗ sóng yếu:</p>
+      <ul>
+        <li><b>Xem được khi mất mạng:</b> các màn (form/table/doc) đã từng mở khi online được lưu cache để mở lại offline.</li>
+        <li><b>Nhập liệu khi mất mạng:</b> phiếu (form thêm mới) được <b>lưu tạm trên máy</b> và <b>tự gửi khi có mạng trở lại</b>; thanh đồng bộ hiện số bản ghi đang chờ + nút gửi thủ công.</li>
+        <li>Chống trùng nhờ mã thao tác (gửi lại không tạo bản ghi đôi).</li>
+      </ul>
+      <div class="note"><b>Lưu ý:</b> offline phục vụ <b>xem màn đã tải</b> và <b>nhập phiếu mới</b>; thao tác cần dữ liệu sống (sửa dòng bảng, mở màn chưa từng tải, đăng nhập lần đầu) vẫn cần mạng.</div>
+
+      <p><b>4) Tối ưu cho cảm ứng &amp; camera.</b> Trường ảnh/file trên điện thoại mở thẳng <b>Camera / Thư viện / Tệp</b>; form xếp dọc dễ thao tác; bảng cuộn ngang gọn; bố cục chừa <b>vùng an toàn</b> (tai thỏ/thanh home iPhone). Ô PIN dùng bàn phím số.</p>
+
+      <div class="tip"><b>Mẹo cấu hình:</b> kiểu điều hướng mobile (bottom-nav / drawer) và hiển thị từng màn đặt trong <a href="#wb-settings">App settings (5.2)</a>; muốn ẩn màn nào khỏi thanh điều hướng chỉ cần tắt “hiển thị trong nav”.</div>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="datasets.html">🗄️ Dataset →</a><a href="dashboards.html">📊 Nhúng báo cáo →</a><a href="showcase.html">🎁 Xem demo →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>

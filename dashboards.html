@@ -1,65 +1,146 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard — Báo cáo — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Báo cáo — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">📊</span></div>
   <h1>Dashboard — Báo cáo</h1>
   <p>Lắp biểu đồ thành báo cáo nhiều trang tương tác, áp dụng bộ lọc, tuỳ biến giao diện, rồi chia sẻ công khai / nhúng / xuất PDF — kèm trợ lý AI hỏi đáp dữ liệu.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
 
-<section class="sec"><div class="container">
+    <section class="doc" id="db-list">
+      <h3 class="feat"><span class="feat-id">4.1</span>Danh sách Dashboard &amp; báo cáo đa trang</h3>
+      <p><b>Là gì:</b> tạo mới, Import HTML, tìm/lọc, chia sẻ. Báo cáo hỗ trợ <b>nhiều trang</b> — chuyển trang, thêm/đổi tên/xoá trang.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Dashboards → New Dashboard</span> (đặt tên, mô tả).</li>
+        <li>Dùng bộ chọn trang trên tiêu đề để <b>chuyển trang</b>; bấm <b>Add page</b> để thêm trang mới.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/41-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dashboard.</figcaption></figure>
+        <figure><img src="images/43-pages.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bộ chuyển trang + thêm/đổi tên/xoá trang.</figcaption></figure>
+      </div>
+    </section>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Báo cáo đa trang, bố cục linh hoạt</h3>
-      <p>Nhiều trang, kéo-thả &amp; resize tile, “Tidy layout”, chế độ Canvas tự do, widget (text/đếm ngược/ảnh/hình khối). Biểu đồ hiển thị nhãn số rõ ràng.</p>
-    </div>
-    <div class="shot"><figure><img src="images/42-hero.png"><figcaption>Một trang báo cáo — KPI + line + donut.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="db-layout">
+      <h3 class="feat"><span class="feat-id">4.2</span>Thêm biểu đồ, bố cục &amp; nhãn dữ liệu</h3>
+      <p><b>Là gì:</b> thêm biểu đồ có sẵn hoặc tạo mới, kéo-thả &amp; resize tile, “Tidy layout” tự căn hàng, chế độ Canvas tự do, và các widget (text, đếm ngược, ảnh, hình khối). Biểu đồ hiển thị nhãn số liệu rõ ràng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">Add Chart</span>, tìm biểu đồ có sẵn hoặc tạo mới, rồi đưa vào báo cáo.</li>
+        <li>Kéo để di chuyển, kéo góc để chỉnh kích thước tile; dùng <b>⋯ → Tidy layout</b> để tự căn hàng.</li>
+        <li>Dùng <b>⋯ → Add widget</b> để chèn text/đếm ngược/ảnh/hình khối.</li>
+      </ol></div>
+      <figure><img src="images/42-hero.png"><figcaption><span class="exlabel">VÍ DỤ</span>Một trang báo cáo — KPI + biểu đồ đường + donut.</figcaption></figure>
+      <div class="grid2" style="margin-top:14px">
+        <figure><img src="images/48-addchart.png"><figcaption><span class="exlabel">VÍ DỤ</span>Add Chart — tìm/tạo &amp; xem trước.</figcaption></figure>
+        <figure><img src="images/4g-bar.png"><figcaption><span class="exlabel">VÍ DỤ</span>Biểu đồ cột có nhãn giá trị.</figcaption></figure>
+      </div>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Slicer · Filter · Filter Map · Tương tác chéo</h3>
-      <p>Slicer trên canvas, Filter pane theo phạm vi (toàn báo cáo/từng trang), lọc theo từng chart, <b>cross-highlight</b> (bấm 1 điểm lọc chart khác). <b>Filter Map</b> tổng hợp mọi filter đang tác động.</p>
-    </div>
-    <div class="shot"><figure><img src="images/49-filtermap.png"><figcaption>Filter Map — mọi filter &amp; nguồn gốc.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="db-filter">
+      <h3 class="feat"><span class="feat-id">4.3</span>Slicer, Filter &amp; Filter Map</h3>
+      <p><b>Là gì:</b> Slicer trên canvas, Filter pane theo phạm vi (toàn báo cáo / từng trang), lọc theo từng chart (HAVING), cross-highlight (bấm một điểm để lọc các chart khác). <b>Filter Map</b> tổng hợp mọi filter đang tác động và nguồn gốc của chúng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>Add slicer</b> để thêm bộ chọn lên canvas (vd Năm, Khu vực).</li>
+        <li>Bấm <b>Filters</b> để mở Filter pane và thêm bộ lọc cấp trang hoặc toàn báo cáo.</li>
+        <li>Bấm vào một điểm dữ liệu trên biểu đồ để <b>lọc chéo</b> các biểu đồ khác; bấm lại để bỏ.</li>
+        <li>Mở <b>⋯ → Filter map</b> để xem toàn bộ bộ lọc đang áp dụng.</li>
+      </ol></div>
+      <figure><img src="images/49-filtermap.png"><figcaption><span class="exlabel">VÍ DỤ</span>Filter Map — mọi filter + nguồn gốc + trạng thái public.</figcaption></figure>
+    </section>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Chia sẻ đa hình thức &amp; tuỳ biến giao diện</h3>
-      <p>Link công khai <b>không giới hạn</b> (đặt mật khẩu, khoá/ẩn filter, giao diện riêng), nhúng iframe, xuất PDF đa trang; Theme 5 mục (Mẫu/Màu/Chữ/Thẻ/Biểu đồ).</p>
-    </div>
-    <div class="shot"><figure><img src="images/4b-publiclinks.png"><figcaption>Public Links — link + URL nhúng.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="db-theme">
+      <h3 class="feat"><span class="feat-id">4.4</span>Tuỳ biến giao diện (Theme)</h3>
+      <p><b>Là gì:</b> 5 mục <b>Mẫu / Màu / Chữ / Thẻ / Biểu đồ</b> với 8 preset dựng sẵn và bảng màu dữ liệu, có xem trước trực tiếp.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>⋯ → Theme</b>.</li>
+        <li>Chọn một <b>Mẫu</b> dựng sẵn, hoặc tinh chỉnh từng mục Màu/Chữ/Thẻ/Biểu đồ.</li>
+        <li>Xem preview tức thì rồi <b>Save appearance</b>.</li>
+      </ol></div>
+      <figure><img src="images/4a-theme.png"><figcaption><span class="exlabel">VÍ DỤ</span>Theme — 8 mẫu + tuỳ chỉnh màu/chữ/thẻ.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Trợ lý AI ngay trên báo cáo <span class="kbadge">ĐIỂM MẠNH</span></h3>
-      <p>Router tự chọn Nhanh/Sâu; tổng hợp số liệu từ chính báo cáo đang xem, trả lời kèm <b>trích dẫn biểu đồ nguồn</b> + độ tin cậy, tra cứu web, và hướng dẫn cách đọc. Người xem không cần biết SQL/BI.</p>
-      <div class="tip"><b>Mẹo:</b> hỏi “Hướng dẫn tôi cách đọc báo cáo này” — AI dẫn đi từng trang/biểu đồ.</div>
-    </div>
-    <div class="shot"><figure><img src="images/4e-aibot.png"><figcaption>AI trả lời kèm số liệu, trích dẫn nguồn &amp; gợi ý.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="db-share">
+      <h3 class="feat"><span class="feat-id">4.5</span>Chia sẻ công khai, Nhúng &amp; Xuất PDF</h3>
+      <p><b>Là gì:</b> tạo link công khai (kèm khoá/ẩn filter, <b>mật khẩu</b>, giao diện riêng), nhúng iframe vào website khác, xuất PDF nhiều trang. <b>Số link không giới hạn</b> — mỗi đối tượng một link riêng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Link công khai:</b> <span class="path">⋯ → Public links → Create new public link</span>; tuỳ chọn đặt mật khẩu, khoá/ẩn bộ lọc, chỉnh giao diện; rồi <b>Copy link</b>.</li>
+        <li><b>Nhúng:</b> dùng URL dạng <code>/embed/&lt;token&gt;</code> trong cùng hộp thoại để chèn iframe.</li>
+        <li><b>Xuất PDF:</b> <span class="path">⋯ → Export PDF</span>, chọn hướng giấy/khổ/trang → <b>Export</b>.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo phân quyền:</b> tạo nhiều link cho nhiều đối tượng — mỗi link có thể khoá sẵn một bộ lọc và đặt mật khẩu riêng, không giới hạn số lượng.</div>
+      <div class="grid2">
+        <figure><img src="images/4b-publiclinks.png"><figcaption><span class="exlabel">VÍ DỤ</span>Public Links — quản lý link, URL nhúng.</figcaption></figure>
+        <figure><img src="images/4c-exportpdf.png"><figcaption><span class="exlabel">VÍ DỤ</span>Export PDF — hướng giấy, khổ, chọn trang.</figcaption></figure>
+      </div>
+      <figure><img src="images/4d-public.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trang công khai — người xem không cần đăng nhập.</figcaption></figure>
+    </section>
 
-</div></section>
+    <section class="doc" id="db-ai">
+      <h3 class="feat"><span class="feat-id">4.6</span>Trợ lý AI trên báo cáo <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;vertical-align:middle">ĐIỂM MẠNH</span> <span class="new-badge">MỚI</span></h3>
+      <p class="lead">Một <b>nhà phân tích AI sống ngay trong báo cáo</b>: nó đọc đúng dữ liệu người dùng đang xem, trả lời bằng ngôn ngữ tự nhiên kèm <b>trích dẫn biểu đồ nguồn</b> và độ tin cậy, biết <b>phân tích sâu</b> (vì sao, xu hướng, dự báo, so sánh) và <b>hướng dẫn người mới cách đọc</b>. Người xem không cần biết SQL hay BI.</p>
 
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Liên quan</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="explore.html">📈 Tạo biểu đồ →</a>
-    <a href="workboards.html">🧩 Nhúng vào mini-app →</a>
-    <a href="showcase.html">🎁 Xem sản phẩm đầu cuối →</a>
-  </div>
-</div></section>
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">① Hai “bộ não”, tự chọn theo câu hỏi</p>
+      <p>Bot có 2 chế độ và <b>tự định tuyến</b> (không bắt người dùng chọn, không tốn thêm lượt gọi AI — phân loại bằng quy tắc, hiểu tiếng Việt cả khi không dấu):</p>
+      <ul>
+        <li><b>Nhanh (Normal)</b> — cho câu tra cứu: “doanh thu tháng này bao nhiêu”, “cho xem top 10…”. Trả lời nhanh.</li>
+        <li><b>Sâu (Thinking)</b> — cho câu phân tích: “tại sao…”, “so sánh…”, “xu hướng/dự báo…”. Bot lập <b>kế hoạch đọc</b> rồi gọi nhiều công cụ.</li>
+        <li>Mặc định <b>Tự động</b>; người xem có thể bấm chip để ép Nhanh/Sâu.</li>
+      </ul>
 
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">② Chủ động ngay khi mở</p>
+      <ul>
+        <li><b>Tóm tắt “điều đáng chú ý”</b> + <b>câu hỏi gợi ý</b> dựa trên chính các biểu đồ của báo cáo (tính sẵn, không gọi AI nên mở rất nhanh).</li>
+        <li><b>Trợ lý dẫn dắt (briefing):</b> đoán lĩnh vực/vai trò/trọng tâm để “đọc” báo cáo theo đúng góc nhìn của bạn.</li>
+      </ul>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">③ Biết làm gì — bộ công cụ phân tích</p>
+      <p>Bot không “đoán” mà thực sự <b>truy vấn dữ liệu báo cáo qua các công cụ</b>:</p>
+      <ul>
+        <li><b>Đọc &amp; tra cứu:</b> liệt kê biểu đồ, lấy tóm tắt/thống kê (tổng, min/max, trung bình, top-5, outlier), lấy dữ liệu một biểu đồ, xem bộ lọc đang áp dụng, tra <b>từ điển nghiệp vụ</b> (ý nghĩa cột).</li>
+        <li><b>Phân tích sâu (chế độ Sâu):</b> so sánh kỳ (MoM/QoQ/YoY), <b>bóc tách nguyên nhân thay đổi</b> (ai/yếu tố nào đóng góp), <b>dự báo</b> kỳ tới, đọc <b>xu hướng</b> chắc chắn (loại kỳ dở dang), <b>so sánh một nhóm với phần còn lại</b>, tương quan giữa 2 biểu đồ, phát hiện bất thường, phân bố (P90/Pareto), khoan sâu &amp; gộp nhóm.</li>
+        <li><b>Tính toán:</b> bộ tính an toàn cho các phép cộng/trừ/tỷ lệ, luôn ghi nguồn số.</li>
+      </ul>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">④ Tra cứu web (tuỳ admin bật)</p>
+      <p>Khi được phép, ở chế độ Sâu bot có thể <b>tìm kiếm web</b>, <b>đọc một URL</b>, và <b>đối chiếu chỉ số với chuẩn ngành/thị trường</b> — dữ liệu web được tách bạch (gắn nhãn) khỏi số liệu báo cáo.</p>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑤ Đáng tin: trích dẫn — không bịa — đúng phạm vi</p>
+      <ul>
+        <li><b>Trích dẫn nguồn:</b> mọi con số gắn <code>[chart:N]</code> trỏ về biểu đồ gốc; có nhãn độ tin cậy <b>HIGH / MED / LOW</b>.</li>
+        <li><b>Không bịa:</b> dữ liệu không đủ thì nói thẳng, không suy diễn; “0 dòng” khác “không có dữ liệu”.</li>
+        <li><b>Đúng phạm vi link:</b> bot <b>luôn tuân thủ bộ lọc đã khoá/ẩn</b> của link công khai và slicer người xem — không “lách” để lộ dữ liệu ngoài phạm vi.</li>
+        <li>Tuỳ chọn <b>tự rà soát (self-critique)</b> thêm một lượt để loại mâu thuẫn &amp; ép trích dẫn.</li>
+      </ul>
+
+      <div class="grid2">
+        <figure><img src="images/4e2-aibot-welcome.png"><figcaption><span class="exlabel">VÍ DỤ</span>Mở bot — lời chào chủ động &amp; câu hỏi gợi ý.</figcaption></figure>
+        <figure><img src="images/4e-aibot.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trả lời kèm số liệu chính xác, trích dẫn chart nguồn &amp; gợi ý đào sâu.</figcaption></figure>
+      </div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑥ Cách dùng (người xem)</p>
+      <div class="howto"><h4>⚙ Thao tác</h4><ol>
+        <li>Trên báo cáo (bản công khai/embed/nội bộ), bấm nút trợ lý AI (góc dưới phải).</li>
+        <li>Bấm một <b>câu hỏi gợi ý</b>, hoặc tự gõ câu hỏi bằng tiếng Việt.</li>
+        <li>(Tuỳ chọn) bấm chip chế độ để ép <b>Nhanh/Sâu</b>; theo dõi “AI đang đọc” khi phân tích sâu.</li>
+        <li>Xem câu trả lời kèm trích dẫn → bấm gợi ý để <b>đào sâu</b>; đánh giá 👍/👎.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> hỏi <i>“Hướng dẫn tôi cách đọc báo cáo này”</i> để AI dẫn bạn đi từng trang/biểu đồ — rất hợp cho người mới.</div>
+
+      <p style="font-weight:700;color:var(--ink);font-size:16px;margin-top:18px">⑦ Cấu hình cho quản trị (theo từng link)</p>
+      <p>Bot bật/tắt &amp; tinh chỉnh <b>riêng cho mỗi link công khai</b> (trong trình sửa Public Link → tab <b>AI Bot</b>):</p>
+      <div class="howto"><h4>⚙ Cấu hình</h4><ol>
+        <li>Bật <b>“AI analyst”</b> cho link.</li>
+        <li>Chọn <b>nhà cung cấp</b> (Anthropic / OpenAI / Gemini) + <b>model</b>; <b>API key lưu phía server, không bao giờ lộ cho người xem</b> (người xem cũng có thể dùng key riêng — chỉ lưu tạm trong phiên, không lưu trữ).</li>
+        <li>Chọn <b>chế độ phân tích</b> (Tự động/Nhanh/Sâu) và bật/tắt <b>Tra cứu web</b>.</li>
+        <li>Viết <b>system prompt</b> (“ngữ cảnh báo cáo”) để hướng bot đọc đúng nghiệp vụ của bạn; bật <b>tự rà soát</b> nếu cần độ chính xác cao.</li>
+      </ol></div>
+      <figure><img src="images/4e3-aibot-config.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tab “AI Bot” của Public Link — bật trợ lý, chọn nhà cung cấp/model, chế độ tự động, tra cứu web, system prompt; key giữ phía server.</figcaption></figure>
+      <div class="note"><b>Riêng tư &amp; an toàn:</b> key người xem chỉ tồn tại trong phiên (đóng tab là mất); mỗi câu hỏi giới hạn số bước gọi công cụ; bot chỉ đọc trong phạm vi dữ liệu của link.</div>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="explore.html">📈 Explore →</a><a href="workboards.html">🧩 Workboard →</a><a href="showcase.html">🎁 Sản phẩm đầu cuối →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>

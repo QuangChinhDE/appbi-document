@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Govern — Quản trị dữ liệu — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Govern — Quản trị dữ liệu — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">🏛️</span></div>
   <h1>Govern — Quản trị dữ liệu</h1>
   <p>Chuẩn hoá ngữ nghĩa dữ liệu cho cả tổ chức: định nghĩa chỉ số dùng chung một lần, gắn nhãn &amp; thuật ngữ, và phát hiện xung đột khi cùng một chỉ số bị hiểu khác nhau.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
+<div class="note">⚙️ <b>Đang phát triển:</b> Govern là module mới, vẫn đang hoàn thiện — giao diện &amp; tính năng có thể thay đổi ở các bản kế tiếp.</div>
+    <section class="doc" id="gov">
+      <h3 class="feat"><span class="feat-id">6.1</span>Danh mục chỉ số dùng chung</h3>
+      <p><b>Vùng này để làm gì:</b> tập trung mọi <b>chỉ số/KPI</b> của hệ thống về một danh mục để đối chiếu &amp; chuẩn hoá — thay vì mỗi báo cáo tự định nghĩa một kiểu.</p>
+      <ul>
+        <li><b>Bảng chỉ số:</b> mỗi dòng là một chỉ số kèm <b>mô tả</b>, <b>nguồn/dataset</b>, <b>loại</b> (sum/count/avg…), <b>nhãn</b>, <b>thuật ngữ</b>, <b>chủ sở hữu</b>.</li>
+        <li><b>Thống kê đầu trang:</b> tổng số chỉ số, số <b>xung đột</b>, số thuật ngữ, số nhãn.</li>
+        <li><b>Cảnh báo xung đột:</b> badge <b>“⚠ xung đột”</b> đánh dấu chỉ số bị định nghĩa không thống nhất giữa các nơi để bạn rà lại.</li>
+        <li><b>Tìm &amp; lọc</b> theo tên/dataset, theo nguồn, theo loại.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Govern</span> ở thanh điều hướng trái.</li>
+        <li>Dùng ô tìm + bộ lọc <b>Mọi nguồn / Mọi loại</b> để khoanh vùng chỉ số.</li>
+        <li>Bấm lọc <b>“⚠ xung đột”</b> để xem riêng các chỉ số đang mâu thuẫn và xử lý.</li>
+        <li>Bấm <b>“+ Thêm chỉ số”</b> để khai báo một chỉ số dùng chung mới.</li>
+      </ol></div>
+      <figure><img src="images/60-govern.png"><figcaption><span class="exlabel">VÍ DỤ</span>Govern — danh mục chỉ số (mô tả, nhãn, thuật ngữ, chủ sở hữu) + cảnh báo xung đột.</figcaption></figure>
+    </section>
 
-<section class="sec"><div class="container">
-  <div class="note" style="margin-bottom:18px">⚙️ <b>Đang phát triển:</b> Govern là module mới, vẫn đang hoàn thiện — giao diện &amp; tính năng có thể thay đổi ở các bản kế tiếp.</div>
-
-  <div class="frow">
-    <div class="txt">
-      <h3>Danh mục chỉ số dùng chung</h3>
-      <p>Tập trung mọi chỉ số/KPI về một danh mục kèm mô tả, nguồn, loại, nhãn, thuật ngữ, chủ sở hữu — thay vì mỗi báo cáo tự định nghĩa một kiểu.</p>
-      <ul><li>Thống kê tổng chỉ số / xung đột / thuật ngữ / nhãn.</li><li>Badge <b>“⚠ xung đột”</b> đánh dấu chỉ số định nghĩa không thống nhất.</li></ul>
-    </div>
-    <div class="shot"><figure><img src="images/60-govern.png"><figcaption>Govern — danh mục chỉ số + cảnh báo xung đột.</figcaption></figure></div>
-  </div>
-
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Từ điển &amp; Nhãn</h3>
-      <p>Quản lý <b>thuật ngữ nghiệp vụ</b> (định nghĩa chuẩn) và <b>nhãn phân loại</b> dùng chung, rồi gắn vào chỉ số để cả công ty hiểu số liệu giống nhau.</p>
-    </div>
-    <div class="shot"><figure><img src="images/62-govern-dict.png"><figcaption>Từ điển &amp; Nhãn — thuật ngữ + phân loại.</figcaption></figure></div>
-  </div>
-
-</div></section>
-
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Liên quan</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="datasets.html">🗄️ Nguồn chỉ số: Dataset/Measures →</a>
-    <a href="observability.html">📡 Giám sát sức khoẻ dữ liệu →</a>
-  </div>
-</div></section>
-
+    <section class="doc" id="gov-dict">
+      <h3 class="feat"><span class="feat-id">6.2</span>Từ điển &amp; Nhãn (chuẩn hoá ngữ nghĩa)</h3>
+      <p><b>Vùng này để làm gì:</b> quản lý <b>thuật ngữ nghiệp vụ</b> (định nghĩa chuẩn) và <b>nhãn phân loại</b> dùng chung, rồi <b>gắn vào chỉ số</b> để cả công ty hiểu số liệu giống nhau.</p>
+      <ul>
+        <li><b>Thuật ngữ:</b> mỗi thuật ngữ có tên, nhóm nghiệp vụ, định nghĩa (vd “Doanh thu thuần = tổng doanh thu sau giảm giá, chiết khấu, hàng trả lại”) và số chỉ số đang dùng nó.</li>
+        <li><b>Phân loại (Nhãn):</b> gắn nhãn (vd <i>Tối mật</i>, <i>Bronze</i>) để phân loại/độ nhạy của chỉ số.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở trang Govern, bấm <b>“Từ điển &amp; Nhãn”</b> (góc trên phải).</li>
+        <li>Chuyển giữa tab <b>Thuật ngữ</b> / <b>Phân loại</b>; bấm <b>“+ Thêm thuật ngữ”</b> để tạo định nghĩa chuẩn mới.</li>
+        <li>Gắn thuật ngữ/nhãn vào chỉ số ở trang chi tiết mỗi chỉ số; bấm “n chỉ số” để lọc xem chỉ số nào đang dùng.</li>
+      </ol></div>
+      <figure><img src="images/62-govern-dict.png"><figcaption><span class="exlabel">VÍ DỤ</span>Từ điển &amp; Nhãn — thuật ngữ nghiệp vụ chuẩn + nhãn phân loại dùng chung.</figcaption></figure>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="datasets.html">🗄️ Dataset/Measures →</a><a href="observability.html">📡 Observability →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>

@@ -1,60 +1,76 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kết nối dữ liệu — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kết nối dữ liệu — Data Sources — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">🔌</span></div>
   <h1>Kết nối dữ liệu — Data Sources</h1>
-  <p>Điểm khởi đầu của mọi báo cáo: kết nối trực tiếp tới cơ sở dữ liệu, kho phân tích đám mây, bảng tính và file — dữ liệu được truy vấn <b>live</b>, không cần sao chép thủ công.</p>
+  <p>Điểm khởi đầu của mọi báo cáo: kết nối trực tiếp tới cơ sở dữ liệu, kho phân tích đám mây, bảng tính và file — dữ liệu được truy vấn live, không cần sao chép thủ công.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
 
-<section class="sec"><div class="container">
-
-  <div class="frow">
-    <div class="txt">
-      <h3>Nhiều loại nguồn, kết nối trong vài phút</h3>
-      <p>Hỗ trợ <b>PostgreSQL, MySQL, BigQuery, Google Sheets</b> và <b>Manual Table</b> (Excel/CSV). Kết nối được <b>tự kiểm tra</b> khi lưu.</p>
-      <ul>
-        <li><b>BigQuery:</b> đăng nhập Google (OAuth) hoặc Service Account JSON.</li>
-        <li><b>Google Sheets:</b> chọn spreadsheet/sheet, đọc/ghi dòng.</li>
-        <li><b>Manual Table:</b> kéo-thả CSV/Excel (nhiều sheet), tự suy kiểu cột.</li>
-      </ul>
-      <div class="howbox"><h5>⚙ Cách làm</h5><ol>
-        <li>Vào <span class="path">Data Sources → New Data Source</span>.</li>
-        <li>Chọn loại nguồn, nhập kết nối → <span class="path">Create</span> (tự test).</li>
+    <section class="doc" id="ds-list">
+      <h3 class="feat"><span class="feat-id">1.1</span>Danh sách nguồn dữ liệu</h3>
+      <p><b>Là gì:</b> nơi quản lý mọi kết nối — thống kê, tìm kiếm, lọc theo loại/quyền/chủ sở hữu, xem dạng lưới hoặc bảng.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Data Sources</span> ở thanh điều hướng trái.</li>
+        <li>Dùng ô <b>Search</b> hoặc bộ lọc <b>All source types</b> để tìm nhanh nguồn.</li>
+        <li>Trên mỗi dòng, dùng các nút <b>Test connection</b>, <b>Share</b>, <b>Delete</b> ở cột Actions.</li>
       </ol></div>
-    </div>
-    <div class="shot"><figure><img src="images/14-new-bigquery.png"><figcaption>Tạo nguồn — ví dụ BigQuery (OAuth / Service Account).</figcaption></figure></div>
-  </div>
+      <div class="note"><b>Lưu ý:</b> không xoá được nguồn đang được một Dataset sử dụng — hệ thống sẽ báo các Dataset phụ thuộc để bạn xử lý trước.</div>
+      <figure><img src="images/11-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trang Data Sources — thống kê và danh sách kết nối.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Quản lý &amp; chia sẻ tập trung</h3>
-      <p>Danh sách mọi kết nối kèm thống kê, tìm/lọc theo loại-quyền-chủ sở hữu, và <b>test kết nối</b> ngay trên từng dòng.</p>
-      <ul>
-        <li>Chia sẻ theo <b>Xem / Sửa / Toàn quyền</b> (dùng chung cho cả Dataset, Chart, Dashboard, Workboard).</li>
-        <li>Chặn xoá khi nguồn đang được Dataset sử dụng.</li>
-      </ul>
-    </div>
-    <div class="shot"><figure><img src="images/11-list.png"><figcaption>Danh sách Data Sources.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="ds-new">
+      <h3 class="feat"><span class="feat-id">1.2</span>Tạo nguồn mới &amp; các loại nguồn</h3>
+      <p><b>Là gì:</b> AppBI hỗ trợ <b>PostgreSQL, MySQL, BigQuery, Google Sheets</b> và <b>Manual Table</b> (Excel/CSV). Kết nối được kiểm tra tự động khi lưu.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">New Data Source</span>.</li>
+        <li>Đặt <b>Name</b> và chọn <b>Type</b> (loại nguồn).</li>
+        <li>Nhập cấu hình tương ứng:
+          <ul>
+            <li><b>PostgreSQL/MySQL:</b> host, port, database, schema, user, password.</li>
+            <li><b>BigQuery:</b> đăng nhập Google (OAuth) hoặc dán Service Account JSON.</li>
+            <li><b>Google Sheets:</b> kết nối Google rồi chọn spreadsheet/sheet.</li>
+            <li><b>Manual Table:</b> kéo-thả file <code>.csv</code>/<code>.xlsx</code> vào vùng tải lên.</li>
+          </ul>
+        </li>
+        <li>Bấm <span class="path">Create</span> — hệ thống tự test kết nối; nếu lỗi sẽ báo ngay.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> với Manual Table, file Excel nhiều sheet sẽ được nạp tất cả các sheet thành nhiều bảng.</div>
+      <div class="grid2">
+        <figure><img src="images/12-new-postgres.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tạo nguồn PostgreSQL.</figcaption></figure>
+        <figure><img src="images/14-new-bigquery.png"><figcaption><span class="exlabel">VÍ DỤ</span>BigQuery — OAuth hoặc Service Account.</figcaption></figure>
+      </div>
+      <figure><img src="images/13-new-manual.png"><figcaption><span class="exlabel">VÍ DỤ</span>Manual Table — kéo-thả CSV/Excel.</figcaption></figure>
+    </section>
 
-</div></section>
+    <section class="doc" id="ds-edit">
+      <h3 class="feat"><span class="feat-id">1.3</span>Sửa cấu hình &amp; kiểm tra kết nối</h3>
+      <p><b>Là gì:</b> cập nhật thông tin kết nối an toàn. Thông tin nhạy cảm (mật khẩu, khoá) được mã hoá; để trống nghĩa là giữ nguyên giá trị cũ.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm vào tên nguồn để mở chi tiết, rồi bấm <span class="path">Edit</span>.</li>
+        <li>Sửa các trường cần thiết (mật khẩu để trống nếu không đổi).</li>
+        <li>Bấm <b>Update/Save</b> — kết nối được kiểm tra lại tự động.</li>
+        <li>Hoặc bấm <b>Test connection</b> ở danh sách để kiểm tra mà không cần sửa.</li>
+      </ol></div>
+      <figure><img src="images/15-detail-edit.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chi tiết nguồn — kiểm tra kết nối tự động khi lưu.</figcaption></figure>
+    </section>
 
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Bước tiếp theo trong hành trình</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="datasets.html">🗄️ Dựng Dataset &amp; Mô hình →</a>
-    <a href="observability.html">📡 Giám sát sức khoẻ nguồn →</a>
-  </div>
-</div></section>
-
+    <section class="doc" id="ds-share">
+      <h3 class="feat"><span class="feat-id">1.4</span>Chia sẻ &amp; phân quyền</h3>
+      <p><b>Là gì:</b> cấp quyền cho người dùng/nhóm với 3 mức <b>Xem / Sửa / Toàn quyền</b>. Cơ chế này dùng nhất quán cho cả Dataset, Chart, Dashboard, Workboard.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm biểu tượng <b>Share</b> trên nguồn cần chia sẻ.</li>
+        <li>Nhập email người dùng (hoặc chọn nhóm), chọn vai trò <b>Viewer/Editor/Full</b>.</li>
+        <li>Bấm <b>Share</b>. Có thể thu hồi quyền bất cứ lúc nào trong cùng hộp thoại.</li>
+      </ol></div>
+      <figure><img src="images/16-share.png"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại chia sẻ theo người &amp; nhóm.</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> cần viết SQL tuỳ ý? Bạn không cần công cụ ngoài — dùng bảng <b>SQL Query</b> trong Dataset hoặc chế độ <b>Custom SQL</b> trong Explore.</div>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="datasets.html">🗄️ Dataset &amp; Mô hình →</a><a href="observability.html">📡 Observability →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>

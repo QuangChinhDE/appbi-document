@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Observability — Giám sát dữ liệu — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Observability — Giám sát sức khoẻ dữ liệu — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">📡</span></div>
   <h1>Observability — Giám sát sức khoẻ dữ liệu</h1>
-  <p>Theo dõi sức khoẻ &amp; vòng đời dữ liệu trên mọi dataset để phát hiện sớm dữ liệu trễ/thiếu/sai lệch trước khi làm hỏng báo cáo. Năm trụ cột: Độ tươi · Khối lượng · Lược đồ · Phân phối · Chất lượng.</p>
+  <p>Theo dõi sức khoẻ &amp; vòng đời dữ liệu trên mọi dataset — phát hiện sớm dữ liệu trễ/thiếu/sai lệch trước khi làm hỏng báo cáo. Năm trụ cột: Độ tươi · Khối lượng · Lược đồ · Phân phối · Chất lượng.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
+<div class="note">⚙️ <b>Đang phát triển:</b> Observability là module mới, vẫn đang hoàn thiện — một số monitor còn ở mức khởi tạo; giao diện có thể thay đổi.</div>
+    <section class="doc" id="obs">
+      <h3 class="feat"><span class="feat-id">7.1</span>Tổng quan sức khoẻ dữ liệu</h3>
+      <p><b>Vùng này để làm gì:</b> một bảng điều khiển cho biết <b>toàn bộ dataset đang “khoẻ” hay có vấn đề</b>, để đội dữ liệu xử lý trước khi người xem báo cáo bị ảnh hưởng.</p>
+      <ul>
+        <li><b>Chỉ số vận hành đầu trang:</b> số dataset đang giám sát · <b>sự cố đang mở</b> · <b>MTTR</b> (thời gian khắc phục trung bình) · số đã xử lý.</li>
+        <li><b>Bảng dataset:</b> mỗi dòng hiện sự cố mở, số <b>monitor</b>, mức tiêu thụ (số biểu đồ/dòng dùng), lần <b>làm mới</b> gần nhất.</li>
+        <li><b>Lọc nhanh:</b> “Chỉ dataset có sự cố”, hoặc theo trụ cột (Độ tươi/Khối lượng/Lược đồ/Phân phối/Chất lượng).</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Observability</span> ở thanh điều hướng.</li>
+        <li>Bấm <b>“Quét ngay”</b> để chấm lại sức khoẻ; hoặc <b>“Kênh cảnh báo”</b> để cấu hình nơi nhận cảnh báo (khi có sự cố).</li>
+        <li>Dùng bộ lọc để tìm dataset cần chú ý, rồi bấm vào dataset đó để xem chi tiết.</li>
+      </ol></div>
+      <figure><img src="images/61-observability.png"><figcaption><span class="exlabel">VÍ DỤ</span>Observability — danh sách dataset kèm sự cố, monitor, tiêu thụ, lần làm mới.</figcaption></figure>
+    </section>
 
-<section class="sec"><div class="container">
-  <div class="note" style="margin-bottom:18px">⚙️ <b>Đang phát triển:</b> Observability là module mới, vẫn đang hoàn thiện — một số monitor còn ở mức khởi tạo; giao diện có thể thay đổi.</div>
-
-  <div class="frow">
-    <div class="txt">
-      <h3>Tổng quan sức khoẻ dữ liệu</h3>
-      <p>Bảng điều khiển cho biết dataset đang “khoẻ” hay có vấn đề: số dataset giám sát, <b>sự cố đang mở</b>, <b>MTTR</b>, số đã xử lý; lọc nhanh theo trụ cột hoặc “chỉ dataset có sự cố”.</p>
-      <ul><li><b>Quét ngay</b> để chấm lại sức khoẻ; <b>Kênh cảnh báo</b> để cấu hình nơi nhận cảnh báo.</li></ul>
-    </div>
-    <div class="shot"><figure><img src="images/61-observability.png"><figcaption>Danh sách dataset — sự cố, monitor, tiêu thụ, làm mới.</figcaption></figure></div>
-  </div>
-
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Chi tiết dataset &amp; Lineage</h3>
-      <p>Bấm một dataset để mở 4 tab: <b>Sự cố · Giám sát · Chất lượng · Lineage</b>. Tab Lineage vẽ <b>nguồn gốc dữ liệu</b> (Nguồn → Bảng → Biểu đồ → Dashboard) — biết một dataset đang “nuôi” báo cáo nào để đánh giá tác động khi có sự cố.</p>
-    </div>
-    <div class="shot"><figure><img src="images/63-obs-lineage.png"><figcaption>Lineage — Nguồn → 13 Bảng → 70 Biểu đồ → 1 Dashboard.</figcaption></figure></div>
-  </div>
-
-</div></section>
-
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Liên quan</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="datasets.html">🗄️ Chất lượng ở Dataset →</a>
-    <a href="govern.html">🏛️ Quản trị chỉ số →</a>
-  </div>
-</div></section>
-
+    <section class="doc" id="obs-detail">
+      <h3 class="feat"><span class="feat-id">7.2</span>Chi tiết một dataset — Sự cố · Giám sát · Chất lượng · Lineage</h3>
+      <p><b>Vùng này để làm gì:</b> bấm vào một dataset để mở trang chi tiết với 4 tab, xử lý mọi thứ ngay tại chỗ:</p>
+      <ul>
+        <li><b>Sự cố:</b> danh sách sự cố (lọc Đang mở/Tất cả, mức Nghiêm trọng/Cảnh báo/Thông tin). “Mọi monitor đều khoẻ” = không có sự cố.</li>
+        <li><b>Giám sát:</b> các monitor đang chạy trên dataset.</li>
+        <li><b>Chất lượng:</b> điểm chất lượng theo các chiều (liên thông với rule chất lượng ở Dataset — mục 2.8).</li>
+        <li><b>Lineage:</b> sơ đồ <b>nguồn gốc dữ liệu</b>: Nguồn → Bảng → Biểu đồ → Dashboard — biết một dataset đang “nuôi” những báo cáo nào (đánh giá tác động khi có sự cố).</li>
+      </ul>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở danh sách, bấm một dataset để vào trang chi tiết.</li>
+        <li>Chuyển tab <b>Sự cố / Giám sát / Chất lượng / Lineage</b> tuỳ nhu cầu.</li>
+        <li>Mở tab <b>Lineage</b> để xem dataset này đang cấp dữ liệu cho biểu đồ/dashboard nào.</li>
+      </ol></div>
+      <figure><img src="images/63-obs-lineage.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chi tiết dataset · tab Lineage — Nguồn → 13 Bảng → 70 Biểu đồ → 1 Dashboard.</figcaption></figure>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="datasets.html">🗄️ Chất lượng ở Dataset →</a><a href="govern.html">🏛️ Govern →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>

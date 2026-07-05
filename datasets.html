@@ -1,70 +1,120 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dataset &amp; Mô hình — AppBI</title>
-<link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset &amp; Mô hình dữ liệu — AppBI</title><link rel="stylesheet" href="assets/styles.css"></head><body>
 <section class="mhero"><div class="container">
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">🗄️</span></div>
   <h1>Dataset &amp; Mô hình dữ liệu</h1>
-  <p>Lớp ngữ nghĩa biến dữ liệu thô thành mô hình sẵn sàng phân tích: gom nhiều bảng, định nghĩa quan hệ, tạo chỉ số (Measure), kiểm soát chất lượng — “nguồn sự thật” dùng chung cho báo cáo &amp; mini-app.</p>
+  <p>Lớp ngữ nghĩa biến dữ liệu thô thành mô hình sẵn sàng phân tích: gom nhiều bảng, định nghĩa quan hệ, tạo chỉ số (Measure), kiểm soát chất lượng và tài liệu hoá ý nghĩa từng cột.</p>
 </div></section>
+<div class="doc-wrap container">
+  <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
+  <main class="doc-main">
 
-<section class="sec"><div class="container">
+    <section class="doc" id="dt-list">
+      <h3 class="feat"><span class="feat-id">2.1</span>Danh sách Dataset</h3>
+      <p><b>Là gì:</b> quản lý toàn bộ Dataset, lọc chéo theo dashboard/chart/nguồn, chia sẻ và xoá (có chặn phụ thuộc).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở <span class="path">Datasets</span>. Bấm <span class="path">New Dataset</span> để tạo mới (đặt tên + mô tả).</li>
+        <li>Bấm vào một Dataset để mở không gian làm việc của nó.</li>
+      </ol></div>
+      <figure><img src="images/21-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dataset.</figcaption></figure>
+    </section>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Không gian làm việc trực quan</h3>
-      <p>Gom bảng theo nhóm (Source / Calculated / Calendar / Measures), lưới xem trước dữ liệu, quản lý cột &amp; xuất Excel.</p>
-      <ul>
-        <li>Thêm bảng: <b>bảng vật lý</b>, <b>SQL tuỳ ý</b>, hoặc <b>bảng dẫn xuất</b> (CTE).</li>
-        <li><b>Cột tính toán</b> bằng công thức kiểu Excel (LOOKUP, IF…) hoặc JavaScript.</li>
-      </ul>
-    </div>
-    <div class="shot"><figure><img src="images/22-tables.png"><figcaption>Không gian Tables — sidebar nhóm bảng + preview.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="dt-tables">
+      <h3 class="feat"><span class="feat-id">2.2</span>Không gian làm việc Tables</h3>
+      <p><b>Là gì:</b> trung tâm của Dataset — sidebar gom bảng theo nhóm (<b>Source / Calculated / Calendar / Measures</b>), lưới xem trước dữ liệu, công cụ quản lý cột &amp; xuất Excel. Có 3 tab: <b>Tables · Quality · Model</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở tab <b>Tables</b>, chọn một bảng trong sidebar trái để xem dữ liệu.</li>
+        <li>Dùng <b>Columns</b> để ẩn/hiện cột, <b>Export Excel</b> để tải dữ liệu.</li>
+        <li>Chuyển tab <b>Model</b> để dựng quan hệ, tab <b>Quality</b> để kiểm soát chất lượng.</li>
+      </ol></div>
+      <figure><img src="images/22-tables.png"><figcaption><span class="exlabel">VÍ DỤ</span>Không gian Tables — sidebar nhóm bảng + lưới xem trước.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Mô hình quan hệ (ERD)</h3>
-      <p>Sơ đồ trực quan các bảng &amp; đường nối; tạo/sửa quan hệ (loại join, cardinality, cross-filter). Nút <b>Generate Model</b> tự dò quan hệ theo khoá ngoại.</p>
-    </div>
-    <div class="shot"><figure><img src="images/26-model.png"><figcaption>Canvas ERD — bảng &amp; quan hệ.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="dt-add">
+      <h3 class="feat"><span class="feat-id">2.3</span>Thêm bảng vào Dataset</h3>
+      <p><b>Là gì:</b> ba cách đưa bảng vào mô hình — bảng vật lý, truy vấn SQL, hoặc bảng dẫn xuất.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong nhóm <b>Source</b> (hoặc Calculated), bấm <span class="path">+ Add</span>.</li>
+        <li>Chọn cách thêm:
+          <ul>
+            <li><b>From Table:</b> chọn nguồn → chọn bảng có sẵn.</li>
+            <li><b>From SQL Query:</b> chọn nguồn → viết câu SQL tuỳ ý.</li>
+            <li><b>Calculated:</b> viết SQL tham chiếu các bảng khác trong Dataset.</li>
+          </ul>
+        </li>
+        <li>Bấm <b>Add Table</b> — cột được tự suy luận kiểu dữ liệu.</li>
+      </ol></div>
+      <figure><img src="images/23-addtable.png"><figcaption><span class="exlabel">VÍ DỤ</span>Thêm bảng — From Table / From SQL Query.</figcaption></figure>
+    </section>
 
-  <div class="frow">
-    <div class="txt">
-      <h3>Measures — chỉ số nghiệp vụ</h3>
-      <p>Định nghĩa chỉ số tái sử dụng (biểu thức, bộ lọc riêng, định dạng, folder, phụ thuộc) — chuẩn PowerBI cho số liệu.</p>
-      <div class="tip"><b>Mẹo:</b> chọn đúng hàm tổng hợp — “số khách” dùng <b>COUNT DISTINCT</b>, “doanh thu” dùng <b>SUM</b>.</div>
-    </div>
-    <div class="shot"><figure><img src="images/25-measure.png"><figcaption>Trình soạn Measure.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="dt-cols">
+      <h3 class="feat"><span class="feat-id">2.4</span>Quản lý cột &amp; cột tính toán</h3>
+      <p><b>Là gì:</b> ẩn/hiện cột; thêm cột tính toán bằng <b>công thức kiểu Excel</b> (IF, LOOKUP, SUM…) hoặc <b>JavaScript</b>; đổi kiểu &amp; định dạng (số/tiền/%/ngày).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">Columns</span> trên thanh công cụ để mở bảng quản lý cột.</li>
+        <li>Tích/bỏ tích để hiện/ẩn từng cột, rồi <b>Apply</b>.</li>
+        <li>Để thêm cột tính toán: bấm <b>+ Add column</b>, chọn <b>Excel formula</b> hoặc <b>JavaScript</b>, nhập công thức, xem preview rồi lưu.</li>
+        <li>Đổi định dạng/kiểu: mở popup định dạng trên tiêu đề cột (số lẻ, ký hiệu tiền tệ, định dạng ngày…).</li>
+      </ol></div>
+      <figure><img src="images/24-managecols.png"><figcaption><span class="exlabel">VÍ DỤ</span>Manage Columns — bật/tắt hiển thị cột.</figcaption></figure>
+    </section>
 
-  <div class="frow rev">
-    <div class="txt">
-      <h3>Chất lượng dữ liệu (6 chiều)</h3>
-      <p>Giám sát theo Completeness/Validity/Uniqueness/Consistency/Timeliness/Accuracy với 13 loại rule, <b>gợi ý bằng AI</b>, xem trước PASS/FAIL, chạy theo lịch.</p>
-    </div>
-    <div class="shot"><figure><img src="images/2a-qualityrule.png"><figcaption>Trình tạo rule chất lượng + AI suggest.</figcaption></figure></div>
-  </div>
+    <section class="doc" id="dt-model">
+      <h3 class="feat"><span class="feat-id">2.5</span>Mô hình dữ liệu (ERD) &amp; quan hệ</h3>
+      <p><b>Là gì:</b> sơ đồ trực quan các bảng và quan hệ. Tạo/sửa quan hệ với loại join, cardinality (1:1, 1:N…), khoá chính, hướng lọc chéo. Nút <b>Generate Model</b> tự dò quan hệ theo khoá ngoại.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở tab <b>Model</b> của Dataset.</li>
+        <li>Bấm <b>Generate relationships</b> để hệ thống tự đề xuất quan hệ, hoặc <b>Add Relationship</b> để tạo tay.</li>
+        <li>Trong hộp thoại quan hệ: chọn <b>From/To table</b>, cặp cột khoá, <b>Join type</b>, <b>Cardinality</b>, hướng cross-filter → <b>Save</b>.</li>
+        <li>Bấm vào một đường nối để sửa, hoặc bấm ✕ để xoá quan hệ.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/26-model.png"><figcaption><span class="exlabel">VÍ DỤ</span>Canvas ERD — bảng &amp; đường quan hệ.</figcaption></figure>
+        <figure><img src="images/27-relationship.png"><figcaption><span class="exlabel">VÍ DỤ</span>Tạo quan hệ — join type, cardinality.</figcaption></figure>
+      </div>
+    </section>
 
-</div></section>
+    <section class="doc" id="dt-measure">
+      <h3 class="feat"><span class="feat-id">2.6</span>Measures — chỉ số nghiệp vụ</h3>
+      <p><b>Là gì:</b> chỉ số tái sử dụng (vd Doanh thu, AOV, % giao đúng hẹn). Định nghĩa một lần với biểu thức, bộ lọc riêng, định dạng, nhóm folder; hỗ trợ nhiều loại (sum, count_distinct, % of total, formula, window…).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong sidebar, mở nhóm <b>Measures</b> và bấm <span class="path">+ Add</span> (chọn bảng đích).</li>
+        <li>Nhập <b>Label</b> (tên hiển thị) và <b>biểu thức</b> (vd <code>SUM(total_revenue)</code> hoặc tham chiếu measure khác).</li>
+        <li>Tuỳ chọn: thêm <b>bộ lọc (WHERE)</b>, chọn <b>định dạng</b> (số/tiền/%), gán <b>folder</b>.</li>
+        <li>Lưu — measure sẵn sàng dùng trong Explore và mini-app.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> đặt tên rõ nghĩa và gom theo folder (vd “Doanh thu”, “Vận hành”) để người tạo biểu đồ tìm nhanh.</div>
+      <figure><img src="images/25-measure.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trình soạn Measure — biểu thức, phụ thuộc, định dạng, điều kiện.</figcaption></figure>
+    </section>
 
-<section class="sec soft"><div class="container center">
-  <span class="eyebrow">Kết hợp với</span>
-  <h2 style="font-size:26px;margin:6px 0 16px">Dùng Dataset ở đâu?</h2>
-  <div class="xlinks" style="justify-content:center">
-    <a href="explore.html">📈 Dựng biểu đồ →</a>
-    <a href="workboards.html">🧩 Làm mini-app →</a>
-    <a href="govern.html">🏛️ Quản trị chỉ số →</a>
-    <a href="observability.html">📡 Giám sát dữ liệu →</a>
-  </div>
-</div></section>
+    <section class="doc" id="dt-date">
+      <h3 class="feat"><span class="feat-id">2.7</span>Date table (chiều thời gian) &amp; Từ điển</h3>
+      <p><b>Là gì:</b> tạo bảng lịch chuẩn (năm/quý/tháng/tuần, fiscal year, auto-join cột ngày) để phân tích theo thời gian. <b>Dictionary</b> tài liệu hoá ý nghĩa từng bảng/cột kèm % độ phủ.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Date table:</b> mở hộp thoại <b>Calendar</b>, đặt khoảng ngày, ngày đầu tuần, tháng đầu năm tài chính, bật auto-join cột ngày → Save.</li>
+        <li><b>Dictionary:</b> ở tab Model bấm <b>Dictionary</b>, điền mô tả cho bảng/cột; theo dõi % đã tài liệu hoá.</li>
+      </ol></div>
+      <figure><img src="images/28-dictionary.png"><figcaption><span class="exlabel">VÍ DỤ</span>Dictionary — chú thích ý nghĩa cột.</figcaption></figure>
+    </section>
 
+    <section class="doc" id="dt-quality">
+      <h3 class="feat"><span class="feat-id">2.8</span>Chất lượng dữ liệu (Data Quality)</h3>
+      <p><b>Là gì:</b> giám sát dữ liệu theo 6 chiều — Completeness, Validity, Uniqueness, Consistency, Timeliness, Accuracy — với 13 loại rule, gợi ý bằng AI, xem trước PASS/FAIL, chạy theo lịch và lưu lịch sử.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở tab <b>Quality</b>, bấm <span class="path">+ Add Rule</span>.</li>
+        <li>Chọn <b>bảng</b>, <b>loại rule</b> (not null, accepted values, range, unique, freshness, custom SQL…) và <b>cột</b>.</li>
+        <li>Đặt mức độ (Info/Warning/Error), xem <b>Live preview</b>, bấm <b>Run test</b> để thử trên dữ liệu thật → <b>Create Rule</b>.</li>
+        <li>Bấm <b>Run Now</b> để chấm điểm, hoặc <b>Automate</b> để chạy theo lịch.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> bấm <b>Suggest with AI</b> để hệ thống tự đề xuất bộ rule phù hợp với bảng của bạn.</div>
+      <div class="grid2">
+        <figure><img src="images/29-quality.png"><figcaption><span class="exlabel">VÍ DỤ</span>Quality — 6 chiều chất lượng.</figcaption></figure>
+        <figure><img src="images/2a-qualityrule.png"><figcaption><span class="exlabel">VÍ DỤ</span>Trình tạo rule — AI suggest + live preview.</figcaption></figure>
+      </div>
+    </section>
+    <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="sources.html">🔌 Kết nối dữ liệu →</a><a href="explore.html">📈 Explore →</a><a href="workboards.html">🧩 Workboard →</a><a href="govern.html">🏛️ Govern →</a><a href="observability.html">📡 Observability →</a></div></section>
+  </main>
+</div>
 <script src="assets/site.js"></script>
-</body>
-</html>
+</body></html>
