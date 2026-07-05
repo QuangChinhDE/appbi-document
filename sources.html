@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kết nối dữ liệu — AppBI</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<section class="mhero"><div class="container">
+  <a class="bk" href="index.html">← Tổng quan</a>
+  <div style="margin-top:8px"><span class="ic">🔌</span></div>
+  <h1>Kết nối dữ liệu — Data Sources</h1>
+  <p>Điểm khởi đầu của mọi báo cáo: kết nối trực tiếp tới cơ sở dữ liệu, kho phân tích đám mây, bảng tính và file — dữ liệu được truy vấn <b>live</b>, không cần sao chép thủ công.</p>
+</div></section>
+
+<section class="sec"><div class="container">
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Nhiều loại nguồn, kết nối trong vài phút</h3>
+      <p>Hỗ trợ <b>PostgreSQL, MySQL, BigQuery, Google Sheets</b> và <b>Manual Table</b> (Excel/CSV). Kết nối được <b>tự kiểm tra</b> khi lưu.</p>
+      <ul>
+        <li><b>BigQuery:</b> đăng nhập Google (OAuth) hoặc Service Account JSON.</li>
+        <li><b>Google Sheets:</b> chọn spreadsheet/sheet, đọc/ghi dòng.</li>
+        <li><b>Manual Table:</b> kéo-thả CSV/Excel (nhiều sheet), tự suy kiểu cột.</li>
+      </ul>
+      <div class="howbox"><h5>⚙ Cách làm</h5><ol>
+        <li>Vào <span class="path">Data Sources → New Data Source</span>.</li>
+        <li>Chọn loại nguồn, nhập kết nối → <span class="path">Create</span> (tự test).</li>
+      </ol></div>
+    </div>
+    <div class="shot"><figure><img src="images/14-new-bigquery.png"><figcaption>Tạo nguồn — ví dụ BigQuery (OAuth / Service Account).</figcaption></figure></div>
+  </div>
+
+  <div class="frow rev">
+    <div class="txt">
+      <h3>Quản lý &amp; chia sẻ tập trung</h3>
+      <p>Danh sách mọi kết nối kèm thống kê, tìm/lọc theo loại-quyền-chủ sở hữu, và <b>test kết nối</b> ngay trên từng dòng.</p>
+      <ul>
+        <li>Chia sẻ theo <b>Xem / Sửa / Toàn quyền</b> (dùng chung cho cả Dataset, Chart, Dashboard, Workboard).</li>
+        <li>Chặn xoá khi nguồn đang được Dataset sử dụng.</li>
+      </ul>
+    </div>
+    <div class="shot"><figure><img src="images/11-list.png"><figcaption>Danh sách Data Sources.</figcaption></figure></div>
+  </div>
+
+</div></section>
+
+<section class="sec soft"><div class="container center">
+  <span class="eyebrow">Kết hợp với</span>
+  <h2 style="font-size:26px;margin:6px 0 16px">Bước tiếp theo trong hành trình</h2>
+  <div class="xlinks" style="justify-content:center">
+    <a href="datasets.html">🗄️ Dựng Dataset &amp; Mô hình →</a>
+    <a href="observability.html">📡 Giám sát sức khoẻ nguồn →</a>
+  </div>
+</div></section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

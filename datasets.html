@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset &amp; Mô hình — AppBI</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<section class="mhero"><div class="container">
+  <a class="bk" href="index.html">← Tổng quan</a>
+  <div style="margin-top:8px"><span class="ic">🗄️</span></div>
+  <h1>Dataset &amp; Mô hình dữ liệu</h1>
+  <p>Lớp ngữ nghĩa biến dữ liệu thô thành mô hình sẵn sàng phân tích: gom nhiều bảng, định nghĩa quan hệ, tạo chỉ số (Measure), kiểm soát chất lượng — “nguồn sự thật” dùng chung cho báo cáo &amp; mini-app.</p>
+</div></section>
+
+<section class="sec"><div class="container">
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Không gian làm việc trực quan</h3>
+      <p>Gom bảng theo nhóm (Source / Calculated / Calendar / Measures), lưới xem trước dữ liệu, quản lý cột &amp; xuất Excel.</p>
+      <ul>
+        <li>Thêm bảng: <b>bảng vật lý</b>, <b>SQL tuỳ ý</b>, hoặc <b>bảng dẫn xuất</b> (CTE).</li>
+        <li><b>Cột tính toán</b> bằng công thức kiểu Excel (LOOKUP, IF…) hoặc JavaScript.</li>
+      </ul>
+    </div>
+    <div class="shot"><figure><img src="images/22-tables.png"><figcaption>Không gian Tables — sidebar nhóm bảng + preview.</figcaption></figure></div>
+  </div>
+
+  <div class="frow rev">
+    <div class="txt">
+      <h3>Mô hình quan hệ (ERD)</h3>
+      <p>Sơ đồ trực quan các bảng &amp; đường nối; tạo/sửa quan hệ (loại join, cardinality, cross-filter). Nút <b>Generate Model</b> tự dò quan hệ theo khoá ngoại.</p>
+    </div>
+    <div class="shot"><figure><img src="images/26-model.png"><figcaption>Canvas ERD — bảng &amp; quan hệ.</figcaption></figure></div>
+  </div>
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Measures — chỉ số nghiệp vụ</h3>
+      <p>Định nghĩa chỉ số tái sử dụng (biểu thức, bộ lọc riêng, định dạng, folder, phụ thuộc) — chuẩn PowerBI cho số liệu.</p>
+      <div class="tip"><b>Mẹo:</b> chọn đúng hàm tổng hợp — “số khách” dùng <b>COUNT DISTINCT</b>, “doanh thu” dùng <b>SUM</b>.</div>
+    </div>
+    <div class="shot"><figure><img src="images/25-measure.png"><figcaption>Trình soạn Measure.</figcaption></figure></div>
+  </div>
+
+  <div class="frow rev">
+    <div class="txt">
+      <h3>Chất lượng dữ liệu (6 chiều)</h3>
+      <p>Giám sát theo Completeness/Validity/Uniqueness/Consistency/Timeliness/Accuracy với 13 loại rule, <b>gợi ý bằng AI</b>, xem trước PASS/FAIL, chạy theo lịch.</p>
+    </div>
+    <div class="shot"><figure><img src="images/2a-qualityrule.png"><figcaption>Trình tạo rule chất lượng + AI suggest.</figcaption></figure></div>
+  </div>
+
+</div></section>
+
+<section class="sec soft"><div class="container center">
+  <span class="eyebrow">Kết hợp với</span>
+  <h2 style="font-size:26px;margin:6px 0 16px">Dùng Dataset ở đâu?</h2>
+  <div class="xlinks" style="justify-content:center">
+    <a href="explore.html">📈 Dựng biểu đồ →</a>
+    <a href="workboards.html">🧩 Làm mini-app →</a>
+    <a href="govern.html">🏛️ Quản trị chỉ số →</a>
+    <a href="observability.html">📡 Giám sát dữ liệu →</a>
+  </div>
+</div></section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

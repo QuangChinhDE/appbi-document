@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workboard — Mini-app vận hành — AppBI</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<section class="mhero"><div class="container">
+  <a class="bk" href="index.html">← Tổng quan</a>
+  <div style="margin-top:8px"><span class="ic">🧩</span></div>
+  <h1>Workboard — Mini-app vận hành</h1>
+  <p>Biến Dataset thành ứng dụng thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn (Form / Table / Document / Dashboard), phân quyền theo người dùng và phát hành qua cổng đăng nhập PIN.</p>
+</div></section>
+
+<section class="sec"><div class="container">
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Builder trực quan, nhiều loại màn</h3>
+      <p>Canvas quản lý Workspace + màn hình; 4 loại màn: <b>Form</b> (nhập liệu), <b>Table</b> (danh sách/sửa), <b>Document</b> (in A4), <b>Dashboard</b> (nhúng báo cáo).</p>
+    </div>
+    <div class="shot"><figure><img src="images/52-builder.png"><figcaption>Builder — nhiều màn qua các Workspace.</figcaption></figure></div>
+  </div>
+
+  <div class="frow rev">
+    <div class="txt">
+      <h3>Form mạnh: 10 widget · logic điều kiện · OCR</h3>
+      <p>Wizard đa trang, 10 loại widget, điều kiện show/required/valid, auto-number. <b>OCR</b>: chụp/tải ảnh phiếu → AI đọc &amp; điền sẵn các trường (Anthropic/OpenAI/Gemini, token giữ phía server).</p>
+    </div>
+    <div class="shot"><figure><img src="images/5o-ocr-config.png"><figcaption>Cấu hình OCR — nhà cung cấp/model/token.</figcaption></figure></div>
+  </div>
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Bản đồ &amp; Gallery cho hiện trường <span class="kbadge">MỚI</span></h3>
+      <p><b>Widget Bản đồ (Leaflet):</b> chọn vùng/lô trên bản đồ vệ tinh (polygon). <b>Chế độ Gallery:</b> bản ghi thành thẻ ảnh, gom nhóm theo ngày/lô + bộ lọc — hợp cho nhật ký/khảo sát hiện trường.</p>
+    </div>
+    <div class="shot"><figure><img src="images/5q-map-widget.png"><figcaption>Widget Bản đồ — chạm để chọn lô.</figcaption></figure></div>
+  </div>
+
+  <div class="frow rev">
+    <div class="txt">
+      <h3>Phân quyền hàng (RLS) &amp; Cổng PIN</h3>
+      <p>Mỗi người chỉ thấy dữ liệu của mình (theo <code>miniapp_user</code>); Owner/Admin xem tất cả. Phát hành qua <b>cổng công khai</b>, đăng nhập bằng PIN, bật/tắt hiển thị từng màn.</p>
+    </div>
+    <div class="shot"><figure><img src="images/5c-rls.png"><figcaption>RLS editor — lọc theo người dùng.</figcaption></figure></div>
+  </div>
+
+  <div class="frow">
+    <div class="txt">
+      <h3>Mobile &amp; PWA — cài lên điện thoại <span class="kbadge">ĐIỂM MẠNH</span></h3>
+      <p>Điều hướng tự thích ứng (bottom-nav/drawer), <b>cài lên màn hình chính</b> như app gốc, <b>chạy offline</b> (nhập phiếu offline → tự gửi khi có mạng). Truy cập qua <span class="path">https://&lt;tên-miền&gt;/m</span>.</p>
+    </div>
+    <div class="shot"><figure><img src="images/5l-mobile-nav.png"><figcaption>Mini-app trên điện thoại — bottom-nav.</figcaption></figure></div>
+  </div>
+
+</div></section>
+
+<section class="sec soft"><div class="container center">
+  <span class="eyebrow">Kết hợp với</span>
+  <h2 style="font-size:26px;margin:6px 0 16px">Liên quan</h2>
+  <div class="xlinks" style="justify-content:center">
+    <a href="datasets.html">🗄️ Dataset làm nền →</a>
+    <a href="dashboards.html">📊 Nhúng báo cáo vào app →</a>
+    <a href="showcase.html">🎁 Xem mini-app demo →</a>
+  </div>
+</div></section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
