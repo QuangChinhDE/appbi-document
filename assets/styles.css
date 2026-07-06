@@ -335,3 +335,68 @@ header.site .bar{ max-width:none; padding:0 30px; }
 /* section eyebrow gradient + heading polish */
 .sec h2{ letter-spacing:-.02em; }
 .mcard .ic{ transition:transform .15s; } .mcard:hover .ic{ transform:scale(1.08) rotate(-3deg); }
+
+/* ============================================================
+   DOCS v2 — Airbyte-style docs shell (module detail pages)
+   ============================================================ */
+/* breadcrumb inside the module hero band */
+.breadcrumb{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:13px; margin-bottom:14px; }
+.breadcrumb a{ color:#e0e7ff; font-weight:600; } .breadcrumb a:hover{ color:#fff; }
+.breadcrumb .sep{ color:#c7d2fe; opacity:.7; } .breadcrumb .cur{ color:#fff; font-weight:700; }
+
+/* 3-column docs grid (left nav tree · content · right rail) */
+.doc-wrap.docs3{ grid-template-columns:238px minmax(0,1fr) 208px; gap:40px; }
+@media (max-width:1200px){ .doc-wrap.docs3{ grid-template-columns:220px minmax(0,1fr); } .docaside{ display:none; } }
+@media (max-width:960px){ .doc-wrap.docs3{ grid-template-columns:1fr; gap:6px; } .docnav{ display:none; } }
+
+/* left nav tree */
+.docnav{ position:sticky; top:84px; align-self:start; max-height:calc(100vh - 100px); overflow-y:auto; padding-right:6px; }
+.docnav .nvhead{ font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); font-weight:800; margin:0 0 10px; }
+.docnav .nvlink{ display:block; color:#5b6884; font-size:13.5px; font-weight:600; padding:6px 10px; border-radius:8px; }
+.docnav .nvlink:hover{ background:var(--soft); color:var(--ink); text-decoration:none; }
+.docnav .nvgroup{ margin:8px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:8px 0; }
+.docnav .nv .top{ display:flex; align-items:center; gap:8px; color:#41506e; font-size:13.5px; font-weight:600; padding:6px 10px; border-radius:8px; }
+.docnav .nv .top .di{ font-size:15px; } .docnav .nv .top em{ font-style:normal; font-size:9.5px; font-weight:800; background:#16a34a; color:#fff; padding:1px 6px; border-radius:999px; }
+.docnav .nv .top:hover{ background:var(--soft); color:var(--ink); text-decoration:none; }
+.docnav .nv.on > .top{ color:var(--brand-d); background:var(--chip); font-weight:800; }
+.docnav .kids{ display:flex; flex-direction:column; margin:2px 0 6px 16px; border-left:2px solid var(--line); }
+.docnav .kids a{ color:#5b6884; font-size:12.8px; padding:5px 12px; display:flex; gap:7px; align-items:baseline; }
+.docnav .kids a i{ font-style:normal; font-size:10px; font-weight:800; color:#94a3b8; }
+.docnav .kids a:hover{ color:var(--ink); text-decoration:none; }
+.docnav .kids a.active{ color:var(--brand-d); font-weight:700; box-shadow:inset 2px 0 0 var(--brand); background:var(--chip); border-radius:0 6px 6px 0; }
+
+/* right rail */
+.docaside{ position:sticky; top:84px; align-self:start; }
+.docaside .onthis .ttl{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:10px; }
+.docaside .onthis .list{ display:flex; flex-direction:column; border-left:2px solid var(--line); }
+.docaside .onthis a{ color:#6b7793; font-size:12.6px; padding:5px 12px; line-height:1.35; }
+.docaside .onthis a:hover{ color:var(--ink); text-decoration:none; }
+.docaside .onthis a.active{ color:var(--brand-d); font-weight:700; box-shadow:inset 2px 0 0 var(--brand); }
+.docaside .helpful{ margin-top:22px; padding-top:18px; border-top:1px solid var(--line); }
+.docaside .helpful .q{ font-size:13px; font-weight:700; color:var(--ink); margin-bottom:10px; }
+.docaside .helpful .btns{ display:flex; gap:8px; }
+.docaside .helpful button{ flex:1; background:#fff; border:1px solid var(--line); border-radius:9px; padding:7px 8px; font-size:12.5px; font-weight:600; cursor:pointer; color:#41506e; }
+.docaside .helpful button:hover{ border-color:#c7d2fe; background:var(--chip); color:var(--brand-d); }
+.docaside .helpful .thx{ font-size:12.5px; color:var(--teal); font-weight:600; }
+
+/* content: lead + feature cards */
+.doclead{ font-size:16px; color:#48546f; margin:2px 0 16px; }
+.featcards{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:0 0 8px; }
+@media (max-width:620px){ .featcards{ grid-template-columns:1fr; } }
+.fcard{ display:flex; flex-direction:column; gap:6px; background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:16px 16px 14px; box-shadow:var(--shadow); transition:transform .14s, box-shadow .14s, border-color .14s; }
+.fcard:hover{ transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:#c7d2fe; text-decoration:none; }
+.fcard .fic{ width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#eef2ff,#e0f2f1);display:flex;align-items:center;justify-content:center;font-size:17px; }
+.fcard b{ color:var(--ink); font-size:15px; line-height:1.3; }
+.fcard .fnum{ font-size:11px; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--brand),var(--teal)); padding:2px 7px; border-radius:6px; }
+.fcard p{ color:var(--muted); font-size:12.8px; margin:0; }
+.fcard .go{ color:var(--brand); font-weight:700; font-size:12.8px; margin-top:auto; }
+
+/* prev / next pager */
+.pager{ display:flex; gap:14px; margin:30px 0 8px; }
+.pager .pg{ flex:1; display:flex; flex-direction:column; gap:4px; background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:14px 18px; box-shadow:var(--shadow); transition:transform .12s, border-color .12s; }
+.pager .pg:hover{ transform:translateY(-2px); border-color:#c7d2fe; text-decoration:none; }
+.pager .pg span{ font-size:12px; color:var(--muted); font-weight:600; } .pager .pg b{ color:var(--brand-d); font-size:15px; }
+.pager .pg.next{ text-align:right; }
+@media (max-width:620px){ .pager{ flex-direction:column; } }

@@ -49,29 +49,101 @@
   window.addEventListener('scroll', function(){ tt.style.display = window.scrollY>600 ? 'flex':'none'; });
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 
-  /* ---------- sticky TOC + scrollspy (module pages) ---------- */
-  var main=document.querySelector('.doc-main'), tocList=document.getElementById('toc');
-  if(main && tocList){
+  /* ---------- breadcrumb (any page with an .mhero band) ---------- */
+  var curMod=null, curIdx=-1;
+  MODULES.forEach(function(m,i){ if(m.id===page){ curMod=m; curIdx=i; } });
+  var mheroC=document.querySelector('.mhero .container');
+  if(mheroC){
+    var crumbLast = curMod ? curMod.n :
+      (page==='showcase' ? 'Sản phẩm đầu cuối' : page==='changelog' ? 'Cập nhật & Lộ trình' : (document.title.split('—')[0]||'').trim());
+    var midCrumb = curMod ? '<a href="index.html#modules">Sản phẩm</a><span class="sep">›</span>' : '';
+    mheroC.insertAdjacentHTML('afterbegin',
+      '<nav class="breadcrumb"><a href="index.html">🏠 Trang chủ</a><span class="sep">›</span>'+midCrumb+
+      '<span class="cur">'+crumbLast+'</span></nav>');
+    var bk=mheroC.querySelector('.bk'); if(bk) bk.style.display='none';
+  }
+
+  /* ---------- DOCS SHELL (module detail pages): left nav tree · feature cards · right "on this page" + helpful · prev/next ---------- */
+  var main=document.querySelector('.doc-main');
+  var wrap=document.querySelector('.doc-wrap');
+  if(main && wrap){
     var secs=[].slice.call(main.querySelectorAll('section.doc[id]'));
-    var links={};
-    tocList.innerHTML = secs.map(function(s){
-      var h=s.querySelector('h3.feat'); if(!h) return '';
-      var idEl=h.querySelector('.feat-id'); var idt=idEl?idEl.textContent.trim():'';
-      var rest=h.textContent.replace(/\s+/g,' ').trim();
+    var secMeta=secs.map(function(s){
+      var h=s.querySelector('h3.feat');
+      var idEl=h?h.querySelector('.feat-id'):null; var idt=idEl?idEl.textContent.trim():'';
+      var rest=h?h.textContent.replace(/\s+/g,' ').trim():s.id;
       if(idt && rest.indexOf(idt)===0) rest=rest.slice(idt.length).trim();
       rest=rest.replace(/(ĐIỂM MẠNH|MỚI)/g,'').trim();
-      var label=(idt?idt+' ':'')+rest;
-      return '<a href="#'+s.id+'" data-t="'+s.id+'">'+label+'</a>';
-    }).join('');
-    [].slice.call(tocList.querySelectorAll('a')).forEach(function(a){ links[a.getAttribute('data-t')]=a; });
-    tocList.addEventListener('click', function(e){ if(window.innerWidth<=920){} });
-    var io=new IntersectionObserver(function(ents){
-      ents.forEach(function(en){ if(en.isIntersecting){
-        Object.keys(links).forEach(function(k){ links[k].classList.remove('active'); });
-        var a=links[en.target.id]; if(a) a.classList.add('active');
-      }});
-    },{ rootMargin:'-80px 0px -72% 0px', threshold:0 });
-    secs.forEach(function(s){ io.observe(s); });
+      var pEl=s.querySelector('p'); var desc=pEl?pEl.textContent.replace(/\s+/g,' ').replace(/^Là gì:\s*/i,'').trim():'';
+      if(desc.length>96) desc=desc.slice(0,95).trim()+'…';
+      return {id:s.id, idt:idt, title:rest, desc:desc};
+    });
+
+    /* left: whole-product nav tree (current module expanded to its sections) */
+    var left=wrap.querySelector('aside.toc') || document.createElement('aside');
+    if(!left.parentNode) wrap.insertBefore(left, main);
+    left.className='docnav';
+    left.innerHTML =
+      '<div class="nvhead">Tài liệu sản phẩm</div>'+
+      '<a class="nvlink" href="index.html">Tổng quan</a>'+
+      '<div class="nvgroup">'+ MODULES.map(function(m){
+        var on=m.id===page;
+        var kids = on ? '<div class="kids">'+secMeta.map(function(s){
+          return '<a href="#'+s.id+'" data-t="'+s.id+'">'+(s.idt?'<i>'+s.idt+'</i>':'')+s.title+'</a>';
+        }).join('')+'</div>' : '';
+        return '<div class="nv'+(on?' on':'')+'"><a class="top" href="'+m.id+'.html"><span class="di">'+m.ic+'</span>'+
+          m.n+(m.badge?' <em>'+m.badge+'</em>':'')+'</a>'+kids+'</div>';
+      }).join('') +'</div>'+
+      '<a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a>'+
+      '<a class="nvlink" href="changelog.html">Cập nhật &amp; Lộ trình</a>';
+
+    /* feature cards + lead at top of content (Airbyte child-page style) */
+    if(secMeta.length){
+      main.insertAdjacentHTML('afterbegin',
+        '<p class="doclead">Trang này gồm <b>'+secMeta.length+' phần</b> — chọn nhanh một mục hoặc cuộn để đọc hướng dẫn từng bước.</p>'+
+        '<div class="featcards">'+secMeta.map(function(s){
+          return '<a class="fcard" href="#'+s.id+'"><span class="fic">'+(curMod?curMod.ic:'📄')+'</span>'+
+            '<b>'+(s.idt?'<span class="fnum">'+s.idt+'</span> ':'')+s.title+'</b>'+
+            (s.desc?'<p>'+s.desc+'</p>':'')+'<span class="go">Xem mục →</span></a>';
+        }).join('')+'</div>');
+    }
+
+    /* right rail: on this page + helpful */
+    var right=document.createElement('aside'); right.className='docaside';
+    right.innerHTML =
+      '<div class="onthis"><div class="ttl">Trên trang này</div><div class="list">'+
+        secMeta.map(function(s){ return '<a href="#'+s.id+'" data-t="'+s.id+'">'+s.title+'</a>'; }).join('')+
+      '</div></div>'+
+      '<div class="helpful"><div class="q">Trang này có hữu ích?</div>'+
+        '<div class="btns"><button data-h="y">👍 Có</button><button data-h="n">👎 Không</button></div>'+
+        '<div class="thx" hidden>Cảm ơn phản hồi của bạn! 🙌</div></div>';
+    wrap.appendChild(right);
+    wrap.classList.add('docs3');
+    [].slice.call(right.querySelectorAll('.helpful button')).forEach(function(b){
+      b.addEventListener('click', function(){ right.querySelector('.btns').hidden=true; right.querySelector('.thx').hidden=false; });
+    });
+
+    /* prev / next pager */
+    var prev = curIdx>0 ? MODULES[curIdx-1] : {id:'index', n:'Tổng quan'};
+    var next = (curIdx>=0 && curIdx<MODULES.length-1) ? MODULES[curIdx+1] : {id:'showcase', n:'Sản phẩm đầu cuối'};
+    main.insertAdjacentHTML('beforeend',
+      '<nav class="pager">'+
+        '<a class="pg prev" href="'+prev.id+'.html"><span>← Trước</span><b>'+prev.n+'</b></a>'+
+        '<a class="pg next" href="'+next.id+'.html"><span>Tiếp →</span><b>'+next.n+'</b></a>'+
+      '</nav>');
+
+    /* scrollspy — highlight matching links in BOTH left tree + right rail */
+    var spy=[].slice.call(document.querySelectorAll('[data-t]')); var byId={};
+    spy.forEach(function(a){ var k=a.getAttribute('data-t'); (byId[k]=byId[k]||[]).push(a); });
+    if(secs.length && 'IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(ents){
+        ents.forEach(function(en){ if(en.isIntersecting){
+          spy.forEach(function(a){ a.classList.remove('active'); });
+          (byId[en.target.id]||[]).forEach(function(a){ a.classList.add('active'); });
+        }});
+      },{ rootMargin:'-90px 0px -72% 0px', threshold:0 });
+      secs.forEach(function(s){ io.observe(s); });
+    }
   }
 
   /* ---------- changelog (rendered into #changelog on changelog.html) ---------- */
