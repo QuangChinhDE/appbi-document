@@ -5,40 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppBI — Nền tảng phân tích &amp; ứng dụng dữ liệu</title>
 <meta name="description" content="AppBI: kết nối dữ liệu, dựng mô hình & biểu đồ, báo cáo tương tác và mini-app vận hành — tất cả trong một.">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=2">
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <span class="tag">NỀN TẢNG PHÂN TÍCH &amp; ỨNG DỤNG DỮ LIỆU</span>
-    <h1>Từ dữ liệu thô đến quyết định — trong một nền tảng</h1>
-    <p class="sub">AppBI giúp bạn kết nối mọi nguồn dữ liệu, dựng mô hình &amp; chỉ số, trực quan hoá thành báo cáo tương tác, và đóng gói thành ứng dụng vận hành cho người dùng cuối.</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="#modules">Khám phá các module →</a>
-      <a class="btn btn-light" href="showcase.html">Xem sản phẩm đầu cuối</a>
+<!-- HERO v2 — full-bleed, two-column, animated mesh -->
+<section class="hero2">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="tag"><span class="dot"></span> NỀN TẢNG PHÂN TÍCH &amp; ỨNG DỤNG DỮ LIỆU</span>
+      <h1>Từ dữ liệu thô đến <span class="grad">quyết định</span> — trong một nền tảng</h1>
+      <p class="sub">AppBI kết nối mọi nguồn dữ liệu, dựng mô hình &amp; chỉ số, trực quan hoá thành báo cáo tương tác, và đóng gói thành ứng dụng vận hành cho người dùng cuối.</p>
+      <div class="cta">
+        <a class="btn btn-ghost" href="#modules">Khám phá các module →</a>
+        <a class="btn btn-light" href="showcase.html">Xem sản phẩm đầu cuối</a>
+      </div>
+      <div class="flow">
+        <span>Nguồn dữ liệu</span><span class="ar">→</span>
+        <span>Dataset &amp; Mô hình</span><span class="ar">→</span>
+        <span>Biểu đồ</span><span class="ar">→</span>
+        <span>Báo cáo</span><span class="ar">→</span>
+        <span>Mini-app</span>
+      </div>
     </div>
-    <div class="chips">
-      <span>Nguồn dữ liệu</span><span class="ar">→</span>
-      <span>Dataset &amp; Mô hình</span><span class="ar">→</span>
-      <span>Biểu đồ</span><span class="ar">→</span>
-      <span>Báo cáo</span><span class="ar">→</span>
-      <span>Mini-app</span>
+    <div class="hero-vis">
+      <div class="frame"><img src="images/42-hero.png" alt="Báo cáo AppBI" loading="eager"></div>
+      <div class="chip c1"><span class="ci">📈</span><div>GMV<br><b>15.8M</b></div></div>
+      <div class="chip c2"><span class="ci">✅</span><div>Đúng hạn<br><b>91.9%</b></div></div>
+      <div class="chip c3"><span class="ci">🤖</span><div>Trợ lý AI<br><b>đang phân tích…</b></div></div>
     </div>
-    <div class="hero-shot"><img src="images/42-hero.png" alt="Báo cáo AppBI"></div>
   </div>
 </section>
 
-<!-- STATS -->
-<section class="sec" style="padding:34px 0">
+<!-- CONNECTOR LOGO MARQUEE -->
+<section class="logos">
   <div class="container">
-    <div class="stats">
-      <div class="s"><b>7</b><span>Module</span></div>
-      <div class="s"><b>33</b><span>Loại biểu đồ</span></div>
-      <div class="s"><b>5+</b><span>Loại nguồn dữ liệu</span></div>
-      <div class="s"><b>Real-time</b><span>Truy vấn live, không chờ refresh</span></div>
-      <div class="s"><b>BYOK AI</b><span>Trợ lý AI trên báo cáo</span></div>
+    <div class="lab">Kết nối trực tiếp mọi nguồn dữ liệu của bạn</div>
+    <div class="marquee">
+      <div class="track" id="logotrack"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS (animated counters) -->
+<section class="sec" style="padding:44px 0">
+  <div class="container">
+    <div class="stat-row">
+      <div class="stat" data-reveal><b data-count="7">0</b><span>Module xuyên suốt hành trình dữ liệu</span></div>
+      <div class="stat d1" data-reveal><b data-count="33">0</b><span>Loại biểu đồ dựng bằng kéo–thả</span></div>
+      <div class="stat d2" data-reveal><b data-count="5" data-suffix="+">0</b><span>Loại nguồn (PostgreSQL, BigQuery, Sheets…)</span></div>
+      <div class="stat d3" data-reveal><b data-count="30" data-suffix="+">0</b><span>Widget dựng mini-app vận hành</span></div>
     </div>
   </div>
 </section>
@@ -46,17 +63,17 @@
 <!-- STRENGTHS -->
 <section class="sec soft" id="strengths">
   <div class="container">
-    <div class="sec-head center">
+    <div class="sec-head center" data-reveal>
       <span class="eyebrow">Điểm khác biệt</span>
       <h2>Vì sao chọn AppBI</h2>
       <p class="lead">Nền tảng do đội tự làm chủ — tối ưu cho triển khai nhanh và tuỳ biến sâu.</p>
     </div>
     <div class="str5">
-      <div class="it"><div class="n">1</div><div><h4>Dựng cực nhanh nhờ Claude + MCP</h4><p>Yêu cầu bằng ngôn ngữ tự nhiên để AI tự dựng Nguồn → Dataset → Biểu đồ → Báo cáo → Mini-app — từ nhiều ngày xuống vài phút.</p></div></div>
-      <div class="it"><div class="n">2</div><div><h4>Tuỳ biến không giới hạn</h4><p>Sở hữu mã nguồn nên thêm loại biểu đồ / tính năng riêng theo từng khách hàng — không phụ thuộc bên thứ ba.</p></div></div>
-      <div class="it"><div class="n">3</div><div><h4>Phân quyền đa hình thức</h4><p>Mỗi người một link báo cáo riêng, có mật khẩu, không giới hạn; khoá/ẩn bộ lọc; RLS theo hàng cho mini-app.</p></div></div>
-      <div class="it"><div class="n">4</div><div><h4>AI phân tích ngay trên báo cáo</h4><p>Trợ lý tổng hợp số liệu từ chính báo cáo đang xem, trả lời kèm trích dẫn nguồn &amp; hướng dẫn cách đọc.</p></div></div>
-      <div class="it" style="grid-column:1/-1"><div class="n">5</div><div><h4>Dữ liệu real-time từ Data Warehouse</h4><p>Truy vấn trực tiếp lên nguồn mỗi lần xem — không sao chép, không lịch refresh; kèm cache thông minh để vẫn nhanh trên dữ liệu lớn.</p></div></div>
+      <div class="it" data-reveal><div class="n">1</div><div><h4>Dựng cực nhanh nhờ Claude + MCP</h4><p>Yêu cầu bằng ngôn ngữ tự nhiên để AI tự dựng Nguồn → Dataset → Biểu đồ → Báo cáo → Mini-app — từ nhiều ngày xuống vài phút.</p></div></div>
+      <div class="it d1" data-reveal><div class="n">2</div><div><h4>Tuỳ biến không giới hạn</h4><p>Sở hữu mã nguồn nên thêm loại biểu đồ / tính năng riêng theo từng khách hàng — không phụ thuộc bên thứ ba.</p></div></div>
+      <div class="it" data-reveal><div class="n">3</div><div><h4>Phân quyền đa hình thức</h4><p>Mỗi người một link báo cáo riêng, có mật khẩu, không giới hạn; khoá/ẩn bộ lọc; RLS theo hàng cho mini-app.</p></div></div>
+      <div class="it d1" data-reveal><div class="n">4</div><div><h4>AI phân tích ngay trên báo cáo</h4><p>Trợ lý tổng hợp số liệu từ chính báo cáo đang xem, trả lời kèm trích dẫn nguồn &amp; hướng dẫn cách đọc.</p></div></div>
+      <div class="it" data-reveal style="grid-column:1/-1"><div class="n">5</div><div><h4>Dữ liệu real-time từ Data Warehouse</h4><p>Truy vấn trực tiếp lên nguồn mỗi lần xem — không sao chép, không lịch refresh; kèm cache thông minh để vẫn nhanh trên dữ liệu lớn.</p></div></div>
     </div>
   </div>
 </section>
@@ -64,7 +81,7 @@
 <!-- MODULES -->
 <section class="sec" id="modules">
   <div class="container">
-    <div class="sec-head center">
+    <div class="sec-head center" data-reveal>
       <span class="eyebrow">Các module</span>
       <h2>Hệ thống theo đúng hành trình dữ liệu</h2>
       <p class="lead">Bấm vào một module để xem các tính năng quan trọng và cách chúng liên kết với nhau.</p>
@@ -76,39 +93,85 @@
 <!-- END PRODUCTS -->
 <section class="sec soft">
   <div class="container">
-    <div class="sec-head center">
+    <div class="sec-head center" data-reveal>
       <span class="eyebrow">Sản phẩm đầu cuối</span>
       <h2>Bạn tạo ra được gì từ AppBI?</h2>
       <p class="lead">Những "đầu ra" người dùng nhận được — xem bộ sưu tập demo đầy đủ.</p>
     </div>
     <div class="mgrid">
-      <a class="mcard" href="showcase.html"><div class="ic">📊</div><h3>Báo cáo tương tác</h3><p>Dashboard nhiều trang, bộ lọc, cross-highlight, chia sẻ công khai.</p><span class="go">Xem demo →</span></a>
-      <a class="mcard" href="showcase.html"><div class="ic">🧩</div><h3>Mini-app vận hành</h3><p>Cổng nhập liệu Form/Table/Doc, phân quyền theo người, chạy được trên điện thoại.</p><span class="go">Xem demo →</span></a>
-      <a class="mcard" href="showcase.html"><div class="ic">🤖</div><h3>Trợ lý AI &amp; link chia sẻ</h3><p>Hỏi đáp trên báo cáo, link công khai/nhúng, xuất PDF.</p><span class="go">Xem demo →</span></a>
+      <a class="mcard" href="showcase.html" data-reveal><div class="ic">📊</div><h3>Báo cáo tương tác</h3><p>Dashboard nhiều trang, bộ lọc, cross-highlight, chia sẻ công khai.</p><span class="go">Xem demo →</span></a>
+      <a class="mcard d1" href="showcase.html" data-reveal><div class="ic">🧩</div><h3>Mini-app vận hành</h3><p>Cổng nhập liệu Form/Table/Doc, phân quyền theo người, chạy được trên điện thoại.</p><span class="go">Xem demo →</span></a>
+      <a class="mcard d2" href="showcase.html" data-reveal><div class="ic">🤖</div><h3>Trợ lý AI &amp; link chia sẻ</h3><p>Hỏi đáp trên báo cáo, link công khai/nhúng, xuất PDF.</p><span class="go">Xem demo →</span></a>
     </div>
     <div class="center" style="margin-top:26px"><a class="btn btn-primary" href="showcase.html">Mở bộ sưu tập demo →</a></div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA band -->
 <section class="sec">
-  <div class="container center">
-    <h2>Sản phẩm đang hoàn thiện liên tục</h2>
-    <p class="lead center">Xem các mốc nâng cấp lớn/nhỏ gần đây và ai đang làm gì.</p>
-    <div style="margin-top:18px"><button class="btn btn-ghost" data-clog>📜 Nhật ký cập nhật &amp; Lộ trình</button></div>
+  <div class="container">
+    <div class="cta-band" data-reveal>
+      <h2>Sản phẩm đang hoàn thiện liên tục</h2>
+      <p>Xem các mốc nâng cấp lớn/nhỏ gần đây, ai đang làm gì, và lộ trình sắp tới.</p>
+      <div style="margin-top:22px"><a class="btn btn-ghost" href="changelog.html">📜 Nhật ký cập nhật &amp; Lộ trình →</a></div>
+    </div>
   </div>
 </section>
 
 <script src="assets/site.js"></script>
 <script>
-  /* render module grid from single-source APPBI_MODULES */
-  (function(){
-    var g=document.getElementById('mgrid'); if(!g||!window.APPBI_MODULES) return;
-    g.innerHTML = window.APPBI_MODULES.map(function(m){
-      return '<a class="mcard" href="'+m.id+'.html">'+(m.badge?'<span class="badge">'+m.badge+'</span>':'')+
+(function(){
+  /* ---- module grid from single-source APPBI_MODULES ---- */
+  var g=document.getElementById('mgrid');
+  if(g && window.APPBI_MODULES){
+    g.innerHTML = window.APPBI_MODULES.map(function(m,i){
+      return '<a class="mcard'+(i%3?' d'+(i%3):'')+'" data-reveal href="'+m.id+'.html">'+(m.badge?'<span class="badge">'+m.badge+'</span>':'')+
         '<div class="ic">'+m.ic+'</div><h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">Tìm hiểu →</span></a>';
     }).join('');
-  })();
+  }
+
+  /* ---- connector logo marquee (duplicated track for seamless loop) ---- */
+  var track=document.getElementById('logotrack');
+  if(track){
+    var logos=[
+      ['PostgreSQL','#336791','🐘'],['BigQuery','#4285f4','🔷'],['Google Sheets','#0f9d58','📗'],
+      ['Excel','#217346','📊'],['MySQL','#00758f','🐬'],['Airbyte','#615eff','🔄'],
+      ['CSV / API','#ff6b4a','🧾'],['Data Warehouse','#0f766e','🏢']
+    ];
+    var one=logos.map(function(l){
+      return '<span class="lchip"><span class="lg" style="background:'+l[1]+'">'+l[2]+'</span>'+l[0]+'</span>';
+    }).join('');
+    track.innerHTML = one + one; /* two copies → -50% loop is seamless */
+  }
+
+  /* ---- scroll reveal ---- */
+  var items=[].slice.call(document.querySelectorAll('[data-reveal]'));
+  if('IntersectionObserver' in window && items.length){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{ rootMargin:'0px 0px -10% 0px', threshold:0.08 });
+    items.forEach(function(el){ io.observe(el); });
+    /* failsafe: never leave content invisible if the observer never fires */
+    setTimeout(function(){ items.forEach(function(el){ el.classList.add('in'); }); }, 2600);
+  } else { items.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* ---- animated count-up ---- */
+  function runCount(el){
+    var target=parseFloat(el.getAttribute('data-count'))||0, suf=el.getAttribute('data-suffix')||'';
+    var start=null, dur=1100;
+    function step(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1);
+      var val=Math.round((1-Math.pow(1-p,3))*target);
+      el.textContent=val+suf; if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var counters=[].slice.call(document.querySelectorAll('[data-count]'));
+  if('IntersectionObserver' in window && counters.length){
+    var cio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); } });
+    },{ threshold:0.5 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else { counters.forEach(runCount); }
+})();
 </script>
 </body>
 </html>

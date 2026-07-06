@@ -4,54 +4,81 @@
   <a class="bk" href="index.html">← Tổng quan</a>
   <div style="margin-top:8px"><span class="ic">🧩</span></div>
   <h1>Workboard — Mini-app vận hành</h1>
-  <p>Biến Dataset thành ứng dụng thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn (Form / Table / Document / Dashboard), phân quyền theo người dùng và phát hành qua cổng đăng nhập PIN.</p>
+  <p>Biến Dataset thành ứng dụng thực thụ: 1 Workboard = 1 mini-app gồm nhiều Workspace, mỗi Workspace có nhiều màn (Form / Table / Document / Dashboard), <b>giao diện tuỳ biến toàn diện</b> (màu/nền/font/dark-mode), <b>30+ loại trường nhập</b>, <b>ô bảng sửa đúng kiểu</b>, phân quyền theo người dùng và phát hành qua cổng đăng nhập PIN. Không cần code — dựng bằng builder kéo-thả (hoặc để AI dựng qua MCP).</p>
 </div></section>
 <div class="doc-wrap container">
   <aside class="toc"><div class="ttl">Trong trang này</div><div class="list" id="toc"></div></aside>
   <main class="doc-main">
 
+    <div class="callout">
+      <b>Ví dụ xuyên suốt — “LogiFlow — Vận hành”:</b> toàn bộ ảnh minh hoạ trong trang này chụp từ một mini-app logistics hoàn chỉnh dựng sẵn: điều phối đơn, phân công tài xế/xe, tài xế cập nhật giao hàng tại hiện trường (chụp ảnh POD, ký nhận, quét mã, GPS), danh mục khách/tài xế/xe, chi phí, và phiếu giao hàng in được — <b>10 màn / 4 nhóm</b>, 3 vai trò (Quản lý · Điều phối · Tài xế). Một mini-app kiểu này thay được cả cụm công cụ rời rạc (Excel + Zalo + giấy tờ) của một công ty vận tải nhỏ.
+    </div>
+    <figure><img src="images/wb-logi-dispatch.png"><figcaption><span class="exlabel">VÍ DỤ</span>LogiFlow — Bảng điều phối: KPI, cột tra cứu (khách/tài xế), ô sửa đúng kiểu (trạng thái/ưu tiên/thanh trượt/tiền tệ), tô màu cảnh báo (Khẩn/Hoàn thành/Huỷ), điều hướng nhóm bên trái.</figcaption></figure>
+
     <section class="doc" id="wb-builder">
       <h3 class="feat"><span class="feat-id">5.1</span>Builder &amp; cấu trúc ứng dụng</h3>
-      <p><b>Là gì:</b> trình dựng dạng canvas — các tab <b>Workspace</b>, danh sách màn hình, dataset gắn kết. Một mini-app có thể gồm nhiều màn thuộc 4 loại: Form/Table/Document/Dashboard.</p>
+      <p><b>Là gì:</b> trình dựng dạng canvas — danh sách màn hình gom theo <b>nhóm/Workspace</b>, dataset gắn kết, và <b>khung xem trước trực tiếp (Live preview)</b> ngay bên phải. Một mini-app gồm nhiều màn thuộc 4 loại: <b>Form / Table / Document / Dashboard</b>.</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
         <li>Vào <span class="path">Workboards → New workboard</span> (chọn Dataset nguồn).</li>
-        <li>Trong Builder, tạo <b>Workspace</b> rồi thêm màn hình bằng palette <b>+ Form / + Table / + Document / + Dashboard</b>.</li>
-        <li>Kéo để sắp xếp thứ tự; bấm vào một màn để mở trình sửa chi tiết.</li>
+        <li>Trong Builder, thêm màn hình bằng palette <b>+ Form / + Table / + Document / + Dashboard</b>; gom màn thành <b>nhóm</b> (vd “Điều hành”, “Tài xế”, “Danh mục”) — nhóm chính là mục điều hướng bên trái.</li>
+        <li>Kéo để sắp xếp; bấm một màn để mở trình sửa chi tiết (3 tab: <b>Content · Permissions · Settings</b>).</li>
+        <li>Dùng <b>Live preview</b> để xem app thật ngay khi sửa — có thể <b>giả lập vai trò</b> (Quản lý/Điều phối/Tài xế) và <b>đổi thiết bị</b> (điện thoại/tablet/desktop) để kiểm tra RLS &amp; bố cục.</li>
       </ol></div>
       <div class="grid2">
         <figure><img src="images/51-list.png"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Workboard.</figcaption></figure>
-        <figure><img src="images/52-builder.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — nhiều màn hình qua các Workspace.</figcaption></figure>
+        <figure><img src="images/wb-form-editor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Builder — trình sửa màn + <b>Live preview</b> bên phải (đổi vai trò &amp; thiết bị để xem thử ngay).</figcaption></figure>
       </div>
     </section>
 
     <section class="doc" id="wb-settings">
-      <h3 class="feat"><span class="feat-id">5.2</span>Cài đặt ứng dụng (branding, nav, auto-number)</h3>
-      <p><b>Là gì:</b> đổi dataset, đặt tên app, màu chủ đạo, logo, lời chào; cấu hình điều hướng (sidebar/bottom-nav); định nghĩa <b>số tự tăng</b> theo mẫu.</p>
+      <h3 class="feat"><span class="feat-id">5.2</span>Giao diện &amp; Cài đặt — Design system tuỳ biến <span class="new-badge">MỚI</span></h3>
+      <p><b>Là gì:</b> tuỳ biến <b>toàn bộ diện mạo</b> mini-app trong một chỗ (nút <b>App settings</b>) — không chỉ tên/màu/logo như trước, mà cả <b>chế độ Sáng/Tối</b>, <b>ảnh/nền gradient</b>, <b>phông chữ</b>, <b>kiểu thẻ &amp; header</b>, và <b>giao diện riêng cho trang đăng nhập</b>. Mọi thứ áp dụng ngay cho cả app-shell lẫn cổng đăng nhập, tự đồng bộ desktop &amp; mobile.</p>
+      <p><b>Các nhóm thiết lập:</b></p>
+      <ul>
+        <li><b>Thương hiệu:</b> Tên app, Logo URL, Lời chào (login), Tagline login.</li>
+        <li><b>Màu &amp; chế độ:</b> <b>Màu chính</b> + <b>Màu nhấn (accent)</b> chọn bằng <b>bảng màu</b> (không cần gõ hex); <b>Chế độ</b> = Sáng / Tối / Tự động; <b>Phông chữ</b> (System / Inter / Be Vietnam Pro / Roboto / Serif / Mono).</li>
+        <li><b>Nền app:</b> <b>Màu đơn</b>, <b>Gradient</b> (preset dựng sẵn, có xem trước), hoặc <b>Ảnh nền</b> (tải lên — ảnh được nén &amp; nhúng an toàn; không phụ thuộc link ngoài).</li>
+        <li><b>Thẻ &amp; header:</b> Bo góc thẻ, Đổ bóng, Kiểu header (Viền dưới / Nền màu / Tối giản).</li>
+        <li><b>Nền trang login riêng</b> + <b>Auto-number</b> (mẫu <code>DH-{YYYY}{MM}{DD}-{N:3}</code> + chu kỳ reset) + <b>Điều hướng</b> (sidebar/top-tabs · bottom-nav/drawer).</li>
+      </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
         <li>Trong Builder, bấm <b>App settings</b>.</li>
-        <li>Thiết lập <b>App name, Primary color, Logo URL, Welcome text</b>.</li>
-        <li>Thêm <b>auto-number</b>: chọn cột + mẫu (vd <code>SH-{YYYY}{MM}{DD}-{N:3}</code>) + chu kỳ reset.</li>
-        <li>Chọn kiểu điều hướng cho mobile/desktop.</li>
+        <li>Nhóm <b>Màu &amp; chế độ</b>: bấm ô màu mở <b>bảng chọn màu</b>; chọn <b>Chế độ = Tối</b> nếu muốn dark-mode; chọn <b>Phông chữ</b>.</li>
+        <li>Nhóm <b>Nền app</b>: chọn <b>Gradient</b> rồi chọn preset (xem thanh preview), hoặc <b>Ảnh nền</b> để tải ảnh.</li>
+        <li>Chỉnh <b>Bo góc / Đổ bóng / Kiểu header</b>, đặt <b>Tagline login</b>. Mọi thay đổi hiện ngay ở <b>Live preview</b>.</li>
       </ol></div>
-      <figure><img src="images/53-appsettings.png"><figcaption><span class="exlabel">VÍ DỤ</span>App Settings — branding, auto-number, navigation.</figcaption></figure>
+      <figure><img src="images/wb-theme-editor.png"><figcaption><span class="exlabel">VÍ DỤ</span>App settings — design system đầy đủ: bảng màu chính/accent, chế độ Sáng/Tối, phông chữ, nền gradient (có preview), bo góc/đổ bóng/kiểu header, nền login riêng, auto-number.</figcaption></figure>
+      <figure><img src="images/wb-theme-dark.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ <b>Tối</b> + nền gradient áp cho toàn app-shell (nav, thẻ, ô nhập, chữ đều đổi màu theo theme).</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> bộ nhận diện đẹp = <b>Màu chính</b> theo thương hiệu, <b>nền</b> gradient nhạt cùng tông, phông <b>Inter/Be Vietnam Pro</b>, thẻ bo góc <b>Lớn</b> + đổ bóng <b>Nhẹ</b>; Tagline login ngắn gọn nêu đúng mục đích app.</div>
     </section>
 
     <section class="doc" id="wb-form">
-      <h3 class="feat"><span class="feat-id">5.3</span>Màn hình Form (nhập liệu)</h3>
-      <p><b>Là gì:</b> biểu mẫu nhiều trang (wizard có thanh tiến độ), chia section, <b>10 loại widget</b> (text, số, chọn, lookup, ngày, checkbox, file, ảnh/chụp ảnh…), logic điều kiện (show_if / required_if / valid_if), giá trị mặc định và <b>OCR chụp ảnh tự điền</b>.</p>
+      <h3 class="feat"><span class="feat-id">5.3</span>Màn hình Form (nhập liệu) — 30+ loại trường <span class="new-badge">MỚI</span></h3>
+      <p><b>Là gì:</b> biểu mẫu <b>một hoặc nhiều trang</b> (wizard có thanh tiến độ), chia section, kho <b>hơn 30 loại widget</b> (từ text/số cơ bản đến sao đánh giá, thanh trượt, tiền tệ, chữ ký, quét mã, GPS, bản đồ, video…), <b>logic điều kiện</b> (show_if / required_if / readonly_if / valid_if) có thư viện hàm, giá trị mặc định, và <b>OCR chụp ảnh tự điền</b>.</p>
+      <p><b>Kho widget đầy đủ</b> (chọn ở ô <b>Widget</b> khi thêm trường):</p>
+      <ul>
+        <li><b>Cơ bản:</b> <code>text</code> · <code>textarea</code> · <code>number</code> (có đơn vị) · <code>select</code> · <code>lookup</code> (chọn từ bảng khác, đa hop) · <code>date</code> · <code>datetime</code> · <code>checkbox</code></li>
+        <li><b>Văn bản có kiểu <span class="new-badge">MỚI</span>:</b> <code>email</code> · <code>phone</code> · <code>url</code> (validate + bàn phím phù hợp + bấm gọi/mở link) · <code>rich_text</code> (soạn Markdown: đậm/nghiêng/danh sách/link + xem trước)</li>
+        <li><b>Chọn &amp; đánh giá <span class="new-badge">MỚI</span>:</b> <code>enum_list</code> (chọn nhiều — chip, giới hạn số) · <code>rating</code> (sao) · <code>slider</code> (thanh trượt min/max/bước + đơn vị)</li>
+        <li><b>Số &amp; thời gian <span class="new-badge">MỚI</span>:</b> <code>currency</code> (tiền tệ + ký hiệu) · <code>percent</code> (%) · <code>time</code> (giờ) · <code>duration</code> (khoảng thời gian giờ/phút) · <code>color</code> (bảng chọn màu)</li>
+        <li><b>Hiện trường / media:</b> <code>image</code> · <code>images</code> (nhiều ảnh, giới hạn, ép chụp) · <code>file</code> · <code>signature</code> (chữ ký tay) · <code>barcode</code> (quét QR/mã vạch) · <code>audio</code> (ghi âm) · <code>video</code> (clip ngắn) · <code>geopoint</code> (bắt GPS) · <code>map</code> (chọn vùng/lô trên bản đồ vệ tinh)</li>
+        <li><b>Nghiệp vụ:</b> <code>computed</code> (tự tính theo công thức, lưu khi submit) · <code>status</code> (trạng thái/duyệt có màu, giới hạn vai trò đổi)</li>
+      </ul>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Mở màn Form, ở tab <b>Content</b> chọn <b>bảng đích</b> để ghi dữ liệu.</li>
-        <li>Bấm <b>+ Add field</b>, đặt <b>Label</b>, chọn <b>widget</b>, gắn <b>cột</b>.</li>
-        <li>Tuỳ chọn điều kiện: <b>show_if / required_if / valid_if</b> (vd bắt buộc SĐT khi kênh = “Điện thoại”).</li>
-        <li>Chia thành nhiều <b>page</b> để tạo wizard; đặt giá trị mặc định nếu cần.</li>
+        <li>Mở màn Form, ở tab <b>Content</b> chọn <b>Data source</b> (bảng đích).</li>
+        <li>Bấm <b>+ Add field</b>, đặt <b>Label</b>, chọn <b>Widget</b>, gắn <b>cột</b>. Widget giàu cấu hình (rating/slider/currency/enum_list…) hiện thêm ô riêng ở mục <b>“Cấu hình widget”</b> (số sao, min/max/bước, ký hiệu tiền, số lựa chọn tối đa…).</li>
+        <li>Tuỳ chọn điều kiện: <b>show_if / required_if / readonly_if / valid_if</b>.</li>
+        <li>Bật <b>Multi-step</b> (Form flow) để chia wizard; đặt giá trị mặc định nếu cần.</li>
       </ol></div>
+      <figure><img src="images/wb-rich-fields.png"><figcaption><span class="exlabel">VÍ DỤ</span>Một form gom nhiều widget mới: Email, Điện thoại, URL, <b>Sao</b>, <b>Thanh trượt</b>, <b>Tiền tệ</b>, %, <b>Giờ</b>, <b>Khoảng thời gian</b>, <b>Màu</b>, <b>Chọn nhiều (chip)</b>, <b>Markdown</b>.</figcaption></figure>
       <div class="grid2">
-        <figure><img src="images/55-form-wizard.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form wizard — nhiều trang + nhiều widget.</figcaption></figure>
-        <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác.</figcaption></figure>
+        <figure><img src="images/wb-logi-driver.png"><figcaption><span class="exlabel">VÍ DỤ</span>Form hiện trường (tài xế): chọn đơn (lookup), <b>trạng thái</b>, giờ, <b>quét mã</b>, <b>GPS</b>, <b>ảnh POD (ép chụp)</b>, <b>chữ ký</b>, ghi chú Markdown.</figcaption></figure>
+        <figure><img src="images/56-form-conditional.png"><figcaption><span class="exlabel">VÍ DỤ</span>Logic điều kiện theo giá trị trường khác (show_if / required_if / valid_if).</figcaption></figure>
       </div>
+      <div class="note"><b>Thư viện hàm cho điều kiện</b> (show_if / required_if / readonly_if / valid_if): ngoài so sánh &amp; <code>AND/OR/NOT</code>, hỗ trợ <code>CONCAT · UPPER · LOWER · TRIM · LEN · LEFT · RIGHT · CONTAINS · ISBLANK · MOD · POWER · YEAR · MONTH · DAY</code>. Tham chiếu trường khác bằng <code>[ten_cot]</code> hoặc <code>{{row.ten_cot}}</code>. Ví dụ: <code>valid_if = [ngay_giao] &gt;= [ngay_lay]</code>; <code>required_if = [kenh] == "Điện thoại"</code>.</div>
 
-      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Widget Bản đồ (chọn vùng/lô trên bản đồ) <span class="new-badge">MỚI</span></p>
-      <p>Ngoài các widget cơ bản, Form có <b>widget Bản đồ</b>: hiển thị các vùng/lô (polygon) trên <b>bản đồ vệ tinh</b>, người nhập <b>chạm vào một vùng để chọn</b> (vd chọn lô vườn, khu vực công trình). Hình học lấy từ một bảng dataset; giá trị chọn được lưu như một lựa chọn bình thường. Rất hợp cho mini-app hiện trường.</p>
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Widget Bản đồ (chọn vùng/lô trên bản đồ)</p>
+      <p>Form có <b>widget Bản đồ</b>: hiển thị các vùng/lô (polygon) trên <b>bản đồ vệ tinh</b>, người nhập <b>chạm vào một vùng để chọn</b>. Hình học lấy từ một bảng dataset; giá trị chọn lưu như một lựa chọn bình thường. Rất hợp cho mini-app hiện trường.</p>
       <figure><img src="images/5q-map-widget.png"><figcaption><span class="exlabel">VÍ DỤ</span>Widget Bản đồ trong Form — bản đồ vệ tinh + các lô (polygon), chạm để chọn.</figcaption></figure>
     </section>
 
@@ -91,21 +118,36 @@
     </section>
 
     <section class="doc" id="wb-table">
-      <h3 class="feat"><span class="feat-id">5.4</span>Màn hình Table (danh sách &amp; chỉnh sửa)</h3>
-      <p><b>Là gì:</b> cấu hình cột, nhóm cột, định dạng; bộ lọc (text/select/ngày/số); chỉnh sửa inline, thêm/xoá dòng, <b>dán hàng loạt</b>; <b>cột tính toán JS</b>, cột lookup (VLOOKUP đa hop), và dòng tổng (sum/avg/min/max/count).</p>
-      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+      <h3 class="feat"><span class="feat-id">5.4</span>Màn hình Table — bảng, ô sửa đúng kiểu, KPI, tổng hợp <span class="new-badge">MỚI</span></h3>
+      <p><b>Là gì:</b> màn dữ liệu mạnh nhất. Ngoài bảng cơ bản (cột hiển thị/sửa, lọc, thêm/xoá dòng, dán hàng loạt), giờ có: <b>3 chế độ hiển thị</b> (Bảng / Gallery / Lịch), <b>ô sửa đúng kiểu</b> (typed cells), <b>thẻ KPI</b> đầu bảng, <b>cột tổng hợp từ bảng con (roll-up)</b>, <b>tô màu có điều kiện</b>, cột <b>lookup</b> (VLOOKUP đa hop), cột <b>tính toán JS</b>, dòng tổng, nhóm cột, và <b>panel chi tiết</b> khi bấm dòng.</p>
+      <div class="howto"><h4>⚙ Cách làm (cơ bản)</h4><ol>
         <li>Mở màn Table, chọn <b>Data source</b> (bảng).</li>
-        <li>Trong <b>Visible columns</b>, chọn cột hiển thị; trong <b>Editable columns</b>, chọn cột cho phép sửa.</li>
-        <li>Bật <b>Add/Delete row</b>, cấu hình <b>Filters</b>, <b>Footer totals</b>, <b>Computed column (JS)</b> nếu cần.</li>
+        <li><b>Visible columns</b> = cột hiển thị; <b>Editable columns</b> = cột cho phép sửa inline.</li>
+        <li>Bật <b>Add/Delete row</b>, cấu hình <b>Filters</b> (text/select/ngày/số), <b>Footer totals</b>.</li>
+        <li>Chọn <b>Chế độ hiển thị</b> = Bảng / Gallery / Lịch ở cuối cột trái của trình sửa.</li>
       </ol></div>
-      <div class="grid2">
-        <figure><img src="images/54-tableeditor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Table editor — cột, editable, footer totals.</figcaption></figure>
-        <figure><img src="images/58-table-runtime.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — bảng có nhóm cột, filter, cột tính toán.</figcaption></figure>
-      </div>
+      <figure><img src="images/wb-table-editor.png"><figcaption><span class="exlabel">VÍ DỤ</span>Table editor — Visible/Editable columns, Row behaviour, Footer totals, <b>Chế độ hiển thị</b>, kèm Live preview. (Cuộn cột trái còn có Roll-up, Định dạng có điều kiện, Column presentation…)</figcaption></figure>
 
-      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">Chế độ Gallery — hiển thị dạng thẻ ảnh <span class="new-badge">MỚI</span></p>
-      <p>Màn Table có thêm <b>chế độ hiển thị Gallery</b>: thay vì bảng, mỗi bản ghi hiện thành <b>thẻ ảnh</b> (ảnh + tiêu đề + phụ đề), <b>gom nhóm</b> theo một cột (vd theo ngày/theo lô) và có bộ lọc. Rất hợp để xem nhanh ảnh chứng từ/hiện trường sau khi nhập bằng Form.</p>
-      <figure><img src="images/5r-gallery.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ Gallery — thẻ ảnh gom theo ngày, kèm bộ lọc ngày/lô.</figcaption></figure>
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">a) Ô sửa đúng kiểu (typed cells) <span class="new-badge">MỚI</span></p>
+      <p>Trước đây mọi ô sửa inline đều là text trơn. Nay mỗi cột sửa được có thể chọn <b>loại ô đúng nghĩa</b>: số, tiền tệ, %, ngày, giờ, checkbox, <b>select</b>, <b>chọn nhiều</b>, <b>sao (rating)</b>, <b>màu</b>, <b>thanh trượt</b> — cả ở lưới lẫn panel chi tiết. Đặt trong <b>Column presentation → Kiểu ô nhập</b> của từng cột (chỉ hiện với cột nằm trong Editable columns).</p>
+      <figure><img src="images/wb-typed-cells.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bảng với ô sửa đúng kiểu: sao đánh giá, thanh trượt, tiền tệ, %, giờ, ô màu — sửa ngay trong lưới, tự lưu.</figcaption></figure>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">b) Thẻ KPI · Roll-up · Tô màu có điều kiện <span class="new-badge">MỚI</span></p>
+      <ul>
+        <li><b>Thẻ KPI (stat tiles):</b> dải thẻ số đầu bảng, tự tổng hợp trên dữ liệu đang xem (đếm/tổng/TB/min/max) — vd “Tổng đơn”, “Tổng cước”, “TB tiến độ”.</li>
+        <li><b>Cột Roll-up:</b> gom &amp; tính từ <b>bảng con</b> lên từng dòng cha. Vd trên bảng Khách hàng: “Số đơn” = đếm đơn, “Tổng cước” = tổng cước của khách đó.</li>
+        <li><b>Tô màu có điều kiện (format rules):</b> tô nền dòng/ô khi biểu thức đúng (cùng cú pháp điều kiện của Form), có icon &amp; nhãn. Vd đơn “Khẩn” → vàng, “Hoàn thành” → xanh, “Huỷ” → đỏ.</li>
+        <li><b>Cột Lookup</b> (kéo giá trị từ bảng liên quan, VLOOKUP đa hop) &amp; <b>cột tính toán JS</b> (công thức JavaScript chạy sandbox, tính mỗi dòng — kiểm thử bằng test-js).</li>
+      </ul>
+      <figure><img src="images/wb-logi-customers.png"><figcaption><span class="exlabel">VÍ DỤ</span>Bảng Khách hàng: cột <b>roll-up</b> “Số đơn/Tổng cước” (+ dòng tổng), <b>tô vàng khách VIP</b>, ô <b>sao</b> &amp; <b>màu</b>, thẻ KPI “Số KH”.</figcaption></figure>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">c) Chế độ Gallery — thẻ ảnh</p>
+      <p><b>Chế độ Gallery</b>: mỗi bản ghi hiện thành <b>thẻ ảnh</b> (ảnh + tiêu đề + phụ đề), <b>gom nhóm</b> theo một cột (vd theo ngày/lô), có bộ lọc. Hợp để xem nhanh ảnh chứng từ/POD sau khi nhập bằng Form.</p>
+      <figure><img src="images/5r-gallery.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ Gallery — thẻ ảnh gom theo ngày, kèm bộ lọc.</figcaption></figure>
+
+      <p style="font-weight:700;color:var(--ink);font-size:15.5px;margin-top:16px">d) Chế độ Lịch (Calendar) <span class="new-badge">MỚI</span></p>
+      <p><b>Chế độ Lịch</b>: đặt bản ghi lên lưới tháng theo một cột ngày, chip <b>tô màu theo trạng thái</b> (có chú thích), điều hướng tháng &amp; nút “Hôm nay”. Cùng dữ liệu/RLS/bộ lọc/panel chi tiết như bảng.</p>
+      <figure><img src="images/wb-logi-calendar.png"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ Lịch — đơn hàng theo ngày lấy, chip màu theo trạng thái + chú thích.</figcaption></figure>
     </section>
 
     <section class="doc" id="wb-doc">
@@ -116,7 +158,10 @@
         <li>Bấm <b>+ Add block</b> để thêm header/text/data table/kv/footer/chữ ký.</li>
         <li>Với data table, chọn bảng &amp; cột hiển thị, bật dòng tổng nếu cần.</li>
       </ol></div>
-      <figure><img src="images/59-doc.png"><figcaption><span class="exlabel">VÍ DỤ</span>Document editor — page setup A4 + các block.</figcaption></figure>
+      <div class="grid2">
+        <figure><img src="images/59-doc.png"><figcaption><span class="exlabel">VÍ DỤ</span>Document editor — page setup A4 + các block.</figcaption></figure>
+        <figure><img src="images/wb-logi-doc.png"><figcaption><span class="exlabel">VÍ DỤ</span>Runtime — Phiếu giao hàng: header, key-value có biến <code>{{today}}</code>/<code>{{app_user.full_name}}</code>, bảng dữ liệu + dòng tổng, ô chữ ký, footer.</figcaption></figure>
+      </div>
     </section>
 
     <section class="doc" id="wb-dash">
@@ -142,6 +187,7 @@
         <li>Tích các quyền <b>Create / Update / Delete</b> phù hợp; vai trò Owner/Admin có thể bật <b>Unrestricted</b>.</li>
       </ol></div>
       <div class="note"><b>Lưu ý quan trọng:</b> nếu vai trò User không có rule nào, người dùng sẽ <b>không thấy dữ liệu</b> (mặc định an toàn). Hãy luôn cấu hình rule cho từng vai trò cần truy cập.</div>
+      <div class="tip"><b>Phân quyền theo màn (RBAC):</b> ngoài lọc <b>dòng</b> (RLS), mỗi màn còn có <b>“hiển thị cho vai trò nào”</b> — vd trong LogiFlow: nhóm <b>Điều hành/Danh mục/Tài chính</b> chỉ hiện với <b>Quản lý &amp; Điều phối</b>, còn <b>Tài xế</b> chỉ thấy màn <b>cập nhật giao hàng</b> &amp; <b>ảnh POD</b> (và chỉ dữ liệu của chính mình nhờ RLS). Kết hợp RLS (dòng) + RBAC (màn) để mỗi vai trò chỉ thấy đúng phần việc của họ.</div>
       <figure><img src="images/5c-rls.png"><figcaption><span class="exlabel">VÍ DỤ</span>RLS editor — lọc per-user qua miniapp_user.</figcaption></figure>
     </section>
 
@@ -244,6 +290,9 @@
       <p><b>4) Tối ưu cho cảm ứng &amp; camera.</b> Trường ảnh/file trên điện thoại mở thẳng <b>Camera / Thư viện / Tệp</b>; form xếp dọc dễ thao tác; bảng cuộn ngang gọn; bố cục chừa <b>vùng an toàn</b> (tai thỏ/thanh home iPhone). Ô PIN dùng bàn phím số.</p>
 
       <div class="tip"><b>Mẹo cấu hình:</b> kiểu điều hướng mobile (bottom-nav / drawer) và hiển thị từng màn đặt trong <a href="#wb-settings">App settings (5.2)</a>; muốn ẩn màn nào khỏi thanh điều hướng chỉ cần tắt “hiển thị trong nav”.</div>
+
+      <p><b>5) Thông báo đẩy (Web Push).</b> <span class="new-badge">MỚI</span> Người dùng bật nhận thông báo ngay trong app (nút <b>🔔 Thông báo</b> ở đầu app). Khi có bản ghi được cập nhật, hệ thống <b>đẩy thông báo về máy</b> — kể cả khi app đang đóng (qua Service Worker) — bấm vào mở thẳng màn liên quan. Hợp để báo tài xế có chuyến mới, báo điều phối khi trạng thái đơn đổi.</p>
+      <div class="note"><b>Yêu cầu:</b> Web Push cần chạy trên <b>HTTPS</b> (tên miền thật) và người dùng <b>đồng ý cấp quyền</b> thông báo trên trình duyệt/điện thoại. Nút hiện “Đã bật / Bật thông báo” tuỳ máy đã đăng ký hay chưa.</div>
     </section>
     <section class="xrel"><div class="ttl">🔗 Kết hợp với các module khác</div><div class="xlinks"><a href="datasets.html">🗄️ Dataset →</a><a href="dashboards.html">📊 Nhúng báo cáo →</a><a href="showcase.html">🎁 Xem demo →</a></div></section>
   </main>
