@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 5 · Dashboard — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 5: dựng báo cáo Dashboard — thêm chart đã lưu, sắp layout (Grid/Canvas), slicer (7 kiểu), bộ lọc trang/toàn báo cáo, đa trang, cross-highlight — ví dụ trên dash67 (Olist).">
+<link rel="stylesheet" href="assets/styles.css?v=10"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">🧱</span></div>
+  <h1>Chương 5 · Dashboard</h1>
+  <p><b>Dashboard</b> là lớp bàn giao cuối: ghép các <b>chart đã lưu</b> ở <a href="guide-3-explore.html">Chương 3</a> thành một báo cáo nhiều trang, thêm <b>bộ lọc/slicer</b> để người xem tương tác, rồi <b>chia sẻ</b>. Ví dụ dùng báo cáo <b>Olist (dash67)</b> — 5 trang.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s5-screen">
+      <h3 class="feat"><span class="feat-id">5.1</span>Màn hình Dashboard &amp; thanh công cụ</h3>
+      <p><b>Là gì:</b> mỗi Dashboard gồm nhiều <b>trang</b>; mỗi trang chứa các <b>tile</b> (KPI, biểu đồ, slicer, widget). Thanh trên cùng gom các thao tác chính.</p>
+      <div class="howto"><h4>⚙ Các nút trên thanh công cụ</h4><ol>
+        <li><b>← Quay lại</b> + <b>tên báo cáo</b> (bút chì để đổi tên).</li>
+        <li><b>Chuyển trang</b> (ví dụ “Tổng quan điều hành · 5”) — chọn/đổi trang.</li>
+        <li><b>Làm mới dữ liệu</b> — chạy lại truy vấn cho toàn báo cáo.</li>
+        <li><b>Bộ lọc</b> — mở bảng bộ lọc (mục 5.5).</li>
+        <li><b>⋯ Thêm tuỳ chọn</b> — Giao diện, Link công khai, Canvas, Sắp xếp, Quản lý biểu đồ, Xuất PDF, Nhập HTML, Thêm widget…</li>
+        <li><b>Thêm biểu đồ</b> và <b>Thêm slicer</b> (ở dải bộ lọc).</li>
+      </ol></div>
+      <figure><img src="images/g5-overview.png" alt="Màn hình dashboard Olist"><figcaption><span class="exlabel">VÍ DỤ</span>dash67 “Olist E-Commerce” — dải slicer (Năm/Bang/Trạng thái), hàng KPI, biểu đồ GMV theo tháng &amp; Donut trạng thái.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s5-addchart">
+      <h3 class="feat"><span class="feat-id">5.2</span>Thêm biểu đồ đã lưu vào Dashboard</h3>
+      <p><b>Là gì:</b> cách chuẩn là <b>tái sử dụng chart đã lưu</b> (thay vì dựng lại). Bấm <span class="path">Thêm biểu đồ</span> để mở hộp chọn.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Chọn tab <b>Chọn có sẵn</b> (hoặc <b>Tạo mới</b> để dựng chart ngay tại đây).</li>
+        <li><b>Tìm biểu đồ đã lưu</b> theo tên, lọc theo <b>loại chart</b>/<b>quyền truy cập</b>; mục <b>Gợi ý cho dashboard này</b> ưu tiên chart cùng dataset.</li>
+        <li>Bấm vào một chart để <b>xem trước</b> (render đầy đủ với dữ liệu) ở bên phải.</li>
+        <li>Đặt <b>kích thước</b> ô lưới bằng <b>R</b> (hàng) × <b>C</b> (cột) — hoặc để “tự động theo loại chart”.</li>
+        <li>Bấm <b>+ Thêm biểu đồ</b>. Tile xuất hiện ở đầu trang, kéo/đổi kích thước sau.</li>
+      </ol></div>
+      <figure><img src="images/g5-addchart.png" alt="Hộp thêm biểu đồ vào dashboard"><figcaption><span class="exlabel">VÍ DỤ</span><b>Thêm biểu đồ vào Dashboard</b> — tìm trong 300+ chart đã lưu, xem trước (Grouped Bar) trước khi thêm, đặt R×C.</figcaption></figure>
+      <div class="tip"><b>Vì sao tái sử dụng:</b> sửa chart gốc ở Explore → mọi dashboard dùng nó cập nhật theo. Một nguồn sự thật cho visual.</div>
+    </section>
+
+    <section class="doc" id="s5-layout">
+      <h3 class="feat"><span class="feat-id">5.3</span>Sắp xếp layout — Grid, Canvas &amp; công cụ</h3>
+      <p><b>Là gì:</b> sắp đặt các tile cho dễ đọc. Có <b>2 chế độ bố cục</b> và vài công cụ trong menu <b>⋯</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li><b>Kéo-thả</b> tile để di chuyển; kéo mép để <b>đổi kích thước</b>.</li>
+        <li><b>Grid</b> (mặc định) — lưới hàng/cột gọn gàng. <b>Chuyển sang Canvas</b> (menu ⋯) — bố cục tự do, đặt tile ở bất kỳ đâu.</li>
+        <li><b>Sắp xếp gọn</b> (⋯) — tự dồn các tile cho ngăn nắp.</li>
+        <li><b>Quản lý biểu đồ</b> (⋯) — xem/ẩn/xoá nhanh các tile trên trang.</li>
+        <li><b>Thêm widget</b> (⋯) — chèn tiêu đề/ghi chú/ảnh… ngoài biểu đồ.</li>
+      </ol></div>
+      <figure><img src="images/g5-options.png" alt="Menu Thêm tuỳ chọn của dashboard"><figcaption><span class="exlabel">VÍ DỤ</span>Menu <b>⋯</b>: Xuất PDF, Chia sẻ với nhóm, <b>Link công khai</b>, Bản đồ filter, <b>Chuyển sang Canvas</b>, <b>Sắp xếp gọn</b>, <b>Giao diện</b>, Quản lý biểu đồ, Nhập HTML, Thêm widget.</figcaption></figure>
+      <div class="note"><b>Nguyên tắc bố cục:</b> đặt <b>KPI tổng quan</b> và biểu đồ xu hướng ở trên, bảng chi tiết/biểu đồ chẩn đoán ở dưới. Mỗi trang tập trung <b>một chủ đề</b>.</div>
+    </section>
+
+    <section class="doc" id="s5-slicer">
+      <h3 class="feat"><span class="feat-id">5.4</span>Slicer — bộ điều khiển lọc cho người xem</h3>
+      <p><b>Là gì:</b> <b>slicer</b> là ô lọc đặt ngay trên báo cáo để người xem tự chọn (Năm, Bang, Trạng thái…). Bấm <span class="path">Thêm slicer</span> rồi chọn <b>kiểu điều khiển</b>.</p>
+      <div class="howto"><h4>⚙ 7 kiểu slicer</h4><ol>
+        <li><b>Dropdown</b> — chọn nhiều, phổ biến nhất.</li>
+        <li><b>Danh sách cố định</b> — luôn mở (không thu gọn).</li>
+        <li><b>Ô nhập</b> — gõ văn bản (chứa / bắt đầu bằng…).</li>
+        <li><b>Bộ lọc nâng cao</b> — chọn toán tử (eq / ne / gt / lt…).</li>
+        <li><b>Thanh trượt</b> — khoảng cho giá trị số.</li>
+        <li><b>Ô tích</b> — Bật/Tắt (yes/no, 0/1).</li>
+        <li><b>Khoảng ngày</b> — khoảng ngày + preset (tháng này, tuần trước…).</li>
+      </ol></div>
+      <figure><img src="images/g5-slicer.png" alt="Chọn kiểu slicer"><figcaption><span class="exlabel">VÍ DỤ</span><b>Thêm slicer · Chọn kiểu điều khiển</b> — 7 kiểu; con số bên phải là số cột dùng được cho kiểu đó.</figcaption></figure>
+      <div class="tip"><b>Phạm vi slicer:</b> mỗi slicer có thể áp cho <b>trang này</b> hoặc <b>mọi trang</b> — chọn khi cấu hình để lọc không “lan” sang trang khác ngoài ý muốn.</div>
+    </section>
+
+    <section class="doc" id="s5-filter">
+      <h3 class="feat"><span class="feat-id">5.5</span>Bảng bộ lọc — trang này vs toàn báo cáo</h3>
+      <p><b>Là gì:</b> ngoài slicer (người xem thấy), còn có <b>Bảng bộ lọc</b> (bấm <span class="path">Bộ lọc</span>) để người dựng đặt điều kiện nền:</p>
+      <ul>
+        <li><b>Bộ lọc trên trang này</b> — chỉ áp cho trang đang mở.</li>
+        <li><b>Bộ lọc trên mọi trang</b> — áp cho mọi biểu đồ trong dashboard.</li>
+      </ul>
+      <figure><img src="images/g5-filterpane.png" alt="Bảng bộ lọc dashboard"><figcaption><span class="exlabel">VÍ DỤ</span>Bảng <b>BỘ LỌC</b> — tách <b>trang này</b> và <b>mọi trang</b>.</figcaption></figure>
+      <div class="callout"><b>Phân biệt 3 lớp:</b> ① <b>Filter biểu đồ</b> (gắn trong chart, Chương 3) → ② <b>Bảng bộ lọc</b> (trang/toàn báo cáo) → ③ <b>Slicer</b> (người xem tự chọn). Chúng chồng lên nhau theo thứ tự này.</div>
+    </section>
+
+    <section class="doc" id="s5-pages">
+      <h3 class="feat"><span class="feat-id">5.6</span>Báo cáo đa trang</h3>
+      <p><b>Là gì:</b> một Dashboard có nhiều <b>trang</b> (như dash67 có 5: Tổng quan điều hành, Doanh thu &amp; Sản phẩm, Khách hàng &amp; Địa lý, Giao hàng &amp; Vận hành, Đánh giá &amp; Thanh toán).</p>
+      <div class="howto"><h4>⚙ Cách làm (menu Chuyển trang)</h4><ol>
+        <li>Bấm tên trang trên thanh công cụ để mở danh sách trang.</li>
+        <li><b>Thêm trang</b> — tạo trang mới.</li>
+        <li><b>Đổi tên trang hiện tại</b> / <b>Xoá trang hiện tại</b>.</li>
+        <li>Bấm một trang để chuyển sang.</li>
+      </ol></div>
+      <figure><img src="images/g5-pages.png" alt="Danh sách trang của dashboard"><figcaption><span class="exlabel">VÍ DỤ</span>Menu <b>Chuyển trang</b> của dash67 — 5 trang + Thêm/Đổi tên/Xoá.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s5-interact">
+      <h3 class="feat"><span class="feat-id">5.7</span>Tương tác &amp; xuất bản</h3>
+      <ul>
+        <li><b>Cross-highlight:</b> bấm vào một cột/điểm trên biểu đồ → các biểu đồ khác cùng trang lọc theo (kiểu Power BI).</li>
+        <li><b>Toolbar mỗi tile:</b> mở trong <b>Explore</b> (↗), bộ lọc riêng biểu đồ (HAVING), tuỳ chọn (⋯), xoá (×).</li>
+        <li><b>Làm mới dữ liệu</b> để lấy số mới; <b>Xuất PDF</b> (⋯) để gửi bản in; <b>Nhập HTML</b> (⋯) để dựng nhanh trang từ HTML.</li>
+        <li><b>Chia sẻ:</b> <b>Chia sẻ với nhóm</b> (người có tài khoản) hoặc <b>Link công khai</b> — xem <a href="guide-7-public.html">Chương 7</a>.</li>
+      </ul>
+      <div class="note"><b>Trước khi bàn giao:</b> đặt tên trang/biểu đồ dễ hiểu, kiểm tra bộ lọc &amp; slicer chạy đúng với người xem không phải editor, rồi mới publish.</div>
+    </section>
+
+    <section class="doc" id="s5-check">
+      <h3 class="feat"><span class="feat-id">5.8</span>Xong Chương 5 — Checklist</h3>
+      <ul>
+        <li>✅ Đã <b>thêm các chart đã lưu</b> vào đúng trang, đặt kích thước hợp lý.</li>
+        <li>✅ Bố cục rõ ràng (KPI trên, chi tiết dưới); mỗi trang một chủ đề.</li>
+        <li>✅ Có <b>slicer</b> đúng kiểu &amp; đúng phạm vi (trang/mọi trang).</li>
+        <li>✅ Bộ lọc nền đặt đúng lớp; cross-highlight hoạt động.</li>
+      </ul>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-6-theme.html"><b>Chương 6 · Theme &amp; giao diện</b></a> — chỉnh màu/nền/font/thẻ cho báo cáo đẹp và nhất quán.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-4-charts.html">← Chương 4: Thư viện chart</a><a href="dashboards.html">📖 Tài liệu module: Dashboard →</a><a href="guide-6-theme.html">➡️ Chương 6: Theme →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=10"></script>
+</body></html>

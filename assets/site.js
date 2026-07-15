@@ -17,9 +17,9 @@
     {id:'guide-2-dataset',   n:'2 · Tạo Dataset & Nối Model',  ic:'🗄️', d:'Gom bảng, bảng SQL, nối quan hệ (join) & định nghĩa Measures.', ready:true},
     {id:'guide-3-explore',   n:'3 · Explore — Tạo chart',      ic:'📈', d:'Gán role, aggregation, filter/sort/limit, preview/SQL, lưu.', ready:true},
     {id:'guide-4-charts',    n:'4 · Thư viện 33 loại chart',   ic:'📊', d:'Đủ 33 loại theo 6 nhóm + tuỳ chọn riêng từng loại.', ready:true},
-    {id:'guide-5-dashboard', n:'5 · Dashboard',                ic:'🧱', d:'Thêm chart đã lưu, layout, bộ lọc, đa trang.'},
-    {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.'},
-    {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…'}
+    {id:'guide-5-dashboard', n:'5 · Dashboard',                ic:'🧱', d:'Thêm chart đã lưu, layout, bộ lọc, đa trang.', ready:true},
+    {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.', ready:true},
+    {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…', ready:true}
   ];
   var isReady = function(m){ return !isGuidePage || m.ready === true; };
   window.APPBI_ONBOARDING = ONBOARDING;

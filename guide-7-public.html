@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 7 · Public link — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 7: chia sẻ báo cáo qua link công khai — normal (tạo link, xem ngay) vs nâng cao (khoá/giới hạn/ẩn filter, mật khẩu, logo, nhúng iframe, AI bot). Ví dụ trên dash67 (Olist).">
+<link rel="stylesheet" href="assets/styles.css?v=10"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">🌐</span></div>
+  <h1>Chương 7 · Public link</h1>
+  <p>Bước cuối: chia sẻ báo cáo ra ngoài <b>không cần tài khoản AppBI</b>. Chương này tách rõ <b>Normal</b> (tạo link, người xem thấy mọi dữ liệu) và <b>Nâng cao</b> (khoá/giới hạn/ẩn bộ lọc, mật khẩu, logo, nhúng iframe, trợ lý AI). Ví dụ trên <b>dash67 (Olist)</b>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s7-open">
+      <h3 class="feat"><span class="feat-id">7.1</span>Mở “Public Links” &amp; các đường link</h3>
+      <div class="howto"><h4>⚙ Cách mở</h4><ol>
+        <li>Trong Dashboard, bấm <b>⋯ (Thêm tuỳ chọn)</b> → <span class="path">Link công khai</span>.</li>
+        <li>Hộp <b>Public Links</b> liệt kê các link đã tạo (kèm lượt xem, lần truy cập cuối, ngày tạo).</li>
+        <li>Mỗi link có <b>2 URL</b>: trang công khai <code>/d/&lt;token&gt;</code> và bản nhúng <code>/embed/&lt;token&gt;</code> — bấm để copy.</li>
+      </ol></div>
+      <figure><img src="images/g7-links.png" alt="Danh sách Public Links"><figcaption><span class="exlabel">VÍ DỤ</span><b>Public Links</b> — nút <b>Create new public link</b>, link “Olist Public” (23 views), URL <code>/d/…</code> + <code>/embed/…</code>, và thẻ xem trước (Compact rail, Tabs, Viewer filters).</figcaption></figure>
+      <div class="note"><b>Nhiều link cho nhiều đối tượng:</b> bạn có thể tạo <b>nhiều link</b> từ cùng một báo cáo — mỗi link có tên, bộ lọc khoá, mật khẩu, giao diện riêng (ví dụ 1 link cho sếp đã khoá vùng, 1 link cho đối tác chỉ xem 1 bang).</div>
+    </section>
+
+    <section class="doc" id="s7-normal">
+      <h3 class="feat"><span class="feat-id">7.2</span>NORMAL — link cơ bản trong 30 giây</h3>
+      <p><b>Mục tiêu:</b> ai có link là xem được toàn báo cáo, không mật khẩu.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>Create new public link</b>.</li>
+        <li>Đặt <b>Link name</b> (để phân biệt sau này) — ví dụ “Olist Public”.</li>
+        <li>Giữ nguyên mặc định: <b>No password</b>, filter <b>Hiện</b> hết, tabs/viewer-filters tuỳ báo cáo.</li>
+        <li><b>Save changes</b> → copy URL <code>/d/&lt;token&gt;</code> và gửi đi.</li>
+      </ol></div>
+      <div class="callout"><b>Người xem thấy gì:</b> đúng báo cáo bạn đang dựng (theo theme ở <a href="guide-6-theme.html">Chương 6</a>), có thể chuyển trang &amp; dùng slicer nếu bạn bật. <b>Không</b> cần đăng nhập AppBI.</div>
+    </section>
+
+    <section class="doc" id="s7-appearance">
+      <h3 class="feat"><span class="feat-id">7.3</span>Giao diện link — logo, tabs, bộ lọc người xem</h3>
+      <p><b>Là gì:</b> mở một link → tab <b>Giao diện</b>. Link <b>kế thừa theme</b> của dashboard (màu/font); ở đây chỉ set thêm:</p>
+      <ul>
+        <li><b>Report logo</b> — tải logo thay cho dấu mặc định (PNG/JPG/SVG, ≤256KB).</li>
+        <li><b>Page tabs</b> — cho người xem chuyển trang hay không.</li>
+        <li><b>Viewer filters</b> — cho người xem dùng slicer/bộ lọc hay khoá cứng.</li>
+        <li><b>Compact rail</b> — thanh điều hướng gọn cho khách.</li>
+      </ul>
+      <figure><img src="images/g7-appearance.png" alt="Edit Public Link — tab Giao diện"><figcaption><span class="exlabel">VÍ DỤ</span><b>Edit Public Link</b> — Link name + 4 tab (Giao diện / Dữ liệu / AI Bot / Bảo mật); bên phải xem trước <b>Public page</b> &amp; <b>Embed</b>.</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> bật <b>tabs</b> chỉ khi báo cáo thực sự nhiều trang đáng chuyển; tắt <b>viewer filters</b> cho báo cáo “điều hành đã khoá”, bật khi muốn người xem tự khám phá nhẹ.</div>
+    </section>
+
+    <section class="doc" id="s7-filter">
+      <h3 class="feat"><span class="feat-id">7.4</span>NÂNG CAO ① — khoá/giới hạn/ẩn dữ liệu (Filter)</h3>
+      <p><b>Là gì:</b> tab <b>Dữ liệu (Filter)</b> là phần <b>quan trọng nhất</b> của link nâng cao — quyết định người xem được thấy &amp; lọc gì. Mỗi field có <b>4 hành vi</b>:</p>
+      <ul>
+        <li>👁 <b>Hiện</b> — người xem thấy &amp; tự chỉnh (như slicer bình thường).</li>
+        <li>🎯 <b>Giới hạn</b> — chỉ cho chọn trong <b>danh sách cho phép</b> (allow-list).</li>
+        <li>🔒 <b>Khoá</b> — <b>ép một giá trị</b>, người xem thấy read-only (ví dụ khoá <i>Bang = SP</i>).</li>
+        <li>🚫 <b>Ẩn</b> — ép giá trị nhưng người xem <b>không thấy</b> field đó.</li>
+      </ul>
+      <figure><img src="images/g7-filter.png" alt="Public link — tab Dữ liệu Filter"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Dữ liệu (Filter)</b> — mỗi slicer (Năm / Bang khách hàng / Trạng thái đơn) chọn <b>Hiện / Giới hạn / Khoá / Ẩn</b>. Thứ tự lọc: <b>Khoá link → Giới hạn → Filter trang → Slicer người xem</b>.</figcaption></figure>
+      <div class="callout"><b>Ứng dụng thực tế:</b> gửi cho đối tác ở <b>Bang SP</b> → <b>Khoá</b> (hoặc <b>Ẩn</b>) field Bang = SP: họ chỉ thấy dữ liệu của mình, không đổi được, không thấy bang khác. Đây là cách phân quyền dữ liệu cho người <b>không có tài khoản</b>.</div>
+    </section>
+
+    <section class="doc" id="s7-security">
+      <h3 class="feat"><span class="feat-id">7.5</span>NÂNG CAO ② — mật khẩu &amp; link nhúng</h3>
+      <p><b>Là gì:</b> tab <b>Bảo mật &amp; Chia sẻ</b>:</p>
+      <ul>
+        <li><b>Password protection</b>: <b>No password</b> (mở ngay) hoặc <b>Require password</b> — người xem chỉ cần <b>mật khẩu của link</b> (không phải tài khoản AppBI).</li>
+        <li><b>Link chia sẻ</b>: URL trang công khai <code>/d/&lt;token&gt;</code> + <b>mã nhúng iframe</b> <code>/embed/&lt;token&gt;</code> (nút <b>&lt;/&gt;</b> để lấy code nhúng).</li>
+      </ul>
+      <figure><img src="images/g7-security.png" alt="Public link — tab Bảo mật"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Bảo mật &amp; Chia sẻ</b> — chọn <b>No password / Require password</b>; lấy link công khai &amp; mã nhúng iframe.</figcaption></figure>
+      <div class="note"><b>Nhúng (embed):</b> dùng URL <code>/embed/&lt;token&gt;</code> để cắm báo cáo vào website/portal nội bộ bằng <code>&lt;iframe&gt;</code>. Tab <b>AI Bot</b> (không trong ảnh) cho bật/tắt <b>trợ lý AI</b> hỏi-đáp ngay trên link công khai.</div>
+    </section>
+
+    <section class="doc" id="s7-vs">
+      <h3 class="feat"><span class="feat-id">7.6</span>Normal vs Nâng cao — tóm tắt &amp; Checklist</h3>
+      <p><b>Bảng so sánh nhanh:</b></p>
+      <ul>
+        <li><b>NORMAL cần gì:</b> tạo link → đặt tên → giữ <i>No password</i>, filter <i>Hiện</i> → copy URL <code>/d/…</code>. Xong.</li>
+        <li><b>NÂNG CAO cần thêm:</b> ① <b>Filter</b> — Khoá/Giới hạn/Ẩn field để phân quyền dữ liệu; ② <b>Bảo mật</b> — bật mật khẩu; ③ <b>Giao diện</b> — logo, tắt tabs/viewer-filters; ④ <b>Nhúng</b> — dùng <code>/embed/…</code>; ⑤ <b>AI Bot</b> — bật trợ lý cho khách.</li>
+      </ul>
+      <div class="callout"><b>Checklist trước khi gửi:</b> ✅ đặt <b>tên link</b> theo đối tượng; ✅ rà <b>Filter</b> (đúng field đã Khoá/Ẩn, không lộ dữ liệu ngoài phạm vi); ✅ quyết định <b>mật khẩu</b>; ✅ kiểm <b>tabs/viewer-filters</b>; ✅ mở thử <b>Public page</b> ở chế độ ẩn danh để xem đúng như khách sẽ thấy.</div>
+      <div class="note"><b>Bảo mật dữ liệu:</b> link công khai bỏ qua đăng nhập — hãy luôn <b>Khoá/Ẩn</b> các field nhạy cảm và cân nhắc <b>mật khẩu</b> cho báo cáo nội bộ. Link bị vô hiệu hoá sẽ trả về 404.</div>
+      <p style="margin-top:14px">🎉 <b>Hoàn thành lộ trình A→Z!</b> Bạn đã đi trọn phần lõi: Nguồn → Dataset &amp; Model → Explore → Thư viện chart → Dashboard → Theme → Public link. Xem thêm <a href="showcase.html">Sản phẩm đầu cuối</a> hoặc quay lại <a href="guide.html">Mục lục hướng dẫn</a>.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-6-theme.html">← Chương 6: Theme</a><a href="dashboards.html">📖 Tài liệu module: Dashboard →</a><a href="guide.html">🎓 Mục lục hướng dẫn →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=10"></script>
+</body></html>

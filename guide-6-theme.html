@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 6 · Theme & giao diện — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 6: cá nhân hoá giao diện Dashboard — mẫu dựng sẵn, chế độ Sáng/Tối, màu nhấn & bảng màu dữ liệu, màu trạng thái, kiểu thẻ, lưới/trục & đơn vị hiển thị — cho báo cáo đẹp và nhất quán.">
+<link rel="stylesheet" href="assets/styles.css?v=10"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">🎨</span></div>
+  <h1>Chương 6 · Theme &amp; giao diện</h1>
+  <p>Cá nhân hoá <b>toàn bộ báo cáo</b> — màu, nền, font, kiểu thẻ, trục — để nhìn <b>đẹp &amp; nhất quán</b>. Quan trọng: theme <b>áp dụng cho cả bản Build lẫn link công khai</b>, nên chỉnh một lần là đồng bộ mọi nơi.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s6-open">
+      <h3 class="feat"><span class="feat-id">6.1</span>Mở “Giao diện Dashboard” &amp; phạm vi</h3>
+      <div class="howto"><h4>⚙ Cách mở</h4><ol>
+        <li>Trong Dashboard, bấm <b>⋯ (Thêm tuỳ chọn)</b> → <span class="path">Giao diện</span>.</li>
+        <li>Hộp <b>Giao diện Dashboard</b> mở ra với 5 tab: <b>Mẫu · Màu · Chữ · Thẻ · Biểu đồ</b>.</li>
+        <li>Chỉnh xong bấm <b>Lưu giao diện</b> (hoặc Hủy).</li>
+      </ol></div>
+      <div class="callout"><b>Áp dụng ở đâu:</b> mọi thay đổi ở đây ảnh hưởng <b>toàn báo cáo</b> — cả khi bạn dựng (Build) lẫn khi người ngoài xem qua <b>link công khai</b>. Không phải chỉnh lại lần hai.</div>
+    </section>
+
+    <section class="doc" id="s6-preset">
+      <h3 class="feat"><span class="feat-id">6.2</span>Tab Mẫu — chọn nhanh một bộ giao diện</h3>
+      <p><b>Là gì:</b> <b>Mẫu dựng sẵn</b> = áp luôn nền + bảng màu + kiểu thẻ chỉ bằng một cú bấm. Có <b>8 mẫu</b> (sáng &amp; tối), kèm <b>Chế độ</b> và <b>Màu nền trang</b>.</p>
+      <ul>
+        <li>Mẫu sáng: <b>Trắng tinh</b> (Tableau), <b>Xám trung tính</b> (doanh nghiệp), <b>Mù màu an toàn</b> (Okabe-Ito), <b>Tương phản</b> (IBM Carbon), <b>Đại dương</b> (viridis), <b>Hoàng hôn</b> (ColorBrewer).</li>
+        <li>Mẫu tối: <b>Tối Midnight</b>, <b>Tối Than chì</b> (IBM vivid).</li>
+        <li><b>Chế độ</b>: Sáng / Tối. <b>Màu nền trang</b>: màu đơn hoặc gradient (ví dụ <code>linear-gradient(180deg,#fff7ed,#fffbeb)</code>).</li>
+      </ul>
+      <figure><img src="images/g6-preset.png" alt="Tab Mẫu — các preset theme"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Mẫu</b> — 8 preset (mỗi ô xem trước ngay trên thẻ) + Chế độ Sáng/Tối + Màu nền trang.</figcaption></figure>
+      <div class="tip"><b>Mẹo cho đẹp nhanh:</b> chọn 1 mẫu hợp thương hiệu trước (ví dụ Hoàng hôn/Đại dương), rồi mới tinh chỉnh màu nhấn ở tab Màu. Với báo cáo trình chiếu tối, dùng <b>Tối Midnight</b>.</div>
+    </section>
+
+    <section class="doc" id="s6-color">
+      <h3 class="feat"><span class="feat-id">6.3</span>Tab Màu — màu nhấn, bảng màu &amp; màu trạng thái</h3>
+      <ul>
+        <li><b>Màu nhấn</b> — màu chủ đạo (nút, điểm nhấn), ví dụ <code>#ea580c</code>; có <b>Đặt lại</b>.</li>
+        <li><b>Bảng màu dữ liệu</b> — dãy màu cho <b>chuỗi/cột trong mọi biểu đồ</b>. Chọn preset hoặc tự thêm từng màu (<b>+</b>); để trống = mỗi chart dùng bảng màu riêng.</li>
+        <li><b>Màu trạng thái</b> — <b>Tốt</b> (xanh), <b>Trung tính</b> (xám), <b>Xấu</b> (đỏ); dùng cho <b>chênh lệch KPI</b> (tăng/giảm).</li>
+      </ul>
+      <figure><img src="images/g6-color.png" alt="Tab Màu"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Màu</b> — màu nhấn, bảng màu dữ liệu (6 màu chuỗi), màu trạng thái Tốt/Trung tính/Xấu.</figcaption></figure>
+      <div class="note"><b>Đồng bộ màu:</b> đặt bảng màu dữ liệu ở đây để <b>mọi biểu đồ</b> trong báo cáo cùng một tông — chuyên nghiệp hơn để từng chart mỗi màu.</div>
+    </section>
+
+    <section class="doc" id="s6-font">
+      <h3 class="feat"><span class="feat-id">6.4</span>Tab Chữ — phông chữ</h3>
+      <p><b>Là gì:</b> tab <b>Chữ</b> chọn <b>phông chữ</b> và cỡ chữ nền cho toàn báo cáo, giúp tiêu đề/nhãn đồng bộ. Chọn font dễ đọc, tránh trộn quá nhiều kiểu chữ.</p>
+    </section>
+
+    <section class="doc" id="s6-tile">
+      <h3 class="feat"><span class="feat-id">6.5</span>Tab Thẻ — kiểu dáng ô/tile</h3>
+      <ul>
+        <li><b>Kiểu thẻ</b> — ví dụ <b>Bo mềm</b> (bo góc mềm).</li>
+        <li><b>Mật độ</b> — khoảng cách nội dung (Vừa…).</li>
+        <li><b>Đổ bóng</b> &amp; <b>Hiệu ứng hover</b> — Bật/Tắt.</li>
+        <li><b>Viền &amp; bo góc</b> — <b>Bo góc</b> (px), <b>Độ dày viền</b> (px), <b>Màu viền</b>.</li>
+      </ul>
+      <figure><img src="images/g6-tile.png" alt="Tab Thẻ"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Thẻ</b> — kiểu thẻ, mật độ, đổ bóng, hover, bo góc 8px, độ dày viền 1px.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s6-chart">
+      <h3 class="feat"><span class="feat-id">6.6</span>Tab Biểu đồ — lưới, trục &amp; đơn vị hiển thị</h3>
+      <ul>
+        <li><b>Lưới &amp; trục</b> — <b>Màu đường lưới</b>, <b>Màu nhãn trục</b> áp cho mọi biểu đồ có trục.</li>
+        <li><b>Đơn vị hiển thị</b> — rút gọn số lớn (tỷ/triệu/nghìn) cho <b>toàn báo cáo</b>; mỗi biểu đồ vẫn có thể tự ghi đè.</li>
+      </ul>
+      <figure><img src="images/g6-chart.png" alt="Tab Biểu đồ"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Biểu đồ</b> — màu lưới/nhãn trục + đơn vị hiển thị dùng chung.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s6-check">
+      <h3 class="feat"><span class="feat-id">6.7</span>Xong Chương 6 — Checklist “sao cho đẹp”</h3>
+      <ul>
+        <li>✅ Chọn <b>một mẫu</b> hợp thương hiệu + <b>Chế độ</b> (Sáng/Tối) phù hợp bối cảnh xem.</li>
+        <li>✅ Đặt <b>bảng màu dữ liệu</b> dùng chung để mọi biểu đồ đồng tông; định <b>màu trạng thái</b> cho KPI.</li>
+        <li>✅ Chuẩn hoá <b>kiểu thẻ</b> (bo góc/viền/mật độ) &amp; <b>đơn vị hiển thị</b> toàn báo cáo.</li>
+        <li>✅ Bấm <b>Lưu giao diện</b> — kiểm tra lại vài trang để chắc đồng bộ.</li>
+      </ul>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-7-public.html"><b>Chương 7 · Public link</b></a> — chia sẻ báo cáo ra ngoài (normal vs nâng cao).</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-5-dashboard.html">← Chương 5: Dashboard</a><a href="dashboards.html">📖 Tài liệu module: Dashboard →</a><a href="guide-7-public.html">➡️ Chương 7: Public link →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=10"></script>
+</body></html>
