@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn build Mini App — AppBI</title>
+<meta name="description" content="Lộ trình A→Z build Mini App (Workboard): Dataset trên Google Sheets (yêu cầu khắt khe: cột miniapp_user cho RLS) → tạo Workboard & Workspace → dựng màn hình Form/Table/Doc/Dashboard → App Users & RLS → xuất bản qua Cổng.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="index.html">← Tổng quan</a>
+  <div style="margin-top:8px"><span class="ic">🧩</span></div>
+  <h1>Hướng dẫn build Mini App</h1>
+  <p>Lộ trình <b>A→Z build ứng dụng vận hành</b> (Workboard): biến một Dataset thành mini-app có <b>nhập liệu</b>, <b>phân quyền theo người</b> và chạy được trên điện thoại. Khác với Báo cáo — Mini App <b>ghi dữ liệu</b> nên phần <b>Dataset khắt khe hơn</b>.</p>
+  <p style="margin-top:6px;font-size:14px;opacity:.9">Chỉ cần một báo cáo để đọc/chia sẻ? Xem <a href="guide.html" style="color:#fff;text-decoration:underline">📊 Hướng dẫn làm Báo cáo (BI) →</a></p>
+</div></section>
+
+<section class="sec"><div class="container">
+  <div class="sec-head center">
+    <span class="eyebrow">Onboarding · Mini App (Workboard)</span>
+    <h2>5 chương — từ Dataset đến app chạy được</h2>
+    <p class="lead">Hướng dẫn từng bước, ảnh chụp thật từ mini-app kho “Kho — Quét &amp; Phiếu”. Đặc biệt chú ý Chương 1 (Dataset) vì đây là chỗ khác biệt lớn nhất so với Báo cáo.</p>
+  </div>
+
+  <!-- pipeline flow -->
+  <div class="gflow">
+    <span>🗄️ Dataset (Google Sheets)</span><span class="ar">→</span>
+    <span>🧩 Workboard &amp; Workspace</span><span class="ar">→</span>
+    <span>🖥️ Màn hình</span><span class="ar">→</span>
+    <span>🔐 App Users &amp; RLS</span><span class="ar">→</span>
+    <span>🚀 Cổng chia sẻ</span>
+  </div>
+
+  <div class="callout" style="max-width:860px;margin:22px auto 0;border-color:#fed7aa;background:#fff7ed">
+    <b>⚠️ Điều kiện tiên quyết — Dataset cho Mini App:</b> hiện <b>chỉ hỗ trợ nguồn Google Sheets</b> cho mini-app có nhập liệu (vì cần ghi ngược dữ liệu — kho warehouse như PostgreSQL/BigQuery là chỉ-đọc). Ngoài ra mỗi bảng “theo người dùng” cần cột <b>miniapp_user</b> để phân quyền hàng (RLS). Chi tiết ở <a href="miniapp-1-dataset.html">Chương 1</a>.
+  </div>
+
+  <div class="mgrid" id="miniappgrid" style="margin-top:26px"></div>
+
+  <div class="callout" style="max-width:820px;margin:28px auto 0">
+    <b>Gợi ý cách đọc:</b> đi tuần tự Chương 1 → 5. Chương 1 (Dataset) là nền — làm chắc trước khi dựng màn hình. Mỗi trang có mục lục bên phải và nút “Trước / Tiếp” ở cuối.
+  </div>
+</div></section>
+
+<script src="assets/site.js?v=11"></script>
+<script>
+(function(){
+  var g=document.getElementById('miniappgrid');
+  if(g && window.APPBI_MINIAPP){
+    g.innerHTML = window.APPBI_MINIAPP.map(function(m){
+      if(m.ready){
+        return '<a class="mcard" href="'+m.id+'.html"><div class="ic">'+m.ic+'</div>'+
+          '<h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">Mở hướng dẫn →</span></a>';
+      }
+      return '<div class="mcard soon"><span class="badge">Đang cập nhật</span><div class="ic">'+m.ic+'</div>'+
+        '<h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">Sắp ra mắt</span></div>';
+    }).join('');
+  }
+})();
+</script>
+</body></html>

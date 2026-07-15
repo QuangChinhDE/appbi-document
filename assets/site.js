@@ -21,11 +21,30 @@
     {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.', ready:true},
     {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…', ready:true}
   ];
-  var isReady = function(m){ return !isGuidePage || m.ready === true; };
   window.APPBI_ONBOARDING = ONBOARDING;
 
+  /* Mini App track — guided A→Z path for building operational mini-apps (Workboard) */
+  var MINIAPP = [
+    {id:'miniapp-1-dataset', n:'1 · Dataset cho Mini App',  ic:'🗄️', d:'Chỉ Google Sheets (ghi ngược) + cột miniapp_user cho RLS — yêu cầu khắt khe hơn.', ready:true},
+    {id:'miniapp-2-create',  n:'2 · Tạo Workboard & Workspace', ic:'🧩', d:'Gắn dataset nền, chia Workspace, mỗi screen chọn 1 bảng.', ready:true},
+    {id:'miniapp-3-screens', n:'3 · Dựng màn hình',          ic:'🖥️', d:'4 loại: Form / Table / Document / Dashboard + cấu hình cột, hành vi.', ready:true},
+    {id:'miniapp-4-users',   n:'4 · App Users & RLS',        ic:'🔐', d:'Tài khoản mini-app, role, phân quyền dữ liệu theo miniapp_user.', ready:true},
+    {id:'miniapp-5-publish', n:'5 · Xuất bản & Cổng chia sẻ', ic:'🚀', d:'Preview, publish, link Cổng /ws/, PIN, Mobile/PWA, Webhook, Export.', ready:true}
+  ];
+  window.APPBI_MINIAPP = MINIAPP;
+
+  /* two guided tracks */
+  var TRACKS = {
+    bi:  { overview:'guide',   name:'Hướng dẫn Báo cáo',  short:'Báo cáo',  chapters:ONBOARDING },
+    app: { overview:'miniapp', name:'Hướng dẫn Mini App', short:'Mini App', chapters:MINIAPP }
+  };
+
   var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/,'') || 'index';
-  var isGuidePage = page==='guide' || /^guide-/.test(page);
+  var trackKey = (page==='guide'   || /^guide-/.test(page))   ? 'bi'
+               : (page==='miniapp' || /^miniapp-/.test(page)) ? 'app' : null;
+  var isGuidePage = trackKey !== null;
+  var track = trackKey ? TRACKS[trackKey] : null;
+  var isReady = function(m){ return !isGuidePage || m.ready === true; };
   var A = function(id){ return page===id ? ' class="active"' : ''; };
 
   /* ---------- header ---------- */
@@ -39,7 +58,10 @@
       '<nav id="nav">'+
         '<a href="index.html"'+A('index')+'>Tổng quan</a>'+
         '<div class="dd" id="dd"><button class="navbtn" id="ddbtn">Sản phẩm ▾</button><div class="dd-menu">'+ddItems+'</div></div>'+
-        '<a href="guide.html"'+(isGuidePage?' class="active"':'')+'>Hướng dẫn A→Z</a>'+
+        '<div class="dd" id="ddg"><button class="navbtn'+(isGuidePage?' active':'')+'" id="ddgbtn">Hướng dẫn ▾</button><div class="dd-menu">'+
+          '<a href="guide.html"'+(trackKey==='bi'?' style="background:var(--soft)"':'')+'><span class="di">📊</span><span><b>Làm Báo cáo (BI)</b><small>Nguồn → Dataset → Chart → Dashboard → Public link</small></span></a>'+
+          '<a href="miniapp.html"'+(trackKey==='app'?' style="background:var(--soft)"':'')+'><span class="di">🧩</span><span><b>Build Mini App</b><small>Dataset (Sheets) → Workboard → Màn hình → RLS → Cổng</small></span></a>'+
+        '</div></div>'+
         '<a href="showcase.html"'+A('showcase')+'>Sản phẩm đầu cuối</a>'+
         '<a href="changelog.html"'+A('changelog')+'>Cập nhật</a>'+
         '<span class="spacer"></span>'+
@@ -56,29 +78,29 @@
     '</div><small>AppBI — Nền tảng phân tích &amp; ứng dụng dữ liệu. Ảnh minh hoạ dùng bộ dữ liệu mẫu (chỉ là ví dụ).</small></div></footer>'+
     '<button class="totop" id="totop" title="Lên đầu trang">↑</button>');
 
-  /* ---------- dropdown + mobile + totop ---------- */
-  var dd=document.getElementById('dd');
-  document.getElementById('ddbtn').addEventListener('click', function(e){ e.stopPropagation(); dd.classList.toggle('open'); });
-  document.addEventListener('click', function(e){ if(!dd.contains(e.target)) dd.classList.remove('open'); });
+  /* ---------- dropdowns + mobile + totop ---------- */
+  var dds=[].slice.call(document.querySelectorAll('header.site .dd'));
+  dds.forEach(function(d){ var b=d.querySelector('.navbtn'); if(b) b.addEventListener('click', function(e){ e.stopPropagation(); dds.forEach(function(o){ if(o!==d) o.classList.remove('open'); }); d.classList.toggle('open'); }); });
+  document.addEventListener('click', function(e){ dds.forEach(function(d){ if(!d.contains(e.target)) d.classList.remove('open'); }); });
   document.getElementById('hamb').addEventListener('click', function(){ document.getElementById('nav').classList.toggle('open'); });
   var tt=document.getElementById('totop');
   window.addEventListener('scroll', function(){ tt.style.display = window.scrollY>600 ? 'flex':'none'; });
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 
   /* ---------- breadcrumb (any page with an .mhero band) ---------- */
-  var NAV = isGuidePage ? ONBOARDING : MODULES;
+  var NAV = track ? track.chapters : MODULES;
   var curMod=null, curIdx=-1;
   NAV.forEach(function(m,i){ if(m.id===page){ curMod=m; curIdx=i; } });
   var mheroC=document.querySelector('.mhero .container');
   if(mheroC){
     var crumbLast = curMod ? curMod.n :
-      (page==='guide' ? 'Hướng dẫn A→Z'
+      (track ? track.name
       : page==='showcase' ? 'Sản phẩm đầu cuối'
       : page==='changelog' ? 'Cập nhật & Lộ trình'
       : (document.title.split('—')[0]||'').trim());
     var midCrumb = curMod
-      ? (isGuidePage ? '<a href="guide.html">Hướng dẫn A→Z</a><span class="sep">›</span>'
-                     : '<a href="index.html#modules">Sản phẩm</a><span class="sep">›</span>')
+      ? (track ? '<a href="'+track.overview+'.html">'+track.name+'</a><span class="sep">›</span>'
+               : '<a href="index.html#modules">Sản phẩm</a><span class="sep">›</span>')
       : '';
     mheroC.insertAdjacentHTML('afterbegin',
       '<nav class="breadcrumb"><a href="index.html">🏠 Trang chủ</a><span class="sep">›</span>'+midCrumb+
@@ -87,8 +109,8 @@
   }
 
   /* ---------- neutralize links to not-yet-built guide chapters (no dead 404 links anywhere) ---------- */
-  var notReady={}; ONBOARDING.forEach(function(m){ if(m.ready!==true) notReady[m.id]=true; });
-  [].slice.call(document.querySelectorAll('a[href^="guide-"]')).forEach(function(a){
+  var notReady={}; ONBOARDING.concat(MINIAPP).forEach(function(m){ if(m.ready!==true) notReady[m.id]=true; });
+  [].slice.call(document.querySelectorAll('a[href^="guide-"], a[href^="miniapp-"]')).forEach(function(a){
     var id=(a.getAttribute('href')||'').replace(/#.*$/,'').replace(/\.html$/,'');
     if(notReady[id]){ a.classList.add('lnk-soon'); a.removeAttribute('href'); a.setAttribute('title','Chương này đang được biên soạn'); }
   });
@@ -114,8 +136,8 @@
     if(!left.parentNode) wrap.insertBefore(left, main);
     left.className='docnav';
     left.innerHTML =
-      '<div class="nvhead">'+(isGuidePage?'Hướng dẫn A→Z':'Tài liệu sản phẩm')+'</div>'+
-      '<a class="nvlink" href="'+(isGuidePage?'guide.html':'index.html')+'">'+(isGuidePage?'Tổng quan hướng dẫn':'Tổng quan')+'</a>'+
+      '<div class="nvhead">'+(track?track.name:'Tài liệu sản phẩm')+'</div>'+
+      '<a class="nvlink" href="'+(track?track.overview+'.html':'index.html')+'">'+(track?'Mục lục: '+track.short:'Tổng quan')+'</a>'+
       '<div class="nvgroup">'+ NAV.map(function(m){
         var on=m.id===page;
         var kids = on ? '<div class="kids">'+secMeta.map(function(s){
@@ -128,8 +150,8 @@
           m.n+(m.badge?' <em>'+m.badge+'</em>':'')+'</a>'+kids+'</div>';
       }).join('') +'</div>'+
       (isGuidePage
-        ? '<a class="nvlink" href="index.html#modules">Tài liệu module</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a>'
-        : '<a class="nvlink" href="guide.html">Hướng dẫn A→Z</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a><a class="nvlink" href="changelog.html">Cập nhật &amp; Lộ trình</a>');
+        ? '<a class="nvlink" href="'+(trackKey==='bi'?'miniapp':'guide')+'.html">↔ '+(trackKey==='bi'?'Hướng dẫn Mini App':'Hướng dẫn Báo cáo')+'</a><a class="nvlink" href="index.html#modules">Tài liệu module</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a>'
+        : '<a class="nvlink" href="guide.html">Hướng dẫn Báo cáo</a><a class="nvlink" href="miniapp.html">Hướng dẫn Mini App</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a><a class="nvlink" href="changelog.html">Cập nhật &amp; Lộ trình</a>');
 
     /* feature cards + lead at top of content (Airbyte child-page style) */
     if(secMeta.length){
@@ -158,8 +180,8 @@
     });
 
     /* prev / next pager — skip unbuilt (non-ready) chapters */
-    var firstFallback = isGuidePage ? {id:'guide', n:'Tổng quan hướng dẫn'} : {id:'index', n:'Tổng quan'};
-    var lastFallback  = isGuidePage ? {id:'guide', n:'Mục lục hướng dẫn'}   : {id:'showcase', n:'Sản phẩm đầu cuối'};
+    var firstFallback = track ? {id:track.overview, n:'Mục lục '+track.short} : {id:'index', n:'Tổng quan'};
+    var lastFallback  = track ? {id:track.overview, n:'Mục lục '+track.short} : {id:'showcase', n:'Sản phẩm đầu cuối'};
     var prev = firstFallback, next = lastFallback;
     for(var pi=curIdx-1; pi>=0; pi--){ if(isReady(NAV[pi])){ prev=NAV[pi]; break; } }
     for(var ni=curIdx+1; ni<NAV.length; ni++){ if(isReady(NAV[ni])){ next=NAV[ni]; break; } }

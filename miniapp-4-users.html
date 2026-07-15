@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini App · Chương 4 · App Users & RLS — Hướng dẫn AppBI</title>
+<meta name="description" content="Mini App Chương 4: tạo tài khoản đăng nhập mini-app (role user/admin/owner), phân quyền dữ liệu theo hàng (RLS) qua cột miniapp_user, và đánh dấu bảng shared.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
+  <div style="margin-top:8px"><span class="ic">🔐</span></div>
+  <h1>Chương 4 · App Users &amp; RLS</h1>
+  <p>Mini App có <b>hệ người dùng riêng</b> (không cần tài khoản AppBI). Chương này tạo tài khoản đăng nhập app và <b>phân quyền dữ liệu theo hàng (RLS)</b> — mỗi người chỉ thấy dữ liệu của mình, dựa trên cột <b>miniapp_user</b> đã chuẩn bị ở <a href="miniapp-1-dataset.html">Chương 1</a>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="m4-users">
+      <h3 class="feat"><span class="feat-id">4.1</span>Tạo App Users &amp; vai trò</h3>
+      <p><b>Là gì:</b> tab <b>Users</b> quản lý những tài khoản có thể <b>đăng nhập vào mini-app này</b> (qua Cổng chia sẻ ở <a href="miniapp-5-publish.html">Chương 5</a>).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Mở tab <b>Users</b>, bấm <span class="path">+ Thêm user</span>.</li>
+        <li>Nhập <b>Username</b>, tên đầy đủ, chọn <b>Role</b> mini-app: <b>user</b> / <b>admin</b> / <b>owner</b> (và role nghiệp vụ như thukho, quanly…).</li>
+        <li>Chọn <b>Phạm vi mini-app</b>: <b>chỉ bản thân</b> (chỉ thấy dữ liệu của mình) hoặc <b>toàn quyền</b> (owner/quản lý).</li>
+        <li>Bật/tắt tài khoản ở cột <b>Đang bật</b>.</li>
+      </ol></div>
+      <figure><img src="images/gm-users.png" alt="Tab App Users"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Users</b> — 4 tài khoản (Owner / thukho / quanly), cột <b>Phạm vi mini-app</b> (chỉ bản thân / toàn quyền) và <b>Context RLS</b>.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="m4-rls">
+      <h3 class="feat"><span class="feat-id">4.2</span>Phân quyền dữ liệu theo hàng (RLS)</h3>
+      <p><b>Là gì:</b> phần <b>Phân quyền dữ liệu</b> cho biết từng bảng thừa kế quyền thế nào. Mỗi bảng rơi vào một trong các trạng thái:</p>
+      <ul>
+        <li><b>per-user</b> — bảng <b>có cột miniapp_user</b> → mỗi người chỉ thấy hàng của mình (lọc <code>miniapp_user = {{app_user.username}}</code>).</li>
+        <li><b>shared</b> — bảng dùng chung (danh mục, kho) → mọi người xem như nhau.</li>
+        <li><b>qua quan hệ</b> — thừa kế quyền qua bảng cha đã có model.</li>
+        <li><b>chưa rõ</b> — <b>thiếu cột miniapp_user</b> và chưa có model → cần xử lý.</li>
+      </ul>
+      <div class="howto"><h4>⚙ Xử lý bảng “chưa rõ”</h4><ol>
+        <li>Nếu là bảng theo người → <b>Mở dataset</b>, thêm cột <b>miniapp_user</b> (Chương 1).</li>
+        <li>Nếu là bảng dùng chung → bấm <b>Đánh dấu shared</b>.</li>
+        <li>Hoặc <b>generate dataset model</b> để hệ thống suy quyền qua quan hệ.</li>
+        <li>Bấm <b>Refresh</b> để cập nhật lại trạng thái.</li>
+      </ol></div>
+      <div class="callout"><b>Nguyên tắc bảo mật:</b> đừng bàn giao khi còn bảng “<b>chưa rõ</b>” chứa dữ liệu riêng — vì chưa đảm bảo cô lập giữa người dùng. Bảng nào cho xem chung mới đánh dấu <b>shared</b>.</div>
+    </section>
+
+    <section class="doc" id="m4-check">
+      <h3 class="feat"><span class="feat-id">4.3</span>Checklist</h3>
+      <ul>
+        <li>✅ Đã tạo <b>tài khoản</b> cho từng người dùng thật, đúng <b>role</b> &amp; <b>phạm vi</b>.</li>
+        <li>✅ Bảng theo người = <b>per-user</b> (có miniapp_user); bảng chung = <b>shared</b>.</li>
+        <li>✅ <b>Không còn bảng “chưa rõ”</b> chứa dữ liệu nhạy cảm.</li>
+      </ul>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-5-publish.html"><b>Chương 5 · Xuất bản &amp; Cổng chia sẻ</b></a> — đưa app cho người dùng thật.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="miniapp-3-screens.html">← Chương 3: Màn hình</a><a href="miniapp-1-dataset.html">↩ Cột miniapp_user (Chương 1)</a><a href="miniapp-5-publish.html">➡️ Chương 5: Xuất bản →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=11"></script>
+</body></html>

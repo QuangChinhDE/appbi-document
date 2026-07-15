@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini App · Chương 1 · Dataset cho Mini App — Hướng dẫn AppBI</title>
+<meta name="description" content="Mini App Chương 1: chuẩn bị Dataset — chỉ Google Sheets (ghi ngược), cột miniapp_user cho RLS, khoá chính & kiểu dữ liệu. Đây là yêu cầu khắt khe hơn so với Dataset báo cáo.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
+  <div style="margin-top:8px"><span class="ic">🗄️</span></div>
+  <h1>Chương 1 · Dataset cho Mini App</h1>
+  <p>Đây là chỗ <b>khác biệt lớn nhất</b> giữa Mini App và Báo cáo. Mini App <b>ghi dữ liệu</b> (nhập liệu, sửa, xoá) chứ không chỉ đọc — nên Dataset nền phải đáp ứng vài <b>yêu cầu khắt khe hơn</b>. Làm chắc chương này trước khi dựng app.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="m1-source">
+      <h3 class="feat"><span class="feat-id">1.1</span>⚠️ Nguồn dữ liệu: hiện chỉ Google Sheets</h3>
+      <p><b>Là gì:</b> Mini App có màn nhập liệu phải <b>ghi ngược</b> dữ liệu về nguồn. Hiện tại <b>chỉ Google Sheets hỗ trợ ghi</b>, nên Dataset dùng cho mini-app nhập liệu <b>bắt buộc lấy từ nguồn Google Sheets</b>.</p>
+      <div class="note"><b>Vì sao:</b> các kho phân tích như <b>PostgreSQL / BigQuery là chỉ-đọc</b> trong AppBI (truy vấn live, không ghi). Chúng chỉ hợp cho mini-app <b>dạng xem</b> (portal/báo cáo nhúng), <b>chưa nhập liệu được</b>. Khi cần Form nhập/sửa/xoá → phải là <b>Google Sheets</b>.</p>
+      </div>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở <a href="guide-1-source.html">bước tạo nguồn</a>, chọn <b>Type = Google Sheets</b>, kết nối tài khoản Google và chọn spreadsheet.</li>
+        <li>Mỗi <b>sheet</b> nên là <b>một bảng</b> rõ ràng (dòng đầu = tên cột), tránh gộp nhiều bảng trong một sheet.</li>
+        <li>Sau đó tạo <b>Dataset</b> từ nguồn Sheets này (xem <a href="guide-2-dataset.html">cách tạo Dataset</a>) — đây sẽ là dataset “nền” gắn vào Workboard ở <a href="miniapp-2-create.html">Chương 2</a>.</li>
+      </ol></div>
+      <div class="tip"><b>Mẹo:</b> giữ tên cột không dấu, không khoảng trắng (ví dụ <code>ma_hang</code>, <code>so_luong</code>) để ổn định khi làm Form &amp; công thức.</div>
+    </section>
+
+    <section class="doc" id="m1-pk">
+      <h3 class="feat"><span class="feat-id">1.2</span>Khoá chính &amp; kiểu dữ liệu rõ ràng</h3>
+      <p><b>Là gì:</b> vì mini-app <b>sửa/xoá theo từng hàng</b>, mỗi bảng nhập liệu cần một <b>khoá chính (PK)</b> ổn định để hệ thống biết đang thao tác đúng dòng nào.</p>
+      <div class="howto"><h4>⚙ Yêu cầu</h4><ol>
+        <li>Mỗi bảng nhập liệu có <b>một cột khoá</b> duy nhất (ví dụ <code>id</code>, <code>ma_phieu</code>) — không trùng, không để trống.</li>
+        <li>Kiểu dữ liệu đúng: số là số, ngày là ngày (dùng <b>Tự nhận dạng kiểu</b> trong Dataset). Cột số bị nhận thành chữ sẽ không cộng/tính được trên app.</li>
+        <li>Với bảng cha–con (đơn ↔ dòng hàng), giữ khoá liên kết nhất quán để phiếu nhập gom đúng dòng.</li>
+      </ol></div>
+      <div class="note"><b>Lưu ý vi-VN (dấu phẩy thập phân):</b> Google Sheets tiếng Việt có thể dùng dấu <b>phẩy</b> làm thập phân — hãy đảm bảo cột số ở dạng number chuẩn để không bị lệch ×10/×100 khi tính tổng.</div>
+    </section>
+
+    <section class="doc" id="m1-rls">
+      <h3 class="feat"><span class="feat-id">1.3</span>Cột <code>miniapp_user</code> — chìa khoá phân quyền hàng (RLS)</h3>
+      <p><b>Là gì:</b> điểm “khắt khe” quan trọng nhất. Nếu muốn <b>mỗi người chỉ thấy dữ liệu của mình</b> (RLS theo hàng), bảng đó phải có cột <b>miniapp_user</b> chứa username của người tạo hàng. Hệ thống dùng nó để lọc <code>miniapp_user = {{app_user.username}}</code>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Thêm cột <b>miniapp_user</b> vào các bảng “theo người dùng” (ví dụ bảng <i>Dòng phiếu</i>, <i>Đơn/Phiếu</i>).</li>
+        <li>Khi người dùng nhập một hàng qua app, hệ thống <b>tự điền username</b> của họ vào cột này.</li>
+        <li>Bảng <b>dùng chung cho mọi người</b> (danh mục sản phẩm, kho…) thì <b>không</b> cần cột này — sẽ <b>đánh dấu “shared”</b> ở tab Users (<a href="miniapp-4-users.html">Chương 4</a>).</li>
+      </ol></div>
+      <figure><img src="images/gm-users.png" alt="Phân quyền dữ liệu theo miniapp_user"><figcaption><span class="exlabel">VÍ DỤ</span>Tab <b>Users → Phân quyền dữ liệu</b>: bảng có <b>miniapp_user column</b> → <b>per-user</b>; bảng thiếu → “<b>chưa rõ</b>”, cần <b>thêm cột miniapp_user</b> hoặc <b>generate dataset model</b> / đánh dấu <b>shared</b>.</figcaption></figure>
+      <div class="callout"><b>Nếu bỏ qua:</b> bảng không có <code>miniapp_user</code> và chưa đánh dấu shared sẽ ở trạng thái <b>“chưa rõ”</b> (No semantic model — cannot infer access). App vẫn chạy nhưng <b>không đảm bảo cô lập dữ liệu giữa người dùng</b>. Đây là lỗi hay gặp nhất khi bàn giao mini-app.</div>
+    </section>
+
+    <section class="doc" id="m1-model">
+      <h3 class="feat"><span class="feat-id">1.4</span>Semantic model &amp; bảng dùng chung</h3>
+      <p><b>Là gì:</b> để hệ thống hiểu quan hệ giữa các bảng (đơn ↔ dòng ↔ danh mục) và suy ra cách thừa kế quyền, nên <b>khai báo model</b> cho Dataset (như tab Model ở <a href="guide-2-dataset.html#s2-model">Báo cáo Chương 2</a>) hoặc bấm <b>generate dataset model</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Trong Dataset, sang tab <b>Model</b> nối quan hệ (ví dụ <i>Dòng phiếu</i> → <i>Danh mục sản phẩm</i> qua <code>ma_hang</code>).</li>
+        <li>Với bảng tra cứu dùng chung (danh mục, kho, đơn vị) → ở tab Users bấm <b>“Đánh dấu shared”</b> để mọi người đều xem được.</li>
+        <li>Bấm <b>Refresh</b> ở tab Users để hệ thống nhận lại trạng thái phân quyền sau khi chỉnh.</li>
+      </ol></div>
+    </section>
+
+    <section class="doc" id="m1-check">
+      <h3 class="feat"><span class="feat-id">1.5</span>Checklist Dataset cho Mini App</h3>
+      <ul>
+        <li>✅ Nguồn là <b>Google Sheets</b> (nếu app cần nhập liệu).</li>
+        <li>✅ Mỗi bảng nhập liệu có <b>khoá chính</b> ổn định; <b>kiểu dữ liệu</b> đúng.</li>
+        <li>✅ Bảng “theo người” có cột <b>miniapp_user</b>; bảng dùng chung được <b>đánh dấu shared</b>.</li>
+        <li>✅ Đã khai báo/generate <b>model</b>; tab Users không còn bảng “chưa rõ”.</li>
+      </ul>
+      <div class="note"><b>Lỗi hay gặp:</b> ① dùng nguồn PostgreSQL/BigQuery cho app nhập liệu → không ghi được; ② quên cột <code>miniapp_user</code> → rò rỉ dữ liệu giữa người dùng; ③ cột số sai kiểu (dấu phẩy thập phân) → tính tổng sai; ④ thiếu khoá chính → sửa/xoá nhầm hàng.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-2-create.html"><b>Chương 2 · Tạo Workboard &amp; Workspace</b></a> — gắn Dataset này vào một mini-app.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-2-dataset.html">📖 Dataset (báo cáo) →</a><a href="workboards.html">📖 Tài liệu module: Workboard →</a><a href="miniapp-2-create.html">➡️ Chương 2: Tạo Workboard →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=11"></script>
+</body></html>

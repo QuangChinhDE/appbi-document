@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini App · Chương 2 · Tạo Workboard & Workspace — Hướng dẫn AppBI</title>
+<meta name="description" content="Mini App Chương 2: tạo Workboard (gắn Dataset nền), hiểu Builder — Workspaces, danh sách screen, mỗi screen chọn 1 bảng, App settings, live preview.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
+  <div style="margin-top:8px"><span class="ic">🧩</span></div>
+  <h1>Chương 2 · Tạo Workboard &amp; Workspace</h1>
+  <p>Có Dataset rồi, giờ tạo <b>Workboard</b> (một Workboard = một Mini App) và làm quen <b>Builder</b>: gắn dataset nền, chia <b>Workspace</b>, và thêm các <b>màn hình (screen)</b>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="m2-list">
+      <h3 class="feat"><span class="feat-id">2.1</span>Màn hình Workboards</h3>
+      <p><b>Là gì:</b> nơi quản lý mọi Mini App. Mỗi dòng là một Workboard với <b>trạng thái</b> (Bản nháp / Đã xuất bản), <b>Dataset</b> nền, chủ sở hữu.</p>
+      <div class="howto"><h4>⚙ Cách mở</h4><ol>
+        <li>Vào module <b>Workboard</b> (biểu tượng bảng kẹp ở thanh trái).</li>
+        <li>Trên cùng: <b>Tạo workboard</b> và <b>Import</b> (nhập bản export sẵn); có bộ lọc theo trạng thái/quyền/dataset.</li>
+      </ol></div>
+      <figure><img src="images/gm-list.png" alt="Danh sách Workboards"><figcaption><span class="exlabel">VÍ DỤ</span>Module <b>Workboards</b> — 9 mini-app, mỗi cái gắn một Dataset (#139, #137, #111…), trạng thái Đã xuất bản/Bản nháp.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="m2-create">
+      <h3 class="feat"><span class="feat-id">2.2</span>Tạo Workboard — chọn Dataset nền</h3>
+      <p><b>Là gì:</b> Mini App là <b>dataset-first</b> — bạn phải chọn Dataset khi tạo. Mỗi màn hình sau này sẽ chọn <b>một bảng</b> từ dataset này.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">+ Tạo workboard</span>.</li>
+        <li>Nhập <b>Tên workboard</b> (bắt buộc) + <b>Mô tả</b>.</li>
+        <li>Chọn <b>Dataset</b> — dùng Dataset Google Sheets đã chuẩn bị ở <a href="miniapp-1-dataset.html">Chương 1</a>.</li>
+        <li>Bấm <b>Tạo</b> → mở thẳng vào <b>Builder</b>.</li>
+      </ol></div>
+      <figure><img src="images/gm-create.png" alt="Hộp tạo Workboard"><figcaption><span class="exlabel">VÍ DỤ</span><b>Tạo workboard</b> — Tên + Mô tả + <b>Dataset</b> (bắt buộc). Ghi chú: “Mỗi screen trong Builder sẽ tự chọn bảng từ dataset này.”</figcaption></figure>
+    </section>
+
+    <section class="doc" id="m2-builder">
+      <h3 class="feat"><span class="feat-id">2.3</span>Builder — Workspace, screen &amp; xem trước</h3>
+      <p><b>Là gì:</b> màn dựng app. Bên trái cấu hình, bên phải <b>LIVE PREVIEW</b> cập nhật ngay như người dùng thấy.</p>
+      <ul>
+        <li><b>BOUND DATASET</b> — dataset nền + số bảng khả dụng; nút <b>App settings</b> (thương hiệu/giao diện app).</li>
+        <li><b>WORKSPACES</b> — nhóm các màn hình (ví dụ “Kho”, “Báo cáo”). Có thể có nhiều Workspace.</li>
+        <li><b>Danh sách screen</b> — mỗi screen gắn 1 bảng, có trạng thái <b>Configured / Needs fields</b>.</li>
+        <li>Thanh trên: tab <b>Builder / Users / Preview / Webhook</b> + <b>Chia sẻ</b> + <b>Export</b> + trạng thái xuất bản.</li>
+      </ul>
+      <figure><img src="images/gm-builder.png" alt="Workboard Builder"><figcaption><span class="exlabel">VÍ DỤ</span><b>Builder</b> của “Kho — Quét &amp; Phiếu”: bound dataset “Kho InvenTree”, 8 screen (Form/Table/Doc), live preview mini-app bên phải.</figcaption></figure>
+      <div class="tip"><b>Workspace để làm gì:</b> gom màn hình theo vai trò/nghiệp vụ. Khi chia sẻ (Chương 5) có thể bật/tắt từng Workspace hoặc từng screen cho người xem.</div>
+    </section>
+
+    <section class="doc" id="m2-check">
+      <h3 class="feat"><span class="feat-id">2.4</span>Checklist</h3>
+      <ul>
+        <li>✅ Đã tạo Workboard và <b>gắn đúng Dataset</b> (Google Sheets).</li>
+        <li>✅ Hiểu bố cục Builder: <b>Workspace → screen → bảng</b>.</li>
+        <li>✅ Biết chỗ mở <b>App settings</b>, tab <b>Users</b>, <b>Chia sẻ</b>.</li>
+      </ul>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-3-screens.html"><b>Chương 3 · Dựng màn hình</b></a> — thêm &amp; cấu hình Form / Table / Document / Dashboard.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="miniapp-1-dataset.html">← Chương 1: Dataset</a><a href="workboards.html">📖 Tài liệu module: Workboard →</a><a href="miniapp-3-screens.html">➡️ Chương 3: Màn hình →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=11"></script>
+</body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini App · Chương 3 · Dựng màn hình — Hướng dẫn AppBI</title>
+<meta name="description" content="Mini App Chương 3: 4 loại màn hình (Form/Table/Document/Dashboard) và cách cấu hình một screen — chọn bảng nguồn, cột hiện/sửa, hành vi hàng, chế độ POS, quyền.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
+  <div style="margin-top:8px"><span class="ic">🖥️</span></div>
+  <h1>Chương 3 · Dựng màn hình</h1>
+  <p>Màn hình (screen) là thứ người dùng thực sự thao tác. AppBI có <b>4 loại screen</b>; mỗi screen gắn <b>một bảng</b> của dataset nền và có bộ cấu hình riêng. Xem trước trực tiếp khi chỉnh.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="m3-kinds">
+      <h3 class="feat"><span class="feat-id">3.1</span>4 loại màn hình</h3>
+      <p><b>Là gì:</b> ở khu <b>Thêm screen</b> chọn một trong 4 loại:</p>
+      <ul>
+        <li><b>Form</b> — nhập một bản ghi mỗi lần (phiếu nhập, đăng ký). Hợp cho <b>nhập liệu tuần tự</b>.</li>
+        <li><b>Table</b> — bảng nhiều dòng, có thể <b>sửa trực tiếp</b> từng ô, thêm/xoá hàng; hỗ trợ <b>chế độ POS</b> (quét mã → gom giỏ).</li>
+        <li><b>Document</b> — trang in A4 (phiếu kho, báo cáo in) dựng từ block.</li>
+        <li><b>Dashboard</b> — nhúng biểu đồ/KPI (đọc) ngay trong app.</li>
+      </ul>
+      <figure><img src="images/gm-builder.png" alt="Danh sách screen với 4 loại"><figcaption><span class="exlabel">VÍ DỤ</span>Nút <b>Form / Table / Document / Dashboard</b> để thêm screen; danh sách 8 screen của app kho (mỗi screen gắn 1 bảng, trạng thái Configured/Needs fields).</figcaption></figure>
+    </section>
+
+    <section class="doc" id="m3-config">
+      <h3 class="feat"><span class="feat-id">3.2</span>Cấu hình một screen</h3>
+      <p><b>Là gì:</b> bấm vào một screen để mở trình cấu hình. 3 tab: <b>Content</b> (nội dung), <b>Permissions</b> (quyền), <b>Settings</b> (thiết lập).</p>
+      <div class="howto"><h4>⚙ Cách làm (ví dụ screen Table)</h4><ol>
+        <li><b>Data source</b> — chọn <b>bảng</b> của dataset cho screen (ví dụ <i>Dòng phiếu (DonHang_Dong)</i>).</li>
+        <li><b>Visible columns</b> — chọn cột hiển thị &amp; thứ tự.</li>
+        <li><b>Editable columns</b> — cột nào cho <b>sửa</b> (số còn lại chỉ đọc).</li>
+        <li><b>Row behaviour</b> — cho phép <b>Thêm/Xoá</b> hàng hay không.</li>
+        <li><b>Chế độ POS</b> — quét mã hàng → tự gom vào giỏ/phiếu (cho nghiệp vụ kho/bán hàng).</li>
+        <li><b>Paging &amp; sorting</b>, <b>New row defaults</b> (giá trị mặc định), <b>Footer totals</b>, <b>Empty state</b>…</li>
+      </ol></div>
+      <figure><img src="images/gm-screen.png" alt="Cấu hình screen Table"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình screen <b>Quét &amp; Lập phiếu</b> — Data source = Dòng phiếu; Visible columns (ma_hang/ten_hang/so_luong/don_gia/thanh_tien); Editable, Row behaviour, POS; preview cập nhật bên phải.</figcaption></figure>
+      <div class="tip"><b>Trạng thái screen:</b> “<b>Configured</b>” là xong; “<b>Needs fields</b>” nghĩa là chưa chọn cột/bảng — bổ sung để screen chạy được.</div>
+    </section>
+
+    <section class="doc" id="m3-perm">
+      <h3 class="feat"><span class="feat-id">3.3</span>Quyền &amp; thiết lập theo screen</h3>
+      <ul>
+        <li><b>Permissions (theo screen)</b> — giới hạn ai xem/sửa screen này, kết hợp với App Users &amp; RLS (<a href="miniapp-4-users.html">Chương 4</a>).</li>
+        <li><b>Settings</b> — tiêu đề, icon, hành vi hiển thị của screen.</li>
+        <li>Kéo-thả để đổi thứ tự screen; thứ tự này là thứ tự tab dưới đáy app (thanh điều hướng).</li>
+      </ul>
+      <div class="note"><b>Widget nâng cao trên Form/Table:</b> ngoài ô nhập thường, còn có geopoint (bản đồ), ảnh/chữ ký, quét mã QR/barcode, cột tính toán, trạng thái — tuỳ nghiệp vụ hiện trường.</div>
+    </section>
+
+    <section class="doc" id="m3-check">
+      <h3 class="feat"><span class="feat-id">3.4</span>Checklist</h3>
+      <ul>
+        <li>✅ Mỗi màn hình gắn <b>đúng bảng</b>; chọn <b>cột hiện &amp; cột sửa</b> hợp lý.</li>
+        <li>✅ Bật <b>Thêm/Xoá</b> (và POS nếu cần) đúng nghiệp vụ.</li>
+        <li>✅ Không còn screen “<b>Needs fields</b>”; xem trước chạy đúng.</li>
+      </ul>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-4-users.html"><b>Chương 4 · App Users &amp; RLS</b></a> — cấp tài khoản đăng nhập &amp; phân quyền dữ liệu.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="miniapp-2-create.html">← Chương 2: Workboard</a><a href="workboards.html">📖 Tài liệu module: Workboard →</a><a href="miniapp-4-users.html">➡️ Chương 4: Users &amp; RLS →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=11"></script>
+</body></html>

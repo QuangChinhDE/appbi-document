@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini App · Chương 5 · Xuất bản & Cổng chia sẻ — Hướng dẫn AppBI</title>
+<meta name="description" content="Mini App Chương 5: preview, publish, chia sẻ qua Cổng /ws/, chọn screen hiển thị, người dùng đăng nhập bằng tài khoản mini-app, cài PWA trên điện thoại, Webhook & Export.">
+<link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
+  <div style="margin-top:8px"><span class="ic">🚀</span></div>
+  <h1>Chương 5 · Xuất bản &amp; Cổng chia sẻ</h1>
+  <p>Bước cuối: kiểm tra app, <b>xuất bản</b>, rồi phát cho người dùng qua <b>Cổng</b> (link <code>/ws/</code>). Người dùng đăng nhập bằng <b>tài khoản mini-app</b> (Chương 4) — không cần tài khoản AppBI — và có thể <b>cài lên điện thoại như một app</b>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="m5-preview">
+      <h3 class="feat"><span class="feat-id">5.1</span>Preview &amp; xuất bản</h3>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Dùng <b>LIVE PREVIEW</b> trong Builder (hoặc tab <b>Preview</b>) để thử app như người dùng — chọn thử user/role để xem RLS đúng chưa.</li>
+        <li>Kiểm tra thao tác nhập/sửa/xoá trên các screen Form/Table.</li>
+        <li>Khi ổn, đặt trạng thái <b>Đã xuất bản</b> (publish) — do owner thực hiện.</li>
+      </ol></div>
+      <div class="note"><b>Publish do owner:</b> chỉ chủ sở hữu mới xuất bản/gỡ xuất bản. Bản nháp vẫn chỉnh được nhưng chưa phát ra Cổng.</div>
+    </section>
+
+    <section class="doc" id="m5-portal">
+      <h3 class="feat"><span class="feat-id">5.2</span>Cổng chia sẻ — link <code>/ws/</code></h3>
+      <p><b>Là gì:</b> bấm <b>Chia sẻ</b> để lấy <b>link Cổng công khai</b>. Đây là nơi người dùng mini-app đăng nhập &amp; làm việc.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>Chia sẻ</b> (thanh trên) → hộp <b>Chia sẻ app công khai</b>.</li>
+        <li>Bật <b>Đang công khai</b>; copy <b>Link gửi cho mọi người</b> dạng <code>/ws/&lt;token&gt;</code>.</li>
+        <li>Ở <b>Hiển thị trên link</b>, bật/tắt từng <b>Workspace</b> hoặc <b>screen</b> muốn cho người xem.</li>
+        <li><b>BRANDING</b>: chỉnh logo/màu app trong <b>App settings</b>.</li>
+      </ol></div>
+      <figure><img src="images/gm-share.png" alt="Chia sẻ app công khai — Cổng"><figcaption><span class="exlabel">VÍ DỤ</span><b>Chia sẻ app công khai</b> — trạng thái Đang công khai, SCREENS VISIBLE 8/8, link <code>/ws/AhbipX12…</code>, và danh sách bật/tắt hiển thị từng screen.</figcaption></figure>
+      <div class="callout"><b>Đăng nhập của người dùng:</b> mở link Cổng, người dùng đăng nhập bằng <b>username</b> (tài khoản mini-app ở Chương 4). Nhờ RLS, mỗi người chỉ thấy &amp; ghi được dữ liệu trong phạm vi của mình.</div>
+    </section>
+
+    <section class="doc" id="m5-mobile">
+      <h3 class="feat"><span class="feat-id">5.3</span>Chạy trên điện thoại (PWA) &amp; tự động hoá</h3>
+      <ul>
+        <li><b>Mobile / PWA</b> — mở Cổng trên điện thoại, <b>cài lên màn hình chính</b> để dùng như app; hỗ trợ nhập liệu hiện trường (một số widget hoạt động offline-first rồi đồng bộ khi có mạng).</li>
+        <li><b>Webhook</b> (tab Webhook) — bắn sự kiện khi có bản ghi mới/đổi trạng thái (tích hợp hệ thống khác).</li>
+        <li><b>Export / Import</b> — xuất cả layout + dataset + semantic thành bundle để nhân bản app sang môi trường/khách khác (Import ở màn danh sách Workboards).</li>
+      </ul>
+    </section>
+
+    <section class="doc" id="m5-check">
+      <h3 class="feat"><span class="feat-id">5.4</span>Xong lộ trình Mini App — Checklist</h3>
+      <ul>
+        <li>✅ Đã <b>preview</b> theo từng role, RLS đúng (mỗi người chỉ thấy dữ liệu của mình).</li>
+        <li>✅ Đã <b>publish</b> và lấy <b>link Cổng /ws/</b>; bật đúng các screen cho người xem.</li>
+        <li>✅ Người dùng đăng nhập &amp; nhập liệu được; cài PWA trên điện thoại nếu cần.</li>
+        <li>✅ (Tuỳ chọn) cấu hình <b>Webhook</b>, và <b>Export</b> để nhân bản.</li>
+      </ul>
+      <div class="note"><b>Lỗi hay gặp:</b> ① chưa publish nên link Cổng trống; ② quên bật screen cần thiết trong “Hiển thị trên link”; ③ bảng “chưa rõ” (Chương 4) khiến dữ liệu không cô lập; ④ nguồn không phải Google Sheets nên không nhập liệu được (Chương 1).</div>
+      <p style="margin-top:14px">🎉 <b>Hoàn thành lộ trình build Mini App!</b> Bạn đã đi trọn: Dataset (Sheets) → Workboard → Màn hình → App Users &amp; RLS → Cổng chia sẻ. Xem thêm <a href="showcase.html">Sản phẩm đầu cuối</a> hoặc quay lại <a href="miniapp.html">Mục lục Mini App</a>.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="miniapp-4-users.html">← Chương 4: Users &amp; RLS</a><a href="workboards.html">📖 Tài liệu module: Workboard →</a><a href="miniapp.html">🧩 Mục lục Mini App →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=11"></script>
+</body></html>
