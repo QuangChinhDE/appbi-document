@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppBI — Nền tảng phân tích &amp; ứng dụng dữ liệu</title>
 <meta name="description" content="AppBI: kết nối dữ liệu, dựng mô hình & biểu đồ, báo cáo tương tác và mini-app vận hành — tất cả trong một.">
-<link rel="stylesheet" href="assets/styles.css?v=12">
+<link rel="stylesheet" href="assets/styles.css?v=13">
 </head>
 <body>
 
@@ -82,11 +82,12 @@
 <section class="sec" id="modules">
   <div class="container">
     <div class="sec-head center" data-reveal>
-      <span class="eyebrow">Các module</span>
-      <h2>Hệ thống theo đúng hành trình dữ liệu</h2>
-      <p class="lead">Bấm vào một module để xem các tính năng quan trọng và cách chúng liên kết với nhau.</p>
+      <span class="eyebrow">Sản phẩm</span>
+      <h2>Các module — chia theo nhóm</h2>
+      <p class="lead">Toàn cảnh các module của AppBI. Bấm vào một module để mở <b>hướng dẫn chi tiết</b>.</p>
     </div>
-    <div class="mgrid" id="mgrid"></div>
+    <div id="mgrid"></div>
+    <div class="center" data-reveal style="margin-top:26px"><a class="btn btn-ghost" href="products.html">Xem trang Sản phẩm đầy đủ →</a></div>
   </div>
 </section>
 
@@ -118,15 +119,19 @@
   </div>
 </section>
 
-<script src="assets/site.js?v=12"></script>
+<script src="assets/site.js?v=13"></script>
 <script>
 (function(){
-  /* ---- module grid from single-source APPBI_MODULES ---- */
+  /* ---- module grid grouped from single-source APPBI_MODULES ---- */
   var g=document.getElementById('mgrid');
-  if(g && window.APPBI_MODULES){
-    g.innerHTML = window.APPBI_MODULES.map(function(m,i){
-      return '<a class="mcard'+(i%3?' d'+(i%3):'')+'" data-reveal href="'+m.id+'.html">'+(m.badge?'<span class="badge">'+m.badge+'</span>':'')+
-        '<div class="ic">'+m.ic+'</div><h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">Tìm hiểu →</span></a>';
+  if(g && window.APPBI_MODULES && window.APPBI_MODGROUPS){
+    g.innerHTML = window.APPBI_MODGROUPS.map(function(grp){
+      var cards = window.APPBI_MODULES.filter(function(m){ return m.grp===grp.key; }).map(function(m){
+        var cta = grp.key==='gov' ? 'Xem chi tiết →' : 'Xem hướng dẫn →';
+        return '<a class="mcard" href="'+m.href+'">'+(m.badge?'<span class="badge">'+m.badge+'</span>':'')+
+          '<div class="ic">'+m.ic+'</div><h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">'+cta+'</span></a>';
+      }).join('');
+      return '<div class="prodgrp" data-reveal><div class="prodgrp-head"><h2>'+grp.name+'</h2><p>'+grp.d+'</p></div><div class="mgrid">'+cards+'</div></div>';
     }).join('');
   }
 

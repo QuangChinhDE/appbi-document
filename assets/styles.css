@@ -520,3 +520,75 @@ header.site .logo .mk{ background:linear-gradient(135deg,#2f6bff,#5b9bff); box-s
 .hero2 .cta .btn-ghost:hover{ box-shadow:0 0 0 1px rgba(110,168,255,.55),0 14px 38px rgba(47,107,255,.6); }
 /* module top accent bar a touch brighter */
 .mcard::before{ background:linear-gradient(90deg,#2f6bff,#38bdf8); }
+
+/* ============================================================
+   Grouped "Sản phẩm" dropdown + product-group sections
+   ============================================================ */
+.dd-menu{ width:340px; max-height:78vh; overflow-y:auto; }
+.dd-grp{ font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--muted);
+  padding:10px 10px 4px; margin-top:2px; }
+.dd-grp:first-child{ margin-top:0; }
+.dd-menu a .nb{ font-style:normal; font-size:9px; font-weight:800; background:#16a34a; color:#fff; padding:1px 6px; border-radius:999px; margin-left:6px; }
+.dd-all{ display:block; margin-top:6px; padding:10px; border-top:1px solid var(--line); color:var(--brand-d); font-weight:700; font-size:13.5px; }
+.dd-all:hover{ background:rgba(255,255,255,.05); text-decoration:none; }
+
+.prodgrp{ margin-bottom:46px; }
+.prodgrp:last-child{ margin-bottom:0; }
+.prodgrp-head{ margin:0 0 18px; padding-left:14px; border-left:3px solid var(--brand); }
+.prodgrp-head h2{ font-size:24px; margin:0; }
+.prodgrp-head p{ margin:4px 0 0; color:var(--muted); font-size:15px; }
+
+/* ============================================================
+   DOCS TYPOGRAPHY & LAYOUT POLISH — bigger, clearer, easier to read
+   ============================================================ */
+.doc-wrap.docs3{ grid-template-columns:246px minmax(0,1fr) 216px; gap:48px; padding-top:44px; }
+.doc-main{ font-size:16.5px; line-height:1.78; }
+.doc-main > .doclead{ font-size:18px; color:#bcd0ee; margin:2px 0 22px; }
+.doc-main p{ margin:13px 0; }
+.doc-main ul, .doc-main ol{ margin:13px 0; padding-left:24px; }
+.doc-main li{ margin:7px 0; }
+.doc-main ul ul{ margin:5px 0; }
+
+/* section spacing + clearer separators */
+.doc-main section.doc{ padding:34px 0 30px; border-top:1px solid var(--line); }
+.doc-main section.doc:first-of-type{ padding-top:6px; }
+h3.feat{ font-size:26px; gap:12px; margin-bottom:12px; letter-spacing:-.02em; }
+.feat-id{ font-size:13px; padding:4px 11px; border-radius:9px; }
+.doc-main h4{ font-size:17.5px; color:#eef4ff; margin:22px 0 8px; }
+
+/* how-to & callouts — roomier */
+.howto{ padding:16px 20px; margin:16px 0; border-radius:14px; }
+.howto h4{ font-size:12px; letter-spacing:.08em; margin:0 0 10px; }
+.howto ol{ padding-left:22px; } .howto li{ margin:8px 0; font-size:15.5px; }
+.tip,.note,.callout{ padding:14px 18px; margin:16px 0; font-size:15px; line-height:1.7; border-radius:12px; }
+.path{ font-size:14px; padding:2px 9px; }
+.exlabel{ font-size:11px; padding:2px 9px; }
+
+/* figures */
+.doc-main figure{ margin:22px 0 10px; }
+.doc-main figcaption{ font-size:13px; margin-top:10px; line-height:1.55; }
+
+/* feature cards a touch bigger */
+.featcards{ gap:16px; }
+.fcard{ padding:18px 18px 16px; gap:8px; }
+.fcard b{ font-size:16px; line-height:1.35; }
+.fcard p{ font-size:13.6px; }
+.fcard .go{ font-size:13.5px; }
+
+/* nav rails — slightly larger, more legible */
+.docnav .nvhead, .docaside .onthis .ttl{ font-size:11.5px; }
+.docnav .nvlink{ font-size:14px; }
+.docnav .nv .top{ font-size:14px; padding:7px 10px; }
+.docnav .kids a{ font-size:13.5px; padding:6px 12px; }
+.docaside .onthis a{ font-size:13.2px; padding:6px 12px; line-height:1.4; }
+.docaside{ top:88px; }
+.docnav{ top:88px; }
+
+/* pager bigger tap targets */
+.pager .pg{ padding:16px 20px; } .pager .pg b{ font-size:16px; }
+
+/* mhero copy a bit larger for guide intros */
+.mhero h1{ font-size:42px; } .mhero p{ font-size:18.5px; line-height:1.65; max-width:760px; }
+
+@media (max-width:1200px){ .doc-wrap.docs3{ grid-template-columns:230px minmax(0,1fr); } }
+@media (max-width:960px){ .doc-wrap.docs3{ grid-template-columns:1fr; } .doc-main{ font-size:16px; } }

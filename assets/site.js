@@ -1,15 +1,20 @@
 /* ===== AppBI product site — shared shell (header / footer / TOC / changelog page) ===== */
 (function(){
   var MODULES = [
-    {id:'sources',       n:'Kết nối dữ liệu',        ic:'🔌', d:'PostgreSQL, BigQuery, Sheets, Excel — truy vấn live.'},
-    {id:'datasets',      n:'Dataset & Mô hình',      ic:'🗄️', d:'Bảng, quan hệ, Measures, chất lượng dữ liệu.'},
-    {id:'explore',       n:'Explore — Biểu đồ',      ic:'📈', d:'33 loại biểu đồ, dựng bằng kéo-thả.'},
-    {id:'dashboards',    n:'Dashboard — Báo cáo',    ic:'📊', d:'Đa trang, bộ lọc, chia sẻ, trợ lý AI.'},
-    {id:'workboards',    n:'Workboard — Mini-app',   ic:'🧩', d:'Form/Table/Doc + RLS + Mobile/PWA + OCR.'},
-    {id:'govern',        n:'Govern — Quản trị',      ic:'🏛️', d:'Chỉ số dùng chung, từ điển & nhãn.', badge:'MỚI'},
-    {id:'observability', n:'Observability — Giám sát',ic:'📡', d:'Sức khoẻ dữ liệu, sự cố, lineage.', badge:'MỚI'}
+    {id:'sources',       n:'Kết nối dữ liệu',        ic:'🔌', d:'PostgreSQL, BigQuery, Sheets, Excel — truy vấn live.',        grp:'data', href:'guide-1-source.html'},
+    {id:'datasets',      n:'Dataset & Mô hình',      ic:'🗄️', d:'Bảng, quan hệ, Measures, chất lượng dữ liệu.',              grp:'data', href:'guide-2-dataset.html'},
+    {id:'explore',       n:'Explore — Biểu đồ',      ic:'📈', d:'33 loại biểu đồ, dựng bằng kéo-thả.',                       grp:'data', href:'guide-3-explore.html'},
+    {id:'dashboards',    n:'Dashboard — Báo cáo',    ic:'📊', d:'Đa trang, bộ lọc, chia sẻ, trợ lý AI.',                     grp:'data', href:'guide-5-dashboard.html'},
+    {id:'workboards',    n:'Workboard — Mini App',   ic:'🧩', d:'Form/Table/Doc + RLS + Mobile/PWA + OCR.',                   grp:'app',  href:'miniapp.html'},
+    {id:'govern',        n:'Govern — Quản trị',      ic:'🏛️', d:'Chỉ số dùng chung, từ điển & nhãn.',            badge:'MỚI', grp:'gov',  href:'govern.html'},
+    {id:'observability', n:'Observability — Giám sát',ic:'📡', d:'Sức khoẻ dữ liệu, sự cố, lineage.',             badge:'MỚI', grp:'gov',  href:'observability.html'}
   ];
-  window.APPBI_MODULES = MODULES;
+  var MODGROUPS = [
+    {key:'data', name:'Dữ liệu & Báo cáo (BI)', d:'Kết nối → mô hình → biểu đồ → dashboard.'},
+    {key:'app',  name:'Ứng dụng vận hành',      d:'Biến dữ liệu thành mini-app nhập liệu.'},
+    {key:'gov',  name:'Quản trị & Giám sát',    d:'Chuẩn hoá chỉ số & theo dõi sức khoẻ dữ liệu.'}
+  ];
+  window.APPBI_MODULES = MODULES; window.APPBI_MODGROUPS = MODGROUPS;
 
   /* Onboarding track — guided A→Z path (core system, before AI) */
   var ONBOARDING = [
@@ -48,9 +53,12 @@
   var A = function(id){ return page===id ? ' class="active"' : ''; };
 
   /* ---------- header ---------- */
-  var ddItems = MODULES.map(function(m){
-    return '<a href="'+m.id+'.html"'+(page===m.id?' style="background:var(--soft)"':'')+'><span class="di">'+m.ic+'</span><span><b>'+m.n+'</b><small>'+m.d+'</small></span></a>';
-  }).join('');
+  var ddItems = MODGROUPS.map(function(g){
+    var items = MODULES.filter(function(m){ return m.grp===g.key; }).map(function(m){
+      return '<a href="'+m.href+'"><span class="di">'+m.ic+'</span><span><b>'+m.n+(m.badge?' <em class="nb">'+m.badge+'</em>':'')+'</b><small>'+m.d+'</small></span></a>';
+    }).join('');
+    return '<div class="dd-grp">'+g.name+'</div>'+items;
+  }).join('') + '<a class="dd-all" href="products.html"'+(page==='products'?' aria-current="page"':'')+'>Xem tất cả sản phẩm →</a>';
   document.body.insertAdjacentHTML('afterbegin',
     '<header class="site"><div class="container bar">'+
       '<a class="logo" href="index.html"><span class="mk">📊</span> AppBI</a>'+
@@ -70,7 +78,7 @@
     '</div></header>');
 
   /* ---------- footer ---------- */
-  var footCols = MODULES.map(function(m){ return '<a href="'+m.id+'.html">'+m.n+'</a>'; }).join('');
+  var footCols = MODULES.map(function(m){ return '<a href="'+m.href+'">'+m.n+'</a>'; }).join('');
   document.body.insertAdjacentHTML('beforeend',
     '<footer class="site"><div class="container"><div class="row">'+
       '<div class="logo"><span class="mk">📊</span> AppBI</div>'+
