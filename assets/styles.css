@@ -592,3 +592,66 @@ h3.feat{ font-size:26px; gap:12px; margin-bottom:12px; letter-spacing:-.02em; }
 
 @media (max-width:1200px){ .doc-wrap.docs3{ grid-template-columns:230px minmax(0,1fr); } }
 @media (max-width:960px){ .doc-wrap.docs3{ grid-template-columns:1fr; } .doc-main{ font-size:16px; } }
+
+/* ============================================================
+   WIDE DOCS + QUICK SEARCH + TYPOGRAPHY v3
+   ============================================================ */
+
+/* ---- docs pages stretch near full screen (set via body.docs-page by site.js) ---- */
+body.docs-page .container{ max-width:min(1760px, 96.5vw); }
+body.docs-page .doc-wrap.docs3{ grid-template-columns:272px minmax(0,1fr) 248px; gap:56px; }
+body.docs-page .doc-main{ font-size:17px; line-height:1.8; max-width:none; }
+/* keep prose lines comfortable even on ultra-wide: cap text blocks, let figures go full */
+body.docs-page .doc-main p, body.docs-page .doc-main ul, body.docs-page .doc-main ol,
+body.docs-page .doclead, body.docs-page .tip, body.docs-page .note, body.docs-page .callout,
+body.docs-page .howto{ max-width:1080px; }
+body.docs-page .doc-main figure, body.docs-page .featcards, body.docs-page .pager{ max-width:none; }
+@media (min-width:1400px){
+  body.docs-page .featcards{ grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:1200px){ body.docs-page .doc-wrap.docs3{ grid-template-columns:236px minmax(0,1fr); } }
+@media (max-width:960px){ body.docs-page .doc-wrap.docs3{ grid-template-columns:1fr; } }
+
+/* ---- global typography polish (whole site) ---- */
+body{ font-size:16.5px; }
+.sec h2{ font-size:37px; }
+.lead{ font-size:20px; }
+header.site nav a, header.site .navbtn{ font-size:15px; }
+.mcard h3{ font-size:19px; } .mcard p{ font-size:14.5px; line-height:1.6; }
+.show .b h3{ font-size:19px; } .show .b p{ font-size:14.5px; }
+.str5 h4{ font-size:17px; } .str5 p{ font-size:14.5px; }
+footer.site nav{ font-size:14.5px; }
+.clog tbody td{ font-size:13.5px; }
+.prodgrp-head h2{ font-size:26px; } .prodgrp-head p{ font-size:15.5px; }
+.frow .txt h3{ font-size:24px; }
+.frow .txt p, .frow .txt li{ font-size:15.5px; }
+
+/* ---- header search button ---- */
+.sbtn{ display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line) !important; border-radius:999px !important;
+  padding:7px 14px !important; background:rgba(255,255,255,.04) !important; }
+.sbtn:hover{ border-color:rgba(110,168,255,.5) !important; background:rgba(255,255,255,.08) !important; }
+.sbtn kbd{ font-family:inherit; font-size:10.5px; font-weight:700; color:#8fa5c8; border:1px solid var(--line);
+  border-radius:6px; padding:1px 6px; background:rgba(255,255,255,.05); }
+@media (max-width:920px){ .sbtn kbd{ display:none; } }
+
+/* ---- quick-search modal ---- */
+.srch{ position:fixed; inset:0; z-index:90; background:rgba(5,10,20,.72); backdrop-filter:blur(4px);
+  display:flex; align-items:flex-start; justify-content:center; padding:9vh 18px 18px; }
+.srch[hidden]{ display:none; }
+.srch-box{ width:100%; max-width:720px; background:var(--surface); border:1px solid rgba(110,168,255,.35);
+  border-radius:18px; box-shadow:0 40px 90px rgba(0,0,0,.6), var(--glow); overflow:hidden; }
+.srch-bar{ display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line); }
+.srch-bar span{ font-size:17px; }
+.srch-bar input{ flex:1; background:none; border:none; outline:none; color:var(--ink); font-size:16.5px; font-family:inherit; }
+.srch-bar input::placeholder{ color:#6d80a3; }
+.srch-x{ background:rgba(255,255,255,.06); border:1px solid var(--line); color:#8fa5c8; border-radius:8px;
+  font-size:11px; font-weight:700; padding:4px 9px; cursor:pointer; }
+.srch-res{ max-height:56vh; overflow-y:auto; padding:8px; }
+.srch-hint{ color:var(--muted); font-size:14px; padding:18px 14px 22px; text-align:center; }
+.srch-grp{ font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--brand-d);
+  padding:12px 12px 4px; }
+.srch-it{ display:block; padding:9px 12px; border-radius:10px; }
+.srch-it b{ display:block; color:var(--ink); font-size:14.5px; font-weight:700; }
+.srch-it small{ display:block; color:var(--muted); font-size:12.8px; line-height:1.5; margin-top:2px; }
+.srch-it:hover, .srch-it.sel{ background:var(--chip); text-decoration:none; }
+.srch-it.sel{ box-shadow:inset 2px 0 0 var(--brand); }

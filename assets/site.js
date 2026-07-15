@@ -70,10 +70,10 @@
           '<a href="guide.html"'+(trackKey==='bi'?' style="background:var(--soft)"':'')+'><span class="di">📊</span><span><b>Làm Báo cáo (BI)</b><small>Nguồn → Dataset → Chart → Dashboard → Public link</small></span></a>'+
           '<a href="miniapp.html"'+(trackKey==='app'?' style="background:var(--soft)"':'')+'><span class="di">🧩</span><span><b>Build Mini App</b><small>Dataset (Sheets) → Workboard → Màn hình → RLS → Cổng</small></span></a>'+
         '</div></div>'+
-        '<a href="showcase.html"'+A('showcase')+'>Sản phẩm đầu cuối</a>'+
         '<a href="changelog.html"'+A('changelog')+'>Cập nhật</a>'+
         '<span class="spacer"></span>'+
-        '<a class="btn btn-primary" href="showcase.html" style="padding:9px 16px">Xem demo</a>'+
+        '<button class="navbtn sbtn" id="sbtn" title="Tìm kiếm nhanh (Ctrl+K)">🔍 Tìm kiếm<kbd>Ctrl K</kbd></button>'+
+        '<a class="btn btn-primary" href="showcase.html"'+(page==='showcase'?' aria-current="page"':'')+' style="padding:9px 16px">Xem demo</a>'+
       '</nav>'+
     '</div></header>');
 
@@ -94,6 +94,63 @@
   var tt=document.getElementById('totop');
   window.addEventListener('scroll', function(){ tt.style.display = window.scrollY>600 ? 'flex':'none'; });
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ---------- QUICK SEARCH (Ctrl+K / nút 🔍) — tìm nhanh mọi trang & mọi mục ---------- */
+  document.body.insertAdjacentHTML('beforeend',
+    '<div class="srch" id="srch" hidden><div class="srch-box">'+
+      '<div class="srch-bar"><span>🔍</span><input id="srch-in" type="text" placeholder="Tìm trang, tính năng, mục hướng dẫn… (vd: slicer, public link, RLS)" autocomplete="off">'+
+      '<button class="srch-x" id="srch-x" title="Đóng (Esc)">Esc</button></div>'+
+      '<div class="srch-res" id="srch-res"><div class="srch-hint">Gõ để tìm trong toàn bộ tài liệu — tiêu đề chương, từng mục và mô tả.</div></div>'+
+    '</div></div>');
+  var srch=document.getElementById('srch'), sin=document.getElementById('srch-in'), sres=document.getElementById('srch-res');
+  var sIdx=null, sSel=0;
+  function deacc(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase(); }
+  function loadIdx(cb){ if(sIdx){ cb(); return; }
+    if(window.APPBI_SEARCH){ sIdx=window.APPBI_SEARCH.map(function(e){ e.k=deacc(e.h+' '+e.t+' '+e.x); return e; }); cb(); return; }
+    var sc=document.createElement('script'); sc.src='assets/search-index.js?v=14';
+    sc.onload=function(){ sIdx=(window.APPBI_SEARCH||[]).map(function(e){ e.k=deacc(e.h+' '+e.t+' '+e.x); return e; }); cb(); };
+    document.head.appendChild(sc); }
+  function openS(){ srch.hidden=false; document.body.style.overflow='hidden'; sin.value=''; renderS([]); sin.focus(); loadIdx(function(){}); }
+  function closeS(){ srch.hidden=true; document.body.style.overflow=''; }
+  function renderS(hits){
+    sSel=0;
+    if(!sin.value.trim()){ sres.innerHTML='<div class="srch-hint">Gõ để tìm trong toàn bộ tài liệu — tiêu đề chương, từng mục và mô tả.</div>'; return; }
+    if(!hits.length){ sres.innerHTML='<div class="srch-hint">Không thấy kết quả cho “'+sin.value.replace(/</g,'&lt;')+'”. Thử từ khoá khác (không cần dấu).</div>'; return; }
+    var byPage={}, order=[];
+    hits.slice(0,30).forEach(function(e){ if(!byPage[e.p]){ byPage[e.p]=[]; order.push(e.p); } byPage[e.p].push(e); });
+    sres.innerHTML = order.map(function(pg){
+      var es=byPage[pg];
+      return '<div class="srch-grp">'+es[0].t+'</div>'+es.map(function(e){
+        var url=e.p+(e.s?'#'+e.s:'');
+        return '<a class="srch-it" href="'+url+'"><b>'+(e.s?e.h:'Mở trang: '+e.h)+'</b>'+(e.x?'<small>'+e.x+'</small>':'')+'</a>';
+      }).join('');
+    }).join('');
+    markSel();
+  }
+  function items(){ return [].slice.call(sres.querySelectorAll('.srch-it')); }
+  function markSel(){ items().forEach(function(a,i){ a.classList.toggle('sel', i===sSel); }); var a=items()[sSel]; if(a) a.scrollIntoView({block:'nearest'}); }
+  sin.addEventListener('input', function(){
+    loadIdx(function(){
+      var q=deacc(sin.value.trim()); if(!q){ renderS([]); return; }
+      var terms=q.split(/\s+/);
+      var hits=sIdx.filter(function(e){ return terms.every(function(t){ return e.k.indexOf(t)>=0; }); });
+      hits.sort(function(a,b){ return (deacc(b.h).indexOf(terms[0])>=0?1:0)-(deacc(a.h).indexOf(terms[0])>=0?1:0); });
+      renderS(hits);
+    });
+  });
+  sin.addEventListener('keydown', function(e){
+    if(e.key==='ArrowDown'){ e.preventDefault(); sSel=Math.min(sSel+1, items().length-1); markSel(); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); sSel=Math.max(sSel-1, 0); markSel(); }
+    else if(e.key==='Enter'){ var a=items()[sSel]; if(a){ location.href=a.getAttribute('href'); closeS(); } }
+  });
+  document.getElementById('sbtn').addEventListener('click', openS);
+  document.getElementById('srch-x').addEventListener('click', closeS);
+  srch.addEventListener('click', function(e){ if(e.target===srch) closeS(); });
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey||e.metaKey) && (e.key==='k'||e.key==='K')){ e.preventDefault(); srch.hidden?openS():closeS(); }
+    else if(e.key==='Escape' && !srch.hidden){ closeS(); }
+    else if(e.key==='/' && srch.hidden && !/INPUT|TEXTAREA/.test((document.activeElement||{}).tagName||'')){ e.preventDefault(); openS(); }
+  });
 
   /* ---------- breadcrumb (any page with an .mhero band) ---------- */
   var NAV = track ? track.chapters : MODULES;
@@ -127,6 +184,7 @@
   var main=document.querySelector('.doc-main');
   var wrap=document.querySelector('.doc-wrap');
   if(main && wrap){
+    document.body.classList.add('docs-page'); /* widen layout to near-full-screen */
     var secs=[].slice.call(main.querySelectorAll('section.doc[id]'));
     var secMeta=secs.map(function(s){
       var h=s.querySelector('h3.feat');
