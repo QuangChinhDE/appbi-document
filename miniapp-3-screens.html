@@ -1,64 +1,134 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mini App · Chương 3 · Dựng màn hình — Hướng dẫn AppBI</title>
-<meta name="description" content="Mini App Chương 3: 4 loại màn hình (Form/Table/Document/Dashboard) và cách cấu hình một screen — chọn bảng nguồn, cột hiện/sửa, hành vi hàng, chế độ POS, quyền.">
+<meta name="description" content="Mini App Chương 3 (chi tiết): 4 loại màn hình Form/Table/Document/Dashboard — làm được gì, cấu hình thế nào, 32 loại field, chế độ POS, in A4, nhúng biểu đồ.">
 <link rel="stylesheet" href="assets/styles.css?v=11"></head><body>
 
 <section class="mhero"><div class="container">
   <a class="bk" href="miniapp.html">← Hướng dẫn Mini App</a>
   <div style="margin-top:8px"><span class="ic">🖥️</span></div>
   <h1>Chương 3 · Dựng màn hình</h1>
-  <p>Màn hình (screen) là thứ người dùng thực sự thao tác. AppBI có <b>4 loại screen</b>; mỗi screen gắn <b>một bảng</b> của dataset nền và có bộ cấu hình riêng. Xem trước trực tiếp khi chỉnh.</p>
+  <p>Màn hình (screen) là thứ người dùng thực sự bấm vào. Chương này đi <b>chi tiết từng loại</b>: <b>làm được gì</b>, có <b>tính năng nào</b> và <b>cấu hình ra sao</b> — đọc xong bạn biết ngay app có thể làm gì để mò dùng thử. Mỗi screen gắn <b>một bảng</b> của dataset; bên phải luôn có <b>xem trước trực tiếp</b>.</p>
 </div></section>
 
 <div class="doc-wrap container">
   <aside class="toc"></aside>
   <main class="doc-main">
 
-    <section class="doc" id="m3-kinds">
-      <h3 class="feat"><span class="feat-id">3.1</span>4 loại màn hình</h3>
-      <p><b>Là gì:</b> ở khu <b>Thêm screen</b> chọn một trong 4 loại:</p>
+    <section class="doc" id="m3-common">
+      <h3 class="feat"><span class="feat-id">3.0</span>Điểm chung của mọi screen</h3>
       <ul>
-        <li><b>Form</b> — nhập một bản ghi mỗi lần (phiếu nhập, đăng ký). Hợp cho <b>nhập liệu tuần tự</b>.</li>
-        <li><b>Table</b> — bảng nhiều dòng, có thể <b>sửa trực tiếp</b> từng ô, thêm/xoá hàng; hỗ trợ <b>chế độ POS</b> (quét mã → gom giỏ).</li>
-        <li><b>Document</b> — trang in A4 (phiếu kho, báo cáo in) dựng từ block.</li>
-        <li><b>Dashboard</b> — nhúng biểu đồ/KPI (đọc) ngay trong app.</li>
+        <li><b>Thêm screen</b>: ở khu màn hình, chọn 1 trong 4 loại — <b>Form · Table · Document · Dashboard</b>.</li>
+        <li>Mỗi screen có <b>3 tab</b>: <b>Content</b> (nội dung), <b>Permissions</b> (ai xem/sửa), <b>Settings</b> (tiêu đề, icon, hành vi).</li>
+        <li><b>Data source</b>: mỗi screen chọn <b>một bảng</b> từ dataset nền.</li>
+        <li><b>Thứ tự screen</b> = thứ tự các <b>tab dưới đáy</b> app (thanh điều hướng) — kéo-thả để đổi.</li>
+        <li>Trạng thái “<b>Configured</b>” là xong; “<b>Needs fields</b>” là chưa chọn cột/field.</li>
       </ul>
-      <figure><img src="images/gm-builder.png" alt="Danh sách screen với 4 loại"><figcaption><span class="exlabel">VÍ DỤ</span>Nút <b>Form / Table / Document / Dashboard</b> để thêm screen; danh sách 8 screen của app kho (mỗi screen gắn 1 bảng, trạng thái Configured/Needs fields).</figcaption></figure>
+      <figure><img src="images/gm-builder.png" alt="Danh sách screen 4 loại"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách 8 screen của app kho + nút thêm <b>Form / Table / Document / Dashboard</b>; live preview bên phải.</figcaption></figure>
     </section>
 
-    <section class="doc" id="m3-config">
-      <h3 class="feat"><span class="feat-id">3.2</span>Cấu hình một screen</h3>
-      <p><b>Là gì:</b> bấm vào một screen để mở trình cấu hình. 3 tab: <b>Content</b> (nội dung), <b>Permissions</b> (quyền), <b>Settings</b> (thiết lập).</p>
-      <div class="howto"><h4>⚙ Cách làm (ví dụ screen Table)</h4><ol>
-        <li><b>Data source</b> — chọn <b>bảng</b> của dataset cho screen (ví dụ <i>Dòng phiếu (DonHang_Dong)</i>).</li>
-        <li><b>Visible columns</b> — chọn cột hiển thị &amp; thứ tự.</li>
-        <li><b>Editable columns</b> — cột nào cho <b>sửa</b> (số còn lại chỉ đọc).</li>
-        <li><b>Row behaviour</b> — cho phép <b>Thêm/Xoá</b> hàng hay không.</li>
-        <li><b>Chế độ POS</b> — quét mã hàng → tự gom vào giỏ/phiếu (cho nghiệp vụ kho/bán hàng).</li>
-        <li><b>Paging &amp; sorting</b>, <b>New row defaults</b> (giá trị mặc định), <b>Footer totals</b>, <b>Empty state</b>…</li>
+    <!-- ===================== FORM ===================== -->
+    <section class="doc" id="m3-form">
+      <h3 class="feat"><span class="feat-id">3.1</span>Màn hình FORM — nhập một bản ghi mỗi lần</h3>
+      <p><b>Dùng để làm gì:</b> phiếu nhập/đăng ký/khảo sát/báo cáo hiện trường — người dùng điền một bản ghi rồi <b>Save</b>. Hợp cho nhập liệu tuần tự, có kiểm tra ràng buộc.</p>
+      <div class="howto"><h4>⚙ Khu SETUP (bên trái)</h4><ol>
+        <li><b>Form layout</b> — chia field thành <b>nhóm (group)</b>; chọn <b>Form flow</b>: <b>Single page</b> (một trang) hoặc <b>multi-step</b> (nhiều bước — hợp khi quy trình rõ ràng từng bước).</li>
+        <li><b>Submit flow</b> — sau khi lưu thì: ở lại screen / chuyển screen khác / reset để nhập tiếp.</li>
+        <li><b>Initial values</b> — đặt <b>giá trị mặc định</b> (preset) cho field khi mở form.</li>
+        <li><b>Chụp ảnh tự điền (OCR)</b> — bật để người dùng <b>chụp ảnh phiếu</b>, AI đọc và <b>điền sẵn</b> các field. Rất nhanh cho nhập liệu từ chứng từ giấy.</li>
       </ol></div>
-      <figure><img src="images/gm-screen.png" alt="Cấu hình screen Table"><figcaption><span class="exlabel">VÍ DỤ</span>Cấu hình screen <b>Quét &amp; Lập phiếu</b> — Data source = Dòng phiếu; Visible columns (ma_hang/ten_hang/so_luong/don_gia/thanh_tien); Editable, Row behaviour, POS; preview cập nhật bên phải.</figcaption></figure>
-      <div class="tip"><b>Trạng thái screen:</b> “<b>Configured</b>” là xong; “<b>Needs fields</b>” nghĩa là chưa chọn cột/bảng — bổ sung để screen chạy được.</div>
+      <figure><img src="images/gm-form-cfg.png" alt="Cấu hình Form — layout, flow, OCR"><figcaption><span class="exlabel">VÍ DỤ</span>Form config — <b>Form layout</b> (groups + Form flow Single/multi-step), <b>Submit flow</b>, <b>Initial values</b>, <b>Chụp ảnh tự điền</b> (OCR), và khu <b>FIELDS</b>.</figcaption></figure>
+
+      <h4 style="margin:18px 0 6px">Cấu hình từng field</h4>
+      <p>Bấm <b>+</b> ở khu FIELDS để thêm; mỗi field có:</p>
+      <ul>
+        <li><b>Column</b> (cột dữ liệu) · <b>Display label</b> (nhãn hiển thị) · <b>Input type</b> (loại nhập — xem 32 loại bên dưới).</li>
+        <li><b>Content group</b>, <b>Placeholder</b>, <b>Help text</b> (gợi ý).</li>
+        <li><b>Rules</b>: <b>Required</b> (bắt buộc), <b>Readonly</b> (chỉ đọc); <b>Default value</b> theo giá trị cố định (<code>abc</code>) hoặc <b>công thức</b> (<code>fx</code>).</li>
+        <li><b>Advanced</b>: điều kiện hợp lệ (valid_if), tự động đánh số, quy tắc theo field khác…</li>
+      </ul>
+      <figure><img src="images/gm-form-field.png" alt="Trình sửa field của Form"><figcaption><span class="exlabel">VÍ DỤ</span>Sửa field <code>ma_hang</code> — <b>Input type</b>, label, group, placeholder, help, <b>Required/Readonly</b>, <b>Default value</b> (abc / fx công thức), Advanced.</figcaption></figure>
+
+      <h4 style="margin:18px 0 6px">🎛️ 32 loại field (Input type) — biết để mò dùng</h4>
+      <p>Ô <b>Input type</b> quyết định người dùng nhập kiểu gì. Đây là “vũ khí” của Form — gồm:</p>
+      <ul>
+        <li><b>Cơ bản:</b> Text · Long text · Number · Email · Số điện thoại · Đường dẫn (URL) · Văn bản định dạng (Markdown) · Màu sắc.</li>
+        <li><b>Số &amp; đơn vị:</b> Tiền tệ · Phần trăm (%) · Đánh giá (sao) · Thanh trượt (slider).</li>
+        <li><b>Ngày &amp; giờ:</b> Date · Date + time · Giờ (time) · Khoảng thời gian.</li>
+        <li><b>Chọn:</b> Select (static — danh sách cố định) · Select (from table — lấy từ bảng khác) · Chọn nhiều (chips) · On/off (bật/tắt).</li>
+        <li><b>Media &amp; hiện trường:</b> Image upload · Nhiều ảnh (chụp thực địa) · File upload · Video (clip ngắn) · Ghi âm ghi chú · Chữ ký tay · Vị trí GPS (chấm công/định vị) · Bản đồ (chọn vùng trên map) · Quét mã QR/Barcode.</li>
+        <li><b>Tự động &amp; quy trình:</b> Tính tự động (công thức) · Trạng thái/duyệt · Mã QR (hiển thị/in tem).</li>
+      </ul>
+      <div class="tip"><b>Gợi ý dùng thử:</b> nhập liệu kho → <b>Quét QR/Barcode</b> cho mã hàng; nghiệm thu hiện trường → <b>Nhiều ảnh</b> + <b>Chữ ký tay</b> + <b>GPS</b>; phiếu tiền → <b>Tiền tệ</b> + field <b>Tính tự động</b> (thành tiền = SL × đơn giá); duyệt đơn → <b>Trạng thái/duyệt</b>.</div>
+    </section>
+
+    <!-- ===================== TABLE ===================== -->
+    <section class="doc" id="m3-table">
+      <h3 class="feat"><span class="feat-id">3.2</span>Màn hình TABLE — bảng nhiều dòng, sửa trực tiếp</h3>
+      <p><b>Dùng để làm gì:</b> nhập/sửa <b>nhiều dòng</b> nhanh (sổ nhập-xuất, danh sách công việc, giỏ hàng), xem dạng bảng hoặc thẻ ảnh, và bán hàng kiểu <b>POS</b> (quét mã → gom giỏ).</p>
+      <div class="howto"><h4>⚙ 14 tuỳ chọn của Table</h4><ol>
+        <li><b>Visible columns</b> — chọn cột hiển thị &amp; thứ tự.</li>
+        <li><b>Editable columns</b> — cột nào cho sửa (còn lại chỉ đọc).</li>
+        <li><b>Row behaviour</b> — cho phép <b>Thêm</b> / <b>Xoá</b> hàng.</li>
+        <li><b>Chế độ POS (quét → giỏ)</b> — quét mã hàng để tự gom vào giỏ/phiếu (kho, bán hàng).</li>
+        <li><b>Paging &amp; sorting</b> — số dòng/trang &amp; sắp xếp mặc định.</li>
+        <li><b>New row defaults</b> — field bắt buộc &amp; giá trị mặc định khi thêm hàng.</li>
+        <li><b>Footer totals</b> — dòng tổng ở chân bảng (tổng số lượng, thành tiền…).</li>
+        <li><b>Empty state</b> — thông điệp khi chưa có dữ liệu.</li>
+        <li><b>Chế độ hiển thị</b> — <b>Bảng</b> hoặc <b>Gallery</b> (thẻ ảnh, gom nhóm).</li>
+        <li><b>Header groups</b> — gộp nhiều cột dưới một tiêu đề nhóm.</li>
+        <li><b>Row merge</b> — gộp ô trùng theo cột.</li>
+        <li><b>Column presentation</b> — nhãn/định dạng hiển thị cột.</li>
+        <li><b>Detail panel</b> — mở bảng chi tiết khi bấm vào một hàng.</li>
+        <li><b>Định dạng có điều kiện</b> — tô màu ô/hàng theo điều kiện (ví dụ tồn &lt; mức → đỏ).</li>
+      </ol></div>
+      <figure><img src="images/gm-table-cfg.png" alt="Cấu hình Table"><figcaption><span class="exlabel">VÍ DỤ</span>Table config — Visible/Editable columns, Row behaviour, <b>POS</b>, Paging, New row defaults, Footer totals, Empty state, Chế độ hiển thị (Bảng/Gallery), Header groups, Row merge, Detail panel, <b>Định dạng có điều kiện</b>.</figcaption></figure>
+      <div class="tip"><b>Gợi ý dùng thử:</b> sổ kho → bật <b>Thêm/Xoá</b> + <b>Footer totals</b>; kiểm hàng bằng camera → bật <b>POS</b>; danh mục ảnh → <b>Gallery</b>; cảnh báo tồn thấp → <b>Định dạng có điều kiện</b>.</div>
+    </section>
+
+    <!-- ===================== DOCUMENT ===================== -->
+    <section class="doc" id="m3-doc">
+      <h3 class="feat"><span class="feat-id">3.3</span>Màn hình DOCUMENT — trang in A4 (phiếu/hoá đơn)</h3>
+      <p><b>Dùng để làm gì:</b> tạo <b>phiếu/hoá đơn/báo cáo in</b> đúng khổ giấy — người dùng bấm <b>In</b> hoặc <b>Excel</b> để xuất. Nội dung tự điền từ bản ghi đang chọn bằng placeholder <code>{{shared.tên_cột}}</code>.</p>
+      <div class="howto"><h4>⚙ Cấu hình</h4><ol>
+        <li><b>Page setup</b> — <b>Paper</b> (A4…), <b>Orientation</b> (dọc/ngang), <b>Margin</b> (mm), bảng nguồn chính.</li>
+        <li><b>Blocks</b> — ghép trang từ các khối: <b>Header</b> (tiêu đề/logo công ty), <b>Text</b> (đoạn văn), <b>Key-value grid</b> (các ô mã phiếu/ngày/người giao…), <b>Data table</b> (bảng chi tiết hàng hoá), <b>Mã QR</b>, <b>Spacer</b> (khoảng cách).</li>
+        <li>Chèn dữ liệu động bằng <code>{{shared.ma_don}}</code>, <code>{{shared.ngay}}</code>… trong Header/Text.</li>
+        <li>Người dùng cuối bấm <b>In</b> (in giấy/PDF) hoặc <b>Excel</b>.</li>
+      </ol></div>
+      <figure><img src="images/gm-doc-cfg.png" alt="Cấu hình Document — blocks + xem trước in"><figcaption><span class="exlabel">VÍ DỤ</span>Document “Phiếu kho (in)” — Page setup A4 dọc; blocks Header/Key-value/Data table; xem trước phiếu có <code>{{shared.ma_don}}</code>, chi tiết hàng hoá, nút <b>In / Excel</b>.</figcaption></figure>
+    </section>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <section class="doc" id="m3-dashboard">
+      <h3 class="feat"><span class="feat-id">3.4</span>Màn hình DASHBOARD — biểu đồ &amp; KPI trong app</h3>
+      <p><b>Dùng để làm gì:</b> đưa <b>báo cáo (chỉ đọc)</b> vào ngay trong mini-app — KPI, biểu đồ tồn kho, doanh thu… để quản lý xem nhanh mà không cần rời app.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Thêm screen loại <b>Dashboard</b>.</li>
+        <li>Nhúng các <b>biểu đồ/KPI</b> (tái sử dụng chart đã lưu ở <a href="guide-3-explore.html">Explore</a>, hoặc tổng hợp từ bảng của dataset).</li>
+        <li>Đây là màn <b>xem</b> — không nhập liệu; hợp làm tab “Báo cáo/Tổng quan” trong app vận hành.</li>
+      </ol></div>
+      <div class="note"><b>Khác biệt với Dashboard (Báo cáo BI):</b> Dashboard screen ở đây <b>sống bên trong mini-app</b> và tôn trọng <b>RLS của app-user</b> (mỗi người thấy số của phạm vi mình); còn Dashboard ở track Báo cáo là báo cáo độc lập chia sẻ qua link công khai.</div>
     </section>
 
     <section class="doc" id="m3-perm">
-      <h3 class="feat"><span class="feat-id">3.3</span>Quyền &amp; thiết lập theo screen</h3>
+      <h3 class="feat"><span class="feat-id">3.5</span>Quyền theo screen &amp; thiết lập</h3>
       <ul>
-        <li><b>Permissions (theo screen)</b> — giới hạn ai xem/sửa screen này, kết hợp với App Users &amp; RLS (<a href="miniapp-4-users.html">Chương 4</a>).</li>
-        <li><b>Settings</b> — tiêu đề, icon, hành vi hiển thị của screen.</li>
-        <li>Kéo-thả để đổi thứ tự screen; thứ tự này là thứ tự tab dưới đáy app (thanh điều hướng).</li>
+        <li><b>Permissions (tab)</b> — giới hạn role nào <b>xem</b>/<b>sửa</b> screen này (kết hợp App Users &amp; RLS ở <a href="miniapp-4-users.html">Chương 4</a>). Ví dụ chỉ “quản lý” thấy màn Báo cáo.</li>
+        <li><b>Settings (tab)</b> — tiêu đề, icon, ẩn/hiện, hành vi mở của screen.</li>
+        <li><b>Row action</b> (trên Table) — nút thao tác trên từng hàng (mở phiếu, đổi trạng thái…).</li>
       </ul>
-      <div class="note"><b>Widget nâng cao trên Form/Table:</b> ngoài ô nhập thường, còn có geopoint (bản đồ), ảnh/chữ ký, quét mã QR/barcode, cột tính toán, trạng thái — tuỳ nghiệp vụ hiện trường.</div>
     </section>
 
     <section class="doc" id="m3-check">
-      <h3 class="feat"><span class="feat-id">3.4</span>Checklist</h3>
+      <h3 class="feat"><span class="feat-id">3.6</span>Checklist &amp; gợi ý phối hợp</h3>
       <ul>
-        <li>✅ Mỗi màn hình gắn <b>đúng bảng</b>; chọn <b>cột hiện &amp; cột sửa</b> hợp lý.</li>
-        <li>✅ Bật <b>Thêm/Xoá</b> (và POS nếu cần) đúng nghiệp vụ.</li>
-        <li>✅ Không còn screen “<b>Needs fields</b>”; xem trước chạy đúng.</li>
+        <li>✅ Chọn <b>đúng loại screen</b> theo việc: nhập 1 phiếu → <b>Form</b>; nhập nhiều dòng/POS → <b>Table</b>; in giấy → <b>Document</b>; xem báo cáo → <b>Dashboard</b>.</li>
+        <li>✅ Form: chọn <b>Input type</b> phù hợp (QR/GPS/ảnh/chữ ký…), đặt <b>Required</b> &amp; <b>công thức</b> cần thiết.</li>
+        <li>✅ Table: bật <b>Thêm/Xoá</b>, <b>Footer totals</b>, <b>định dạng có điều kiện</b> đúng nghiệp vụ.</li>
+        <li>✅ Không còn screen “Needs fields”; xem trước chạy đúng.</li>
       </ul>
-      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-4-users.html"><b>Chương 4 · App Users &amp; RLS</b></a> — cấp tài khoản đăng nhập &amp; phân quyền dữ liệu.</p>
+      <div class="callout"><b>Phối hợp điển hình (app kho):</b> <b>Table + POS</b> để quét lập phiếu → <b>Form</b> nhập thông tin phiếu → <b>Document</b> in phiếu → <b>Dashboard</b> xem tồn. Tất cả trên cùng một dataset, chia theo các tab dưới đáy.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="miniapp-4-users.html"><b>Chương 4 · App Users &amp; RLS</b></a> — cấp tài khoản &amp; phân quyền dữ liệu.</p>
     </section>
 
     <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="miniapp-2-create.html">← Chương 2: Workboard</a><a href="workboards.html">📖 Tài liệu module: Workboard →</a><a href="miniapp-4-users.html">➡️ Chương 4: Users &amp; RLS →</a></div></section>
