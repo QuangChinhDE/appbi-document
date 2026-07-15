@@ -400,3 +400,8 @@ header.site .bar{ max-width:none; padding:0 30px; }
 .pager .pg span{ font-size:12px; color:var(--muted); font-weight:600; } .pager .pg b{ color:var(--brand-d); font-size:15px; }
 .pager .pg.next{ text-align:right; }
 @media (max-width:620px){ .pager{ flex-direction:column; } }
+
+/* onboarding overview — pipeline flow strip */
+.gflow{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; max-width:920px; margin:0 auto; }
+.gflow span{ background:#fff; border:1px solid var(--line); box-shadow:var(--shadow); padding:8px 14px; border-radius:999px; font-weight:700; font-size:13.5px; color:var(--ink); }
+.gflow .ar{ background:none; border:none; box-shadow:none; color:var(--muted); padding:0 2px; font-weight:400; }

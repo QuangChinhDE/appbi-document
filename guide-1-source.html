@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 1 · Tạo Data Source — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 1: kết nối nguồn dữ liệu vào AppBI — PostgreSQL, MySQL, BigQuery, Google Sheets, file Excel/CSV — kiểm tra kết nối và chia sẻ.">
+<link rel="stylesheet" href="assets/styles.css?v=4"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">🔌</span></div>
+  <h1>Chương 1 · Tạo Data Source</h1>
+  <p>Điểm khởi đầu của mọi báo cáo. Bạn sẽ kết nối AppBI tới nơi dữ liệu đang nằm — cơ sở dữ liệu, kho phân tích đám mây, Google Sheets hoặc file Excel/CSV — để hệ thống <b>truy vấn trực tiếp (live)</b>, không phải chép tay.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s1-list">
+      <h3 class="feat"><span class="feat-id">1.1</span>Màn hình Data Sources — nơi quản lý mọi kết nối</h3>
+      <p><b>Là gì:</b> trang <span class="path">Data Sources</span> liệt kê toàn bộ nguồn đã kết nối. Đây là nơi bạn tạo mới, tìm kiếm, lọc theo loại, kiểm tra kết nối, chia sẻ và xoá nguồn.</p>
+      <div class="howto"><h4>⚙ Cách mở &amp; đọc màn hình</h4><ol>
+        <li>Ở thanh điều hướng trái, bấm biểu tượng <b>ổ cắm 🔌 (Data Sources)</b>.</li>
+        <li>Trên cùng là các thẻ thống kê: <b>số kết nối</b>, <b>số loại nguồn</b>, số <b>Sheets / Manual</b>.</li>
+        <li>Dùng ô <b>Search</b> để tìm theo tên, hoặc bộ lọc <b>All source types</b> để lọc theo loại (PostgreSQL, BigQuery…).</li>
+        <li>Mỗi dòng hiển thị: <b>tên nguồn</b>, <b>nhãn loại</b> (PostgreSQL/BigQuery/Google Sheets…), <b>chủ sở hữu</b>, ngày cập nhật/tạo, và cột <b>Actions</b>.</li>
+        <li>Ở cột Actions có 3 nút: <b>Test connection</b> (biểu tượng tia — kiểm tra kết nối), <b>Share</b> (chia sẻ), <b>Delete</b> (xoá).</li>
+        <li>Góc trên phải có nút chuyển <b>xem dạng lưới / dạng bảng</b>.</li>
+      </ol></div>
+      <figure><img src="images/g1-source-list.png" alt="Màn hình Data Sources"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách nguồn dữ liệu — có “Olist Postgres”, các nguồn PostgreSQL/BigQuery/Google Sheets thật.</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> đặt tên nguồn theo nghiệp vụ (ví dụ <i>“Olist Postgres”</i>, <i>“DW Buoi 8”</i>) để về sau khi tạo Dataset bạn chọn đúng nguồn ngay, không phải nhớ host/IP.</div>
+    </section>
+
+    <section class="doc" id="s1-new">
+      <h3 class="feat"><span class="feat-id">1.2</span>Tạo nguồn mới &amp; 5 loại nguồn được hỗ trợ</h3>
+      <p><b>Là gì:</b> AppBI hỗ trợ <b>5 loại nguồn</b>: <b>PostgreSQL</b>, <b>MySQL</b>, <b>BigQuery</b>, <b>Google Sheets</b> và <b>Manual Table</b> (tải file Excel/CSV). Sau khi bấm tạo, hệ thống <b>tự kiểm tra kết nối</b> ngay.</p>
+      <div class="howto"><h4>⚙ Các bước chung</h4><ol>
+        <li>Bấm <span class="path">+ New Data Source</span> (Tạo nguồn dữ liệu) ở góc trên phải.</li>
+        <li>Nhập <b>Name</b> (tên nguồn, bắt buộc <span style="color:#dc2626">*</span>).</li>
+        <li>Chọn <b>Type</b> (loại nguồn) — phần cấu hình bên dưới sẽ đổi theo loại bạn chọn.</li>
+        <li>(Tuỳ chọn) nhập <b>Description</b> để đồng đội hiểu nguồn dùng cho việc gì.</li>
+        <li>Điền phần <b>Connection Configuration</b> (xem chi tiết từng loại bên dưới).</li>
+        <li>Bấm <span class="path">Create</span>. Dòng chữ <i>“Connection will be checked automatically…”</i> nghĩa là kết nối sẽ được test tự động — nếu sai, hệ thống báo lỗi ngay tại đây.</li>
+      </ol></div>
+
+      <h4 style="margin:18px 0 6px">a) PostgreSQL / MySQL — cơ sở dữ liệu quan hệ</h4>
+      <p>Điền các trường kết nối tiêu chuẩn:</p>
+      <ul>
+        <li><b>Host</b> (ví dụ <code>localhost</code> hoặc IP/tên miền máy chủ) và <b>Port</b> (PostgreSQL mặc định <code>5432</code>, MySQL <code>3306</code>).</li>
+        <li><b>Database</b> (bắt buộc) — tên database cần đọc.</li>
+        <li><b>Schema</b> (tuỳ chọn, mặc định <code>public</code> với PostgreSQL).</li>
+        <li><b>Username</b> và <b>Password</b> — bấm <b>Show</b> để xem lại mật khẩu vừa nhập.</li>
+      </ul>
+      <figure><img src="images/g1-source-new-pg.png" alt="Form tạo nguồn PostgreSQL"><figcaption><span class="exlabel">VÍ DỤ</span>Form tạo nguồn <b>PostgreSQL</b> — Host/Port/Database/Schema/Username/Password.</figcaption></figure>
+
+      <h4 style="margin:18px 0 6px">b) BigQuery — kho phân tích của Google</h4>
+      <p>BigQuery có <b>2 cách xác thực</b>, chọn 1 trong 2 ở phần <b>Authentication</b>:</p>
+      <ul>
+        <li><b>Use my Google account</b> — dùng tài khoản Google đã kết nối sẵn trong AppBI (nhanh, hợp cho cá nhân).</li>
+        <li><b>Use service account</b> — dán <b>Service Account JSON</b> (khoá dịch vụ). Hợp cho môi trường vận hành/chia sẻ đội nhóm vì không phụ thuộc tài khoản cá nhân.</li>
+      </ul>
+      <p>Sau đó nhập <b>Project ID</b> (ví dụ <code>my-gcp-project</code>); nếu chọn service account thì dán nội dung JSON vào ô <b>Service Account JSON</b>.</p>
+      <figure><img src="images/g1-source-bigquery.png" alt="Form tạo nguồn BigQuery"><figcaption><span class="exlabel">VÍ DỤ</span>BigQuery — chọn <b>Use my Google account</b> hoặc <b>Use service account</b> + Project ID.</figcaption></figure>
+      <div class="note"><b>Lưu ý bảo mật:</b> Service Account JSON được <b>mã hoá</b> khi lưu. Khi sửa nguồn, để trống ô này nghĩa là <b>giữ nguyên</b> khoá cũ (không cần dán lại).</div>
+
+      <h4 style="margin:18px 0 6px">c) Google Sheets — bảng tính</h4>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Chọn <b>Type = Google Sheets</b>, kết nối tài khoản Google.</li>
+        <li>Chọn <b>spreadsheet</b> và <b>sheet</b> cần dùng.</li>
+        <li>Bấm <b>Create</b> — dữ liệu được đọc trực tiếp từ Google Sheets mỗi lần xem.</li>
+      </ol></div>
+
+      <h4 style="margin:18px 0 6px">d) Manual Table — tải file Excel / CSV</h4>
+      <p>Khi dữ liệu chỉ nằm trong file, chọn <b>Manual Table</b> rồi <b>kéo-thả</b> file vào vùng tải lên (hoặc bấm để chọn file).</p>
+      <ul>
+        <li>Hỗ trợ định dạng <code>.csv</code>, <code>.xlsx</code>, <code>.xls</code>.</li>
+        <li>File Excel <b>nhiều sheet</b> sẽ được nạp <b>tất cả các sheet</b> thành nhiều bảng.</li>
+      </ul>
+      <figure><img src="images/g1-source-manual.png" alt="Tải file Excel/CSV làm nguồn"><figcaption><span class="exlabel">VÍ DỤ</span>Manual Table — kéo-thả <code>.csv/.xlsx/.xls</code>; Excel nhiều sheet import tất cả.</figcaption></figure>
+      <div class="tip"><b>Mẹo cho demo Olist:</b> bộ dữ liệu mẫu Olist đã được nạp sẵn qua nguồn <b>PostgreSQL “Olist Postgres”</b> — các chương sau sẽ dùng chính nguồn này để dựng Dataset &amp; biểu đồ.</div>
+    </section>
+
+    <section class="doc" id="s1-test">
+      <h3 class="feat"><span class="feat-id">1.3</span>Kiểm tra kết nối &amp; sửa cấu hình</h3>
+      <p><b>Là gì:</b> sau khi tạo, bạn có thể kiểm tra lại kết nối bất cứ lúc nào và cập nhật thông tin (đổi mật khẩu, đổi host…) một cách an toàn.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở danh sách, bấm nút <b>Test connection</b> (biểu tượng tia) trên một nguồn để kiểm tra nhanh mà không cần mở ra.</li>
+        <li>Muốn sửa: bấm vào <b>tên nguồn</b> để mở chi tiết, rồi bấm <span class="path">Edit</span>.</li>
+        <li>Sửa các trường cần thiết. <b>Mật khẩu/khoá để trống = giữ nguyên giá trị cũ.</b></li>
+        <li>Bấm <b>Update/Save</b> — kết nối được <b>kiểm tra lại tự động</b>; nếu lỗi sẽ báo ngay.</li>
+      </ol></div>
+      <figure><img src="images/15-detail-edit.png" alt="Chi tiết nguồn và kiểm tra kết nối"><figcaption><span class="exlabel">VÍ DỤ</span>Chi tiết nguồn — sửa cấu hình, kết nối được test lại tự động khi lưu.</figcaption></figure>
+      <div class="note"><b>Lưu ý:</b> nếu Test connection báo lỗi, kiểm tra lần lượt: host/port có đúng &amp; máy chủ có mở cho AppBI truy cập không, tên database/schema, và tài khoản có quyền đọc không.</div>
+    </section>
+
+    <section class="doc" id="s1-share">
+      <h3 class="feat"><span class="feat-id">1.4</span>Chia sẻ &amp; phân quyền nguồn</h3>
+      <p><b>Là gì:</b> cấp quyền cho người/nhóm khác dùng nguồn với 3 mức <b>Viewer (Xem) / Editor (Sửa) / Full (Toàn quyền)</b>. Cơ chế chia sẻ này <b>dùng nhất quán</b> cho cả Dataset, Chart, Dashboard và Workboard — nắm ở đây là hiểu toàn hệ thống.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm biểu tượng <b>Share</b> trên nguồn cần chia sẻ.</li>
+        <li>Nhập <b>email người dùng</b> (hoặc chọn <b>nhóm/team</b>).</li>
+        <li>Chọn vai trò <b>Viewer / Editor / Full</b>.</li>
+        <li>Bấm <b>Share</b>. Có thể <b>thu hồi</b> quyền bất cứ lúc nào trong cùng hộp thoại.</li>
+      </ol></div>
+      <figure><img src="images/16-share.png" alt="Hộp thoại chia sẻ nguồn"><figcaption><span class="exlabel">VÍ DỤ</span>Chia sẻ theo người &amp; nhóm với 3 mức quyền.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s1-check">
+      <h3 class="feat"><span class="feat-id">1.5</span>Xong Chương 1 — Checklist &amp; lỗi thường gặp</h3>
+      <p>Trước khi sang Chương 2 (Dataset), hãy chắc chắn:</p>
+      <ul>
+        <li>✅ Đã tạo được ít nhất <b>1 nguồn</b> và <b>Test connection</b> báo thành công.</li>
+        <li>✅ Nguồn có <b>tên dễ hiểu</b> theo nghiệp vụ.</li>
+        <li>✅ Bạn biết nguồn này chứa <b>những bảng nào</b> mình sẽ cần (không cần lấy hết cả schema).</li>
+      </ul>
+      <div class="callout"><b>Nhắc lại nguyên tắc:</b> AppBI <b>không sao chép</b> dữ liệu — mỗi lần xem báo cáo, hệ thống truy vấn trực tiếp lên nguồn. Vì vậy chỉ cần giữ kết nối &amp; quyền đọc là dữ liệu luôn mới.</div>
+      <div class="note"><b>Lỗi hay gặp:</b> ① sai port/host → không kết nối được; ② tài khoản thiếu quyền đọc schema; ③ với BigQuery, thiếu <b>Project ID</b> hoặc dán nhầm Service Account JSON; ④ file Excel sai định dạng ngày/tháng khiến cột bị nhận nhầm kiểu — sẽ xử lý ở Chương 2 (Dataset · Quality).</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-2-dataset.html"><b>Chương 2 · Tạo Dataset</b></a> — gom các bảng từ nguồn này thành một Dataset sẵn sàng để phân tích.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="sources.html">📖 Tài liệu module: Kết nối dữ liệu →</a><a href="guide-2-dataset.html">➡️ Chương 2: Dataset →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=4"></script>
+</body></html>

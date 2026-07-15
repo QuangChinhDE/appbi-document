@@ -10,7 +10,22 @@
     {id:'observability', n:'Observability — Giám sát',ic:'📡', d:'Sức khoẻ dữ liệu, sự cố, lineage.', badge:'MỚI'}
   ];
   window.APPBI_MODULES = MODULES;
+
+  /* Onboarding track — guided A→Z path (core system, before AI) */
+  var ONBOARDING = [
+    {id:'guide-1-source',    n:'1 · Tạo Data Source',          ic:'🔌', d:'Kết nối PostgreSQL/BigQuery/Sheets/Excel, test & chia sẻ.'},
+    {id:'guide-2-dataset',   n:'2 · Tạo Dataset',              ic:'🗄️', d:'Gom bảng, source/calculated/calendar, tab Quality.'},
+    {id:'guide-3-model',     n:'3 · Nối Model',                ic:'🧩', d:'Relationship/join, khoá, Measures, semantic.'},
+    {id:'guide-4a-explore',  n:'4A · Explore & tính năng chart',ic:'📈', d:'Gán role, aggregation, filter/sort/limit, preview/SQL, lưu.'},
+    {id:'guide-4b-charts',   n:'4B · Thư viện 33 loại chart',  ic:'📊', d:'Đủ 33 loại theo 9 nhóm + tuỳ chọn riêng từng loại.'},
+    {id:'guide-5-dashboard', n:'5 · Dashboard',                ic:'🧱', d:'Thêm chart đã lưu, layout, bộ lọc, đa trang.'},
+    {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.'},
+    {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…'}
+  ];
+  window.APPBI_ONBOARDING = ONBOARDING;
+
   var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/,'') || 'index';
+  var isGuidePage = page==='guide' || /^guide-/.test(page);
   var A = function(id){ return page===id ? ' class="active"' : ''; };
 
   /* ---------- header ---------- */
@@ -24,6 +39,7 @@
       '<nav id="nav">'+
         '<a href="index.html"'+A('index')+'>Tổng quan</a>'+
         '<div class="dd" id="dd"><button class="navbtn" id="ddbtn">Sản phẩm ▾</button><div class="dd-menu">'+ddItems+'</div></div>'+
+        '<a href="guide.html"'+(isGuidePage?' class="active"':'')+'>Hướng dẫn A→Z</a>'+
         '<a href="showcase.html"'+A('showcase')+'>Sản phẩm đầu cuối</a>'+
         '<a href="changelog.html"'+A('changelog')+'>Cập nhật</a>'+
         '<span class="spacer"></span>'+
@@ -50,13 +66,20 @@
   tt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 
   /* ---------- breadcrumb (any page with an .mhero band) ---------- */
+  var NAV = isGuidePage ? ONBOARDING : MODULES;
   var curMod=null, curIdx=-1;
-  MODULES.forEach(function(m,i){ if(m.id===page){ curMod=m; curIdx=i; } });
+  NAV.forEach(function(m,i){ if(m.id===page){ curMod=m; curIdx=i; } });
   var mheroC=document.querySelector('.mhero .container');
   if(mheroC){
     var crumbLast = curMod ? curMod.n :
-      (page==='showcase' ? 'Sản phẩm đầu cuối' : page==='changelog' ? 'Cập nhật & Lộ trình' : (document.title.split('—')[0]||'').trim());
-    var midCrumb = curMod ? '<a href="index.html#modules">Sản phẩm</a><span class="sep">›</span>' : '';
+      (page==='guide' ? 'Hướng dẫn A→Z'
+      : page==='showcase' ? 'Sản phẩm đầu cuối'
+      : page==='changelog' ? 'Cập nhật & Lộ trình'
+      : (document.title.split('—')[0]||'').trim());
+    var midCrumb = curMod
+      ? (isGuidePage ? '<a href="guide.html">Hướng dẫn A→Z</a><span class="sep">›</span>'
+                     : '<a href="index.html#modules">Sản phẩm</a><span class="sep">›</span>')
+      : '';
     mheroC.insertAdjacentHTML('afterbegin',
       '<nav class="breadcrumb"><a href="index.html">🏠 Trang chủ</a><span class="sep">›</span>'+midCrumb+
       '<span class="cur">'+crumbLast+'</span></nav>');
@@ -84,9 +107,9 @@
     if(!left.parentNode) wrap.insertBefore(left, main);
     left.className='docnav';
     left.innerHTML =
-      '<div class="nvhead">Tài liệu sản phẩm</div>'+
-      '<a class="nvlink" href="index.html">Tổng quan</a>'+
-      '<div class="nvgroup">'+ MODULES.map(function(m){
+      '<div class="nvhead">'+(isGuidePage?'Hướng dẫn A→Z':'Tài liệu sản phẩm')+'</div>'+
+      '<a class="nvlink" href="'+(isGuidePage?'guide.html':'index.html')+'">'+(isGuidePage?'Tổng quan hướng dẫn':'Tổng quan')+'</a>'+
+      '<div class="nvgroup">'+ NAV.map(function(m){
         var on=m.id===page;
         var kids = on ? '<div class="kids">'+secMeta.map(function(s){
           return '<a href="#'+s.id+'" data-t="'+s.id+'">'+(s.idt?'<i>'+s.idt+'</i>':'')+s.title+'</a>';
@@ -94,8 +117,9 @@
         return '<div class="nv'+(on?' on':'')+'"><a class="top" href="'+m.id+'.html"><span class="di">'+m.ic+'</span>'+
           m.n+(m.badge?' <em>'+m.badge+'</em>':'')+'</a>'+kids+'</div>';
       }).join('') +'</div>'+
-      '<a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a>'+
-      '<a class="nvlink" href="changelog.html">Cập nhật &amp; Lộ trình</a>';
+      (isGuidePage
+        ? '<a class="nvlink" href="index.html#modules">Tài liệu module</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a>'
+        : '<a class="nvlink" href="guide.html">Hướng dẫn A→Z</a><a class="nvlink" href="showcase.html">Sản phẩm đầu cuối</a><a class="nvlink" href="changelog.html">Cập nhật &amp; Lộ trình</a>');
 
     /* feature cards + lead at top of content (Airbyte child-page style) */
     if(secMeta.length){
@@ -124,8 +148,10 @@
     });
 
     /* prev / next pager */
-    var prev = curIdx>0 ? MODULES[curIdx-1] : {id:'index', n:'Tổng quan'};
-    var next = (curIdx>=0 && curIdx<MODULES.length-1) ? MODULES[curIdx+1] : {id:'showcase', n:'Sản phẩm đầu cuối'};
+    var firstFallback = isGuidePage ? {id:'guide', n:'Tổng quan hướng dẫn'} : {id:'index', n:'Tổng quan'};
+    var lastFallback  = isGuidePage ? {id:'showcase', n:'Sản phẩm đầu cuối'} : {id:'showcase', n:'Sản phẩm đầu cuối'};
+    var prev = curIdx>0 ? NAV[curIdx-1] : firstFallback;
+    var next = (curIdx>=0 && curIdx<NAV.length-1) ? NAV[curIdx+1] : lastFallback;
     main.insertAdjacentHTML('beforeend',
       '<nav class="pager">'+
         '<a class="pg prev" href="'+prev.id+'.html"><span>← Trước</span><b>'+prev.n+'</b></a>'+

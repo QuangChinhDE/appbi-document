@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn sử dụng A→Z — AppBI</title>
+<meta name="description" content="Lộ trình onboarding cho người mới: từ kết nối nguồn dữ liệu đến khi có link báo cáo chia sẻ — trọn vẹn phần lõi của AppBI.">
+<link rel="stylesheet" href="assets/styles.css?v=4"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="index.html">← Tổng quan</a>
+  <div style="margin-top:8px"><span class="ic">🎓</span></div>
+  <h1>Hướng dẫn sử dụng A→Z</h1>
+  <p>Lộ trình onboarding cho nhân sự mới: đi tuần tự từ <b>kết nối dữ liệu</b> → <b>dựng mô hình</b> → <b>tạo biểu đồ</b> → <b>báo cáo</b> → <b>chia sẻ link</b>. Đây là phần <b>lõi</b> của hệ thống — nắm chắc trước khi tới các tính năng AI phức tạp.</p>
+</div></section>
+
+<section class="sec"><div class="container">
+  <div class="sec-head center">
+    <span class="eyebrow">Onboarding · Hệ thống lõi</span>
+    <h2>8 chương — đi lần lượt là dùng được hệ thống</h2>
+    <p class="lead">Mỗi chương là hướng dẫn từng bước, kèm ảnh chụp thật từ hệ thống (bộ dữ liệu Olist mẫu). Làm xong chương nào tích chương đó.</p>
+  </div>
+
+  <!-- pipeline flow -->
+  <div class="gflow">
+    <span>🔌 Data Source</span><span class="ar">→</span>
+    <span>🗄️ Dataset</span><span class="ar">→</span>
+    <span>🧩 Model</span><span class="ar">→</span>
+    <span>📈 Explore / Chart</span><span class="ar">→</span>
+    <span>🧱 Dashboard</span><span class="ar">→</span>
+    <span>🎨 Theme</span><span class="ar">→</span>
+    <span>🌐 Public link</span>
+  </div>
+
+  <div class="mgrid" id="guidegrid" style="margin-top:26px"></div>
+
+  <div class="callout" style="max-width:820px;margin:28px auto 0">
+    <b>Gợi ý cách đọc:</b> nếu bạn hoàn toàn mới, hãy đi tuần tự Chương 1 → 7. Nếu chỉ cần ôn một phần, bấm thẳng vào thẻ tương ứng. Mỗi trang đều có mục lục bên phải và nút chuyển “Trước / Tiếp” ở cuối.
+  </div>
+</div></section>
+
+<script src="assets/site.js?v=4"></script>
+<script>
+(function(){
+  var g=document.getElementById('guidegrid');
+  if(g && window.APPBI_ONBOARDING){
+    g.innerHTML = window.APPBI_ONBOARDING.map(function(m){
+      return '<a class="mcard" href="'+m.id+'.html"><div class="ic">'+m.ic+'</div>'+
+        '<h3>'+m.n+'</h3><p>'+m.d+'</p><span class="go">Mở hướng dẫn →</span></a>';
+    }).join('');
+  }
+})();
+</script>
+</body></html>
