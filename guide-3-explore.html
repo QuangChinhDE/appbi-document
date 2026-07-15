@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 3 · Explore — Tạo chart — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 3: dựng biểu đồ trong Explore từ A→Z — chọn dataset, chọn loại chart (6 nhóm/33 loại), gán role, aggregation, chạy & xem preview/SQL, định dạng, filter, chế độ SQL và lưu chart. Ví dụ trên ds111 (Olist).">
+<link rel="stylesheet" href="assets/styles.css?v=8"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">📈</span></div>
+  <h1>Chương 3 · Explore — Tạo chart</h1>
+  <p><b>Explore</b> là xưởng dựng biểu đồ. Bạn chọn Dataset đã mô hình hoá ở <a href="guide-2-dataset.html">Chương 2</a>, chọn loại biểu đồ, gán field vào vai trò (role), chạy xem kết quả, tinh chỉnh định dạng rồi <b>lưu lại</b> để tái sử dụng ở Dashboard. Toàn bộ ví dụ dùng <b>Dataset 111 — Olist</b>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s3-screen">
+      <h3 class="feat"><span class="feat-id">3.1</span>Màn hình Explore — bố cục &amp; các chế độ</h3>
+      <p><b>Là gì:</b> màn Explore chia 2 nửa. <b>Trái = CẤU HÌNH</b> (dựng biểu đồ theo 3 bước). <b>Phải = XEM TRƯỚC</b> (kết quả). Thanh trên cùng gom các điều khiển chính.</p>
+      <div class="howto"><h4>⚙ Các thành phần trên thanh trên</h4><ol>
+        <li><b>Tên biểu đồ</b> (ô "Tên biểu đồ…") + dấu ✓ để xác nhận tên.</li>
+        <li><b>CHẾ ĐỘ</b>: <b>Builder</b> (kéo-thả, mặc định) hoặc <b>SQL</b> (tự viết truy vấn — xem mục 3.11).</li>
+        <li><b>DATASET</b>: chọn dataset nguồn.</li>
+        <li><b>Chạy</b> (▷): chạy truy vấn để tạo/làm mới preview.</li>
+        <li><b>Thêm ghi chú…</b> và <b>Lưu</b> (lưu chart).</li>
+      </ol></div>
+      <p>Nửa <b>XEM TRƯỚC</b> có 3 chế độ hiển thị: <b>Biểu đồ</b>, <b>Bảng</b>, <b>Query</b> (SQL) — sẽ dùng ở mục 3.6.</p>
+      <div class="note"><b>Quy tắc vàng:</b> mọi thứ ở Explore bám vào <b>Dataset</b>. Nếu thiếu field/quan hệ, hãy quay lại Chương 2 sửa Model thay vì ép ở đây.</div>
+    </section>
+
+    <section class="doc" id="s3-dataset">
+      <h3 class="feat"><span class="feat-id">3.2</span>Chọn Dataset &amp; bảng gốc</h3>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở header, mở <b>DATASET</b> và chọn (ví dụ <i>Olist E-Commerce</i>). Panel CẤU HÌNH mở khoá ngay.</li>
+        <li><b>Bảng gốc</b> được suy ra tự động từ field đầu tiên bạn chọn (ví dụ chip <b>Orders</b> ở góc phải panel) — bạn không phải chọn bảng thủ công.</li>
+        <li>Đặt <b>Tên biểu đồ</b> thể hiện rõ ý đồ (metric + chiều), ví dụ <i>“Số đơn theo trạng thái”</i>.</li>
+      </ol></div>
+      <figure><img src="images/g3-editor.png" alt="Explore — chọn dataset, panel cấu hình mở khoá"><figcaption><span class="exlabel">VÍ DỤ</span>Sau khi chọn dataset <b>Olist E-Commerce</b>, panel CẤU HÌNH hiện các bước; loại mặc định là <b>Table</b>.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s3-type">
+      <h3 class="feat"><span class="feat-id">3.3</span>Bước 1 · Chọn loại biểu đồ (33 loại · 6 nhóm)</h3>
+      <p><b>Là gì:</b> ở <b>STEP 1 · Chart Type</b>, bấm <b>Change</b> để mở thư viện <b>33 loại biểu đồ</b>, chia thành <b>6 nhóm</b>:</p>
+      <ul>
+        <li><b>Essentials (6)</b>: Table, Matrix, KPI, Gauge, Bullet, Podium</li>
+        <li><b>Comparison (6)</b>: Bar, Horizontal Bar, Grouped Bar, Stacked Bar, Bar + Line, Waterfall</li>
+        <li><b>Trend (5)</b>: Line, Area, Time Series, Ribbon, Timeline</li>
+        <li><b>Composition (6)</b>: Pie, Donut, Polar Area, Treemap, Funnel, Word Cloud</li>
+        <li><b>Relationship (8)</b>: Scatter, Bubble, 9-Box Grid, Heatmap, Boxplot, Radar, Sankey, Sunburst</li>
+        <li><b>Geo (2)</b>: Point Map, Region Map</li>
+      </ul>
+      <figure><img src="images/g3-charttype.png" alt="Thư viện loại biểu đồ theo nhóm"><figcaption><span class="exlabel">VÍ DỤ</span>Thư viện chart chia 6 tab nhóm; nhóm <b>Essentials</b> gồm Table/Matrix/KPI/Gauge/Bullet/Podium.</figcaption></figure>
+      <div class="tip"><b>Chọn loại theo câu hỏi:</b> so sánh giữa hạng mục → nhóm <i>Comparison</i>; xu hướng theo thời gian → <i>Trend</i>; tỷ trọng → <i>Composition</i>; tương quan/phân bố → <i>Relationship</i>; bản đồ → <i>Geo</i>. Chi tiết từng loại &amp; role riêng xem <a href="guide-4-charts.html">Chương 4 · Thư viện 33 loại chart</a>.</div>
+    </section>
+
+    <section class="doc" id="s3-roles">
+      <h3 class="feat"><span class="feat-id">3.4</span>Bước 2 · Gán field vào Role (Data Binding)</h3>
+      <p><b>Là gì:</b> mỗi loại biểu đồ có bộ <b>vai trò (role)</b> riêng. Bạn kéo/chọn field của Dataset vào đúng role. Với <b>Bar</b>, hai role bắt buộc là:</p>
+      <ul>
+        <li><b>X Axis</b> (trục X — chiều/dimension), ví dụ <code>order_status</code>.</li>
+        <li><b>Values (Y)</b> (giá trị — metric), ví dụ <i>Số đơn hàng</i>. Bấm <b>“+ add value (any column)…”</b> để thêm nhiều giá trị.</li>
+      </ul>
+      <p>Các loại khác có role khác nhau, ví dụ: <b>Line/Time Series</b> có <i>Time field</i>; nhiều loại có <i>Breakdown</i> (tách nhóm màu); <b>Scatter/Bubble</b> dùng <i>scatterX / scatterY</i>; <b>Table</b> chuyển sang <i>pivot</i> với <i>row/column/measure</i>.</p>
+      <figure><img src="images/g3-roles.png" alt="Data Binding — gán X Axis và Values(Y)"><figcaption><span class="exlabel">VÍ DỤ</span>Bar chart: <b>X Axis</b> = order_status, <b>Values (Y)</b> = Số đơn hàng. Header hiện chip <b>X: order_status</b>, <b>Y: Số đơn hàng</b>.</figcaption></figure>
+      <div class="note"><b>Dấu <span style="color:#dc2626">*</span></b> là role bắt buộc. Đừng nhồi quá nhiều role vào một chart — nếu cần trả lời nhiều câu hỏi, hãy tách thành nhiều chart.</div>
+    </section>
+
+    <section class="doc" id="s3-agg">
+      <h3 class="feat"><span class="feat-id">3.5</span>Aggregation, nhiều giá trị &amp; sắp xếp</h3>
+      <p><b>Là gì:</b> mỗi giá trị Y có bộ chọn <b>cách tổng hợp (aggregation)</b> ở đầu dòng. Bấm để chọn:</p>
+      <ul>
+        <li><b>AS-IS</b> (giữ nguyên — dùng cho Measure đã tính sẵn), <b>SUM</b>, <b>AVG</b>, <b>COUNT</b>, <b>MIN</b>, <b>MAX</b>, <b>COUNT DISTINCT</b>.</li>
+        <li>Biểu tượng <b>Σ↑</b> cạnh giá trị để <b>sắp xếp</b> theo giá trị đó; dấu <b>×</b> để bỏ giá trị.</li>
+      </ul>
+      <figure><img src="images/g3-agg.png" alt="Chọn cách tổng hợp aggregation"><figcaption><span class="exlabel">VÍ DỤ</span>Bộ chọn aggregation: AS-IS / SUM / AVG / COUNT / MIN / MAX / COUNT DISTINCT.</figcaption></figure>
+      <div class="callout"><b>Lưu ý:</b> nếu chọn một <b>Measure</b> (đã định nghĩa ở Chương 2) thì để <b>AS-IS</b> — measure đã mang sẵn công thức tổng hợp. Chỉ chọn SUM/AVG… khi kéo trực tiếp một <b>cột số thô</b>.</div>
+    </section>
+
+    <section class="doc" id="s3-run">
+      <h3 class="feat"><span class="feat-id">3.6</span>Chạy &amp; Xem trước — Biểu đồ / Bảng / Query (SQL)</h3>
+      <p><b>Là gì:</b> bấm <b>Chạy</b> để thực thi. Nửa phải cho xem kết quả ở <b>3 chế độ</b> — kiểm tra chéo trước khi lưu.</p>
+      <div class="howto"><h4>⚙ Ba chế độ xem</h4><ol>
+        <li><b>Biểu đồ</b>: hình trực quan (kèm số dòng &amp; thời gian chạy, ví dụ <i>8 dòng · 424.7ms</i>).</li>
+        <li><b>Bảng</b>: dữ liệu thô đứng sau biểu đồ — để <b>đối chiếu số</b> (ví dụ delivered = 96.478).</li>
+        <li><b>Query</b>: <b>SQL do backend sinh ra</b> + nút <b>Copy SQL</b>, kèm chip thông tin (<i>Engine semantic, Dialect, thời gian, số dòng, Tổng hợp trước</i>) và mục <b>Gợi ý debug</b>.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/g3-preview.png" alt="Xem trước biểu đồ"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ <b>Biểu đồ</b> — Số đơn hàng theo trạng thái.</figcaption></figure>
+        <figure><img src="images/g3-table.png" alt="Xem trước bảng dữ liệu"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ <b>Bảng</b> — đối chiếu con số từng dòng.</figcaption></figure>
+      </div>
+      <figure><img src="images/g3-sql.png" alt="Xem SQL do hệ thống sinh ra"><figcaption><span class="exlabel">VÍ DỤ</span>Chế độ <b>Query</b> — SQL sinh ra, nút Copy SQL và Gợi ý debug (chart trống, tổng lệch, cảnh báo engine, sai dialect).</figcaption></figure>
+      <div class="tip"><b>Mẹo kiểm số:</b> nếu con số ở biểu đồ trông lạ, mở tab <b>Bảng</b> đối chiếu, rồi tab <b>Query</b> copy SQL chạy thẳng trên database. Đây là cách nhanh nhất phát hiện lỗi tổng hợp / fan-out.</div>
+    </section>
+
+    <section class="doc" id="s3-visual">
+      <h3 class="feat"><span class="feat-id">3.7</span>Bước 3 · Định dạng cơ bản (VISUAL)</h3>
+      <p><b>Là gì:</b> <b>STEP 3 · Định dạng</b> có ô <b>tìm thiết lập</b> (gõ “trục/nhãn/màu”) và nhóm <b>VISUAL</b> gồm:</p>
+      <ul>
+        <li><b>Tiêu đề biểu đồ</b> — tiêu đề tuỳ chọn hiển thị trên chart.</li>
+        <li><b>Bảng màu</b> — chọn palette màu (Default + các bộ màu).</li>
+        <li><b>Series colors</b> — đổi màu từng chuỗi (ví dụ <code>order_count</code>).</li>
+        <li><b>Legend labels</b> — đổi nhãn hiển thị của chuỗi.</li>
+        <li><b>Định dạng số</b> — ví dụ <i>Rút gọn (1.2K, 3.4M)</i>.</li>
+        <li><b>Chú giải</b> — vị trí legend (Trên/Dưới/Trái/Phải…).</li>
+      </ul>
+      <figure><img src="images/g3-format.png" alt="Nhóm định dạng VISUAL"><figcaption><span class="exlabel">VÍ DỤ</span>VISUAL — tiêu đề, bảng màu, màu chuỗi, nhãn legend, định dạng số, vị trí chú giải.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s3-advanced">
+      <h3 class="feat"><span class="feat-id">3.8</span>Định dạng nâng cao (NÂNG CAO)</h3>
+      <p><b>Là gì:</b> nhóm <b>NÂNG CAO</b> chứa các tuỳ chọn sâu, mỗi mục mở gập riêng:</p>
+      <ul>
+        <li><b>Per-series number format</b> — định dạng số riêng từng chuỗi.</li>
+        <li><b>Tooltip extra fields</b> — thêm field vào tooltip khi rê chuột.</li>
+        <li><b>Annotations</b> — ghi chú/đánh dấu trên biểu đồ.</li>
+        <li><b>Conditional series colors</b> — <b>tô màu theo điều kiện</b> (ví dụ âm→đỏ, dương→xanh).</li>
+        <li><b>Calculated fields</b> — trường tính toán ngay trên chart.</li>
+        <li><b>Data labels</b> — hiện nhãn giá trị trực tiếp trên cột/điểm.</li>
+      </ul>
+      <figure><img src="images/g3-advanced.png" alt="Nhóm định dạng NÂNG CAO"><figcaption><span class="exlabel">VÍ DỤ</span>NÂNG CAO — per-series format, tooltip, annotations, conditional colors, calculated fields, data labels.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s3-axes">
+      <h3 class="feat"><span class="feat-id">3.9</span>Trục, thang đo &amp; đường benchmark</h3>
+      <p><b>Là gì:</b> nhóm <b>TRỤC &amp; THANG ĐO</b> điều chỉnh khung tọa độ:</p>
+      <ul>
+        <li><b>Range &amp; gridlines</b> — min/max của trục, đường lưới.</li>
+        <li><b>Đường benchmark (benchmark lines)</b> — vẽ đường mục tiêu/ngưỡng (ví dụ target doanh thu).</li>
+        <li><b>Bar shape</b> — kiểu dáng cột (bo góc, độ rộng…).</li>
+      </ul>
+      <figure><img src="images/g3-axes.png" alt="Trục và thang đo"><figcaption><span class="exlabel">VÍ DỤ</span>TRỤC &amp; THANG ĐO — range &amp; gridlines, benchmark lines, bar shape.</figcaption></figure>
+    </section>
+
+    <section class="doc" id="s3-filter">
+      <h3 class="feat"><span class="feat-id">3.10</span>Filter biểu đồ (lọc cấp chart)</h3>
+      <p><b>Là gì:</b> phần <b>Filter biểu đồ</b> (cuối panel) cho phép lọc dữ liệu <b>ngay trong chart</b>. Filter này được <b>lưu cùng biểu đồ</b> và <b>chạy trước</b> filter cấp Dashboard.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <b>+ Thêm filter</b>.</li>
+        <li>Chọn <b>field</b> (ví dụ <code>order_id · Orders</code>).</li>
+        <li>Chọn <b>toán tử</b> (ví dụ <b>Thuộc một trong</b> / bằng / lớn hơn / khoảng…) rồi nhập giá trị.</li>
+        <li>Thêm nhiều điều kiện nếu cần; header hiện chip đếm số <b>filter</b> đang áp.</li>
+      </ol></div>
+      <figure><img src="images/g3-filter.png" alt="Thêm filter cấp chart"><figcaption><span class="exlabel">VÍ DỤ</span>Filter biểu đồ — field <code>order_id</code> + toán tử “Thuộc một trong”; ghi chú “chạy trước filter cấp dashboard”.</figcaption></figure>
+      <div class="note"><b>Phân biệt:</b> <b>Filter biểu đồ</b> (ở đây) gắn chặt với chart và đi theo nó vào mọi Dashboard. Còn <b>filter/slicer cấp Dashboard</b> là lớp lọc bên ngoài — sẽ học ở <a href="guide-5-dashboard.html">Chương 5</a>.</div>
+    </section>
+
+    <section class="doc" id="s3-sqlsave">
+      <h3 class="feat"><span class="feat-id">3.11</span>Chế độ SQL &amp; Lưu chart</h3>
+      <p><b>Chế độ SQL (Custom SQL):</b> nếu Builder chưa đủ, chuyển <b>CHẾ ĐỘ → SQL</b> ở header để <b>tự viết truy vấn</b> cho biểu đồ (hợp với các phép tính đặc thù). Kết quả vẫn hiển thị ở nửa Xem trước như thường.</p>
+      <div class="howto"><h4>⚙ Lưu chart</h4><ol>
+        <li>Đặt <b>Tên biểu đồ</b> rõ ràng ở header.</li>
+        <li>(Tuỳ chọn) thêm <b>ghi chú</b>.</li>
+        <li>Bấm <b>Lưu</b>. Chart được lưu vào thư viện <b>All Charts</b> và có thể <b>tái sử dụng</b> ở nhiều Dashboard.</li>
+      </ol></div>
+      <div class="callout"><b>Vì sao nên lưu chart để dùng lại:</b> sửa một chart gốc thì mọi Dashboard dùng nó <b>cập nhật theo</b> — một nguồn sự thật cho visual, đỡ dựng lại nhiều lần.</div>
+    </section>
+
+    <section class="doc" id="s3-check">
+      <h3 class="feat"><span class="feat-id">3.12</span>Xong Chương 3 — Checklist</h3>
+      <ul>
+        <li>✅ Chọn đúng <b>Dataset</b> và <b>loại biểu đồ</b> hợp câu hỏi.</li>
+        <li>✅ Gán đủ <b>role bắt buộc (*)</b>; chọn đúng <b>aggregation</b> (Measure → AS-IS).</li>
+        <li>✅ <b>Chạy</b> và đối chiếu <b>Biểu đồ ↔ Bảng ↔ SQL</b> — số khớp.</li>
+        <li>✅ Đã <b>định dạng</b> (tiêu đề, màu, legend, định dạng số) và đặt <b>filter chart</b> nếu cần.</li>
+        <li>✅ Đặt <b>tên rõ ràng</b> và <b>Lưu</b> chart.</li>
+      </ul>
+      <div class="note"><b>Lỗi hay gặp:</b> ① chọn SUM cho Measure (bị tính hai lần) → để AS-IS; ② thiếu role bắt buộc → chart trống; ③ số lệch do fan-out (xem lại quan hệ ở Chương 2); ④ quên đặt tên nên khó tìm lại chart.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-4-charts.html"><b>Chương 4 · Thư viện 33 loại chart</b></a> — đi sâu từng loại: dùng khi nào, role riêng và tuỳ chọn đặc thù.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-2-dataset.html">← Chương 2: Dataset &amp; Model</a><a href="explore.html">📖 Tài liệu module: Explore →</a><a href="guide-4-charts.html">➡️ Chương 4: Thư viện chart →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=8"></script>
+</body></html>
