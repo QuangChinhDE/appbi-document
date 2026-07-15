@@ -405,3 +405,18 @@ header.site .bar{ max-width:none; padding:0 30px; }
 .gflow{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; max-width:920px; margin:0 auto; }
 .gflow span{ background:#fff; border:1px solid var(--line); box-shadow:var(--shadow); padding:8px 14px; border-radius:999px; font-weight:700; font-size:13.5px; color:var(--ink); }
 .gflow .ar{ background:none; border:none; box-shadow:none; color:var(--muted); padding:0 2px; font-weight:400; }
+
+/* onboarding — not-yet-built chapters (disabled "coming soon") */
+.docnav .nv.soon .top{ color:#aab3c5; cursor:default; }
+.docnav .nv.soon .top .di{ opacity:.5; }
+.docnav .nv.soon em.soon{ font-style:normal; font-size:9px; font-weight:800; background:#eef1f6; color:#94a3b8; padding:1px 6px; border-radius:999px; margin-left:6px; }
+.mcard.soon{ opacity:.62; box-shadow:none; }
+.mcard.soon::before{ background:linear-gradient(90deg,#cbd5e1,#e2e8f0); }
+.mcard.soon:hover{ transform:none; box-shadow:none; }
+.mcard.soon .badge{ background:#94a3b8; }
+.mcard.soon .ic{ filter:grayscale(.5); }
+.mcard.soon .go{ color:#94a3b8; }
+
+/* forward-reference link to a not-yet-built chapter (muted, non-clickable) */
+.lnk-soon{ color:#94a3b8 !important; cursor:default; text-decoration:none; border-bottom:1px dotted #cbd5e1; }
+.lnk-soon::after{ content:" (sắp ra)"; font-size:.85em; color:#aab3c5; }

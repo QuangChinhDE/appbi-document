@@ -13,8 +13,8 @@
 
   /* Onboarding track — guided A→Z path (core system, before AI) */
   var ONBOARDING = [
-    {id:'guide-1-source',    n:'1 · Tạo Data Source',          ic:'🔌', d:'Kết nối PostgreSQL/BigQuery/Sheets/Excel, test & chia sẻ.'},
-    {id:'guide-2-dataset',   n:'2 · Tạo Dataset',              ic:'🗄️', d:'Gom bảng, source/calculated/calendar, tab Quality.'},
+    {id:'guide-1-source',    n:'1 · Tạo Data Source',          ic:'🔌', d:'Kết nối PostgreSQL/BigQuery/Sheets/Excel, test & chia sẻ.', ready:true},
+    {id:'guide-2-dataset',   n:'2 · Tạo Dataset',              ic:'🗄️', d:'Gom bảng, source & SQL table, xem trước & nhận dạng kiểu.', ready:true},
     {id:'guide-3-model',     n:'3 · Nối Model',                ic:'🧩', d:'Relationship/join, khoá, Measures, semantic.'},
     {id:'guide-4a-explore',  n:'4A · Explore & tính năng chart',ic:'📈', d:'Gán role, aggregation, filter/sort/limit, preview/SQL, lưu.'},
     {id:'guide-4b-charts',   n:'4B · Thư viện 33 loại chart',  ic:'📊', d:'Đủ 33 loại theo 9 nhóm + tuỳ chọn riêng từng loại.'},
@@ -22,6 +22,7 @@
     {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.'},
     {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…'}
   ];
+  var isReady = function(m){ return !isGuidePage || m.ready === true; };
   window.APPBI_ONBOARDING = ONBOARDING;
 
   var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/,'') || 'index';
@@ -86,6 +87,13 @@
     var bk=mheroC.querySelector('.bk'); if(bk) bk.style.display='none';
   }
 
+  /* ---------- neutralize links to not-yet-built guide chapters (no dead 404 links anywhere) ---------- */
+  var notReady={}; ONBOARDING.forEach(function(m){ if(m.ready!==true) notReady[m.id]=true; });
+  [].slice.call(document.querySelectorAll('a[href^="guide-"]')).forEach(function(a){
+    var id=(a.getAttribute('href')||'').replace(/#.*$/,'').replace(/\.html$/,'');
+    if(notReady[id]){ a.classList.add('lnk-soon'); a.removeAttribute('href'); a.setAttribute('title','Chương này đang được biên soạn'); }
+  });
+
   /* ---------- DOCS SHELL (module detail pages): left nav tree · feature cards · right "on this page" + helpful · prev/next ---------- */
   var main=document.querySelector('.doc-main');
   var wrap=document.querySelector('.doc-wrap');
@@ -114,6 +122,9 @@
         var kids = on ? '<div class="kids">'+secMeta.map(function(s){
           return '<a href="#'+s.id+'" data-t="'+s.id+'">'+(s.idt?'<i>'+s.idt+'</i>':'')+s.title+'</a>';
         }).join('')+'</div>' : '';
+        if(!isReady(m)){
+          return '<div class="nv soon"><span class="top"><span class="di">'+m.ic+'</span>'+m.n+'<em class="soon">sắp ra</em></span></div>';
+        }
         return '<div class="nv'+(on?' on':'')+'"><a class="top" href="'+m.id+'.html"><span class="di">'+m.ic+'</span>'+
           m.n+(m.badge?' <em>'+m.badge+'</em>':'')+'</a>'+kids+'</div>';
       }).join('') +'</div>'+
@@ -147,11 +158,12 @@
       b.addEventListener('click', function(){ right.querySelector('.btns').hidden=true; right.querySelector('.thx').hidden=false; });
     });
 
-    /* prev / next pager */
+    /* prev / next pager — skip unbuilt (non-ready) chapters */
     var firstFallback = isGuidePage ? {id:'guide', n:'Tổng quan hướng dẫn'} : {id:'index', n:'Tổng quan'};
-    var lastFallback  = isGuidePage ? {id:'showcase', n:'Sản phẩm đầu cuối'} : {id:'showcase', n:'Sản phẩm đầu cuối'};
-    var prev = curIdx>0 ? NAV[curIdx-1] : firstFallback;
-    var next = (curIdx>=0 && curIdx<NAV.length-1) ? NAV[curIdx+1] : lastFallback;
+    var lastFallback  = isGuidePage ? {id:'guide', n:'Mục lục hướng dẫn'}   : {id:'showcase', n:'Sản phẩm đầu cuối'};
+    var prev = firstFallback, next = lastFallback;
+    for(var pi=curIdx-1; pi>=0; pi--){ if(isReady(NAV[pi])){ prev=NAV[pi]; break; } }
+    for(var ni=curIdx+1; ni<NAV.length; ni++){ if(isReady(NAV[ni])){ next=NAV[ni]; break; } }
     main.insertAdjacentHTML('beforeend',
       '<nav class="pager">'+
         '<a class="pg prev" href="'+prev.id+'.html"><span>← Trước</span><b>'+prev.n+'</b></a>'+

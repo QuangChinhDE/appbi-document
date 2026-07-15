@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 2 · Tạo Dataset — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 2: gom các bảng từ nguồn thành một Dataset — thêm bảng nguồn, bảng SQL, xem trước dữ liệu và nhận dạng kiểu — sẵn sàng để phân tích.">
+<link rel="stylesheet" href="assets/styles.css?v=6"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">🗄️</span></div>
+  <h1>Chương 2 · Tạo Dataset</h1>
+  <p>Dataset là <b>lớp mô hình</b> nằm giữa nguồn thô và biểu đồ. Bạn gom những bảng cần dùng vào một Dataset, xem trước &amp; chuẩn hoá kiểu dữ liệu — để mọi biểu đồ sau này đọc từ một nơi <b>sạch và đáng tin</b>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s2-what">
+      <h3 class="feat"><span class="feat-id">2.1</span>Dataset là gì &amp; tạo Dataset mới</h3>
+      <p><b>Là gì:</b> một <b>Dataset</b> là tập hợp các bảng liên quan (lấy từ một hoặc nhiều nguồn) được nhóm lại để phân tích. Bạn <b>không</b> cần kéo cả schema vào — chỉ thêm những bảng phục vụ đúng mục tiêu báo cáo.</p>
+      <div class="howto"><h4>⚙ Cách tạo</h4><ol>
+        <li>Mở <span class="path">Datasets</span> ở thanh điều hướng trái.</li>
+        <li>Bấm <span class="path">+ Tạo dataset</span> (New Dataset) ở góc trên phải.</li>
+        <li>Nhập <b>Name</b> (tên, bắt buộc) — đặt theo nghiệp vụ, ví dụ <i>“Olist E-Commerce”</i>.</li>
+        <li>(Tuỳ chọn) nhập <b>Description</b> để đồng đội hiểu Dataset dùng cho việc gì.</li>
+        <li>Bấm <span class="path">Create Dataset</span>. Dataset trống được tạo, sẵn sàng để thêm bảng.</li>
+      </ol></div>
+      <div class="grid2">
+        <figure><img src="images/g2-list.png" alt="Danh sách Datasets"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dataset — nhãn <b>Documented</b> / <b>Needs notes</b> cho biết đã ghi chú hay chưa.</figcaption></figure>
+        <figure><img src="images/g2-new.png" alt="Tạo Dataset mới"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Create Dataset</b> — chỉ cần Name (+ Description tuỳ chọn).</figcaption></figure>
+      </div>
+      <div class="tip"><b>Mẹo:</b> một Dataset nên tương ứng <b>một chủ đề phân tích</b> (ví dụ “Bán hàng Olist”). Đừng gom mọi thứ vào một Dataset khổng lồ — tách theo chủ đề sẽ dễ bảo trì hơn.</div>
+    </section>
+
+    <section class="doc" id="s2-detail">
+      <h3 class="feat"><span class="feat-id">2.2</span>Màn hình Dataset — tab Bảng</h3>
+      <p><b>Là gì:</b> mở một Dataset, bạn thấy <b>2 tab</b>: <b>Bảng</b> (Tables — nơi bạn đang làm việc chính) và <b>Model</b> (quan hệ &amp; đo lường — sẽ học ở <a href="guide-3-model.html">Chương 3</a>). Cột trái chia làm 3 khu:</p>
+      <ul>
+        <li><b>Source</b> — các bảng lấy trực tiếp từ nguồn (ví dụ <code>olist.olist_products</code>, <code>olist.olist_orders</code>…).</li>
+        <li><b>Calculated</b> — bảng do bạn tự dựng bằng câu lệnh SQL (bảng phái sinh/biến đổi).</li>
+        <li><b>Measures</b> — các chỉ số đo lường, gom theo bảng (ví dụ <i>Doanh thu (sản phẩm)</i>, <i>Tổng phí vận chuyển</i>). Định nghĩa Measures thuộc <a href="guide-3-model.html">Chương 3</a>.</li>
+      </ul>
+      <p>Bên phải là <b>xem trước dữ liệu</b> của bảng đang chọn, kèm thanh công cụ: <b>Xuất Excel</b>, <b>Cột</b> (ẩn/hiện cột), <b>Số dòng</b> (100/…), và nút refresh. Dưới cùng có phân trang <i>“Dòng 1–100 · Trang 1”</i>.</p>
+      <figure><img src="images/g2-tables.png" alt="Dataset Olist — tab Bảng"><figcaption><span class="exlabel">VÍ DỤ</span>Dataset <b>Olist E-Commerce</b> — 12 bảng Source, 23 Measures, và xem trước bảng <code>Products</code>.</figcaption></figure>
+      <div class="note"><b>Lưu ý về grain (độ mịn):</b> mỗi bảng nên có ý nghĩa rõ — bảng ở mức <i>đơn hàng</i> khác bảng ở mức <i>dòng hàng</i>. Trộn lẫn hai mức trong một bảng sẽ khiến mọi biểu đồ phía sau khó tin. Giữ tên bảng dễ hiểu và khoá chính ổn định.</div>
+    </section>
+
+    <section class="doc" id="s2-addtable">
+      <h3 class="feat"><span class="feat-id">2.3</span>Thêm bảng nguồn (From Table)</h3>
+      <p><b>Là gì:</b> đưa một bảng có sẵn từ nguồn vào Dataset. Đây là cách phổ biến nhất.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Ở khu <b>Source</b>, bấm <span class="path">+ Thêm</span>.</li>
+        <li>Chọn tab <b>From Table</b>.</li>
+        <li>Ở <b>Select Datasource</b> (Nguồn dữ liệu), chọn nguồn đã tạo ở <a href="guide-1-source.html">Chương 1</a> (ví dụ <i>Olist Postgres</i>).</li>
+        <li>Tích chọn <b>một hoặc nhiều bảng</b> cần đưa vào (nút <b>Add Table</b> sáng lên khi đã chọn ≥1 bảng).</li>
+        <li>Bấm <b>Add Table</b>. Bảng xuất hiện trong khu Source và có thể xem trước ngay.</li>
+      </ol></div>
+      <figure><img src="images/g2-addtable.png" alt="Thêm bảng từ nguồn"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Add table → From Table</b>: chọn datasource rồi tích các bảng cần thêm.</figcaption></figure>
+      <div class="tip"><b>Mẹo:</b> chỉ thêm bảng bạn thực sự cần cho báo cáo. Thêm ít bảng nhưng đúng thì Model (Chương 3) và bộ lọc Dashboard sau này gọn gàng hơn nhiều.</div>
+    </section>
+
+    <section class="doc" id="s2-addsql">
+      <h3 class="feat"><span class="feat-id">2.4</span>Thêm bảng bằng SQL (From SQL Query)</h3>
+      <p><b>Là gì:</b> khi cần một bảng <b>đã biến đổi</b> (lọc sẵn, gộp nhóm, join, chuẩn hoá category…), bạn tạo <b>bảng phái sinh</b> bằng một câu truy vấn SQL. Bảng này nằm ở khu <b>Calculated</b>.</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Bấm <span class="path">+ Thêm</span> rồi chọn tab <b>From SQL Query</b>.</li>
+        <li>Chọn <b>Nguồn dữ liệu</b> để chạy câu lệnh.</li>
+        <li>Đặt <b>Tên hiển thị</b> (ví dụ <i>“Doanh thu tháng”</i>).</li>
+        <li>Viết <b>Câu truy vấn SQL</b> trong ô soạn thảo (có line numbers, auto-complete, cho phép comment <code>--</code> và <code>/* */</code>).</li>
+        <li>Bấm <b>Kiểm tra SQL</b> để chạy thử, rồi <b>Thêm bảng</b>.</li>
+      </ol></div>
+      <figure><img src="images/g2-addsql.png" alt="Thêm bảng bằng câu truy vấn SQL"><figcaption><span class="exlabel">VÍ DỤ</span><b>From SQL Query</b> — soạn <code>SELECT … FROM … WHERE …</code>; có cả nút <b>Dùng Visual Builder</b> nếu ngại viết tay.</figcaption></figure>
+      <div class="note"><b>Quy tắc an toàn:</b> chỉ cho phép câu lệnh <b>SELECT</b> hoặc <b>WITH (CTE)</b> — không chạy được lệnh ghi/xoá. Đây cũng là nơi để tạo <b>bảng lịch (calendar/date)</b> cho phân tích theo tuần/tháng/quý nếu nguồn chưa có sẵn.</div>
+    </section>
+
+    <section class="doc" id="s2-quality">
+      <h3 class="feat"><span class="feat-id">2.5</span>Kiểu dữ liệu &amp; chất lượng — kiểm trước khi vẽ</h3>
+      <p><b>Là gì:</b> kiểm tra dữ liệu ngay tại Dataset <b>rẻ hơn nhiều</b> so với đi debug biểu đồ. Ở tab Bảng, phần xem trước giúp bạn phát hiện sớm cột nhiều <b>null</b>, giá trị không nhất quán, hoặc <b>sai kiểu</b> (ví dụ số bị nhận thành chữ).</p>
+      <div class="howto"><h4>⚙ Cách làm</h4><ol>
+        <li>Chọn từng bảng và <b>cuộn xem trước</b> vài trăm dòng đầu — để ý cột trống, định dạng ngày, số thập phân.</li>
+        <li>Chú ý nhãn kiểu ngay cạnh tên cột (ví dụ <code>string</code>, <code>float</code>). Nếu một cột số đang là <code>string</code>, biểu đồ sẽ không tính tổng được.</li>
+        <li>Bấm <span class="path">Tự nhận dạng kiểu</span> (Auto-detect types) để hệ thống đoán lại kiểu cột cho đúng.</li>
+        <li>Sửa gốc rễ ở <b>nguồn</b> hoặc ở <b>bảng SQL (Calculated)</b> — đừng bù bằng bộ lọc ở từng biểu đồ.</li>
+      </ol></div>
+      <div class="callout"><b>Vì sao quan trọng:</b> kiểu dữ liệu đúng ngay từ Dataset thì Explore mới cho phép <b>SUM/AVG</b> trên cột số, lọc theo <b>ngày</b>, và gom nhóm chính xác. Đây là lỗi hay gặp nhất khi số liệu “nhìn sai sai”.</div>
+    </section>
+
+    <section class="doc" id="s2-check">
+      <h3 class="feat"><span class="feat-id">2.6</span>Xong Chương 2 — Checklist</h3>
+      <ul>
+        <li>✅ Đã tạo <b>1 Dataset</b> có tên rõ ràng.</li>
+        <li>✅ Đã thêm các <b>bảng nguồn</b> cần dùng (và bảng <b>SQL</b> nếu cần biến đổi).</li>
+        <li>✅ Đã <b>xem trước</b> &amp; chạy <b>Tự nhận dạng kiểu</b> — không còn cột số bị nhận nhầm thành chữ.</li>
+        <li>✅ Nắm được Dataset có những bảng nào và mỗi bảng ở <b>grain</b> gì.</li>
+      </ul>
+      <div class="note"><b>Lỗi hay gặp:</b> ① kéo quá nhiều bảng thừa → Model rối; ② cột ngày/số sai kiểu → biểu đồ tính sai; ③ dùng bảng SQL để “giấu” dữ liệu bẩn thay vì sửa gốc.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-3-model.html"><b>Chương 3 · Nối Model</b></a> — khai báo quan hệ giữa các bảng và định nghĩa Measures để Explore hiểu đúng cách gộp số.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-1-source.html">← Chương 1: Data Source</a><a href="datasets.html">📖 Tài liệu module: Dataset &amp; Mô hình →</a><a href="guide-3-model.html">➡️ Chương 3: Model →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=6"></script>
+</body></html>
