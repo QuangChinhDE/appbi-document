@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chương 2 · Tạo Dataset — Hướng dẫn AppBI</title>
-<meta name="description" content="Chương 2: gom các bảng từ nguồn thành một Dataset — thêm bảng nguồn, bảng SQL, xem trước dữ liệu và nhận dạng kiểu — sẵn sàng để phân tích.">
-<link rel="stylesheet" href="assets/styles.css?v=6"></head><body>
+<title>Chương 2 · Tạo Dataset & Nối Model — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 2: gom bảng thành Dataset, thêm bảng nguồn/SQL, NỐI QUAN HỆ (join) giữa các bảng ở tab Model và định nghĩa Measures — ví dụ trên Dataset 111 (Olist).">
+<link rel="stylesheet" href="assets/styles.css?v=7"></head><body>
 
 <section class="mhero"><div class="container">
   <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
   <div style="margin-top:8px"><span class="ic">🗄️</span></div>
-  <h1>Chương 2 · Tạo Dataset</h1>
-  <p>Dataset là <b>lớp mô hình</b> nằm giữa nguồn thô và biểu đồ. Bạn gom những bảng cần dùng vào một Dataset, xem trước &amp; chuẩn hoá kiểu dữ liệu — để mọi biểu đồ sau này đọc từ một nơi <b>sạch và đáng tin</b>.</p>
+  <h1>Chương 2 · Tạo Dataset &amp; Nối Model</h1>
+  <p>Dataset là <b>lớp mô hình</b> giữa nguồn thô và biểu đồ. Trong <b>cùng một màn hình Dataset</b> bạn làm 3 việc: gom bảng (tab <b>Bảng</b>), <b>nối quan hệ</b> giữa các bảng (tab <b>Model</b>), và định nghĩa <b>Measures</b>. Ví dụ xuyên suốt dùng <b>Dataset 111 — Olist E-Commerce</b>.</p>
 </div></section>
 
 <div class="doc-wrap container">
@@ -20,84 +20,123 @@
       <div class="howto"><h4>⚙ Cách tạo</h4><ol>
         <li>Mở <span class="path">Datasets</span> ở thanh điều hướng trái.</li>
         <li>Bấm <span class="path">+ Tạo dataset</span> (New Dataset) ở góc trên phải.</li>
-        <li>Nhập <b>Name</b> (tên, bắt buộc) — đặt theo nghiệp vụ, ví dụ <i>“Olist E-Commerce”</i>.</li>
-        <li>(Tuỳ chọn) nhập <b>Description</b> để đồng đội hiểu Dataset dùng cho việc gì.</li>
+        <li>Nhập <b>Name</b> (bắt buộc) — đặt theo nghiệp vụ, ví dụ <i>“Olist E-Commerce”</i>; thêm <b>Description</b> nếu muốn.</li>
         <li>Bấm <span class="path">Create Dataset</span>. Dataset trống được tạo, sẵn sàng để thêm bảng.</li>
       </ol></div>
       <div class="grid2">
-        <figure><img src="images/g2-list.png" alt="Danh sách Datasets"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dataset — nhãn <b>Documented</b> / <b>Needs notes</b> cho biết đã ghi chú hay chưa.</figcaption></figure>
-        <figure><img src="images/g2-new.png" alt="Tạo Dataset mới"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Create Dataset</b> — chỉ cần Name (+ Description tuỳ chọn).</figcaption></figure>
+        <figure><img src="images/g2-list.png" alt="Danh sách Datasets"><figcaption><span class="exlabel">VÍ DỤ</span>Danh sách Dataset — nhãn <b>Documented</b> / <b>Needs notes</b>.</figcaption></figure>
+        <figure><img src="images/g2-new.png" alt="Tạo Dataset mới"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Create Dataset</b> — chỉ cần Name.</figcaption></figure>
       </div>
-      <div class="tip"><b>Mẹo:</b> một Dataset nên tương ứng <b>một chủ đề phân tích</b> (ví dụ “Bán hàng Olist”). Đừng gom mọi thứ vào một Dataset khổng lồ — tách theo chủ đề sẽ dễ bảo trì hơn.</div>
+      <div class="tip"><b>Mẹo:</b> một Dataset nên tương ứng <b>một chủ đề phân tích</b>. Đừng gom mọi thứ vào một Dataset khổng lồ.</div>
     </section>
 
     <section class="doc" id="s2-detail">
-      <h3 class="feat"><span class="feat-id">2.2</span>Màn hình Dataset — tab Bảng</h3>
-      <p><b>Là gì:</b> mở một Dataset, bạn thấy <b>2 tab</b>: <b>Bảng</b> (Tables — nơi bạn đang làm việc chính) và <b>Model</b> (quan hệ &amp; đo lường — sẽ học ở <a href="guide-3-model.html">Chương 3</a>). Cột trái chia làm 3 khu:</p>
+      <h3 class="feat"><span class="feat-id">2.2</span>Màn hình Dataset — 2 tab: Bảng &amp; Model</h3>
+      <p><b>Là gì:</b> mở một Dataset, bạn thấy <b>2 tab</b>: <b>Bảng</b> (thêm &amp; xem dữ liệu) và <b>Model</b> (nối quan hệ giữa các bảng). Cột trái của tab Bảng chia 3 khu:</p>
       <ul>
-        <li><b>Source</b> — các bảng lấy trực tiếp từ nguồn (ví dụ <code>olist.olist_products</code>, <code>olist.olist_orders</code>…).</li>
-        <li><b>Calculated</b> — bảng do bạn tự dựng bằng câu lệnh SQL (bảng phái sinh/biến đổi).</li>
-        <li><b>Measures</b> — các chỉ số đo lường, gom theo bảng (ví dụ <i>Doanh thu (sản phẩm)</i>, <i>Tổng phí vận chuyển</i>). Định nghĩa Measures thuộc <a href="guide-3-model.html">Chương 3</a>.</li>
+        <li><b>Source</b> — bảng lấy trực tiếp từ nguồn (ví dụ <code>olist.olist_products</code>, <code>olist.olist_orders</code>…).</li>
+        <li><b>Calculated</b> — bảng bạn tự dựng bằng câu lệnh SQL (bảng phái sinh).</li>
+        <li><b>Measures</b> — các chỉ số đo lường, gom theo bảng (định nghĩa ở mục <a href="#s2-measures">2.8</a>).</li>
       </ul>
-      <p>Bên phải là <b>xem trước dữ liệu</b> của bảng đang chọn, kèm thanh công cụ: <b>Xuất Excel</b>, <b>Cột</b> (ẩn/hiện cột), <b>Số dòng</b> (100/…), và nút refresh. Dưới cùng có phân trang <i>“Dòng 1–100 · Trang 1”</i>.</p>
-      <figure><img src="images/g2-tables.png" alt="Dataset Olist — tab Bảng"><figcaption><span class="exlabel">VÍ DỤ</span>Dataset <b>Olist E-Commerce</b> — 12 bảng Source, 23 Measures, và xem trước bảng <code>Products</code>.</figcaption></figure>
-      <div class="note"><b>Lưu ý về grain (độ mịn):</b> mỗi bảng nên có ý nghĩa rõ — bảng ở mức <i>đơn hàng</i> khác bảng ở mức <i>dòng hàng</i>. Trộn lẫn hai mức trong một bảng sẽ khiến mọi biểu đồ phía sau khó tin. Giữ tên bảng dễ hiểu và khoá chính ổn định.</div>
+      <p>Bên phải là <b>xem trước dữ liệu</b> kèm thanh công cụ <b>Xuất Excel</b>, <b>Cột</b>, <b>Số dòng</b> và phân trang.</p>
+      <figure><img src="images/g2-tables.png" alt="Dataset Olist — tab Bảng"><figcaption><span class="exlabel">VÍ DỤ</span>Dataset <b>Olist E-Commerce</b> — 12 bảng Source, 23 Measures, xem trước bảng <code>Products</code>.</figcaption></figure>
+      <div class="note"><b>Grain (độ mịn):</b> bảng ở mức <i>đơn hàng</i> khác bảng ở mức <i>dòng hàng</i>. Giữ tên bảng dễ hiểu và khoá chính ổn định — điều này quyết định việc nối quan hệ ở tab Model có đúng hay không.</div>
     </section>
 
     <section class="doc" id="s2-addtable">
       <h3 class="feat"><span class="feat-id">2.3</span>Thêm bảng nguồn (From Table)</h3>
-      <p><b>Là gì:</b> đưa một bảng có sẵn từ nguồn vào Dataset. Đây là cách phổ biến nhất.</p>
+      <p><b>Là gì:</b> đưa một bảng có sẵn từ nguồn vào Dataset — cách phổ biến nhất.</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Ở khu <b>Source</b>, bấm <span class="path">+ Thêm</span>.</li>
-        <li>Chọn tab <b>From Table</b>.</li>
-        <li>Ở <b>Select Datasource</b> (Nguồn dữ liệu), chọn nguồn đã tạo ở <a href="guide-1-source.html">Chương 1</a> (ví dụ <i>Olist Postgres</i>).</li>
-        <li>Tích chọn <b>một hoặc nhiều bảng</b> cần đưa vào (nút <b>Add Table</b> sáng lên khi đã chọn ≥1 bảng).</li>
-        <li>Bấm <b>Add Table</b>. Bảng xuất hiện trong khu Source và có thể xem trước ngay.</li>
+        <li>Ở khu <b>Source</b>, bấm <span class="path">+ Thêm</span> → tab <b>From Table</b>.</li>
+        <li>Ở <b>Select Datasource</b>, chọn nguồn đã tạo ở <a href="guide-1-source.html">Chương 1</a> (ví dụ <i>Olist Postgres</i>).</li>
+        <li>Tích chọn <b>một hoặc nhiều bảng</b> (nút <b>Add Table</b> sáng khi đã chọn ≥1 bảng).</li>
+        <li>Bấm <b>Add Table</b>. Bảng xuất hiện trong khu Source, xem trước ngay.</li>
       </ol></div>
-      <figure><img src="images/g2-addtable.png" alt="Thêm bảng từ nguồn"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Add table → From Table</b>: chọn datasource rồi tích các bảng cần thêm.</figcaption></figure>
-      <div class="tip"><b>Mẹo:</b> chỉ thêm bảng bạn thực sự cần cho báo cáo. Thêm ít bảng nhưng đúng thì Model (Chương 3) và bộ lọc Dashboard sau này gọn gàng hơn nhiều.</div>
+      <figure><img src="images/g2-addtable.png" alt="Thêm bảng từ nguồn"><figcaption><span class="exlabel">VÍ DỤ</span><b>Add table → From Table</b>: chọn datasource rồi tích các bảng cần thêm.</figcaption></figure>
     </section>
 
     <section class="doc" id="s2-addsql">
       <h3 class="feat"><span class="feat-id">2.4</span>Thêm bảng bằng SQL (From SQL Query)</h3>
-      <p><b>Là gì:</b> khi cần một bảng <b>đã biến đổi</b> (lọc sẵn, gộp nhóm, join, chuẩn hoá category…), bạn tạo <b>bảng phái sinh</b> bằng một câu truy vấn SQL. Bảng này nằm ở khu <b>Calculated</b>.</p>
+      <p><b>Là gì:</b> khi cần một bảng <b>đã biến đổi</b> (lọc sẵn, gộp nhóm, join, chuẩn hoá category…), tạo <b>bảng phái sinh</b> bằng câu truy vấn SQL — nằm ở khu <b>Calculated</b>.</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Bấm <span class="path">+ Thêm</span> rồi chọn tab <b>From SQL Query</b>.</li>
-        <li>Chọn <b>Nguồn dữ liệu</b> để chạy câu lệnh.</li>
-        <li>Đặt <b>Tên hiển thị</b> (ví dụ <i>“Doanh thu tháng”</i>).</li>
-        <li>Viết <b>Câu truy vấn SQL</b> trong ô soạn thảo (có line numbers, auto-complete, cho phép comment <code>--</code> và <code>/* */</code>).</li>
+        <li>Bấm <span class="path">+ Thêm</span> → tab <b>From SQL Query</b>.</li>
+        <li>Chọn <b>Nguồn dữ liệu</b>, đặt <b>Tên hiển thị</b> (ví dụ <i>“Doanh thu tháng”</i>).</li>
+        <li>Viết <b>Câu truy vấn SQL</b> (có line numbers, auto-complete, comment <code>--</code>, <code>/* */</code>).</li>
         <li>Bấm <b>Kiểm tra SQL</b> để chạy thử, rồi <b>Thêm bảng</b>.</li>
       </ol></div>
-      <figure><img src="images/g2-addsql.png" alt="Thêm bảng bằng câu truy vấn SQL"><figcaption><span class="exlabel">VÍ DỤ</span><b>From SQL Query</b> — soạn <code>SELECT … FROM … WHERE …</code>; có cả nút <b>Dùng Visual Builder</b> nếu ngại viết tay.</figcaption></figure>
-      <div class="note"><b>Quy tắc an toàn:</b> chỉ cho phép câu lệnh <b>SELECT</b> hoặc <b>WITH (CTE)</b> — không chạy được lệnh ghi/xoá. Đây cũng là nơi để tạo <b>bảng lịch (calendar/date)</b> cho phân tích theo tuần/tháng/quý nếu nguồn chưa có sẵn.</div>
+      <figure><img src="images/g2-addsql.png" alt="Thêm bảng bằng SQL"><figcaption><span class="exlabel">VÍ DỤ</span><b>From SQL Query</b> — chỉ cho phép <code>SELECT</code>/<code>WITH (CTE)</code>; có nút <b>Dùng Visual Builder</b>.</figcaption></figure>
+      <div class="note"><b>Cũng là nơi tạo bảng lịch (calendar/date)</b> cho phân tích theo tuần/tháng/quý nếu nguồn chưa có sẵn.</div>
     </section>
 
     <section class="doc" id="s2-quality">
-      <h3 class="feat"><span class="feat-id">2.5</span>Kiểu dữ liệu &amp; chất lượng — kiểm trước khi vẽ</h3>
-      <p><b>Là gì:</b> kiểm tra dữ liệu ngay tại Dataset <b>rẻ hơn nhiều</b> so với đi debug biểu đồ. Ở tab Bảng, phần xem trước giúp bạn phát hiện sớm cột nhiều <b>null</b>, giá trị không nhất quán, hoặc <b>sai kiểu</b> (ví dụ số bị nhận thành chữ).</p>
+      <h3 class="feat"><span class="feat-id">2.5</span>Kiểu dữ liệu &amp; chất lượng — kiểm trước khi nối</h3>
+      <p><b>Là gì:</b> kiểm dữ liệu ngay tại Dataset <b>rẻ hơn nhiều</b> so với debug biểu đồ. Phần xem trước giúp phát hiện cột nhiều <b>null</b>, giá trị lệch, hoặc <b>sai kiểu</b> (số bị nhận thành chữ).</p>
       <div class="howto"><h4>⚙ Cách làm</h4><ol>
-        <li>Chọn từng bảng và <b>cuộn xem trước</b> vài trăm dòng đầu — để ý cột trống, định dạng ngày, số thập phân.</li>
-        <li>Chú ý nhãn kiểu ngay cạnh tên cột (ví dụ <code>string</code>, <code>float</code>). Nếu một cột số đang là <code>string</code>, biểu đồ sẽ không tính tổng được.</li>
-        <li>Bấm <span class="path">Tự nhận dạng kiểu</span> (Auto-detect types) để hệ thống đoán lại kiểu cột cho đúng.</li>
-        <li>Sửa gốc rễ ở <b>nguồn</b> hoặc ở <b>bảng SQL (Calculated)</b> — đừng bù bằng bộ lọc ở từng biểu đồ.</li>
+        <li>Chọn từng bảng, <b>cuộn xem trước</b> — để ý cột trống, định dạng ngày, số thập phân.</li>
+        <li>Chú ý nhãn kiểu cạnh tên cột (<code>string</code>, <code>float</code>, <code>DATE</code>). Cột số đang là <code>string</code> sẽ không SUM được, và khoá join sai kiểu sẽ không nối được.</li>
+        <li>Bấm <span class="path">Tự nhận dạng kiểu</span> (Auto-detect types) để hệ thống đoán lại kiểu cột.</li>
+        <li>Sửa gốc ở <b>nguồn</b> hoặc <b>bảng SQL</b> — đừng bù bằng bộ lọc ở từng biểu đồ.</li>
       </ol></div>
-      <div class="callout"><b>Vì sao quan trọng:</b> kiểu dữ liệu đúng ngay từ Dataset thì Explore mới cho phép <b>SUM/AVG</b> trên cột số, lọc theo <b>ngày</b>, và gom nhóm chính xác. Đây là lỗi hay gặp nhất khi số liệu “nhìn sai sai”.</div>
+      <div class="callout"><b>Vì sao quan trọng:</b> kiểu đúng thì (1) Explore mới SUM/AVG được, (2) lọc theo <b>ngày</b> chuẩn, và (3) <b>khoá join khớp kiểu</b> để nối quan hệ ở bước sau.</div>
+    </section>
+
+    <section class="doc" id="s2-model">
+      <h3 class="feat"><span class="feat-id">2.6</span>Tab Model — nối quan hệ giữa các bảng</h3>
+      <p><b>Là gì:</b> tab <b>Model</b> là <b>sơ đồ quan hệ (ERD)</b>: mỗi bảng là một thẻ, mỗi <b>đường nối</b> là một quan hệ. Đây là nơi khai báo <b>bảng nào nối bảng nào qua khoá nào</b> — để khi vẽ biểu đồ, hệ thống biết cách gộp số giữa các bảng cho đúng (ví dụ đơn hàng ↔ khách hàng ↔ sản phẩm).</p>
+      <div class="howto"><h4>⚙ Cách mở &amp; đọc</h4><ol>
+        <li>Trong Dataset, bấm tab <span class="path">Model</span>. Thanh trên có: <b>zoom</b>, <b>Từ điển</b>, <b>+ Thêm quan hệ</b>, <b>Phát hiện quan hệ</b>, <b>Hiện lớp Date</b>.</li>
+        <li>Mỗi thẻ bảng liệt kê <b>CHIỀU DỮ LIỆU</b> (cột, có nhãn kiểu <code>T</code>/<code>#</code>/<code>DATE</code>) và số <b>MEASURES</b>.</li>
+        <li>Đường nối giữa hai bảng hiển thị <b>chiều quan hệ</b> (ví dụ <b>N → 1</b>) và <b>loại join</b> (ví dụ <b>LEFT</b>).</li>
+        <li>Bấm <span class="path">Phát hiện quan hệ</span> để hệ thống <b>tự gợi ý</b> quan hệ bằng cách khớp tên khoá (ví dụ <code>customer_id</code> ↔ <code>customer_id</code>) — nhanh, sau đó rà lại.</li>
+      </ol></div>
+      <figure><img src="images/g2-model.png" alt="Tab Model — sơ đồ quan hệ ds111"><figcaption><span class="exlabel">VÍ DỤ</span>Sơ đồ quan hệ của <b>ds111 (Olist)</b>: <code>Order Items</code> nối <code>Products</code>/<code>Orders</code>/<code>Sellers</code>; <code>Orders</code> nối <code>Customers</code>; <code>Customers</code> nối <code>Geo Dim</code> qua <code>zip_code_prefix</code>; <code>Category Translation</code> dịch tên ngành hàng.</figcaption></figure>
+      <div class="tip"><b>Đọc sơ đồ Olist:</b> đây là schema kiểu <b>bông tuyết</b> — bảng chi tiết (<i>Order Items</i>) ở giữa nối ra các bảng chiều (<i>Products, Sellers, Orders → Customers → Geo</i>). Nối đúng thì mới lọc “doanh thu theo <b>bang khách hàng</b>” hay “theo <b>ngành hàng</b>” được.</div>
+    </section>
+
+    <section class="doc" id="s2-relationship">
+      <h3 class="feat"><span class="feat-id">2.7</span>Thêm quan hệ thủ công &amp; các loại join</h3>
+      <p><b>Là gì:</b> khi tự nối (hoặc chỉnh quan hệ auto-detect), bạn khai báo đầy đủ: hai bảng, (các) khoá join, chiều quan hệ, loại join và hướng lọc.</p>
+      <div class="howto"><h4>⚙ Cách làm (nút “+ Thêm quan hệ”)</h4><ol>
+        <li><b>Bảng nguồn</b> → <b>Đến bảng</b>: chọn hai bảng cần nối (ví dụ <i>Order Items</i> → <i>Products</i>).</li>
+        <li><b>Khoá join</b>: chọn <b>Cột nguồn</b> = <b>Đến cột</b> (ví dụ <code>product_id</code> = <code>product_id</code>). Bấm <b>+</b> để thêm khoá nếu join bằng nhiều cột.</li>
+        <li><b>Loại quan hệ</b>: <b>N : 1</b> (Many to One — phổ biến nhất), <b>1 : 1</b>, hoặc <b>1 : N</b>.</li>
+        <li><b>Loại join</b>: <b>LEFT JOIN</b> (giữ mọi dòng bảng nguồn) hoặc <b>INNER JOIN</b> (chỉ dòng khớp).</li>
+        <li><b>Bí danh</b> (tuỳ chọn): dùng khi <b>một bảng được join nhiều lần</b> qua các khoá khác nhau — tham chiếu sẽ dùng bí danh (ví dụ <code>creator.email</code>).</li>
+        <li><b>Hướng lọc chéo</b>: <b>Single</b> (chỉ filter từ nguồn → đích) hoặc <b>Both</b> (hai chiều). Rồi bấm <b>Lưu</b>.</li>
+      </ol></div>
+      <figure><img src="images/g2-addrel.png" alt="Hộp thoại Thêm quan hệ"><figcaption><span class="exlabel">VÍ DỤ</span>Hộp thoại <b>Thêm quan hệ</b>: Bảng nguồn → Đến bảng (N→1), khoá join, loại quan hệ, loại join, bí danh, hướng lọc chéo.</figcaption></figure>
+      <div class="note"><b>Cẩn thận “fan-out” (nhân đôi số):</b> nối một bảng chi tiết (nhiều dòng) vào bảng tổng dễ làm tổng bị nhân lên. Hãy chọn đúng <b>chiều N:1</b> và đặt Measure ở <b>đúng bảng grain</b> của nó (mục 2.8). Nếu số liệu bị gấp đôi, xem lại cardinality &amp; loại join ở đây trước tiên.</div>
+    </section>
+
+    <section class="doc" id="s2-measures">
+      <h3 class="feat"><span class="feat-id">2.8</span>Định nghĩa Measures (chỉ số đo lường)</h3>
+      <p><b>Là gì:</b> <b>Measure</b> là chỉ số tính toán tái sử dụng (SUM/AVG/COUNT…). Định nghĩa <b>một lần</b> ở Dataset, dùng lại ở <b>mọi biểu đồ &amp; dashboard</b> — số liệu nhất quán, không phải gõ lại công thức. ds111 có sẵn <b>23 Measures</b> (ví dụ <i>Doanh thu (sản phẩm)</i>, <i>Tổng phí vận chuyển</i>).</p>
+      <div class="howto"><h4>⚙ Cách tạo một Measure</h4><ol>
+        <li>Ở khu <b>Measures</b>, chọn bảng rồi bấm <b>+</b> (Thêm measure), hoặc bấm vào measure có sẵn để sửa.</li>
+        <li><b>Label</b> (tên hiển thị) + <b>SQL name</b> (ví dụ <code>total_revenue</code>) + <b>Folder</b> (nhóm, tuỳ chọn).</li>
+        <li><b>Aggregation</b>: <b>Sum / Avg / Count / Count Distinct / Min / Max</b>.</li>
+        <li><b>Cột để tính</b>: chọn cột (ví dụ <code>${TABLE}.price</code>).</li>
+        <li><b>Filters</b> (chỉ áp cho measure này) + <b>Format</b> (number / decimals / suffix).</li>
+        <li>Xem dòng <b>“Sẽ compile thành”</b> (ví dụ <code>SUM(${TABLE}.price)</code>) và bấm <b>Chạy thử</b> để xem kết quả thật, rồi <b>Save</b>.</li>
+      </ol></div>
+      <figure><img src="images/g2-measure.png" alt="Trình soạn Measure"><figcaption><span class="exlabel">VÍ DỤ</span>Measure <i>Doanh thu (sản phẩm)</i> = <code>SUM(price)</code> trên bảng Order Items — có Aggregation, Cột để tính, Format, Ngữ cảnh lọc và nút <b>Chạy thử</b>.</figcaption></figure>
+      <div class="tip"><b>Nâng cao:</b> mục <b>Công thức nâng cao</b> cho phép viết SQL trên cột hoặc công thức dựa trên measure khác; <b>Ngữ cảnh lọc</b> quyết định measure gộp theo nhóm của chart hay so với tổng toàn bộ (ALL) — dùng khi tính tỷ trọng %.</div>
     </section>
 
     <section class="doc" id="s2-check">
-      <h3 class="feat"><span class="feat-id">2.6</span>Xong Chương 2 — Checklist</h3>
+      <h3 class="feat"><span class="feat-id">2.9</span>Xong Chương 2 — Checklist</h3>
       <ul>
-        <li>✅ Đã tạo <b>1 Dataset</b> có tên rõ ràng.</li>
-        <li>✅ Đã thêm các <b>bảng nguồn</b> cần dùng (và bảng <b>SQL</b> nếu cần biến đổi).</li>
-        <li>✅ Đã <b>xem trước</b> &amp; chạy <b>Tự nhận dạng kiểu</b> — không còn cột số bị nhận nhầm thành chữ.</li>
-        <li>✅ Nắm được Dataset có những bảng nào và mỗi bảng ở <b>grain</b> gì.</li>
+        <li>✅ Đã tạo <b>1 Dataset</b> có tên rõ ràng và thêm các <b>bảng</b> cần dùng (source &amp; SQL).</li>
+        <li>✅ Đã <b>xem trước</b> &amp; <b>Tự nhận dạng kiểu</b> — cột số/ngày đúng kiểu.</li>
+        <li>✅ Ở tab <b>Model</b>, các bảng đã được <b>nối quan hệ</b> đúng (đúng khoá, đúng chiều N:1, đúng loại join).</li>
+        <li>✅ Đã có các <b>Measure</b> chính (doanh thu, số đơn…) và <b>Chạy thử</b> ra số hợp lý.</li>
       </ul>
-      <div class="note"><b>Lỗi hay gặp:</b> ① kéo quá nhiều bảng thừa → Model rối; ② cột ngày/số sai kiểu → biểu đồ tính sai; ③ dùng bảng SQL để “giấu” dữ liệu bẩn thay vì sửa gốc.</div>
-      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-3-model.html"><b>Chương 3 · Nối Model</b></a> — khai báo quan hệ giữa các bảng và định nghĩa Measures để Explore hiểu đúng cách gộp số.</p>
+      <div class="note"><b>Lỗi hay gặp:</b> ① khoá join sai kiểu (string vs number) → không nối được; ② nối sai chiều → <b>fan-out</b> nhân đôi tổng; ③ đặt Measure sai bảng grain; ④ quên nối bảng chiều nên không lọc được theo thuộc tính đó.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-3-explore.html"><b>Chương 3 · Explore — Tạo chart</b></a> — dùng Dataset đã mô hình hoá để dựng biểu đồ đầu tiên.</p>
     </section>
 
-    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-1-source.html">← Chương 1: Data Source</a><a href="datasets.html">📖 Tài liệu module: Dataset &amp; Mô hình →</a><a href="guide-3-model.html">➡️ Chương 3: Model →</a></div></section>
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-1-source.html">← Chương 1: Data Source</a><a href="datasets.html">📖 Tài liệu module: Dataset &amp; Mô hình →</a><a href="guide-3-explore.html">➡️ Chương 3: Explore →</a></div></section>
   </main>
 </div>
-<script src="assets/site.js?v=6"></script>
+<script src="assets/site.js?v=7"></script>
 </body></html>

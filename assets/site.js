@@ -14,10 +14,9 @@
   /* Onboarding track — guided A→Z path (core system, before AI) */
   var ONBOARDING = [
     {id:'guide-1-source',    n:'1 · Tạo Data Source',          ic:'🔌', d:'Kết nối PostgreSQL/BigQuery/Sheets/Excel, test & chia sẻ.', ready:true},
-    {id:'guide-2-dataset',   n:'2 · Tạo Dataset',              ic:'🗄️', d:'Gom bảng, source & SQL table, xem trước & nhận dạng kiểu.', ready:true},
-    {id:'guide-3-model',     n:'3 · Nối Model',                ic:'🧩', d:'Relationship/join, khoá, Measures, semantic.'},
-    {id:'guide-4a-explore',  n:'4A · Explore & tính năng chart',ic:'📈', d:'Gán role, aggregation, filter/sort/limit, preview/SQL, lưu.'},
-    {id:'guide-4b-charts',   n:'4B · Thư viện 33 loại chart',  ic:'📊', d:'Đủ 33 loại theo 9 nhóm + tuỳ chọn riêng từng loại.'},
+    {id:'guide-2-dataset',   n:'2 · Tạo Dataset & Nối Model',  ic:'🗄️', d:'Gom bảng, bảng SQL, nối quan hệ (join) & định nghĩa Measures.', ready:true},
+    {id:'guide-3-explore',   n:'3 · Explore — Tạo chart',      ic:'📈', d:'Gán role, aggregation, filter/sort/limit, preview/SQL, lưu.'},
+    {id:'guide-4-charts',    n:'4 · Thư viện 33 loại chart',   ic:'📊', d:'Đủ 33 loại theo 9 nhóm + tuỳ chọn riêng từng loại.'},
     {id:'guide-5-dashboard', n:'5 · Dashboard',                ic:'🧱', d:'Thêm chart đã lưu, layout, bộ lọc, đa trang.'},
     {id:'guide-6-theme',     n:'6 · Theme & giao diện',        ic:'🎨', d:'Đổi theme, màu/nền/font, tuỳ biến giao diện đẹp.'},
     {id:'guide-7-public',    n:'7 · Public link',              ic:'🌐', d:'Normal vs Nâng cao: khoá filter, slicer, embed…'}
