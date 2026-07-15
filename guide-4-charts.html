@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chương 4 · Thư viện 33 loại chart — Hướng dẫn AppBI</title>
+<meta name="description" content="Chương 4: toàn bộ 33 loại biểu đồ của AppBI theo 6 nhóm (Essentials, Comparison, Trend, Composition, Relationship, Geo) — mỗi loại: dùng khi nào, role cần, tuỳ chọn nổi bật, kèm ảnh thật từ báo cáo Olist.">
+<link rel="stylesheet" href="assets/styles.css?v=9"></head><body>
+
+<section class="mhero"><div class="container">
+  <a class="bk" href="guide.html">← Hướng dẫn A→Z</a>
+  <div style="margin-top:8px"><span class="ic">📊</span></div>
+  <h1>Chương 4 · Thư viện 33 loại chart</h1>
+  <p>AppBI có <b>33 loại biểu đồ</b>, chia thành <b>6 nhóm</b> đúng như bộ chọn trong Explore. Chương này liệt kê <b>từng loại</b>: <b>dùng khi nào</b>, <b>role/field cần</b>, <b>tuỳ chọn nổi bật</b> — kèm ảnh thật từ báo cáo <b>Olist (dash67)</b>. Cách gán role &amp; định dạng chung xem <a href="guide-3-explore.html">Chương 3</a>.</p>
+</div></section>
+
+<div class="doc-wrap container">
+  <aside class="toc"></aside>
+  <main class="doc-main">
+
+    <section class="doc" id="s4-how">
+      <h3 class="feat"><span class="feat-id">4.0</span>Cách chọn loại &amp; đọc chương này</h3>
+      <p><b>Mở thư viện:</b> trong Explore, ở <b>STEP 1 · Chart Type</b> bấm <b>Change</b> → chọn một trong <b>6 tab nhóm</b>. Mỗi mục dưới đây ghi 3 thông tin: <b>Dùng khi nào</b> · <b>Role cần</b> · <b>Tuỳ chọn</b>.</p>
+      <div class="callout"><b>Chọn theo câu hỏi nghiệp vụ:</b> chỉ số đơn/bảng → <b>Essentials</b>; so sánh giữa hạng mục → <b>Comparison</b>; xu hướng theo thời gian → <b>Trend</b>; tỷ trọng/cơ cấu → <b>Composition</b>; tương quan &amp; quan hệ → <b>Relationship</b>; theo địa lý → <b>Geo</b>.</div>
+      <div class="note"><b>Cách đọc:</b> mỗi nhóm có (1) ảnh <b>thư viện</b> liệt kê các loại, (2) ảnh <b>ví dụ</b> chart thật, và (3) ảnh <b>SETUP</b> — tức là mở chính chart đó trong <b>Explore</b> để thấy <b>field nào vào role nào</b>. Role bắt buộc có dấu <span style="color:#dc2626">*</span>. Các loại <b>cùng một kiểu role</b> thì setup như nhau (được ghi chú trong từng ảnh).</div>
+    </section>
+
+    <!-- ===================== ESSENTIALS ===================== -->
+    <section class="doc" id="s4-essentials">
+      <h3 class="feat"><span class="feat-id">Nhóm 1</span>Essentials (6) — chỉ số &amp; bảng nền tảng</h3>
+      <figure><img src="images/g4-cat-essentials.png" alt="Nhóm Essentials"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Essentials</b>: Table, Matrix, KPI, Gauge, Bullet, Podium.</figcaption></figure>
+      <ul>
+        <li><b>Table (Bảng)</b> — <b>Dùng khi nào:</b> xem/đối chiếu số liệu chi tiết, nhiều cột. <i>Role:</i> chọn <b>cột hiển thị</b> (nhiều); bật <b>pivot</b> với <b>row dim × column dim × measure</b>. <i>Tuỳ chọn:</i> dynamic pivot, ẩn/hiện cột, định dạng từng ô, giới hạn dòng.</li>
+        <li><b>Matrix (Ma trận)</b> — <b>Dùng khi nào:</b> bảng chéo 2 chiều (hàng × cột) với giá trị ở ô giao. <i>Role:</i> row dimension × column dimension × measure. <i>Tuỳ chọn:</i> tổng theo hàng/cột, định dạng số.</li>
+        <li><b>KPI (Thẻ chỉ số)</b> — <b>Dùng khi nào:</b> nêu bật <b>một con số</b> quan trọng (GMV, số đơn…). <i>Role:</i> 1 metric, <b>không cần dimension</b>. <i>Tuỳ chọn:</i> icon, viền/nền gradient, <b>benchmark &amp; delta</b> (so kỳ trước), <b>color rule</b> đổi màu theo ngưỡng.</li>
+        <li><b>Gauge (Đồng hồ)</b> — <b>Dùng khi nào:</b> đo một chỉ số so với <b>min–max / mục tiêu</b> (ví dụ % giao đúng hẹn). <i>Role:</i> 1 metric. <i>Tuỳ chọn:</i> min/max, ngưỡng màu (đỏ/vàng/xanh).</li>
+        <li><b>Bullet</b> — <b>Dùng khi nào:</b> KPI dạng thanh so với <b>target &amp; các dải ngưỡng</b> (gọn hơn Gauge). <i>Role:</i> 1 metric (+ target). <i>Tuỳ chọn:</i> dải ngưỡng, target line.</li>
+        <li><b>Podium (Bục xếp hạng)</b> — <b>Dùng khi nào:</b> khoe <b>Top-N</b> kiểu huy chương (quán quân/á quân/hạng 3). <i>Role:</i> dimension + metric. <i>Tuỳ chọn:</i> số hạng hiển thị, style huy chương.</li>
+      </ul>
+      <div class="grid2">
+        <figure><img src="images/g4-gauge.png" alt="Gauge"><figcaption><span class="exlabel">VÍ DỤ</span><b>Gauge</b> — Tỷ lệ giao đúng hẹn.</figcaption></figure>
+        <figure><img src="images/g4-podium.png" alt="Podium"><figcaption><span class="exlabel">VÍ DỤ</span><b>Podium</b> — Top bang theo doanh thu (SP · RJ · MG).</figcaption></figure>
+      </div>
+      <h4 style="margin:20px 0 8px">⚙ Cách setup (mở chart trong Explore)</h4>
+      <figure><img src="images/g4-setup-kpi.png" alt="Setup KPI trong Explore"><figcaption><span class="exlabel">SETUP</span><b>KPI</b> — role <b>Value</b> (1 metric, không cần dimension) + <b>Benchmark Metric</b>; <b>STEP 3 · Card Setup</b> có Card Label &amp; <b>Context Template</b> (<code>{delta} above {benchmarkLabel}</code>) để hiện chênh lệch. <i>Gauge/Bullet setup tương tự — 1 metric + ngưỡng/target.</i></figcaption></figure>
+      <figure><img src="images/g4-setup-podium.png" alt="Setup Podium trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Podium</b> — dimension (hạng mục) + metric xếp hạng; chọn số hạng hiển thị.</figcaption></figure>
+    </section>
+
+    <!-- ===================== COMPARISON ===================== -->
+    <section class="doc" id="s4-comparison">
+      <h3 class="feat"><span class="feat-id">Nhóm 2</span>Comparison (6) — so sánh giữa hạng mục</h3>
+      <figure><img src="images/g4-cat-comparison.png" alt="Nhóm Comparison"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Comparison</b>: Bar, Horizontal Bar, Grouped Bar, Stacked Bar, Bar + Line, Waterfall.</figcaption></figure>
+      <ul>
+        <li><b>Bar (Cột dọc)</b> — <b>Dùng khi nào:</b> so sánh giá trị giữa các hạng mục. <i>Role:</i> X (dimension) + Values (1+ metric). <i>Tuỳ chọn:</i> độ rộng cột, data labels, bo góc.</li>
+        <li><b>Horizontal Bar (Cột ngang)</b> — <b>Dùng khi nào:</b> nhãn dài hoặc <b>xếp hạng</b> nhiều mục (dễ đọc từ trên xuống). <i>Role:</i> giống Bar.</li>
+        <li><b>Grouped Bar (Cột nhóm)</b> — <b>Dùng khi nào:</b> so sánh nhiều chuỗi cạnh nhau theo từng hạng mục. <i>Role:</i> X + <b>breakdown</b> + metric.</li>
+        <li><b>Stacked Bar (Cột chồng)</b> — <b>Dùng khi nào:</b> vừa xem tổng vừa xem <b>cơ cấu</b> bên trong. <i>Role:</i> X + breakdown + metric. <i>Tuỳ chọn:</i> <b>100% stacked</b> (tỷ trọng), nhãn theo <b>segment</b> hoặc <b>total</b>.</li>
+        <li><b>Bar + Line (Combo)</b> — <b>Dùng khi nào:</b> hai đơn vị khác nhau trên cùng khung (ví dụ doanh thu cột + tỷ lệ đường). <i>Role:</i> X + metrics (cột) + <b>lineMetric</b> (đường). <i>Tuỳ chọn:</i> <b>trục Y phụ</b> bên phải.</li>
+        <li><b>Waterfall (Thác nước)</b> — <b>Dùng khi nào:</b> phân rã một tổng thành các phần <b>cộng dồn tăng/giảm</b> (đóng góp theo hạng mục). <i>Role:</i> dimension + metric.</li>
+      </ul>
+      <div class="grid2">
+        <figure><img src="images/g4-hbar.png" alt="Horizontal Bar"><figcaption><span class="exlabel">VÍ DỤ</span><b>Horizontal Bar</b> — Số đơn theo bang (SP 41.7K…).</figcaption></figure>
+        <figure><img src="images/g4-waterfall.png" alt="Waterfall"><figcaption><span class="exlabel">VÍ DỤ</span><b>Waterfall</b> — Đóng góp doanh thu theo danh mục.</figcaption></figure>
+      </div>
+      <figure><img src="images/g4-bar.png" alt="Bar"><figcaption><span class="exlabel">VÍ DỤ</span><b>Bar</b> — Số đơn theo trạng thái.</figcaption></figure>
+      <h4 style="margin:20px 0 8px">⚙ Cách setup (mở chart trong Explore)</h4>
+      <figure><img src="images/g4-setup-bar.png" alt="Setup Bar trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Bar</b> — <b>X Axis</b> (dimension) + <b>Values (Y)</b> (1+ metric). <i>Horizontal Bar giống hệt; Grouped/Stacked thêm role <b>Breakdown</b>.</i></figcaption></figure>
+      <figure><img src="images/g4-setup-combo.png" alt="Setup Bar + Line trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Bar + Line</b> — hai role riêng: <b>Bar Values</b> (cột) + <b>Line Value</b> (đường); hệ thống tự bật <b>trục Y phụ</b> cho đường (doanh thu cột + số đơn đường).</figcaption></figure>
+    </section>
+
+    <!-- ===================== TREND ===================== -->
+    <section class="doc" id="s4-trend">
+      <h3 class="feat"><span class="feat-id">Nhóm 3</span>Trend (5) — xu hướng theo thời gian</h3>
+      <figure><img src="images/g4-cat-trend.png" alt="Nhóm Trend"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Trend</b>: Line, Area, Time Series, Ribbon, Timeline.</figcaption></figure>
+      <ul>
+        <li><b>Line (Đường)</b> — <b>Dùng khi nào:</b> xu hướng liên tục theo thời gian/thứ tự. <i>Role:</i> X (thường là time) + metrics; thêm <b>breakdown</b> để có nhiều đường. <i>Tuỳ chọn:</i> độ dày nét, điểm mốc.</li>
+        <li><b>Area (Vùng)</b> — <b>Dùng khi nào:</b> nhấn mạnh <b>độ lớn tích luỹ</b> của xu hướng. <i>Role:</i> giống Line. <i>Tuỳ chọn:</i> độ mờ nền (fill opacity), area chồng.</li>
+        <li><b>Time Series (Chuỗi thời gian)</b> — <b>Dùng khi nào:</b> phân tích thời gian chuyên biệt, cần <b>gom theo ngày/tuần/tháng/quý</b>. <i>Role:</i> <b>timeField</b> + metrics. <i>Tuỳ chọn:</i> mức gom thời gian (nút “Gom theo thời gian”), rolling.</li>
+        <li><b>Ribbon (Dải xếp hạng)</b> — <b>Dùng khi nào:</b> theo dõi <b>thứ hạng thay đổi</b> của các hạng mục qua thời gian. <i>Role:</i> time + dimension + metric.</li>
+        <li><b>Timeline (Dòng thời gian)</b> — <b>Dùng khi nào:</b> trình bày <b>các mốc/sự kiện</b> theo thời gian. <i>Role:</i> time + nhãn sự kiện.</li>
+      </ul>
+      <figure><img src="images/g4-line.png" alt="Line time series"><figcaption><span class="exlabel">VÍ DỤ</span><b>Line / Time Series</b> — GMV theo tháng (2016→2018), có “Gom theo thời gian”.</figcaption></figure>
+      <h4 style="margin:20px 0 8px">⚙ Cách setup (mở chart trong Explore)</h4>
+      <figure><img src="images/g4-setup-line.png" alt="Setup Line trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Line</b> — <b>X Axis</b> = field ngày (ví dụ <code>Year Month</code> từ <code>order_purchase_date</code>) + bật <b>Date hierarchy</b> để drill theo năm/quý/tháng; <b>Values (Y)</b> = metric; <b>Breakdown</b> để tách nhiều đường. <i>Area/Time Series/Ribbon setup tương tự.</i></figcaption></figure>
+    </section>
+
+    <!-- ===================== COMPOSITION ===================== -->
+    <section class="doc" id="s4-composition">
+      <h3 class="feat"><span class="feat-id">Nhóm 4</span>Composition (6) — cơ cấu &amp; tỷ trọng</h3>
+      <figure><img src="images/g4-cat-composition.png" alt="Nhóm Composition"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Composition</b>: Pie, Donut, Polar Area, Treemap, Funnel, Word Cloud.</figcaption></figure>
+      <ul>
+        <li><b>Pie (Tròn)</b> — <b>Dùng khi nào:</b> tỷ trọng vài phần trong tổng (ít hạng mục). <i>Role:</i> dimension + 1 metric.</li>
+        <li><b>Donut (Vành khuyên)</b> — <b>Dùng khi nào:</b> như Pie nhưng thoáng hơn, tâm để chú thích. <i>Role:</i> dimension + 1 metric. <i>Tuỳ chọn:</i> bán kính trong (độ rỗng).</li>
+        <li><b>Polar Area (Quạt cực)</b> — <b>Dùng khi nào:</b> so tỷ trọng khi các phần khá đều, nhấn bằng bán kính. <i>Role:</i> dimension + 1 metric.</li>
+        <li><b>Treemap (Ô lồng)</b> — <b>Dùng khi nào:</b> tỷ trọng của <b>nhiều</b> hạng mục (hoặc phân cấp) trong một khung. <i>Role:</i> dimension (+ phân cấp) + metric (diện tích ô).</li>
+        <li><b>Funnel (Phễu)</b> — <b>Dùng khi nào:</b> tỷ lệ <b>chuyển đổi qua các bước</b> (đơn: tạo → thanh toán → giao). <i>Role:</i> dimension (bước) + metric. <i>Tuỳ chọn:</i> % rớt giữa các bước.</li>
+        <li><b>Word Cloud (Đám mây từ)</b> — <b>Dùng khi nào:</b> tần suất/độ quan trọng của từ khoá, nhãn. <i>Role:</i> dimension (từ) + metric (cỡ chữ).</li>
+      </ul>
+      <div class="grid2">
+        <figure><img src="images/g4-donut.png" alt="Donut"><figcaption><span class="exlabel">VÍ DỤ</span><b>Donut</b> — Đơn theo trạng thái (delivered 97%).</figcaption></figure>
+        <figure><img src="images/g4-funnel.png" alt="Funnel"><figcaption><span class="exlabel">VÍ DỤ</span><b>Funnel</b> — Phễu trạng thái đơn.</figcaption></figure>
+      </div>
+      <h4 style="margin:20px 0 8px">⚙ Cách setup (mở chart trong Explore)</h4>
+      <figure><img src="images/g4-setup-treemap.png" alt="Setup Treemap trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Treemap</b> — role <b>Category</b> (dimension, ví dụ <code>product_category_name</code>) + <b>Value</b> (metric = diện tích ô). Đây cũng là cách setup chung của Pie/Donut/Polar Area/Sunburst.</figcaption></figure>
+      <div class="grid2">
+        <figure><img src="images/g4-setup-donut.png" alt="Setup Donut trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Donut/Pie</b> — dimension + 1 value; tuỳ chọn bán kính trong.</figcaption></figure>
+        <figure><img src="images/g4-setup-funnel.png" alt="Setup Funnel trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Funnel</b> — dimension (các bước) + value; xem % rớt giữa bước.</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ===================== RELATIONSHIP ===================== -->
+    <section class="doc" id="s4-relationship">
+      <h3 class="feat"><span class="feat-id">Nhóm 5</span>Relationship (8) — tương quan, phân bố &amp; quan hệ</h3>
+      <figure><img src="images/g4-cat-relationship.png" alt="Nhóm Relationship"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Relationship</b>: Scatter, Bubble, 9-Box Grid, Heatmap, Boxplot, Radar, Sankey, Sunburst.</figcaption></figure>
+      <ul>
+        <li><b>Scatter (Phân tán)</b> — <b>Dùng khi nào:</b> tương quan giữa <b>2 biến số</b>. <i>Role:</i> <b>scatterX</b> + <b>scatterY</b> (+ nhãn điểm). <i>Tuỳ chọn:</i> đường xu hướng, nhãn.</li>
+        <li><b>Bubble (Bong bóng)</b> — <b>Dùng khi nào:</b> như Scatter nhưng thêm <b>chiều thứ 3</b> bằng kích thước bong bóng. <i>Role:</i> scatterX + scatterY + <b>size</b> (+ màu).</li>
+        <li><b>9-Box Grid</b> — <b>Dùng khi nào:</b> xếp đối tượng vào <b>ma trận 3×3</b> theo 2 tiêu chí (ví dụ tiềm năng × hiệu suất). <i>Role:</i> 2 trục phân loại + đối tượng.</li>
+        <li><b>Heatmap (Bản đồ nhiệt)</b> — <b>Dùng khi nào:</b> mật độ/giá trị theo <b>2 chiều</b> (ví dụ giờ × thứ). <i>Role:</i> 2 dimension + measure (màu ô).</li>
+        <li><b>Boxplot (Hộp phân bố)</b> — <b>Dùng khi nào:</b> xem <b>phân bố</b> (min/Q1/trung vị/Q3/max, ngoại lệ). <i>Role:</i> dimension + giá trị thô.</li>
+        <li><b>Radar (Mạng nhện)</b> — <b>Dùng khi nào:</b> so <b>nhiều chỉ tiêu</b> của một/vài đối tượng trên các trục toả tròn. <i>Role:</i> dimension + nhiều metrics.</li>
+        <li><b>Sankey (Dòng chảy)</b> — <b>Dùng khi nào:</b> luồng chuyển từ <b>nguồn → đích</b> (ví dụ kênh → trạng thái). <i>Role:</i> <b>source</b> + <b>target</b> + value (độ dày luồng).</li>
+        <li><b>Sunburst (Vòng phân cấp)</b> — <b>Dùng khi nào:</b> cơ cấu <b>phân cấp nhiều tầng</b> dạng vòng đồng tâm. <i>Role:</i> nhiều dimension (tầng) + metric.</li>
+      </ul>
+      <figure><img src="images/g4-bubble.png" alt="Bubble / Scatter"><figcaption><span class="exlabel">VÍ DỤ</span><b>Bubble</b> — Bang: Số đơn (X) × Điểm (Y) × Doanh thu (kích thước).</figcaption></figure>
+      <h4 style="margin:20px 0 8px">⚙ Cách setup (mở chart trong Explore)</h4>
+      <figure><img src="images/g4-setup-bubble.png" alt="Setup Bubble trong Explore"><figcaption><span class="exlabel">SETUP</span><b>Bubble</b> — 4 role: <b>X Axis</b> (số) + <b>Y Axis</b> (số) + <b>Label</b> (dimension, ví dụ <code>customer_state</code>) + <b>Size</b> (metric = kích thước bong bóng). <i>Scatter giống nhưng không bắt buộc Size; 9-Box dùng 2 trục phân loại.</i></figcaption></figure>
+    </section>
+
+    <!-- ===================== GEO ===================== -->
+    <section class="doc" id="s4-geo">
+      <h3 class="feat"><span class="feat-id">Nhóm 6</span>Geo (2) — theo địa lý</h3>
+      <figure><img src="images/g4-cat-geo.png" alt="Nhóm Geo"><figcaption><span class="exlabel">THƯ VIỆN</span>Nhóm <b>Geo</b>: Point Map, Region Map.</figcaption></figure>
+      <ul>
+        <li><b>Point Map (Bản đồ điểm)</b> — <b>Dùng khi nào:</b> chấm từng vị trí theo <b>toạ độ</b> (khách/cửa hàng). <i>Role:</i> <b>lat</b> + <b>lng</b> (+ size/màu theo metric). <i>Tuỳ chọn:</i> nền bản đồ (OpenStreetMap/CARTO), cụm điểm.</li>
+        <li><b>Region Map / Choropleth (Bản đồ vùng)</b> — <b>Dùng khi nào:</b> <b>tô màu vùng</b> (tỉnh/bang) theo giá trị. <i>Role:</i> mã vùng + measure (thang màu). <i>Tuỳ chọn:</i> thang màu, chú giải.</li>
+      </ul>
+      <div class="note"><b>Điều kiện dữ liệu:</b> Point Map cần cột <b>vĩ độ/kinh độ</b>; Region Map cần <b>mã vùng chuẩn</b> khớp bản đồ. Trong ds111, bảng <i>Geo Dim</i> cấp toạ độ theo <code>zip_code_prefix</code> (đã nối ở <a href="guide-2-dataset.html">Chương 2</a>).</div>
+    </section>
+
+    <section class="doc" id="s4-cheat">
+      <h3 class="feat"><span class="feat-id">4.7</span>Chọn nhanh &amp; Checklist</h3>
+      <p><b>Bảng chọn nhanh theo câu hỏi:</b></p>
+      <ul>
+        <li>“Một con số quan trọng?” → <b>KPI</b> · so mục tiêu → <b>Gauge/Bullet</b> · top hạng → <b>Podium</b>.</li>
+        <li>“So sánh giữa hạng mục?” → <b>Bar/Horizontal Bar</b> · nhiều chuỗi → <b>Grouped/Stacked</b> · phân rã tổng → <b>Waterfall</b>.</li>
+        <li>“Thay đổi theo thời gian?” → <b>Line/Area/Time Series</b>.</li>
+        <li>“Cơ cấu/tỷ trọng?” → <b>Pie/Donut</b> (ít mục) · <b>Treemap</b> (nhiều mục) · <b>Funnel</b> (chuyển đổi).</li>
+        <li>“Tương quan/quan hệ?” → <b>Scatter/Bubble</b> · 2 chiều mật độ → <b>Heatmap</b> · luồng → <b>Sankey</b> · phân bố → <b>Boxplot</b> · nhiều tiêu chí → <b>Radar</b>.</li>
+        <li>“Theo địa lý?” → <b>Point Map</b> (điểm) · <b>Region Map</b> (vùng).</li>
+      </ul>
+      <div class="callout"><b>Checklist:</b> ✅ chọn loại khớp <b>câu hỏi</b>; ✅ gán đủ <b>role bắt buộc (*)</b> theo loại; ✅ dữ liệu hợp loại (Scatter cần 2 số; Map cần toạ độ/mã vùng; Heatmap cần 2 chiều); ✅ đối chiếu <b>Bảng/SQL</b> ở Chương 3 trước khi lưu.</div>
+      <div class="note"><b>Lỗi hay gặp:</b> ① dùng Pie khi có quá nhiều hạng mục (rối) → chuyển Treemap/Bar; ② Scatter/Bubble gán nhầm dimension vào trục số; ③ Map thiếu toạ độ/mã vùng → không vẽ được; ④ Stacked mà không bật 100% khi cần xem tỷ trọng.</div>
+      <p style="margin-top:14px">➡️ Tiếp theo: <a href="guide-5-dashboard.html"><b>Chương 5 · Dashboard</b></a> — đưa các chart đã lưu lên báo cáo, sắp layout và thêm bộ lọc.</p>
+    </section>
+
+    <section class="xrel"><div class="ttl">🔗 Liên quan</div><div class="xlinks"><a href="guide-3-explore.html">← Chương 3: Explore</a><a href="explore.html">📖 Tài liệu module: Explore →</a><a href="guide-5-dashboard.html">➡️ Chương 5: Dashboard →</a></div></section>
+  </main>
+</div>
+<script src="assets/site.js?v=9"></script>
+</body></html>
